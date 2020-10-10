@@ -1,0 +1,14 @@
+/sxa/search/*   											https://www.guidedogs.org.uk/sxa/search/:splat 200
+/-/media/*  												https://www.guidedogs.org.uk/-/media/:splat 200
+/formbuilder/*                                              https://www.guidedogs.org.uk/formbuilder:splat 200
+
+/Ensuring-our-website-is-accessible/*                       https://www.guidedogs.org.uk/Ensuring-our-website-is-accessible/:splat 200
+/en/Ensuring-our-website-is-accessible/*                    https://www.guidedogs.org.uk/Ensuring-our-website-is-accessible/:splat 200
+
+/contact-us/sap-epupdates/*                                 https://www.guidedogs.org.uk/contact-us/sap-epupdates/:splat 200
+/en/contact-us/sap-epupdates/*                                 https://www.guidedogs.org.uk/contact-us/sap-epupdates/:splat 200
+
+/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant  https://www.guidedogs.org.uk/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant/:splat 200
+/en/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant  https://www.guidedogs.org.uk/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant/:splat 200
+
+/* 															/${language}/:splat 200

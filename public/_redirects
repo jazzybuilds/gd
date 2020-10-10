@@ -1,0 +1,4 @@
+/sxa/search/*   											https://www.guidedogs.org.uk/sxa/search/:splat 200
+/-/media/*  												https://www.guidedogs.org.uk/-/media/:splat 200
+/formbuilder/*                                              https://www.guidedogs.org.uk/formbuilder:splat 200
+/* 															/en/:splat 200
