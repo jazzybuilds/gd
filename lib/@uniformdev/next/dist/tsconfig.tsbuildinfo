@@ -347,8 +347,8 @@
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts": {
-        "version": "fe31b933a9ded0487e0d183109f46ee809cbc7e5a13c497deba9b0cd08013509",
-        "signature": "fe31b933a9ded0487e0d183109f46ee809cbc7e5a13c497deba9b0cd08013509",
+        "version": "9380056118a97ef261e203816319b1531b45a809d817507fe0fe698c09f06ff0",
+        "signature": "9380056118a97ef261e203816319b1531b45a809d817507fe0fe698c09f06ff0",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/utils/pagecomponentprops.d.ts": {
@@ -361,9 +361,24 @@
         "signature": "b32116a41a5d3018acd4bfac127aae0d2a56824b80b2ad066ee44276eaecfbc7",
         "affectsGlobalScope": false
       },
+      "../../common-client/dist/cjs/utils/mvcoptions.d.ts": {
+        "version": "ad0b313d0748b2d964df039520a25a67c438fcfe5fcaac13002fee6b18ab154f",
+        "signature": "ad0b313d0748b2d964df039520a25a67c438fcfe5fcaac13002fee6b18ab154f",
+        "affectsGlobalScope": false
+      },
+      "../../common-client/dist/cjs/utils/uniformoptions.d.ts": {
+        "version": "5e699cb6c1ac0e36ae51a5529e0d57349d76fb720b00574954ceb02a5e46d580",
+        "signature": "5e699cb6c1ac0e36ae51a5529e0d57349d76fb720b00574954ceb02a5e46d580",
+        "affectsGlobalScope": false
+      },
+      "../../common-client/dist/cjs/utils/processinginstruction.d.ts": {
+        "version": "01659e50688bc5a2898fea05a4f1c0456d2afbcfa452bafadba235346c814768",
+        "signature": "01659e50688bc5a2898fea05a4f1c0456d2afbcfa452bafadba235346c814768",
+        "affectsGlobalScope": false
+      },
       "../../common-client/dist/cjs/utils/index.d.ts": {
-        "version": "d556732419df5a89c1156342fea32ec2f79600a4bb56e9075ea5201ad191a6c5",
-        "signature": "d556732419df5a89c1156342fea32ec2f79600a4bb56e9075ea5201ad191a6c5",
+        "version": "30ec48245ebf1fba6ec777f273a39c9586a5f433a594873ab3eb77aae1799cc3",
+        "signature": "30ec48245ebf1fba6ec777f273a39c9586a5f433a594873ab3eb77aae1799cc3",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/dataitem.d.ts": {
@@ -421,34 +436,19 @@
         "signature": "d37d571aa706edfc60f426239c6973414ab78c194f851d43f036b0d935125687",
         "affectsGlobalScope": false
       },
-      "../src/utils/html/processinginstruction.ts": {
-        "version": "9e788458dc205093667f134c6039a1f4053e00e7f4365c188c546f9315ebd9c3",
-        "signature": "1e4bba35f047b730ed51b42b48e8f9013ce9cdd797c0767499748b990416f251",
+      "../../../node_modules/next/dist/next-server/lib/runtime-config.d.ts": {
+        "version": "b7fff2d004c5879cae335db8f954eb1d61242d9f2d28515e67902032723caeab",
+        "signature": "b7fff2d004c5879cae335db8f954eb1d61242d9f2d28515e67902032723caeab",
         "affectsGlobalScope": false
       },
-      "../src/utils/html/buildlinktag.ts": {
-        "version": "42afbfe68a3b6cb2e2761d87d4629b07ffbdb97287c5489d98682b7f3d2ee0e2",
-        "signature": "318df9bcc1efbd34795cc3cb349f03605a299af445c7106e02d082c6524371e9",
+      "../../../node_modules/next/config.d.ts": {
+        "version": "24ea5deb21fb2ed05f261e98c418ea501f45b54bca976be2e1c2b3fb58b28827",
+        "signature": "24ea5deb21fb2ed05f261e98c418ea501f45b54bca976be2e1c2b3fb58b28827",
         "affectsGlobalScope": false
       },
-      "../src/utils/html/buildplaceholder.ts": {
-        "version": "ca7a655c39c90139889b3c212bf5b646bd207f17502d98c912dfb37aa386e750",
-        "signature": "494a93a64bd69be5733433bde23bc65076f3076d0fdce214ae8b6614b0e58ec8",
-        "affectsGlobalScope": false
-      },
-      "../src/utils/html/buildscripttag.ts": {
-        "version": "e9ff6fda78b5d1cf7a9b12987f65fa76736a7ab37184bd1192b151f274f4d2df",
-        "signature": "c8c47aaa7dbdd72eb45527cbdd11d62dc5b850406836eb0b1247c7118c204226",
-        "affectsGlobalScope": false
-      },
-      "../src/utils/html/buildcanonicallinktag.ts": {
-        "version": "6686eb10628c88fa31bd9739e6e27ef3522bce76264d2d375115af1608accbc5",
-        "signature": "80d14af0c31039b786be9c1afd2a5b4da112daa53334405d2b5385556422397e",
-        "affectsGlobalScope": false
-      },
-      "../src/utils/createrenderingfromhtml.ts": {
-        "version": "23a611ed3b9d9b789b8d48469917afd4b692ad4af27ca25db9f9de5d99713e07",
-        "signature": "756bee30f3785dfc081d55e9fb92cd7627e89d6d7be367c61bc44d813b9aba48",
+      "../src/utils/getnextconfig.ts": {
+        "version": "3ac0a36bfe0f5f72a24006a3f8553e150047b0a2e759a98e911b822595afcfb2",
+        "signature": "c3b81f17d4c0622e5588e6122ecf627db7b40ff701fef716360ad758a8808765",
         "affectsGlobalScope": false
       },
       "../src/components/uniformcontext.tsx": {
@@ -481,19 +481,9 @@
         "signature": "3b14ec1dc7543bcf171b483a3d44d176baecb413d1b4cdc7d15eb8daa832fcc3",
         "affectsGlobalScope": false
       },
-      "../../../node_modules/next/dist/next-server/lib/runtime-config.d.ts": {
-        "version": "b7fff2d004c5879cae335db8f954eb1d61242d9f2d28515e67902032723caeab",
-        "signature": "b7fff2d004c5879cae335db8f954eb1d61242d9f2d28515e67902032723caeab",
-        "affectsGlobalScope": false
-      },
-      "../../../node_modules/next/config.d.ts": {
-        "version": "24ea5deb21fb2ed05f261e98c418ea501f45b54bca976be2e1c2b3fb58b28827",
-        "signature": "24ea5deb21fb2ed05f261e98c418ea501f45b54bca976be2e1c2b3fb58b28827",
-        "affectsGlobalScope": false
-      },
-      "../src/utils/getnextconfig.ts": {
-        "version": "3ac0a36bfe0f5f72a24006a3f8553e150047b0a2e759a98e911b822595afcfb2",
-        "signature": "c3b81f17d4c0622e5588e6122ecf627db7b40ff701fef716360ad758a8808765",
+      "../src/index.ts": {
+        "version": "e8551905a70c40bda50b9ca81070b53d5be92580a658a5b5a3b2d9564f5a08bf",
+        "signature": "b59e2aa8ed8c48b502bf4e8ffb8137a9c1f039454387355bceabd7ce1536c6c0",
         "affectsGlobalScope": false
       },
       "../src/utils/createconsolelogger.ts": {
@@ -506,24 +496,44 @@
         "signature": "8895cf49dd6e5858b9255739fc365498e5a060d7365952e95cd315dff08ff157",
         "affectsGlobalScope": false
       },
-      "../src/utils/index.ts": {
-        "version": "c9681e1a6a97c24d317dabe528905b03f7fd147e6d1c888d4572310859582167",
-        "signature": "3dff960f3eb37205e069fafb5a86162524011dfb6e677ffe7a3c95dc65ba0858",
+      "../src/utils/html/buildlinktag.ts": {
+        "version": "53ecb390022e3c4518ebbe44cf90b85b7d3ea79ae9e83ba8e4b48fc5344337ca",
+        "signature": "84c31b44a7486b3b8a527c22168614b1bada7b57d52ab54f33b5eeb8ef1cf2b9",
         "affectsGlobalScope": false
       },
-      "../src/index.ts": {
-        "version": "e8551905a70c40bda50b9ca81070b53d5be92580a658a5b5a3b2d9564f5a08bf",
-        "signature": "b59e2aa8ed8c48b502bf4e8ffb8137a9c1f039454387355bceabd7ce1536c6c0",
+      "../src/utils/html/buildplaceholder.ts": {
+        "version": "da5f0753bb45f2dfb10d1c583b670dce5fd6f370562e66fd48f4141cf4c69039",
+        "signature": "868a453d3e021d1431e23f4ccd4be4f569b72a0e49c2cec30fd6738073e4e3ce",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/html/buildscripttag.ts": {
+        "version": "dc874c0e0313caf5b4ffa9308bc385380bc2797ef10d5c02007cb94cc7822f6c",
+        "signature": "08aa0df045baa94c4f9767870480e8f6b2172df2d33f4893a1f7ad764ddebd98",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/getdefaultprocessinginstructions.ts": {
+        "version": "0685cbbcf4402711ddb8e7c4f19e9cbf4cfbb6028685c676cd50c10c7389fa21",
+        "signature": "421f5cc4f16871c1972c91f42066b219f00ec677625d09f3d3cbf57e83871b31",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/index.ts": {
+        "version": "c752256a90d5f911f87df516a857a9ae9059d169a217a2680f53b8d920832e7f",
+        "signature": "6acebeb14f0b4682b4aaf49e7b68eba4a4673b51a723a7e79e752b43de9958e3",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/createrenderingfromhtml.ts": {
+        "version": "c2356cea6fa8e78ad0d0e96afae4522d7b34865472877fea9e6e737e443f2575",
+        "signature": "992c8c328a84c8bf64caae76228c88f736d411c0e28a434a226acaf02c8e9823",
         "affectsGlobalScope": false
       },
       "../src/utils/createrendering.tsx": {
-        "version": "adeabff301029ba8b4a8ab460036e5299fe01904f7301f77259a5688e44f6896",
-        "signature": "680bb6f12bda27b282bea0018d6287dd254259f0805759cb8ce0cc09f49a12a5",
+        "version": "307ed1e5968c4898368d24a585b2841680e7ba0457c1a3a2fe2504e90dd941ba",
+        "signature": "d703e4b12d11a4be782b5d362c445b31c978c4946e5d75d4715c8336c236ae78",
         "affectsGlobalScope": false
       },
       "../src/components/baseplaceholder.tsx": {
-        "version": "0bfd0b8a9645cebbde5787d40fd08a7572719f26e6ab5dff425ca3923be970e5",
-        "signature": "3ca1e5fb4339c1ee961bdd51d8309bbc659aea1d2b6c6014aa3c8faa3a88d5f1",
+        "version": "bad58fda083e4a33fb21a3b9c89014fbc72e5fb95b1d5b9a706252d47ec9fd6d",
+        "signature": "c357498c58c9c9a98a2444d530b7a5b16b812b2d5e06a8ee5af810a0b1fbabaa",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@babel/types/lib/index.d.ts": {
@@ -2439,11 +2449,25 @@
         "../../common-client/dist/cjs/utils/convertdataitemtoruntimeitem.d.ts",
         "../../common-client/dist/cjs/utils/getpageprops.d.ts",
         "../../common-client/dist/cjs/utils/getpageurl.d.ts",
+        "../../common-client/dist/cjs/utils/mvcoptions.d.ts",
         "../../common-client/dist/cjs/utils/nooplogger.d.ts",
         "../../common-client/dist/cjs/utils/pagecomponentprops.d.ts",
         "../../common-client/dist/cjs/utils/parseplaceholderkey.d.ts",
         "../../common-client/dist/cjs/utils/popvisiblerenderingsfromplaceholdersmap.d.ts",
-        "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts"
+        "../../common-client/dist/cjs/utils/processinginstruction.d.ts",
+        "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts",
+        "../../common-client/dist/cjs/utils/uniformoptions.d.ts"
+      ],
+      "../../common-client/dist/cjs/utils/mvcoptions.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../../common-client/dist/cjs/utils/nooplogger.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -2484,6 +2508,15 @@
         "../../common/dist/cjs/index.d.ts",
         "../src/model/index.ts"
       ],
+      "../../common-client/dist/cjs/utils/processinginstruction.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
+      ],
       "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
@@ -2492,7 +2525,18 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
+        "../../common-client/dist/cjs/utils/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
+      ],
+      "../../common-client/dist/cjs/utils/uniformoptions.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../common-client/dist/cjs/utils/index.d.ts"
       ],
       "../../common/dist/cjs/events/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -2927,7 +2971,19 @@
         "../../../node_modules/@types/react/index.d.ts",
         "../../common-client/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/buildcanonicallinktag.ts",
+        "../src/utils/index.ts"
+      ],
+      "../src/utils/getdefaultprocessinginstructions.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/react/index.d.ts",
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts",
         "../src/utils/html/buildlinktag.ts",
         "../src/utils/html/buildplaceholder.ts",
         "../src/utils/html/buildscripttag.ts"
@@ -2955,17 +3011,6 @@
         "../src/utils/createconsolelogger.ts",
         "../src/utils/index.ts"
       ],
-      "../src/utils/html/buildcanonicallinktag.ts": [
-        "../../../node_modules/@types/graceful-fs/index.d.ts",
-        "../../../node_modules/@types/node/fs.d.ts",
-        "../../../node_modules/@types/node/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../../node_modules/@types/node/ts3.2/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
-      ],
       "../src/utils/html/buildlinktag.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
@@ -2975,8 +3020,8 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/react/index.d.ts",
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/utils/html/buildplaceholder.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -2987,8 +3032,8 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/react/index.d.ts",
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/utils/html/buildscripttag.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -2999,17 +3044,8 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/react/index.d.ts",
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
-      ],
-      "../src/utils/html/processinginstruction.ts": [
-        "../../../node_modules/@types/graceful-fs/index.d.ts",
-        "../../../node_modules/@types/node/fs.d.ts",
-        "../../../node_modules/@types/node/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../../node_modules/@types/node/ts3.2/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts",
-        "../../../node_modules/@types/node/util.d.ts"
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/utils/index.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -3022,6 +3058,7 @@
         "../src/utils/createconsolelogger.ts",
         "../src/utils/createrendering.tsx",
         "../src/utils/createrenderingfromhtml.ts",
+        "../src/utils/getdefaultprocessinginstructions.ts",
         "../src/utils/getnextconfig.ts",
         "../src/utils/getnextpageprops.ts"
       ]
@@ -4460,11 +4497,25 @@
         "../../common-client/dist/cjs/utils/convertdataitemtoruntimeitem.d.ts",
         "../../common-client/dist/cjs/utils/getpageprops.d.ts",
         "../../common-client/dist/cjs/utils/getpageurl.d.ts",
+        "../../common-client/dist/cjs/utils/mvcoptions.d.ts",
         "../../common-client/dist/cjs/utils/nooplogger.d.ts",
         "../../common-client/dist/cjs/utils/pagecomponentprops.d.ts",
         "../../common-client/dist/cjs/utils/parseplaceholderkey.d.ts",
         "../../common-client/dist/cjs/utils/popvisiblerenderingsfromplaceholdersmap.d.ts",
-        "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts"
+        "../../common-client/dist/cjs/utils/processinginstruction.d.ts",
+        "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts",
+        "../../common-client/dist/cjs/utils/uniformoptions.d.ts"
+      ],
+      "../../common-client/dist/cjs/utils/mvcoptions.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../../common-client/dist/cjs/utils/nooplogger.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -4505,6 +4556,15 @@
         "../../common/dist/cjs/index.d.ts",
         "../src/model/index.ts"
       ],
+      "../../common-client/dist/cjs/utils/processinginstruction.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
+      ],
       "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
@@ -4513,7 +4573,18 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
+        "../../common-client/dist/cjs/utils/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
+      ],
+      "../../common-client/dist/cjs/utils/uniformoptions.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../common-client/dist/cjs/utils/index.d.ts"
       ],
       "../../common/dist/cjs/events/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -4788,6 +4859,7 @@
       ],
       "../src/components/baseplaceholder.tsx": [
         "../../../node_modules/@types/react/index.d.ts",
+        "../../common-client/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts",
         "../src/components/component.tsx"
       ],
@@ -4840,29 +4912,30 @@
         "../../common-client/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
       ],
+      "../src/utils/getdefaultprocessinginstructions.ts": [
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
+      ],
       "../src/utils/getnextpageprops.ts": [
         "../../common-client/dist/cjs/index.d.ts"
       ],
-      "../src/utils/html/buildcanonicallinktag.ts": [
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
-      ],
       "../src/utils/html/buildlinktag.ts": [
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/utils/html/buildplaceholder.ts": [
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/utils/html/buildscripttag.ts": [
-        "../../common/dist/cjs/index.d.ts",
-        "../src/utils/html/processinginstruction.ts"
+        "../../common-client/dist/cjs/index.d.ts",
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/utils/index.ts": [
         "../src/utils/createconsolelogger.ts",
         "../src/utils/createrendering.tsx",
         "../src/utils/createrenderingfromhtml.ts",
+        "../src/utils/getdefaultprocessinginstructions.ts",
         "../src/utils/getnextconfig.ts",
         "../src/utils/getnextpageprops.ts"
       ]
@@ -5008,11 +5081,14 @@
       "../../common-client/dist/cjs/utils/getpageprops.d.ts",
       "../../common-client/dist/cjs/utils/getpageurl.d.ts",
       "../../common-client/dist/cjs/utils/index.d.ts",
+      "../../common-client/dist/cjs/utils/mvcoptions.d.ts",
       "../../common-client/dist/cjs/utils/nooplogger.d.ts",
       "../../common-client/dist/cjs/utils/pagecomponentprops.d.ts",
       "../../common-client/dist/cjs/utils/parseplaceholderkey.d.ts",
       "../../common-client/dist/cjs/utils/popvisiblerenderingsfromplaceholdersmap.d.ts",
+      "../../common-client/dist/cjs/utils/processinginstruction.d.ts",
       "../../common-client/dist/cjs/utils/uniformcontextprops.d.ts",
+      "../../common-client/dist/cjs/utils/uniformoptions.d.ts",
       "../../common/dist/cjs/events/index.d.ts",
       "../../common/dist/cjs/events/queue.d.ts",
       "../../common/dist/cjs/events/subscriptions.d.ts",
@@ -5053,13 +5129,12 @@
       "../src/utils/createconsolelogger.ts",
       "../src/utils/createrendering.tsx",
       "../src/utils/createrenderingfromhtml.ts",
+      "../src/utils/getdefaultprocessinginstructions.ts",
       "../src/utils/getnextconfig.ts",
       "../src/utils/getnextpageprops.ts",
-      "../src/utils/html/buildcanonicallinktag.ts",
       "../src/utils/html/buildlinktag.ts",
       "../src/utils/html/buildplaceholder.ts",
       "../src/utils/html/buildscripttag.ts",
-      "../src/utils/html/processinginstruction.ts",
       "../src/utils/index.ts"
     ]
   },
