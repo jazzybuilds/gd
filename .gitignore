@@ -29,6 +29,7 @@ scjssconfig.json
 .vs/
 azure.config.json
 netlify.config.json
+.netlify
 aws.config.json
 .npmrc
 
