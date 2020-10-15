@@ -7,6 +7,7 @@
   "private": true,
   "license": "SEE LICENSE IN PROVIDED DISTRIBUTION PACKAGE",
   "scripts": {
+    "start": "next dev",
     "build": "ncp lib node_modules && next build",
     "export:site": "next export --threads 50",
     "export": "npm-run-all --serial generate-redirects build export:site",
