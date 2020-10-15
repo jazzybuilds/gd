@@ -21,7 +21,7 @@ function getPageFile(page: string, buildId?: string) {
   return buildId ? `${page}.${buildId}.js` : `${page}.js`
 }
 
-export class CustomHead extends Head {
+class CustomHead extends Head {
 // extracted and modified next 9.3.1 Head.render()
 render() {
     const {
@@ -210,3 +210,5 @@ render() {
     )
   }
 }
+
+export default CustomHead;
