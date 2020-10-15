@@ -11,16 +11,20 @@ module.exports = function () {
   process.env.UNIFORM_API_URL = "http://localhost";
   process.env.UNIFORM_API_TOKEN = "12345";
   process.env.UNIFORM_MODE = "preview";
-  
+
   // complete configuration using dotenv
   const env = dotenv.config();
 
-  const keys = Object.keys(env.parsed);
-  keys.forEach((k) => {
-    const value = env.parsed[k];
-    console.log("Setting " + k + "env variable to " + value);
-    process.env[k] = env.parsed[k];
-  });
+  if (!env.parsed) {
+    console.log("dotenv didn't parse");
+  } else {
+    const keys = Object.keys(env.parsed);
+    keys.forEach((k) => {
+      const value = env.parsed[k];
+      console.log("Setting " + k + "env variable to " + value);
+      process.env[k] = env.parsed[k];
+    });
+  }
 
   // these values must not be changed via .env
   process.env.UNIFORM_OPTIONS_MVC_SUPPORT = "true";
