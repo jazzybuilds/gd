@@ -10,8 +10,13 @@ import {
   createConsoleLogger,
 } from "@uniformdev/next";
 
+import { Hero as HeroComponent } from "../components/Hero"
+
 // Components Index
 const componentsIndex: any = {};
+
+componentsIndex['PrimaryHero'] = HeroComponent
+
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
