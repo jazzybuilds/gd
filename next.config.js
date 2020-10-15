@@ -7,10 +7,10 @@ module.exports = function () {
 
   // load default configuration from uniform.config
   process.env.PORT = 3000;
-  process.env.UNIFORM_API_SITENAME = "GuideDogsDotOrgPreview";
-  process.env.UNIFORM_API_URL = "http://localhost";
-  process.env.UNIFORM_API_TOKEN = "12345";
-  process.env.UNIFORM_MODE = "preview";
+  // process.env.UNIFORM_API_SITENAME = "GuideDogsDotOrgPreview";
+  // process.env.UNIFORM_API_URL = "http://localhost";
+  // process.env.UNIFORM_API_TOKEN = "12345";
+  // process.env.UNIFORM_MODE = "preview";
 
   // complete configuration using dotenv
   const env = dotenv.config();
