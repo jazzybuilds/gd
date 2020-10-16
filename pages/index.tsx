@@ -9,11 +9,13 @@ const context: UniformContextProps = uniformConfig();
 context.logger = context.logger || createConsoleLogger();
 
 import { Hero as HeroComponent } from "../components/Hero"
+import { TextBanner as TextBannerComponent } from "../components/TextBanner"
 
 // Components Index
 const componentsIndex: any = {};
 
 componentsIndex['PrimaryHero'] = HeroComponent
+componentsIndex['PromoPod'] = TextBannerComponent
 
 
 class Placeholder extends BasePlaceholder {
