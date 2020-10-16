@@ -14,7 +14,9 @@ export const TextBanner = (props) => {
         <div className="c-promoPod__wrapper">
           <p className="c-promoPod__text field-text" dangerouslySetInnerHTML={{ __html: fields.text }} />
           <p className="c-promoPod__link field-link">
-            <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
+            {fields.link &&
+              <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
+            }
           </p>
         </div>
       </div>
