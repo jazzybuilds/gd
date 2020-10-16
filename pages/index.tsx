@@ -10,13 +10,14 @@ context.logger = context.logger || createConsoleLogger();
 
 import { Hero as HeroComponent } from "../components/Hero"
 import { TextBanner as TextBannerComponent } from "../components/TextBanner"
+import { Card as CardComponent } from "../components/Card"
 
 // Components Index
 const componentsIndex: any = {};
 
 componentsIndex['PrimaryHero'] = HeroComponent
 componentsIndex['PromoPod'] = TextBannerComponent
-
+componentsIndex['ManualNavigationPod'] = CardComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
