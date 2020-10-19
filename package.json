@@ -9,12 +9,14 @@
   "scripts": {
     "postinstall": "ncp lib node_modules",
     "build": "next build",
+    "build:storybook": "build-storybook",
     "dev": "node ./server.js",
     "start": "npm run build && npm run start:connected",
     "start:connected": "cross-env NODE_ENV=production node ./server.js",
     "export:site": "next export --threads 8",
     "export": "npm-run-all --serial generate-redirects build export:site",
-    "generate-redirects": "node generate-redirects.js"
+    "generate-redirects": "node generate-redirects.js",
+    "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
     "cross-env": "^7.0.2",
@@ -41,10 +43,17 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-links": "^6.0.26",
+    "@storybook/react": "^6.0.26",
     "@types/dotenv": "^8.2.0",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
+    "babel-loader": "^8.1.0",
     "ncp": "^2.0.0",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "react-is": "^16.13.1"
   }
 }
