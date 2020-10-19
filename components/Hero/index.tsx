@@ -24,13 +24,13 @@ export const Hero = (props) => {
       <div className="component-content">
         <div className="c-hero__wrapper">
           {heroimage &&
-          <div
-          className="c-hero__image"
-          style={{
-            backgroundImage: `url(${heroimage.url})`,
-          }}
-          />
-        }
+            <div
+              className="c-hero__image"
+              style={{
+                backgroundImage: `url(${heroimage.url})`,
+              }}
+            />
+          }
           <div className="c-hero__content">
             <h1
               className="c-hero__title field-herotitle"
