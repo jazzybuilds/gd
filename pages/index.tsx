@@ -14,6 +14,7 @@ import { Card as CardComponent } from "../components/Card"
 import { CardBanner as CardBannerComponent } from "../components/CardBanner"
 import { ContactDetails as ContactDetailsComponent } from "../components/ContactDetails"
 import { Button as ButtonComponent } from "../components/Button"
+import { BlockText as BlockTextComponent } from '../components/BlockText';
 
 // Components Index
 const componentsIndex: any = {};
@@ -24,6 +25,7 @@ componentsIndex['ManualNavigationPod'] = CardComponent
 componentsIndex['ImageSpotlight'] = CardBannerComponent
 componentsIndex['GetInTouch'] = ContactDetailsComponent
 componentsIndex['CTAButton'] = ButtonComponent
+componentsIndex['MessageBlock'] = BlockTextComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
