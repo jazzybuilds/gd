@@ -4,6 +4,10 @@ export const Accordion = (props) => {
   const { renderingContext } = props
   const { item: { children } } = renderingContext
 
+  if (!children || children.length === 0) {
+    return null
+  }
+
   return (
     <div className="component accordion small-12 columns" data-properties="{&quot;expandOnHover&quot;:false,&quot;expandedByDefault&quot;:false,&quot;speed&quot;:500,&quot;easing&quot;:&quot;swing&quot;,&quot;canOpenMultiple&quot;:true,&quot;canToggle&quot;:true,&quot;isControlEditable&quot;:false}">
       <div className="component-content">
