@@ -18,6 +18,7 @@ import { BlockText as BlockTextComponent } from '../components/BlockText';
 import { BlockQuote as BlockQuoteComponent } from '../components/BlockQuote';
 import { HeroSecondary as HeroSecondaryComponent } from '../components/HeroSecondary';
 import { Accordion as AccordionComponent } from '../components/Accordion';
+import { Image as ImageComponent } from '../components/Image';
 
 // Components Index
 const componentsIndex: any = {};
@@ -32,6 +33,7 @@ componentsIndex['MessageBlock'] = BlockTextComponent
 componentsIndex['Quote'] = BlockQuoteComponent
 componentsIndex['SecondaryHero'] = HeroSecondaryComponent
 componentsIndex['Accordion'] = AccordionComponent
+componentsIndex['CaptionedImage'] = ImageComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
