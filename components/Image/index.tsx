@@ -6,7 +6,7 @@ export const Image = (props) => {
     return null
   }
 
-  const {id, item: { fields: { image }}} = renderingContext
+  const { id, item: { fields: { image }}} = renderingContext
 
   return (
     <div className="component c-imagePod file-type-icon-media-link small-12 columns">
