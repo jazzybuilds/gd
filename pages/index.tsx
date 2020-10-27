@@ -20,6 +20,7 @@ import { HeroSecondary as HeroSecondaryComponent } from '../components/HeroSecon
 import { Accordion as AccordionComponent } from '../components/Accordion';
 import { Image as ImageComponent } from '../components/Image';
 import { CardArticle as CardArticleComponent } from '../components/CardArticle';
+import { Video as VideoComponent } from '../components/Video';
 
 // Components Index
 const componentsIndex: any = {};
@@ -36,6 +37,7 @@ componentsIndex['SecondaryHero'] = HeroSecondaryComponent
 componentsIndex['Accordion'] = AccordionComponent
 componentsIndex['CaptionedImage'] = ImageComponent
 componentsIndex['CaseStudySpotlight'] = CardArticleComponent
+componentsIndex['Video'] = VideoComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
