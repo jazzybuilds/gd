@@ -8,10 +8,10 @@ const MVCLayout = (props) => {
   return (
     <>
       <Head>
-        <title>Guide Dogs</title>
+        <title>Guide Dogs UK Charity For The Blind And Partially Sighted</title>
         <link href="/main.css" rel="stylesheet" />
 
-        {/* 
+{/*         
         <link
           href="https://gdogskb.blob.core.windows.net/$web/-/media/Feature/Experience-Accelerator/Foundation/Foundation/Styles/optimized-min.css?t=20190703T145413Z"
           rel="stylesheet"
@@ -27,8 +27,10 @@ const MVCLayout = (props) => {
         <link
           href="https://gdogskb.blob.core.windows.net/$web/-/media/Themes/GuideDogs/GuideDogsDotOrg/GuideDogsTheme/styles/optimized-min.css?t=20200914T150421Z"
           rel="stylesheet"
-        />
-        <UniformPlaceholder
+        /> */}
+
+      
+        {/* <UniformPlaceholder
           placeholderKey="/head"
           placeholderComponent={placeholderComponent}
           {...props}
@@ -74,6 +76,7 @@ const MVCLayout = (props) => {
         placeholderComponent={placeholderComponent}
         {...props}
       ></UniformPlaceholder>
+
     </>
   );
 };
