@@ -8,6 +8,13 @@ const MVCLayout = (props) => {
   return (
     <>
       <Head>
+        <link href="/main.css" rel="stylesheet" />
+        {/* <link href="https://guidedogspoc.ngrok.io/-/media/Feature/Experience-Accelerator/Foundation/Foundation/Styles/optimized-min.css?t=20190703T145413Z" rel="stylesheet" /> */}
+        {/* <link href="https://guidedogspoc.ngrok.io/-/media/Themes/GuideDogs/GuideDogsDotOrg/GuideDogsTheme/styles/optimized-min.css?t=20200914T150421Z" rel="stylesheet" />     */}
+        {/* <link href="https://guidedogspoc.ngrok.io/-/media/Base-Themes/Core-Libraries/styles/optimized-min.css?t=20190703T145418Z" rel="stylesheet" /> */}
+        <link href="https://guidedogspoc.ngrok.io/-/media/Base-Themes/Main-Theme/styles/optimized-min.css?t=20190703T145420Z" rel="stylesheet" />
+
+        {/* 
         <link
           href="https://gdogskb.blob.core.windows.net/$web/-/media/Feature/Experience-Accelerator/Foundation/Foundation/Styles/optimized-min.css?t=20190703T145413Z"
           rel="stylesheet"
@@ -28,7 +35,7 @@ const MVCLayout = (props) => {
           placeholderKey="/head"
           placeholderComponent={placeholderComponent}
           {...props}
-        ></UniformPlaceholder>
+        ></UniformPlaceholder> */}
       </Head>
 
       <UniformPlaceholder
