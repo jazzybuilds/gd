@@ -9,7 +9,7 @@ import CustomHead from '../components/CustomHead';
 export default class CustomDocument extends Document {
     render() {
         return (
-            <html>
+            <html lang="en">
                 {/* CustomHead replaces stock Next.js Head component to disable prefetching links */}
                 <CustomHead />
                 <body className="default-device">
