@@ -8,6 +8,7 @@ const MVCLayout = (props) => {
   return (
     <>
       <Head>
+        <title>Guide Dogs</title>
         <link href="/main.css" rel="stylesheet" />
 
         {/* 
