@@ -5,3 +5,12 @@ command = "npm run export"
 
 [[plugins]]
 package = "netlify-plugin-cache-nextjs"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+	cache-control = '''
+	max-age=31536000,
+	no-cache,
+	no-store,
+	must-revalidate'''
