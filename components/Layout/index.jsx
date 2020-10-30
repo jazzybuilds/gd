@@ -19,7 +19,6 @@ const MVCLayout = (props) => {
         <meta content="Guide Dogs UK"  property="og:title" />
         <meta content="https://www.guidedogs.org.uk/"  property="og:url" />
         <link href="/main.css" rel="stylesheet" />
-
 {/*         
         <link
           href="https://gdogskb.blob.core.windows.net/$web/-/media/Feature/Experience-Accelerator/Foundation/Foundation/Styles/optimized-min.css?t=20190703T145413Z"
