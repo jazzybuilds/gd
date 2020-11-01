@@ -1,7 +1,7 @@
 /sxa/search/*   											http://tempsitecoreguidedogs.trafficmanager.net/sxa/search/:splat 200
-/-/media/*  												https://tempguidedogs.azureedge.net/media/-/media/:splat 200
+/-/media/*  												https://tempguidedogs.azureedge.net/media/-/media/:splat 200!
 /formbuilder/*                                              http://tempsitecoreguidedogs.trafficmanager.net/formbuilder:splat 200
 
 
-/contact-us/sap-epupdates/*                                 http://tempsitecoreguidedogs.trafficmanager.net/contact-us/sap-epupdates/:splat 200
-/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant  http://tempsitecoreguidedogs.trafficmanager.net/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant/:splat 200
+/contact-us/sap-epupdates/*                                 http://tempsitecoreguidedogs.trafficmanager.net/contact-us/sap-epupdates/:splat 200!
+/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant  http://tempsitecoreguidedogs.trafficmanager.net/getting-support/information-and-advice/how-can-technology-help-me/assistive-technology-grants-for-children/how-do-i-apply-for-a-grant/:splat 200!
