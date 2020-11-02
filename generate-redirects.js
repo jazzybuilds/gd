@@ -15,7 +15,8 @@ function parseLegacyRedirects(path) {
     if (rule.action.redirectType !== '301') {
       throw new Error(`${rule.action.redirectType} not supported`)
     }
-    const toUrl = rule.action.url.replace('https://{HTTP_HOST}', '').replace(/\/$/, '');
+    const toUrlParse = rule.action.url.replace('https://{HTTP_HOST}', '').replace(/\/$/, '');
+    const toUrl = toUrlParse ? toUrlParse : '/'
     if (rule.match.url.match(escapeRegex('(/)?$'))) {
       const fromUrl = `/${rule.match.url.replace('^', '').replace('(/)?$', '')}`
       if (!cleanRules[fromUrl]) {
