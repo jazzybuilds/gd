@@ -9,7 +9,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 export default class CustomDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <title>
             Guide Dogs UK Charity For The Blind And Partially Sighted
