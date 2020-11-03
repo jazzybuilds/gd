@@ -9,5 +9,6 @@ export interface UniformConfig {
     UNIFORM_OPTIONS_MVC_MODE: 'mixed' | 'mvconly';
     UNIFORM_OPTIONS_MVC_SPA_ENABLED: boolean;
     UNIFORM_OPTIONS_ANALYTICS_ENABLED: boolean;
+    UNIFORM_REACT_RENDERINGS: string;
 }
 //# sourceMappingURL=UniformConfig.d.ts.map

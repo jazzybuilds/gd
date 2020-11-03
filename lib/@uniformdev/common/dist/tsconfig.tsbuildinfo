@@ -172,8 +172,8 @@
         "affectsGlobalScope": false
       },
       "../src/model/uniformconfig.ts": {
-        "version": "2eb99e46233b16fbcdadde5ae96244b68fdf0b7586e089cfc6aded10cb62056e",
-        "signature": "82f0dfdffe76526176c08b3e321f1222f272df8c5828e77e7dc7420c91bc917f",
+        "version": "48c3cb564dd3b2940bebdd165dfe34ead215dd6be5a4b7ed05748b8623fe3853",
+        "signature": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
         "affectsGlobalScope": false
       },
       "../src/model/index.ts": {
@@ -272,7 +272,7 @@
         "affectsGlobalScope": false
       },
       "../src/util/parseuniformconfig.ts": {
-        "version": "4d061633ac0f791cd8bd225f2c710367c339e9c5a2b45268fb33345ccdfba177",
+        "version": "a8d1e0e18a648c9d018650d0dd98d212c2175c66d6526ef39834cfafe6ed8d10",
         "signature": "a9b50bafb58485f641d6ce65387d8112d9c18d64afddbbaaef63c6266f86ff54",
         "affectsGlobalScope": false
       },
@@ -2401,14 +2401,18 @@
         "../../../node_modules/@babel/types/lib/index.d.ts",
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@babel/types/lib/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2420,7 +2424,9 @@
         "../../../node_modules/@types/babel__traverse/index.d.ts",
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2428,7 +2434,9 @@
         "../../../node_modules/@babel/types/lib/index.d.ts",
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2437,7 +2445,9 @@
         "../../../node_modules/@babel/types/lib/index.d.ts",
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2445,7 +2455,9 @@
         "../../../node_modules/@babel/types/lib/index.d.ts",
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2454,7 +2466,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/http.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
@@ -2462,7 +2476,9 @@
       "../../../node_modules/@types/color-name/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2494,7 +2510,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/http.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
@@ -2504,7 +2522,9 @@
         "../../../node_modules/@types/node/events.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/http.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
@@ -2516,7 +2536,9 @@
         "../../../node_modules/@types/express-serve-static-core/index.d.ts",
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/qs/index.d.ts",
@@ -2528,14 +2550,18 @@
         "../../../node_modules/@types/minimatch/index.d.ts",
         "../../../node_modules/@types/node/events.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/graceful-fs/index.d.ts": [
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
@@ -2543,7 +2569,9 @@
       "../../../node_modules/@types/istanbul-lib-coverage/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2551,7 +2579,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/istanbul-lib-coverage/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2560,7 +2590,9 @@
         "../../../node_modules/@types/istanbul-lib-coverage/index.d.ts",
         "../../../node_modules/@types/istanbul-lib-report/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2568,7 +2600,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/jest/node_modules/jest-diff/build/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2576,49 +2610,63 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/json-schema/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/mime/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/minimatch/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/minimist/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/node-fetch/externals.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2627,7 +2675,9 @@
         "../../../node_modules/@types/node-fetch/externals.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/http.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/url.d.ts",
@@ -2934,7 +2984,9 @@
       "../../../node_modules/@types/node/punycode.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -2991,7 +3043,9 @@
       "../../../node_modules/@types/node/timers.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3011,7 +3065,9 @@
       "../../../node_modules/@types/node/trace_events.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3029,6 +3085,8 @@
       "../../../node_modules/@types/node/ts3.2/fs.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3111,7 +3169,9 @@
       "../../../node_modules/@types/node/ts3.7/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/base.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
@@ -3120,7 +3180,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/net.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3177,50 +3239,64 @@
       "../../../node_modules/@types/node/zlib.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/stream.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/normalize-package-data/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/prettier/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/prop-types/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/qs/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/range-parser/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/react-dom/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/react/index.d.ts"
@@ -3228,14 +3304,18 @@
       "../../../node_modules/@types/react/global.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/react/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/prop-types/index.d.ts",
@@ -3247,7 +3327,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/mime/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/express-serve-static-core/express-serve-static-core.d.ts"
@@ -3255,14 +3337,18 @@
       "../../../node_modules/@types/stack-utils/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/@types/yargs-parser/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3279,7 +3365,9 @@
       "../../../node_modules/csstype/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3287,7 +3375,9 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/http.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
@@ -3295,7 +3385,9 @@
       "../../../node_modules/fetch-retry/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
@@ -3303,8 +3395,10 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/http.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/stream.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/ts3.7/index.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
@@ -3313,21 +3407,27 @@
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node-fetch/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/loglevel/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/serialize-error/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/type-fest/index.d.ts"
@@ -3335,7 +3435,9 @@
       "../../../node_modules/type-fest/index.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/type-fest/source/package-json.d.ts"
@@ -3343,7 +3445,9 @@
       "../../../node_modules/type-fest/source/package-json.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/type-fest/index.d.ts"
@@ -3351,196 +3455,252 @@
       "../../../node_modules/typescript/lib/lib.dom.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.core.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.generator.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.iterable.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.promise.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.proxy.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.reflect.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.symbol.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2016.array.include.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2016.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2017.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2017.intl.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2017.object.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2017.string.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2018.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2018.intl.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2018.promise.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2018.regexp.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es2020.bigint.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.es5.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../../node_modules/typescript/lib/lib.esnext.intl.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
         "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts"
       ],
