@@ -31,6 +31,8 @@ export default class CustomDocument extends Document {
           />
           <meta content="Guide Dogs UK" property="og:title" />
           <meta content="https://www.guidedogs.org.uk/" property="og:url" />
+          <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" type="font/woff2"  />
+          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff2" as="font" type="font/woff2"  />
           <link href="/main.css" rel="stylesheet" />
         </Head>
         <body className="default-device">
