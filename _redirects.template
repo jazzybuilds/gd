@@ -1,4 +1,4 @@
-/sxa/search/*   											http://tempsitecoreguidedogs.trafficmanager.net/sxa/search/:splat 200
+/sxa/search/*   											https://www.guidedogs.org.uk/sxa/search/:splat 200
 /-/media/*  												https://tempguidedogs.azureedge.net/media/-/media/:splat 200!
 /formbuilder/*                                              http://tempsitecoreguidedogs.trafficmanager.net/formbuilder:splat 200
 
