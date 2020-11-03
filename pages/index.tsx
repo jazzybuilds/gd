@@ -28,6 +28,7 @@ import { Accordion as AccordionComponent } from "../components/Accordion";
 import { Image as ImageComponent } from "../components/Image";
 import { CardArticle as CardArticleComponent } from "../components/CardArticle";
 import { Video as VideoComponent } from "../components/Video";
+import { CookieBanner as CookieBannerComponent } from "../components/CookieBanner";
 import MVCLayout from "../components/Layout";
 import MetadataLayout from "../components/MetadataLayout";
 
@@ -47,6 +48,8 @@ componentsIndex["Accordion"] = AccordionComponent;
 componentsIndex["CaptionedImage"] = ImageComponent;
 componentsIndex["CaseStudySpotlight"] = CardArticleComponent;
 componentsIndex["Video"] = VideoComponent;
+componentsIndex["PrivacyWarning"] = CookieBannerComponent;
+
 
 componentsIndex["MVCLayout"] = MVCLayout;
 componentsIndex["MetadataLayout"] = MetadataLayout;
