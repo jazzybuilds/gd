@@ -11,7 +11,7 @@ export const Card = (props: any) => {
   return (
     <div className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight"  >
       <div className="component-content">
-        <div className="c-navigationPod__wrapper">
+        <div className="c-navigationPod__wrapper" style={{background: 'yellow'}}>
           {fields['pod image'] &&
             <div className="c-navigationPod__image">
               <img src={fields['pod image'].url} alt={fields['pod image'].alt} />
