@@ -5,3 +5,4 @@
 /contact-us/sap-epupdates/*                                     http://tempsitecoreguidedogs.trafficmanager.net/contact-us/sap-epupdates/:splat 200!
 /fieldtracking/register/*                                       http://tempsitecoreguidedogs.trafficmanager.net/fieldtracking/register/:splat 200!
 /guidedogsapi/*                                                 http://tempsitecoreguidedogs.trafficmanager.net/guidedogsapi/:splat 200!
+/guidedogspayments/*                                            http://tempsitecoreguidedogs.trafficmanager.net/guidedogspayments/:splat 200!
