@@ -3,4 +3,4 @@
 /formbuilder/*                                              http://tempsitecoreguidedogs.trafficmanager.net/formbuilder:splat 200!
 /contact-us/sap-epupdates/*                                 http://tempsitecoreguidedogs.trafficmanager.net/contact-us/sap-epupdates/:splat 200!
 /fieldtracking/register/*                                   http://tempsitecoreguidedogs.trafficmanager.net/fieldtracking/register:splat 200!
-/guidedogsapi/addresslookup/postcodesearch                  http://tempsitecoreguidedogs.trafficmanager.net/guidedogsapi/addresslookup/postcodesearch:splat 200!
+/guidedogsapi/addresslookup/postcodesearch/*                http://tempsitecoreguidedogs.trafficmanager.net/guidedogsapi/addresslookup/postcodesearch:splat 200!
