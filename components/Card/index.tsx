@@ -9,7 +9,7 @@ export const Card = (props) => {
   const { id, item: { fields } } = renderingContext
 
   return (
-    <div className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight" >
+    <div className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight">
       <div className="component-content">
         <div className="c-navigationPod__wrapper" >
           {fields['pod image'] &&
