@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Card = (props) => {
+export const Card = (props: any) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields) {
     return null
@@ -9,9 +9,9 @@ export const Card = (props) => {
   const { id, item: { fields } } = renderingContext
 
   return (
-    <div className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight">
+    <div className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight"  >
       <div className="component-content">
-        <div className="c-navigationPod__wrapper" >
+        <div className="c-navigationPod__wrapper">
           {fields['pod image'] &&
             <div className="c-navigationPod__image">
               <img src={fields['pod image'].url} alt={fields['pod image'].alt} />

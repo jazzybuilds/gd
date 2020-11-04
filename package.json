@@ -6,9 +6,11 @@
   },
   "private": true,
   "license": "SEE LICENSE IN PROVIDED DISTRIBUTION PACKAGE",
-  "pre-commit": [
-    "test"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
+  },
   "scripts": {
     "test": "jest",
     "test:update": "jest --updateSnapshot",
@@ -56,11 +58,12 @@
     "@types/dotenv": "^8.2.0",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
+    "@types/react-test-renderer": "^16.9.3",
     "babel-loader": "^8.1.0",
+    "husky": "^4.3.0",
     "jest": "^26.6.3",
     "ncp": "^2.0.0",
     "npm-run-all": "^4.1.5",
-    "pre-commit": "^1.2.2",
     "react-is": "^16.13.1",
     "react-test-renderer": "^17.0.1",
     "ts-jest": "^26.4.3",
