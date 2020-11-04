@@ -1,22 +1,22 @@
 # Getting started
 
-Run `npm install`.
+Run `yarn`.
 
 ## Local Development
 1. make copy of `.env.dev`, name it `.env`, the sample file is pre-populated
-1. `npm start`
+1. `yarn start`
 1.  visit `http://localhost:3000`
 
 ## Local export
 1. make copy of `.env.export`, name it `.env`
-1. `npm run export`
+1. `yarn export`
 1. The site will be exported to the `./out` folder.
 1. Run any static server on it `npx serve out` for example.
 1. The site should be able to serve statically now.
 
 ## Uniform endpoints
 
-The following ngrok tunnel is configured for the PoC: `https://guidedogspoc.ngrok.io`.
+The following ngrok tunnel is configured for the PoC: `http://tempsitecoreguidedogs.trafficmanager.net`.
 
 ### Map Service
 The role of Uniform Map Service is to return the hierarchy of all the pages in scope for a given site.
@@ -148,7 +148,7 @@ API caching allows to cache the output of Uniform APIs in Azure Blob Storage for
 If is enabled (it is disabled for the time being), accessing any of the APIs above will redirect to the Azure Blob Storage cached copy (it is by design).
 
 In order to force re-population of cache, add the following query string at the end of either map, page or html service:
-`?blob=regenerate&uniform_token=12345`, for example: `https://guidedogspoc.ngrok.io/uniform/api/content/guidedogsdotorgpreview/html.json?blob=regenerate&uniform_token=12345`
+`?blob=regenerate&uniform_token=12345`, for example: `http://tempsitecoreguidedogs.trafficmanager.net/uniform/api/content/guidedogsdotorgpreview/html.json?blob=regenerate&uniform_token=12345`
 
 
 

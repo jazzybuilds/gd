@@ -8,11 +8,11 @@
   "license": "SEE LICENSE IN PROVIDED DISTRIBUTION PACKAGE",
   "husky": {
     "hooks": {
-      "pre-push": "npm test"
+      "pre-push": "yarn test"
     }
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "test:update": "jest --updateSnapshot",
     "postinstall": "ncp lib node_modules",
     "build": "next build",
