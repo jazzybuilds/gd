@@ -38,7 +38,6 @@ export default class CustomDocument extends Document {
         <body className="default-device">
           <Main />
           <NextScript />
-          {/* <script src="/maps.js"></script> */}
           <script src="/-/media/Base-Themes/Core-Libraries/scripts/optimized-min.js?t=20190703T145418Z"></script>
           <script src="/-/media/Base-Themes/XA-API/Scripts/optimized-min.js?t=20190703T145419Z"></script>
           <script src="/-/media/Base-Themes/Main-Theme/scripts/optimized-min.js?t=20190703T145420Z"></script>
@@ -49,7 +48,6 @@ export default class CustomDocument extends Document {
           <script src="/-/media/Base-Themes/Resolve-Conflicts/Scripts/optimized-min.js?t=20190703T145423Z"></script>
           <script src="/-/media/Themes/GuideDogs/GuideDogsDotOrg/GuideDogsTheme/scripts/optimized-min.js"></script> 
           <script src="/scripts.js"></script>
-        
         </body>
       </Html>
     );

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Card renders correctly 1`] = `
 <div
   className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight"
 >
