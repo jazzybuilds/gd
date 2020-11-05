@@ -9,11 +9,6 @@ exports[`Card renders correctly 1`] = `
   >
     <div
       className="c-navigationPod__wrapper"
-      style={
-        Object {
-          "background": "yellow",
-        }
-      }
     >
       <div
         className="c-navigationPod__image"
