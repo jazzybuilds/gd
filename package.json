@@ -20,7 +20,7 @@
     "dev": "node ./server.js",
     "start": "npm run build && npm run start:connected",
     "start:connected": "cross-env NODE_ENV=production node ./server.js",
-    "export:site": "next export --threads 8",
+    "export:site": "next export --threads 100",
     "export": "npm-run-all --serial generate-redirects build export:site",
     "generate-redirects": "node generate-redirects.js",
     "storybook": "start-storybook -p 6006"
