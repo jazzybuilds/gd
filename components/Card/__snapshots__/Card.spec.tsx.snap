@@ -2,29 +2,31 @@
 
 exports[`Card renders correctly 1`] = `
 <div
-  className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight"
+  className="sc-bdfBwQ jOlPSs small-12 columns js-equalHeight"
 >
   <div
     className="component-content"
   >
     <div
-      className="c-navigationPod__wrapper"
+      className="sc-gsTCUz lgbzsf c-navigationPod__wrapper"
     >
       <div
-        className="c-navigationPod__image"
+        className="sc-eCssSg kZyMUE"
       >
         <img
           alt="cute monkey"
+          className="sc-jSgupP qOnTl"
           src="https://img.posterlounge.co.uk/images/big/1592909.jpg"
         />
       </div>
       <div
-        className="c-navigationPod__content"
+        className="sc-dlfnbm BaxHY"
       >
         <div
-          className="c-navigationPod__link field-link"
+          className=" field-link"
         >
           <a
+            className="sc-gKsewC cKBQWx"
             data-variantfieldname="Link"
             data-variantitemid="{undefined}"
             href="/"
@@ -33,7 +35,7 @@ exports[`Card renders correctly 1`] = `
           </a>
         </div>
         <p
-          className="c-navigationPod__text field-pod-text"
+          className="sc-hKgILt fZHvtl field-pod-text"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac lectus et velit vulputate elementum. Aenean euismod tortor id sapien accumsan, vel commodo metus luctus. Mauris dapibus consectetur sem quis ultricies. Nam iaculis velit in tortor lobortis, in egestas augue facilisis. Fusce mattis pulvinar felis nec vulputate. Sed vulputate sem id nisi cursus, in ornare erat eleifend. Aliquam ut velit volutpat, volutpat nisi in, molestie nulla.",
