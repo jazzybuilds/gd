@@ -2,7 +2,7 @@
 
 exports[`Card renders correctly 1`] = `
 <div
-  className="sc-bdfBwQ jOlPSs small-12 columns js-equalHeight"
+  className="sc-bdfBwQ fzlwWY small-12 columns js-equalHeight"
 >
   <div
     className="component-content"
@@ -20,7 +20,7 @@ exports[`Card renders correctly 1`] = `
         />
       </div>
       <div
-        className="sc-dlfnbm BaxHY"
+        className="sc-dlfnbm edcLZW"
       >
         <div
           className=" field-link"
@@ -34,6 +34,7 @@ exports[`Card renders correctly 1`] = `
             button text
           </a>
         </div>
+        ????
         <p
           className="sc-hKgILt fZHvtl field-pod-text"
           dangerouslySetInnerHTML={
