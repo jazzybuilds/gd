@@ -1,4 +1,5 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
 
 // Uniform
 import {
@@ -31,6 +32,7 @@ import { Video as VideoComponent } from "../components/Video";
 import { CookieBanner as CookieBannerComponent } from "../components/CookieBanner";
 import MVCLayout from "../components/Layout";
 import MetadataLayout from "../components/MetadataLayout";
+import { theme } from "../theme";
 
 // Components Index
 const componentsIndex: any = {};
@@ -71,14 +73,16 @@ export default class extends React.Component<NextPageProps> {
   render() {
     return (
       <UniformContext.Provider value={context}>
-        <PageComponent {...this.props} components={componentsIndex}>
-          {(renderingContext) => (
-            <Placeholder
-              placeholderKey="/"
-              renderingContext={renderingContext}
-            />
-          )}
-        </PageComponent>
+        <ThemeProvider theme={theme}>
+          <PageComponent {...this.props} components={componentsIndex}>
+            {(renderingContext) => (
+              <Placeholder
+                placeholderKey="/"
+                renderingContext={renderingContext}
+              />
+            )}
+          </PageComponent>
+        </ThemeProvider>
       </UniformContext.Provider>
     );
   }

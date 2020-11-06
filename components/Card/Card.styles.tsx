@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
 export const Root = styled.div`
-  width:100%;
+  width: 100%;
   margin: .75rem auto;
   padding: 0;
-  @media (min-width: 40em) {
+  ${props => props.theme.breakpoints.sm} {
     margin: 1rem auto;
   }
-  @media (min-width: 60em) {
+  ${props => props.theme.breakpoints.md} {
     margin: 1.5rem auto;
   }
-
 `;
 
 export const Wrapper = styled.div`
@@ -29,7 +28,7 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   padding: 1.5rem;
-  @media (min-width: 60em) {
+  ${props => props.theme.breakpoints.md} {
     padding: 2rem;
   }
 `
@@ -58,4 +57,10 @@ export const Image = styled.img`
   right: 0;
   bottom: 0;
   left: 0;
+`
+
+export const Link = styled.a`
+  font-size: 1.625rem;
+  line-height: 2.25rem;
+  text-decoration: underline;
 `

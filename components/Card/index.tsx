@@ -1,5 +1,5 @@
 import React from 'react'
-import { Root, Wrapper, Content, Text, ImageWrapper, Image } from "./Card.styles"
+import { Root, Wrapper, Content, Text, ImageWrapper, Image, Link } from "./Card.styles"
 
 export const Card = (props: any) => {
   const { renderingContext } = props
@@ -20,11 +20,11 @@ export const Card = (props: any) => {
           }
           <Content>
             {fields.link &&
-              <div className="c-navigationPod__link field-link">
-                <a href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text}</a>
+              <div className=" field-link">
+                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text}</Link>
               </div>
             }
-            <Text className="c-navigationPod__text field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
+            <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
           </Content>
         </Wrapper>
       </div>
