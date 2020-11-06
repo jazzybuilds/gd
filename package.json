@@ -46,6 +46,7 @@
     "react-dom": "^16.13.1",
     "serialize-error": "^4.1.0",
     "sitemap": "^2.2.0",
+    "styled-components": "^5.2.1",
     "typescript": "^3.5.1",
     "winston": "^3.2.1"
   },

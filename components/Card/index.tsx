@@ -1,4 +1,5 @@
 import React from 'react'
+import { Root, Wrapper, Content, Text, ImageWrapper, Image } from "./Card.styles"
 
 export const Card = (props: any) => {
   const { renderingContext } = props
@@ -9,24 +10,24 @@ export const Card = (props: any) => {
   const { id, item: { fields } } = renderingContext
 
   return (
-    <div className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight"  >
+    <Root className="small-12 columns js-equalHeight"  >
       <div className="component-content">
-        <div className="c-navigationPod__wrapper">
+        <Wrapper className="c-navigationPod__wrapper">
           {fields['pod image'] &&
-            <div className="c-navigationPod__image">
-              <img src={fields['pod image'].url} alt={fields['pod image'].alt} />
-            </div>
+            <ImageWrapper >
+              <Image src={fields['pod image'].url} alt={fields['pod image'].alt} />
+            </ImageWrapper>
           }
-          <div className="c-navigationPod__content">
+          <Content>
             {fields.link &&
               <div className="c-navigationPod__link field-link">
                 <a href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text}</a>
               </div>
             }
-            <p className="c-navigationPod__text field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
-          </div>
-        </div>
+            <Text className="c-navigationPod__text field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
+          </Content>
+        </Wrapper>
       </div>
-    </div>
+    </Root>
   )
 }
