@@ -1,4 +1,5 @@
 import React from 'react'
+import { Root, Wrapper } from './CardBanner.styles'
 
 export const CardBanner = (props) => {
   const { renderingContext } = props
@@ -9,9 +10,9 @@ export const CardBanner = (props) => {
   const { id, item: { fields } } = renderingContext
 
   return (
-    <div className="component c-imageSpotlight small-12 columns">
+    <Root className="component small-12 columns">
       <div className="component-content">
-        <div className="c-imageSpotlight__wrapper">
+        <Wrapper>
           {fields.image &&
             <div className="c-imageSpotlight__image">
               <div className="ar-16-9">
@@ -28,8 +29,8 @@ export const CardBanner = (props) => {
               </p>
             }
           </div>
-        </div>
+        </Wrapper>
       </div>
-    </div>
+    </Root>
   )
 }

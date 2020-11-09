@@ -24,7 +24,7 @@ export const Card = (props: any) => {
                 <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text}</Link>
               </div>
             }
-            ????<Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
+            <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
           </Content>
         </Wrapper>
       </div>
