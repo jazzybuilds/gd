@@ -1,5 +1,6 @@
 import React from 'react'
 import { Root, Wrapper } from './CardBanner.styles'
+import "../../styles/component-image-spotlight.scss";
 
 export const CardBanner = (props) => {
   const { renderingContext } = props

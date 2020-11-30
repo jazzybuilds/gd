@@ -1,5 +1,5 @@
 import React from 'react'
-import { getConfigFileParsingDiagnostics } from 'typescript'
+import "../../styles/component-getintouch.scss";
 
 export const ContactDetails = (props) => {
   const { renderingContext } = props

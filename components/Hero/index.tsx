@@ -1,6 +1,5 @@
 import React from "react";
-
-// Q: how to write markup for populating values from json schema
+import "../../styles/component-hero.scss";
 
 export const Hero = (props) => {
   const { item } = props.renderingContext;

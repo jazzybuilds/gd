@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components';
 import { theme } from "../theme"
+import "../styles/core.scss"
 
 export const decorators = [
   (Story) => (

@@ -1,4 +1,5 @@
 import React from 'react'
+import "../../styles/component-blockquote.scss";
 
 export const BlockQuote = (props) => {
   const { renderingContext } = props

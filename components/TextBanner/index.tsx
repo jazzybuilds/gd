@@ -1,4 +1,5 @@
 import React from 'react'
+import "../../styles/component-promo-pod.scss";
 
 export const TextBanner = (props) => {
   const {renderingContext} = props

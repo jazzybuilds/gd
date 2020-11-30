@@ -1,4 +1,5 @@
 import React from 'react'
+import "../../styles/component-accordion.scss";
 
 export const Accordion = (props) => {
   const { renderingContext } = props
