@@ -26,6 +26,7 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cross-env": "^7.0.2",
@@ -40,6 +41,7 @@
     "next": "9.3.2",
     "next-compose-plugins": "^2.2.0",
     "node-fetch": "^2.6.0",
+    "node-sass": "^5.0.0",
     "p-limit": "^2.2.1",
     "react": "^16.13.1",
     "react-content-loader": "^5.0.2",
