@@ -55,6 +55,6 @@
         }
     }
     @import "base/richtext/richtext-files-icons";
-    @import "variants/file-list/*";
+    @import "variants/file-list/default";
 }
-@import "styles/file-list/*";
+@import "styles/file-list/file-list-horizontal";

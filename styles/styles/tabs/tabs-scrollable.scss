@@ -13,11 +13,11 @@
     }
     .prev {
         left: 0;
-        background: #e4e4e4 url("../Images/arrow-left.png") center center no-repeat;
+        background: #e4e4e4 url("/images/arrow-left.png") center center no-repeat;
     }
     .next {
         right: 0;
-        background: #e4e4e4 url("../Images/arrow-right.png") center center no-repeat;
+        background: #e4e4e4 url("/images/arrow-right.png") center center no-repeat;
     }
     &.tabs-bottom {
         .wrapper {

@@ -76,4 +76,7 @@
         display: block;
     }
 }
-@import "styles/tabs/*";
+@import "styles/tabs/tabs-bottom";
+@import "styles/tabs/tabs-scrollable";
+@import "styles/tabs/tabs-vertical-right";
+@import "styles/tabs/tabs-vertical";

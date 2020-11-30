@@ -25,7 +25,7 @@
     &__icon-volunteering {
         width: 100%;
         height: rem-calc(25);
-        background-image: url(../images/icon-human--blue.svg);
+        background-image: url(/images/icon-human--blue.svg);
         background-size: rem-calc(20);
         background-repeat: no-repeat;
         padding-left: rem-calc(38);
@@ -264,23 +264,23 @@
                 label {
                     &:first-child {
                         input {
-                            background-image: url(../images/icon-paypal-card--blue.svg);
+                            background-image: url(/images/icon-paypal-card--blue.svg);
                             background-repeat: no-repeat;
                             background-position: center top rem-calc(23);
                             background-size: rem-calc(47);
                             &:checked {
-                                background-image: url(../images/icon-paypal-card--white.svg);
+                                background-image: url(/images/icon-paypal-card--white.svg);
                             }
                         }
                     }
                     &:nth-child(2) {
                         input {
-                            background-image: url(../images/icon-credit-card--blue.svg);
+                            background-image: url(/images/icon-credit-card--blue.svg);
                             background-repeat: no-repeat;
                             background-position: center top rem-calc(23);
                             background-size: rem-calc(47);
                             &:checked {
-                                background-image: url(../images/icon-credit-card--white.svg);
+                                background-image: url(/images/icon-credit-card--white.svg);
                             }
                         }
                     }
@@ -422,7 +422,7 @@
         }
     }
     &__gift-aid-section {
-        background-image: url(../images/GiftAid-Dark.svg);
+        background-image: url(/images/GiftAid-Dark.svg);
         background-position: left top;
         background-repeat: no-repeat;
         padding-top: rem-calc(30);
@@ -574,7 +574,7 @@
             position: absolute;
             bottom: rem-calc(-10);
             left: 0;
-            background-image: url(../images/direct-debit.svg);
+            background-image: url(/images/direct-debit.svg);
             background-position: 0 rem-calc(9);
             background-repeat: no-repeat;
             background-size: rem-calc(87);
@@ -1063,7 +1063,7 @@ textarea {
 }
 
 select {
-    background-image: url(../images/arrow--down.png);
+    background-image: url(/images/arrow--down.png);
     background-position: right rem-calc(-22) center;
     background-repeat: no-repeat;
     background-size: rem-calc(12);
@@ -1111,7 +1111,7 @@ input[type="reset"],
     &.is-loading {
         opacity: 0.5;
         cursor: not-allowed !important;
-        background-image: url(../images/preloader.gif) !important;
+        background-image: url(/images/preloader.gif) !important;
     }
     &.load-more {
         background-image: none;
@@ -1135,7 +1135,7 @@ input[type="reset"],
             content: '£';
             position: absolute;
             z-index: 5;
-            /* background-image: url(../images/icon-pound.svg); */
+            /* background-image: url(/images/icon-pound.svg); */
             background-repeat: no-repeat;
             background-position: center;
             background-size: 10px;
@@ -1155,13 +1155,13 @@ input[type="reset"],
 // Custom submit button classes
 .search-box-button, .search-box-button-with-redirect {
     &[type="submit"] {
-        background-image: url(../images/icon-search--black.svg);
+        background-image: url(/images/icon-search--black.svg);
         &:active,
         &.active,
         &.open,
         &:hover,
         &:focus {
-            background-image: url(../images/icon-search--black.svg);
+            background-image: url(/images/icon-search--black.svg);
         }
     }
 }
@@ -1174,7 +1174,7 @@ input[data-sc-field-name="FirstName"], input[data-sc-field-name="LastName"] {
 input[type="submit"], button {
     &.sitecore-form__back {
         border: none;
-        background-image: url(../images/arrow_left--blue.png);
+        background-image: url(/images/arrow_left--blue.png);
         background-color: transparent;
         background-repeat: no-repeat;
         display: block;
@@ -1202,7 +1202,7 @@ input[type="submit"], button {
         padding: rem-calc(16 48 16 24);
         font-size: rem-calc(17);
         color: $primary;
-        background-image: url(../images/icon-edit--blue.svg);
+        background-image: url(/images/icon-edit--blue.svg);
         background-repeat: no-repeat;
         background-position: center right rem-calc(21);
         background-size: rem-calc(16);
@@ -1249,7 +1249,7 @@ input[type='radio'] {
     input[type='checkbox'] {
         appearance: none;
         &:checked {
-          background-image: url(../images/check--black.png);
+          background-image: url(/images/check--black.png);
           background-size: 1rem;
           background-position: center;
           background-repeat: no-repeat;
@@ -1259,7 +1259,7 @@ input[type='radio'] {
           appearance: none;
           border-radius: rem-calc(24);
           &:checked {
-            background-image: url(../images/bullet--black.png);
+            background-image: url(/images/bullet--black.png);
             background-size: 0.6rem;
             background-position: center;
             background-repeat: no-repeat;
@@ -1325,7 +1325,7 @@ label.label--required + span + .input-validation-error {
 .c-gift-aid-logo {
     width: 100px;
     height: 100px;
-    background: url(../images/GiftAid-Dark.svg);
+    background: url(/images/GiftAid-Dark.svg);
     background-repeat: no-repeat;
     background-position: center center;
     position: absolute;
@@ -1537,16 +1537,16 @@ label.label--required + span + .input-validation-error {
             color: white;
         }
         &--card {
-            background-image: url(../images/creditcard.svg);
+            background-image: url(/images/creditcard.svg);
         }
         &--apple-pay {
-            background-image: url(../images/applepay.svg);
+            background-image: url(/images/applepay.svg);
         }
         &--paypal {
-            background-image: url(../images/paypal.svg);
+            background-image: url(/images/paypal.svg);
         }
         &--googlepay {
-            background-image: url(../images/googlepay.svg);
+            background-image: url(/images/googlepay.svg);
         }
     }
     &__icons {
@@ -1595,22 +1595,22 @@ label.label--required + span + .input-validation-error {
     }
 
     &__visa {
-        background-image: url(../images/Card-VisaColour.svg);
+        background-image: url(/images/Card-VisaColour.svg);
     }
     &__visa-electron {
-        background-image: url(../images/Card-VisaElectronColour.svg);
+        background-image: url(/images/Card-VisaElectronColour.svg);
     }
     &__visa-debit {
-        background-image: url(../images/Card-VisaDebitColour.svg);
+        background-image: url(/images/Card-VisaDebitColour.svg);
     }
     &__mastercard {
-        background-image: url(../images/Card-MastercardColour.svg);
+        background-image: url(/images/Card-MastercardColour.svg);
     }
     &__maestro {
-        background-image: url(../images/Card-MaestroColour.svg);
+        background-image: url(/images/Card-MaestroColour.svg);
     }
     &__american-express {
-        background-image: url(../images/Card-AmericanExpressColour.svg);
+        background-image: url(/images/Card-AmericanExpressColour.svg);
     }
 
 }

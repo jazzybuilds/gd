@@ -15,6 +15,7 @@ html {
 }
 
 body {
+    margin: 0;
     &.on-page-editor {
        //background: $page-bg-editor !important;
        a {
@@ -334,7 +335,7 @@ body {
     // handling row bgs directly beneath row bgs
     .component.columns.row-bg--blue + .component.columns.row-bg--blue,
     .component.columns.row-bg--grey + .component.columns.row-bg--grey,
-    .component.columns.row-bg--darkBlue + .component.columns.row-bg--darkBlue, {
+    .component.columns.row-bg--darkBlue + .component.columns.row-bg--darkBlue {
         margin-top: rem-calc(-48) !important;
 
         @include bp_min($tablet) {

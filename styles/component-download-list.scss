@@ -106,12 +106,12 @@ $file-types: "jpeg", "jpg", "png", "pdf", "doc", "docx", "xls", "xlsx", "mp3";
       background-color: $highlightBlue;
       background-position: center center;
       background-repeat: no-repeat;
-      background-image: url(../images/icon-download-blue.svg);
+      background-image: url(/images/icon-download-blue.svg);
     }
 
     @each $file in $file-types {
       > span.#{$file} {
-        background-image: url(../images/icon-#{$file}-blue.svg);
+        background-image: url(/images/icon-#{$file}-blue.svg);
       }
     }
   }

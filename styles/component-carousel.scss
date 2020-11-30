@@ -30,7 +30,7 @@
             vertical-align: middle;
             cursor: pointer;
             &:before, &:after {
-                background-image: url(../Images/player.png);
+                background-image: url(/images/player.png);
                 content: '';
                 display: block;
                 position: absolute;
@@ -56,7 +56,7 @@
             }
             .sxa-bullets {
                 &:before {
-                    background-image: url(../Images/player.png);
+                    background-image: url(/images/player.png);
                     background-position: 0 -152px;
                     left: -10px;
                     content: '';
@@ -141,7 +141,6 @@
             opacity: 0.8;
         }
     }
-    @import "styles/carousel/*";
 }
 @media (max-width: 768px) {
     .carousel {

@@ -46,7 +46,7 @@
       background-size: 24px;
       background-repeat: no-repeat;
       background-position: top 20px left 32px;
-      background-image: url(../images/icon-speech-blue.svg);
+      background-image: url(/images/icon-speech-blue.svg);
       left: -2px;
       top: -2px;
       border-radius: rem-calc(8 8 0 0);
@@ -94,7 +94,7 @@
 
   &__email {
     a:before {
-      background-image: url(../images/icon-email-blue.svg);
+      background-image: url(/images/icon-email-blue.svg);
     }
     @include bp_max($tablet) {
       margin-bottom: rem-calc(16);
@@ -103,7 +103,7 @@
 
   &__telephone {
     a:before {
-      background-image: url(../images/icon-phone-blue.svg);
+      background-image: url(/images/icon-phone-blue.svg);
     }
   }
 

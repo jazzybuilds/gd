@@ -55,7 +55,7 @@
     .toggle-header { // now a button
         line-height: 1;
         padding: rem-calc(24 0 24 48);
-        background-image: url(../images/accordion-plus--blue.svg);
+        background-image: url(/images/accordion-plus--blue.svg);
         background-repeat: no-repeat;
         background-position: 0 center;
         background-size: rem-calc(24);
@@ -103,8 +103,8 @@
     // open state
     .toggle-header.active,
     .item.active .toggle-header {
-        background-image: url(../images/accordion-minus--blue.svg);
+        background-image: url(/images/accordion-minus--blue.svg);
     }
 }
 
-@import 'styles/accordion/*';
+@import 'styles/accordion/accordion-horizontal';

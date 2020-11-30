@@ -71,7 +71,7 @@
       a {
         color: $white;
         background-color: $primary;
-        background-image: url(../images/icon-arrow-white.svg);
+        background-image: url(/images/icon-arrow-white.svg);
       }
       a:hover, a:focus {
         background-color: darken($primary, 5%);

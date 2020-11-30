@@ -96,13 +96,13 @@ footer {
       }
 
       padding: rem-calc(0 0 0 48);
-      background-image: url(../images/accordion-plus--blue-tint.svg);
+      background-image: url(/images/accordion-plus--blue-tint.svg);
       background-repeat: no-repeat;
       background-position: 0 center;
       background-size: rem-calc(24);
 
       &.active {
-        background-image: url(../images/accordion-minus--blue-tint.svg);
+        background-image: url(/images/accordion-minus--blue-tint.svg);
       }
 
     }
@@ -144,10 +144,10 @@ footer {
         background-size: 16px;
         background-repeat: no-repeat;
         background-position: center left;
-        background-image: url(../images/icon-arrow-blue-tint.svg);
+        background-image: url(/images/icon-arrow-blue-tint.svg);
 
         &.mail {
-          background-image: url(../images/icon-email-blue-tint.svg);
+          background-image: url(/images/icon-email-blue-tint.svg);
         }
       }
 
@@ -287,7 +287,7 @@ footer {
           background-size: 14px;
           background-repeat: no-repeat;
           background-position: center center;
-          background-image: url(../images/arrow-right--blue.svg);
+          background-image: url(/images/arrow-right--blue.svg);
           transform: rotate(-90deg);
         }
         background-color: rgba(124,210,255,0.8);

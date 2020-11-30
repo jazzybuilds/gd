@@ -115,7 +115,7 @@
     font-family: $font-bold;
     line-height: rem-calc(32);
     margin: 0;
-    background-image: url(../images/accordion-plus--blue.svg);
+    background-image: url(/images/accordion-plus--blue.svg);
     background-repeat: no-repeat;
     background-position: center left;
     padding-left: rem-calc(48);
@@ -128,7 +128,7 @@
     }
 
     &.active {
-      background-image: url(../images/accordion-minus--blue.svg);
+      background-image: url(/images/accordion-minus--blue.svg);
     }
   }
 
@@ -155,7 +155,7 @@
       background-size: 20px;
       background-repeat: no-repeat;
       background-position: center center;
-      background-image: url(../images/icon-location--blue.svg);
+      background-image: url(/images/icon-location--blue.svg);
       @include bp_max(800px) {
         background-size: rem-calc(15);
         margin-right: rem-calc(10);
@@ -192,14 +192,14 @@
     &--location {
     }
     &:before {
-      background-image: url(../images/icon-human--blue.svg);
+      background-image: url(/images/icon-human--blue.svg);
       top: 0;
     }
   }
 
   &__distance {
     &:before {
-      background-image: url(../images/icon-distance--blue.svg);
+      background-image: url(/images/icon-distance--blue.svg);
     }
   }
 

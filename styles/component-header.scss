@@ -178,7 +178,7 @@
         background-size: 16px;
         background-repeat: no-repeat;
         background-position: center center;
-        background-image: url(../images/icon-external-white.svg);
+        background-image: url(/images/icon-external-white.svg);
       }
     }
   }
@@ -254,7 +254,7 @@
       background-size: rem-calc(20) !important;
       background-repeat: no-repeat !important;
       background-position: center center !important;
-      background-image: url(../images/icon-search--black.svg) !important;
+      background-image: url(/images/icon-search--black.svg) !important;
       transition: all .25s ease-in-out;
 
       &:active,
@@ -263,7 +263,7 @@
       &:hover,
       &:focus {
           background-color: #51b2e5 !important;
-          background-image: url(../images/icon-search--black.svg) !important;
+          background-image: url(/images/icon-search--black.svg) !important;
           color: $tintBlue;
       }
     }

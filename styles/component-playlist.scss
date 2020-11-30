@@ -104,7 +104,7 @@
             }
         }
     }
-    @import "variants/play-list/*";
+    @import "variants/play-list/default";
 }
 .video-playlist {
     &.show {
@@ -116,4 +116,4 @@
         display: block;
     }
 }
-@import "styles/play-list/*";
+@import "styles/play-list/playlist-horizontal";

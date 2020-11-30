@@ -10,7 +10,7 @@
         &.style-error {
             .c-donateAnHourResults__opportunities {
                 &:before {
-                    background-image: url(../images/icon-error--red.svg);
+                    background-image: url(/images/icon-error--red.svg);
                     top: 0;
                   }
             }
@@ -101,7 +101,7 @@
 .c-volunteering {
     &__input {
         background-color: transparent !important;
-        background-image: url(../images/icon-human--blue.svg);
+        background-image: url(/images/icon-human--blue.svg);
         background-size: rem-calc(20);
         background-repeat: no-repeat;
         border: none !important;
@@ -155,7 +155,7 @@
             content: '';
             width: rem-calc(16);
             height: rem-calc(16);
-            background-image: url(../images/icon-close--blue.svg);
+            background-image: url(/images/icon-close--blue.svg);
             position: absolute;
             left: 0;
             top: rem-calc(6);

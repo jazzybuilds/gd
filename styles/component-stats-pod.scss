@@ -17,7 +17,7 @@
     background-size: 54px 54px;
     background-repeat: no-repeat;
     background-position: left 24px top 24px;
-    background-image: url(../images/icon-stat-pie.svg);
+    background-image: url(/images/icon-stat-pie.svg);
 
     @include bp_min($tablet) {
       background-position: left 24px center;
@@ -31,11 +31,11 @@
     align-items: center;
     justify-content: space-between;
 
-    .stat--dog & {background-image: url(../images/icon-stat-dog.svg);}
-    .stat--human & {background-image: url(../images/icon-stat-human.svg);}
-    .stat--area & {background-image: url(../images/icon-stat-area.svg);}
-    .stat--pie & {background-image: url(../images/icon-stat-pie.svg);}
-    .stat--monetary & {background-image: url(../images/icon-stat-monetary.svg);}
+    .stat--dog & {background-image: url(/images/icon-stat-dog.svg);}
+    .stat--human & {background-image: url(/images/icon-stat-human.svg);}
+    .stat--area & {background-image: url(/images/icon-stat-area.svg);}
+    .stat--pie & {background-image: url(/images/icon-stat-pie.svg);}
+    .stat--monetary & {background-image: url(/images/icon-stat-monetary.svg);}
 
   }
 

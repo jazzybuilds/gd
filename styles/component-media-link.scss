@@ -48,7 +48,7 @@
             font-size: 1em;
         }
     }
-    @import "variants/media-link/*";
+    @import "variants/media-link/default";
     @import "base/richtext/richtext-files-icons";
 }
-@import "styles/media-link/*";
+@import "styles/media-link/media-link-horizontal";

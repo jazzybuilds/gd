@@ -31,13 +31,13 @@
     }
 
     &:before {
-      background-image: url(../images/quote-open.svg);
+      background-image: url(/images/quote-open.svg);
       left: rem-calc(22);
       top: rem-calc(22);
     }
 
     &:after {
-      background-image: url(../images/quote-closed.svg);
+      background-image: url(/images/quote-closed.svg);
       right: rem-calc(22);
       bottom: rem-calc(22);
     }

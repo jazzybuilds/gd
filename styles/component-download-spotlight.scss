@@ -42,7 +42,7 @@ $file-types: "jpeg", "jpg", "png", "pdf", "doc", "docx", "xls", "xlsx", "mp3";
       background-size: 24px;
       background-repeat: no-repeat;
       background-position: top 20px left 32px;
-      background-image: url(../images/icon-download-blue.svg);
+      background-image: url(/images/icon-download-blue.svg);
       left: -2px;
       top: -2px;
       border-radius: rem-calc(8 8 0 0);
@@ -101,12 +101,12 @@ $file-types: "jpeg", "jpg", "png", "pdf", "doc", "docx", "xls", "xlsx", "mp3";
       display: block;
       background-position: left center;
       background-repeat: no-repeat;
-      background-image: url(../images/icon-download-blue.svg);
+      background-image: url(/images/icon-download-blue.svg);
     }
 
     @each $file in $file-types {
       > span.#{$file} {
-        background-image: url(../images/icon-#{$file}-blue.svg);
+        background-image: url(/images/icon-#{$file}-blue.svg);
       }
     }
   }

@@ -30,7 +30,7 @@
             content: '';
             width: 40px;
             height: 40px;
-            background-image: url(../images/icon-enlarge-blue.svg);
+            background-image: url(/images/icon-enlarge-blue.svg);
             background-repeat: no-repeat;
             background-position: 10px 10px;
             position: absolute;
@@ -148,4 +148,4 @@
         }
     }
 }
-@import "styles/galleria/*";
+@import "styles/galleria/no-margin";

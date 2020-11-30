@@ -18,6 +18,6 @@
         font-weight: normal;
         font-family: $font-bold;
     }
-    @import "variants/page-list/*";
+    @import "variants/page-list/default";
     @import "base/reset/links";
 }

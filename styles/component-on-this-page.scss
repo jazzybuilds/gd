@@ -39,7 +39,7 @@
       transition: .25s all ease-in-out;
       &.loading {
         // icon from https://loading.io/spinner/custom/266834#
-        background-image: url(../images/animated-searching.svg);
+        background-image: url(/images/animated-searching.svg);
         background-size: 60px;
         background-repeat: no-repeat;
         background-position: top left;
@@ -69,7 +69,7 @@
 
       li {
         transition: .25s all ease-in-out;
-        background-image: url(../images/double_chevron_down.png);
+        background-image: url(/images/double_chevron_down.png);
         background-size: 14px 14px;
         background-repeat: no-repeat;
         background-position: rem-calc(3 8);

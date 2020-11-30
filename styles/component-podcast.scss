@@ -64,14 +64,14 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url(../images/podcast-play-btn.svg);
+      background-image: url(/images/podcast-play-btn.svg);
       background-position: center center;
       background-repeat: no-repeat;
       z-index: 1;
     }
 
     &.mp3-playing > div:before {
-      background-image: url(../images/podcast-pause-btn.svg);
+      background-image: url(/images/podcast-pause-btn.svg);
     }
   }
 
@@ -122,7 +122,7 @@
       background-size: 20px;
       background-repeat: no-repeat;
       background-position: center left;
-      background-image: url(../images/icon-mp3-blue.svg);
+      background-image: url(/images/icon-mp3-blue.svg);
     }
 
   }
