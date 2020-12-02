@@ -2,6 +2,8 @@
 
 Run `yarn`.
 
+> **Note** that the postinstall script may not execute at the end of yarn, so you may have to run `yarn postinstall` once manually. This will copy the contents of the `/lib` folder with uniformdev packages to `node_modules/`.
+
 ## Local Development
 1. make copy of `.env.dev`, name it `.env`, the sample file is pre-populated
 1. `yarn start`
