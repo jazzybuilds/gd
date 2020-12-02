@@ -47,7 +47,6 @@ export default class CustomDocument extends Document {
           <meta content="https://www.guidedogs.org.uk/" property="og:url" />
           <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" type="font/woff2" />
           <link rel="preload" href="/fonts/castledown/castledown-heavy.woff2" as="font" type="font/woff2" />
-          {/* <link href="/main.css" rel="stylesheet" /> */}
 
           {/* @ts-ignore */}
           {this.props.styleTags}
@@ -55,15 +54,23 @@ export default class CustomDocument extends Document {
         <body className="default-device">
           <Main />
           <NextScript />
-          <script src="/-/media/Base-Themes/Core-Libraries/scripts/optimized-min.js?t=20190703T145418Z"></script>
-          <script src="/-/media/Base-Themes/XA-API/Scripts/optimized-min.js?t=20190703T145419Z"></script>
-          <script src="/-/media/Base-Themes/Main-Theme/scripts/optimized-min.js?t=20190703T145420Z"></script>
-          <script src="/-/media/Base-Themes/Google-Maps-JS-Connector/Scripts/optimized-min.js?t=20190703T145421Z"></script>
-          <script src="/-/media/Base-Themes/Maps/Scripts/optimized-min.js?t=20190703T145421Z"></script>
-          <script src="/-/media/Base-Themes/SearchTheme/Scripts/optimized-min.js?t=20190703T145422Z"></script>
-          <script src="/-/media/Base-Themes/Components-Theme/Scripts/optimized-min.js?t=20200422T100700Z"></script>
-          <script src="/-/media/Base-Themes/Resolve-Conflicts/Scripts/optimized-min.js?t=20190703T145423Z"></script>
-          <script src="/-/media/Themes/GuideDogs/GuideDogsDotOrg/GuideDogsTheme/scripts/optimized-min.js"></script>
+          <script src="/scripts/core-optimized-min.js"></script>
+          <script src="/scripts/xa-optimized-min.js"></script>
+          <script src="/scripts/theme-optimized-min.js"></script>
+          <script src="/scripts/google-maps-optimized-min.js"></script>
+          <script src="/scripts/maps-optimized-min.js"></script>
+          <script src="/scripts/search-optimized-min.js"></script>
+          <script src="/scripts/components-optimized-min.js"></script>
+          {/* <script src="/-/media/Base-Themes/Core-Libraries/scripts/optimized-min.js?t=20190703T145418Z"></script>
+          <script src="/-/media/Base-Themes/XA-API/Scripts/optimized-min.js?t=20190703T145419Z"></script> */}
+          {/* <script src="/-/media/Base-Themes/Main-Theme/scripts/optimized-min.js?t=20190703T145420Z"></script> */}
+          {/* <script src="/-/media/Base-Themes/Google-Maps-JS-Connector/Scripts/optimized-min.js?t=20190703T145421Z"></script> */}
+          {/* <script src="/-/media/Base-Themes/Maps/Scripts/optimized-min.js?t=20190703T145421Z"></script> */}
+          {/* <script src="/-/media/Base-Themes/SearchTheme/Scripts/optimized-min.js?t=20190703T145422Z"></script> */}
+          {/* <script src="/-/media/Base-Themes/Components-Theme/Scripts/optimized-min.js?t=20200422T100700Z"></script> */}
+          {/* <script src="/-/media/Base-Themes/Resolve-Conflicts/Scripts/optimized-min.js?t=20190703T145423Z"></script> */}
+
+          {/* <script src="/-/media/Themes/GuideDogs/GuideDogsDotOrg/GuideDogsTheme/scripts/optimized-min.js"></script> */}
           <script src="/scripts.js"></script>
         </body>
       </Html>
