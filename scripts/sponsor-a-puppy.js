@@ -67,10 +67,12 @@ if (process.browser) {
         var puppyRealName = jQuery('input[data-sc-field-name="'+puppyName+'"]').val();
         return puppyRealName;
     }
-    
+
     // set sponsorship option  in cookie
     jQuery("body").on("click", ".js-sponsorAPuppySponsorship input[type='radio']", function (e) {
-        console.log('olaa')
+        jQuery(".js-sponsorAPuppySponsorship input[type='radio']").each(function () {
+            jQuery(this).prop("checked", false);
+        })
         var _this = jQuery(this);
         _this.prop("checked", true);
         var thisVal = _this.val().toLowerCase();
