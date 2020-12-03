@@ -69,8 +69,10 @@ if (process.browser) {
     }
     
     // set sponsorship option  in cookie
-    jQuery("body").on("change", ".js-sponsorAPuppySponsorship input[type='radio']", function (e) {
+    jQuery("body").on("click", ".js-sponsorAPuppySponsorship input[type='radio']", function (e) {
+        console.log('olaa')
         var _this = jQuery(this);
+        _this.prop("checked", true);
         var thisVal = _this.val().toLowerCase();
         sessionStorage.setItem("selected_sponsorship", thisVal);
         fillInWhyThisAmount();

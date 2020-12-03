@@ -1,4 +1,5 @@
 import React from 'react'
+import "../../styles/component-case-study.scss";
 
 export const CardArticle = (props) => {
   const { renderingContext } = props

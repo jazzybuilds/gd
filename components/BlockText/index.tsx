@@ -1,4 +1,5 @@
 import React from 'react'
+import "../../styles/component-message-block.scss";
 
 export const BlockText = (props) => {
   const { renderingContext } = props
