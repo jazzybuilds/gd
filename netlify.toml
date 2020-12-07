@@ -7,7 +7,7 @@ command = "npm run export"
 package = "netlify-plugin-cache-nextjs"
 
 [[plugins]]
-package = "netlify-plugin-env"
+package = "netlify-plugin-contextual-env"
 	[plugins.inputs]
 	mode = 'suffix'
 
