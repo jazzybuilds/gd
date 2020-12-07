@@ -6,6 +6,11 @@ command = "npm run export"
 [[plugins]]
 package = "netlify-plugin-cache-nextjs"
 
+[[plugins]]
+package = "netlify-plugin-env"
+	[plugins.inputs]
+	mode = 'suffix'
+
 [[headers]]
   for = "/*"
   [headers.values]
