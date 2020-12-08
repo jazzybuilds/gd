@@ -1,7 +1,5 @@
 const fs = require("fs");
 const parser = require('xml2json');
-const dotenv = require("dotenv");
-const env = dotenv.config();
 
 function escapeRegex(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -44,12 +42,9 @@ fs.readFile('_redirects.template', 'utf8', function (err, data) {
   }
   let text = data.toString();
 
-  const envKeys = Object.keys(env.parsed);
-  envKeys.forEach((k) => {
-    const value = env.parsed[k];
-    console.log("Using " + k + " env variable as: " + value);
-    text = text.replace(`{${k}}`, value);
-  });
+  // Update redirects template with origin hosts.
+  text = text.replace("{SITECORE_ORIGIN}", process.env.SITECORE_ORIGIN);
+  text = text.replace("{MEDIA_ORIGIN}", process.env.MEDIA_ORIGIN);
 
   const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
   fs.writeFile("public/_redirects", `${text}\r\n${legacyRedirects}`, function (err) {
