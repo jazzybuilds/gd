@@ -21,7 +21,7 @@ package = "netlify-plugin-contextual-env"
 
 [[redirects]]
 	from = '/-/media/Project/GuideDogs/GuideDogsDotOrg/form-assets*'
-	to = '{MEDIA_ORIGIN}/-/media/Project/GuideDogs/GuideDogsDotOrg/Form-assets'
+	to = '{MEDIA_ORIGIN}/-/media/Project/GuideDogs/GuideDogsDotOrg/Form-assets:splat'
 	status = 200
 	force = true
 	[redirects.headers]
