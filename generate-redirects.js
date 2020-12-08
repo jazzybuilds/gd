@@ -44,10 +44,10 @@ fs.readFile('_redirects.template', 'utf8', function (err, data) {
 
   // Update redirects template with origin hosts.
   console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
-  text = text.replaceAll("{SITECORE_ORIGIN}", process.env.SITECORE_ORIGIN);
+  text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
 
   console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
-  text = text.replaceAll("{MEDIA_ORIGIN}", process.env.MEDIA_ORIGIN);
+  text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
 
   const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
   fs.writeFile("public/_redirects", `${text}\r\n${legacyRedirects}`, function (err) {
