@@ -1,6 +1,4 @@
 /sxa/search/*   											    {SITECORE_ORIGIN}/sxa/search/:splat 200
-/-/media/Project/GuideDogs/GuideDogsDotOrg/form-assets*         {MEDIA_ORIGIN}/-/media/Project/GuideDogs/GuideDogsDotOrg/Form-assets:splat 200!
-/-/media/*  												    {MEDIA_ORIGIN}/-/media/:splat 200!
 /formbuilder/*                                                  {SITECORE_ORIGIN}/formbuilder/:splat 200!
 /contact-us/sap-epupdates/*                                     {SITECORE_ORIGIN}/contact-us/sap-epupdates/:splat 200!
 /fieldtracking/register/*                                       {SITECORE_ORIGIN}/fieldtracking/register/:splat 200!
