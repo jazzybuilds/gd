@@ -80,5 +80,5 @@ fs.readFile('netlify.toml', 'utf8', function (err, data) {
     }
     console.log("Updated netlify.toml!");
   });
-}));
+});
 
