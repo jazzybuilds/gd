@@ -19,6 +19,55 @@ package = "netlify-plugin-contextual-env"
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
 
+[[redirects]]
+	from = '/sxa/search/*'
+	to = '{SITECORE_ORIGIN}/sxa/search/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/formbuilder/*'
+	to = '{SITECORE_ORIGIN}/formbuilder/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/contact-us/sap-epupdates/*'
+	to = '{SITECORE_ORIGIN}/contact-us/sap-epupdates/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/fieldtracking/register/*'
+	to = '{SITECORE_ORIGIN}/fieldtracking/register/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"	
+
+[[redirects]]
+	from = '/guidedogsapi/*'
+	to = '{SITECORE_ORIGIN}/guidedogsapi/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/guidedogspayments/*'
+	to = '{SITECORE_ORIGIN}/guidedogspayments/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"										
+
+
 [[headers]]
   for = "/*"
   [headers.values]

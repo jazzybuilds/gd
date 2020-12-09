@@ -1,6 +1,1 @@
-/sxa/search/*   											    {SITECORE_ORIGIN}/sxa/search/:splat 200
-/formbuilder/*                                                  {SITECORE_ORIGIN}/formbuilder/:splat 200!
-/contact-us/sap-epupdates/*                                     {SITECORE_ORIGIN}/contact-us/sap-epupdates/:splat 200!
-/fieldtracking/register/*                                       {SITECORE_ORIGIN}/fieldtracking/register/:splat 200!
-/guidedogsapi/*                                                 {SITECORE_ORIGIN}/guidedogsapi/:splat 200!
-/guidedogspayments/*                                            {SITECORE_ORIGIN}/guidedogspayments/:splat 200!
+# Add any simple Netlify redirects here
