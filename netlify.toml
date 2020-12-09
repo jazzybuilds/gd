@@ -19,14 +19,6 @@ package = "netlify-plugin-contextual-env"
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
 
-[[redirects]]
-	from = '/-/media/Project/GuideDogs/GuideDogsDotOrg/form-assets*'
-	to = '{MEDIA_ORIGIN}/-/media/Project/GuideDogs/GuideDogsDotOrg/Form-assets:splat'
-	status = 200
-	force = true
-	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
-
 [[headers]]
   for = "/*"
   [headers.values]
