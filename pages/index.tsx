@@ -50,7 +50,7 @@ componentsIndex["Accordion"] = AccordionComponent;
 componentsIndex["CaptionedImage"] = ImageComponent;
 componentsIndex["CaseStudySpotlight"] = CardArticleComponent;
 componentsIndex["Video"] = VideoComponent;
-componentsIndex["PrivacyWarning"] = CookieBannerComponent;
+//componentsIndex["PrivacyWarning"] = CookieBannerComponent;
 
 
 componentsIndex["MVCLayout"] = MVCLayout;
