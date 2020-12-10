@@ -16,8 +16,6 @@ package = "netlify-plugin-contextual-env"
 	to = '{MEDIA_ORIGIN}/-/media/:splat'
 	status = 200
 	force = true
-	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
 
 [[redirects]]
 	from = '/sxa/search/*'
