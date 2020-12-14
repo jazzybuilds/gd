@@ -21,8 +21,10 @@
     "start": "npm run build && npm run start:connected",
     "start:connected": "cross-env NODE_ENV=production node ./server.js",
     "export:site": "next export --threads 8",
-    "export": "npm-run-all --serial generate-redirects build export:site",
+    "export": "npm-run-all --serial generate-redirects download-robots download-sitemap build export:site",
     "generate-redirects": "node generate-redirects.js",
+    "download-robots": "node download-file.js UNIFORM_API_URL robots.txt",
+    "download-sitemap": "node download-file.js UNIFORM_API_URL sitemap.xml",
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
