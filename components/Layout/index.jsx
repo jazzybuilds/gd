@@ -1,3 +1,4 @@
+import Head from "next/head";
 import UniformPlaceholder from "../UniformPlaceholder";
 
 const MVCLayout = (props) => {
@@ -6,6 +7,14 @@ const MVCLayout = (props) => {
 
   return (
     <>
+      <Head>
+        <UniformPlaceholder
+          placeholderKey="/head"
+          placeholderComponent={placeholderComponent}
+          {...props}
+        ></UniformPlaceholder>
+      </Head>
+
       <UniformPlaceholder
         placeholderKey="/body-top"
         placeholderComponent={placeholderComponent}
