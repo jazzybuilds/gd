@@ -1,7 +1,8 @@
 const jQuery = require("jquery");
 
 if (process.browser) {
-  window.postcodeLookup = function ($) {
+
+  (function($) {
   
     var postcodeLookups = document.querySelectorAll('.postcode-wrapper');
     var postcodeLookupService;
@@ -438,7 +439,7 @@ if (process.browser) {
         }, false);
       }
     }
-  }
+
+  }(jQuery));
   
-  window.postcodeLookup(jQuery);
 }
