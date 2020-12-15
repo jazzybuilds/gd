@@ -21,7 +21,7 @@ export const HeroSecondary = (props) => {
             ></div>
           }
           <div className="c-hero__content">
-            <h1 className="c-hero__title field-herotitle">{fields.herotitle}</h1>
+            <h1 className="c-hero__title field-herotitle" dangerouslySetInnerHTML={{ __html: fields.herotitle }} />
           </div>
         </div>
       </div>
