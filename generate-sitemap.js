@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
 const { UNIFORM_API_SITENAME } = process.env;
-const { SITEMAP_HOST } = process.env;
+const SITEMAP_HOST = process.env.URL;
 
 https.globalAgent.maxSockets = 30;
 
