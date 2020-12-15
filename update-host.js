@@ -31,7 +31,7 @@ async function updateFileWithHost(filePath)
 }
 
 if (process.argv) {
-  const args = process.argv.slice(1);
+  const args = process.argv.slice(2);
   if (args && Array.isArray(args) && args.length > 0) {
     const filePath = args[0];
 
