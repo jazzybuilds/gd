@@ -16,8 +16,8 @@ async function downloadFile(host, filePath, auth) {
     .then(checkStatus)
     .then((res) => res.text())
     .then((contents) => {
-      console.log(`Downloaded ${filePath} from remote server:`);
-      console.log(contents);
+      console.log(`Downloaded ${filePath} from remote server. Length: ${contents.length}`);
+      
       writeFile(filePath, contents);
       return contents;
     })
