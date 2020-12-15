@@ -2,9 +2,17 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-async function downloadFile(host, filePath) {
+async function downloadFile(host, filePath, auth) {
   console.log(`Will be downloading ${filePath} from host '${host}'`);
-  return fetch(`${host}/${filePath}`)
+
+  headers = new fetch.Headers();
+  if (auth) {
+    console.log(`Requesting with basic authentication`);
+
+    headers.set('Authorization', 'Basic ' + auth);
+  }
+
+  return fetch(`${host}/${filePath}`, {method:'GET', headers: headers})
     .then(checkStatus)
     .then((res) => res.text())
     .then((contents) => {
@@ -45,6 +53,7 @@ if (process.argv) {
   if (args && Array.isArray(args) && args.length > 1) {
     const envVarName = args[0];
     const filePath = args[1];
+    const auth = (args.length > 2) ? process.env[args[2]] : null;
 
     //console.log({ envVarName, filePath });
 
@@ -61,7 +70,7 @@ if (process.argv) {
       return;
     }
 
-    downloadFile(host, filePath);
+    downloadFile(host, filePath, auth);
   } else {
     console.warn("Bad args");
   }
