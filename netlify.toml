@@ -36,6 +36,14 @@ package = "netlify-plugin-contextual-env"
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
 
 [[redirects]]
+	from = '/formbuilder'
+	to = '{SITECORE_ORIGIN}/formbuilder'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
+[[redirects]]
 	from = '/contact-us/sap-epupdates/*'
 	to = '{SITECORE_ORIGIN}/contact-us/sap-epupdates/:splat'
 	status = 200
