@@ -33,6 +33,7 @@ netlify.config.json
 aws.config.json
 .npmrc
 
+public/robots.txt
 public/styles.css
 public/_redirects
 
