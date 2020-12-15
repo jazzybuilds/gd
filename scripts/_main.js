@@ -15,7 +15,6 @@ if (process.browser) {
   document.addEventListener('DOMContentLoaded', function(){
     window.checkRowBgs();
     window.equalHeightPods('.js-equalHeight');
-    window.highlightCurrentPage();
     objectFitImages();
 
   }); //dom loaded

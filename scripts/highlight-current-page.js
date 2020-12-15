@@ -16,5 +16,5 @@ if (process.browser) {
           n.classList.add("active");
         }
       }
-    }
+  }
 }
