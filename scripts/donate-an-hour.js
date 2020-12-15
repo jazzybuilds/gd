@@ -1,4 +1,7 @@
+import Mustache from 'mustache';
+
 const jQuery = require("jquery");
+
 // various scripts for the Donate an Hour search page
 if (process.browser) {
 
@@ -10,7 +13,7 @@ if (process.browser) {
   
       var siteUrl = location.protocol + '//' + location.hostname;
   
-  // postcode lookup
+     // postcode lookup
   
       var searchData = {
         requestedDistance: 200,
@@ -66,8 +69,7 @@ if (process.browser) {
             return;
           }
   
-        });
-  
+        });  
   
         // pass the location to search endpoint
         window.fetchResults = function () {
