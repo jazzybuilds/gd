@@ -65,8 +65,15 @@ package = "netlify-plugin-contextual-env"
 	status = 200
 	force = true
 	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"										
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
 
+[[redirects]]
+	from = '/sitecore-post/*'
+	to = '{SITECORE_ORIGIN}/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"											
 
 [[headers]]
   for = "/*"
