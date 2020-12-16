@@ -522,7 +522,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/createrenderingfromhtml.ts": {
-        "version": "94815adfad07b792cb336dfa65c1014cb7aec5fba31380bf5dac9edfa817d891",
+        "version": "7c54e42034084b83d6ea932e3c68aeb527a8f6664bccd5fe2a740ad9309b40f4",
         "signature": "992c8c328a84c8bf64caae76228c88f736d411c0e28a434a226acaf02c8e9823",
         "affectsGlobalScope": false
       },
