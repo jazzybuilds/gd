@@ -107,7 +107,7 @@ async function parseRedirects() {
     console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
 
-    fs.writeFile("./_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
+    fs.writeFile("./public/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
       if (err) {
         throw err;
       }
