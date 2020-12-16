@@ -1,6 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet } from "styled-components";
 
 //import CustomHead from '../components/CustomHead';
 
@@ -8,13 +8,22 @@ import { ServerStyleSheet } from 'styled-components'
 // it makes sense to disable all nextjs scripts to minimize javascript bundle and fit performance budget.
 
 // CustomDocument replaces stock.js Document component to replace stock Head component
-const sheet = new ServerStyleSheet()
+const sheet = new ServerStyleSheet();
+
+const piioScript = `
+(function(i,m,a,g,e) {
+    e = i.getElementsByTagName(m)[0], (g = i.createElement(m)).src = "//pcdn.piiojs.com/"+a+"/image.min.js",
+    g.onerror = function() {
+        (g = i.createElement(m)).src = "https://fs.piio.co/image-failover.min.js",
+        e.parentNode.insertBefore(g, e);
+    }, e.parentNode.insertBefore(g, e);
+}(document, "script", "svcajh"));`;
 
 export default class CustomDocument extends Document {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
     const page = renderPage((App) => (props) =>
-      sheet.collectStyles(<App {...props} />),
+      sheet.collectStyles(<App {...props} />)
     );
 
     const styleTags = sheet.getStyleElement();
@@ -45,14 +54,35 @@ export default class CustomDocument extends Document {
           />
           <meta content="Guide Dogs UK" property="og:title" />
           <meta content="https://www.guidedogs.org.uk/" property="og:url" />
-          <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" type="font/woff2" />
-          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff2" as="font" type="font/woff2" />
+          <link
+            rel="preload"
+            href="/fonts/castledown/castledown-bold.woff2"
+            as="font"
+            type="font/woff2"
+          />
+          <link
+            rel="preload"
+            href="/fonts/castledown/castledown-heavy.woff2"
+            as="font"
+            type="font/woff2"
+          />
+          <link
+            rel="preconnect"
+            href="//pcdn.piiojs.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            as="script"
+            href="//pcdn.piiojs.com/svcajh/image.min.js"
+          ></link>
 
           {/* @ts-ignore */}
           {this.props.styleTags}
         </Head>
         <body className="default-device">
           <Main />
+          <script dangerouslySetInnerHTML={{ __html: piioScript }} />
           <NextScript />
           <script src="/scripts/core-optimized-min.js"></script>
           <script src="/scripts/xa-optimized-min.js"></script>
