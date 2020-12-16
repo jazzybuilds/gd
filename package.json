@@ -20,7 +20,7 @@
     "dev": "node ./server.js",
     "start": "npm run build && npm run start:connected",
     "start:connected": "cross-env NODE_ENV=production node ./server.js",
-    "export:site": "next export --threads 8",
+    "export:site": "next export --threads 48",
     "export": "npm-run-all --serial generate-redirects retrieve-static-files update-static-files generate-sitemap build export:site",
     "generate-redirects": "node generate-redirects.js",
     "retrieve-static-files": "npm-run-all download:* ",
