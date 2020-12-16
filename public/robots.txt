@@ -1,3 +1,2 @@
-# robots are blocked on this server for change it look at Settings Item, Robot txt section
 User-agent: *
-Noindex: /
+Disallow: /
