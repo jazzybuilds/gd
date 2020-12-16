@@ -29,6 +29,7 @@ import { Accordion as AccordionComponent } from "../components/Accordion";
 import { Image as ImageComponent } from "../components/Image";
 import { CardArticle as CardArticleComponent } from "../components/CardArticle";
 import { Video as VideoComponent } from "../components/Video";
+import { CookiePreferences as CookiePreferencesComponent } from "../components/CookiePreferences";
 import MVCLayout from "../components/Layout";
 import MetadataLayout from "../components/MetadataLayout";
 import { theme } from "../theme";
@@ -51,6 +52,7 @@ componentsIndex["CaseStudySpotlight"] = CardArticleComponent;
 componentsIndex["Video"] = VideoComponent;
 componentsIndex["MVCLayout"] = MVCLayout;
 componentsIndex["MetadataLayout"] = MetadataLayout;
+componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
