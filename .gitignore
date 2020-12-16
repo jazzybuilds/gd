@@ -33,7 +33,6 @@ netlify.config.json
 aws.config.json
 .npmrc
 
-public/robots.txt
 public/sitemap.xml
 public/documents.xml
 public/images.xml
