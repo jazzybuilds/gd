@@ -4,11 +4,18 @@ const fetch = require("node-fetch");
 const parser = require('xml2json');
 require("dotenv").config();
 
+const { UNIFORM_API_URL } = process.env;
+
 function escapeRegex(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-const { UNIFORM_API_URL } = process.env;
+function addTrailingSlash(url) {
+  if (url === '/' || url.indexOf('&') > -1 || url.indexOf('?') > -1) {
+    return url;
+  }
+  return url.endsWith('/') ? url : `${url}/`;
+}
 
 function cleanFromUrl(url) {
   url = url.trim().replace(/^\^/ig, '').replace(/^\//ig, '').replace(/\\\./ig, '.').replace(/\/$/ig, '');
@@ -23,7 +30,7 @@ function cleanFromUrl(url) {
 function cleanToUrl(url) {
   const toUrlParse = url.trim().replace('https://{HTTP_HOST}', '').replace('www.guidedogs.org.uk/', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
   const toUrl = (toUrlParse ? toUrlParse : '/').replace(/ /gi, '%20');
-  return toUrl.startsWith('http') ? toUrl : `/${toUrl}`;
+  return addTrailingSlash(toUrl.startsWith('http') || toUrl === '/' ? toUrl : `/${toUrl}`);
 }
 
 function parseLegacyRedirects(path) {
