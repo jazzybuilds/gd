@@ -2,7 +2,7 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 const js2xmlparser = require("js2xmlparser");
 const https = require("https");
-c
+require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
 const { UNIFORM_API_SITENAME } = process.env;

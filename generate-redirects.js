@@ -89,7 +89,7 @@ async function parseManagedRedirects() {
 }
 
 async function parseRedirects() {
-  console.log("Creating public/_redirects file");
+  console.log("Creating _redirects file");
 
   const managedRedirects = await parseManagedRedirects();
   const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
@@ -111,7 +111,7 @@ async function parseRedirects() {
       if (err) {
         throw err;
       }
-      console.log("Created public/_redirects file!");
+      console.log("Created _redirects file!");
     });
   });
 }
