@@ -5,12 +5,22 @@ export const CookiePreferences = (props) => {
   const [advertising, setAdvertising] = React.useState(false)
   const [functional, setFunctional] = React.useState(false)
 
+  const cookieName = props.renderingContext.item?.fields["cookie name"] ?? 'GDUK_GDPR_PREF'
+
+  React.useEffect(() => {
+    const parts = `; ${document.cookie}`.split(`; ${cookieName}=`);
+    if (parts.length >= 2) {
+      const value = JSON.parse(parts.pop().split(';').shift())
+      setAdvertising(value.cc.Advertising)
+      setFunctional(value.cc.Functional)
+    }
+
+  }, [cookieName])
 
   if (!props.renderingContext.item || !props.renderingContext.item.fields) {
     return null
   }
 
-  const cookieName = props.renderingContext.item.fields["cookie name"]
   const onSubmit = () => {
     const updatedCookieData = {
       a: true, rm: false, ac: false, so: false,
@@ -24,6 +34,8 @@ export const CookiePreferences = (props) => {
 
     document.cookie = `${cookieName}=${JSON.stringify(updatedCookieData)};`
     document.cookie = 'privacy-notification=1'
+
+    window.location.reload();
   }
 
   return (
