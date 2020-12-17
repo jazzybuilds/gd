@@ -36,6 +36,14 @@
     "download:robots": "node download-file.js SITECORE_ORIGIN robots.txt SITECORE_PROXY_BASIC_AUTH",
     "updatehost:robots": "node update-host.js public/robots.txt"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "ie 9",
+    "opera 12.1",
+    "ios 6",
+    "android 4"
+  ],
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "body-parser": "^1.19.0",
