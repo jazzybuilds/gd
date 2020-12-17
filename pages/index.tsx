@@ -33,6 +33,7 @@ import { CookiePreferences as CookiePreferencesComponent } from "../components/C
 import MVCLayout from "../components/Layout";
 import MetadataLayout from "../components/MetadataLayout";
 import { theme } from "../theme";
+import { CampaignSearch } from "../components/CampaignSearch";
 
 // Components Index
 const componentsIndex: any = {};
@@ -53,6 +54,7 @@ componentsIndex["Video"] = VideoComponent;
 componentsIndex["MVCLayout"] = MVCLayout;
 componentsIndex["MetadataLayout"] = MetadataLayout;
 componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
+componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
