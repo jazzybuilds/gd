@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-
+import Head from "next/head";
 // Uniform
 import {
   BasePlaceholder,
@@ -69,19 +69,25 @@ export default class extends React.Component<NextPageProps> {
   }
 
   render() {
+    const { title } = this.props?.page?.fields;
     return (
-      <UniformContext.Provider value={context}>
-        <ThemeProvider theme={theme}>
-          <PageComponent {...this.props} components={componentsIndex}>
-            {(renderingContext) => (
-              <Placeholder
-                placeholderKey="/"
-                renderingContext={renderingContext}
-              />
-            )}
-          </PageComponent>
-        </ThemeProvider>
-      </UniformContext.Provider>
+      <>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <UniformContext.Provider value={context}>
+          <ThemeProvider theme={theme}>
+            <PageComponent {...this.props} components={componentsIndex}>
+              {(renderingContext) => (
+                <Placeholder
+                  placeholderKey="/"
+                  renderingContext={renderingContext}
+                />
+              )}
+            </PageComponent>
+          </ThemeProvider>
+        </UniformContext.Provider>
+      </>
     );
   }
 }
