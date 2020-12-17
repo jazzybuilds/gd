@@ -21,10 +21,29 @@
     "start": "npm run build && npm run start:connected",
     "start:connected": "cross-env NODE_ENV=production node ./server.js",
     "export:site": "next export --threads 8",
-    "export": "npm-run-all --serial generate-redirects build export:site",
+    "export": "npm-run-all --serial generate-redirects retrieve-static-files update-static-files generate-sitemap build export:site",
     "generate-redirects": "node generate-redirects.js",
+    "retrieve-static-files": "npm-run-all download:* ",
+    "download:sitemap-images": "node download-file.js SITECORE_ORIGIN images.xml SITECORE_PROXY_BASIC_AUTH",
+    "download:sitemap-documents": "node download-file.js SITECORE_ORIGIN documents.xml SITECORE_PROXY_BASIC_AUTH",
+    "update-static-files": "npm-run-all updatehost:* ",
+    "updatehost:sitemap-images": "node update-host.js public/images.xml",
+    "updatehost:sitemap-documents": "node update-host.js public/documents.xml",
+    "generate-sitemap": "node generate-sitemap.js",
     "storybook": "start-storybook -p 6006"
   },
+  "scriptsDisabled": {
+    "download:robots": "node download-file.js SITECORE_ORIGIN robots.txt SITECORE_PROXY_BASIC_AUTH",
+    "updatehost:robots": "node update-host.js public/robots.txt"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "ie 9",
+    "opera 12.1",
+    "ios 6",
+    "android 4"
+  ],
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "body-parser": "^1.19.0",
@@ -40,6 +59,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "jquery": "^3.5.1",
     "loglevel": "^1.6.3",
+    "mustache": "3.0.1",
     "next": "9.3.2",
     "next-compose-plugins": "^2.2.0",
     "node-fetch": "^2.6.0",
@@ -68,6 +88,7 @@
     "babel-loader": "^8.1.0",
     "husky": "^4.3.0",
     "jest": "^26.6.3",
+    "js2xmlparser": "^4.0.1",
     "ncp": "^2.0.0",
     "npm-run-all": "^4.1.5",
     "react-is": "^16.13.1",

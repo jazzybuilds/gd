@@ -1,0 +1,202 @@
+[build]
+base = "/"
+publish = "out/"
+command = "npm run export"
+
+[[plugins]]
+package = "netlify-plugin-cache-nextjs"
+
+[[plugins]]
+package = "netlify-plugin-contextual-env"
+	[plugins.inputs]
+	mode = 'suffix'
+
+[[redirects]]
+	from = '/-/media/*'
+	to = '{MEDIA_ORIGIN}/-/media/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/sxa/search/*'
+	to = '{SITECORE_ORIGIN}/sxa/search/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/formbuilder/*'
+	to = '{SITECORE_ORIGIN}/formbuilder/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/contact-us/sap-epupdates/*'
+	to = '{SITECORE_ORIGIN}/contact-us/sap-epupdates/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/fieldtracking/register/*'
+	to = '{SITECORE_ORIGIN}/fieldtracking/register/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"	
+
+[[redirects]]
+	from = '/guidedogsapi/*'
+	to = '{SITECORE_ORIGIN}/guidedogsapi/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/guidedogspayments/*'
+	to = '{SITECORE_ORIGIN}/guidedogspayments/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
+# Volunteering Apply For A Role page renders search results at run time, so we must proxy it
+[[redirects]]
+	from = '/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
+[[redirects]]
+	from = '/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/personal-details'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/personal-details'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
+
+[[redirects]]
+	from = '/:slug1/thank-you'
+	to = '{SITECORE_ORIGIN}/:slug1/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/group-thank-you'
+	to = '{SITECORE_ORIGIN}/:slug1/group-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/callback-page'
+	to = '{SITECORE_ORIGIN}/:slug1/callback-page'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/create-page'
+	to = '{SITECORE_ORIGIN}/:slug1/create-page'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
+
+[[redirects]]
+	from = '/:slug1/:slug2/thank-you'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/:slug2/group-thank-you'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/group-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/:slug2/callback-page'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/callback-page'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/:slug2/create-page'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/create-page'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"	
+
+[[redirects]]
+	from = '/:slug1/:slug2/:slug3/thank-you'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/:slug3/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/:slug2/:slug3/group-thank-you'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/:slug3/group-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/:slug2/:slug3/callback-page'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/:slug3/callback-page'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/:slug1/:slug2/:slug3/create-page'
+	to = '{SITECORE_ORIGIN}/:slug1/:slug2/:slug3/create-page'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
+# This is ultimate fallback proxy, and is the last redirect processed. This matches any remaining URL and redirects back to Sitecore.
+# This is NOT forced, so a matching file locally will take precedence.
+[[redirects]]
+	from = '/*'
+	to = '{SITECORE_ORIGIN}/:splat'
+	status = 200
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"										
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+	cache-control = '''
+	max-age=31536000,
+	no-cache,
+	no-store,
+	must-revalidate'''
+
+[build.environment]
+  UNIFORM_REACT_RENDERINGS = "MVCLayout|MetadataLayout|CookiePreferences|Video|ManualNavigationPod|PrimaryHero|PromoPod|ImageSpotlight|GetInTouch|CTAButton|MessageBlock|Quote|SecondaryHero|Accordion|CaptionedImage|CaseStudySpotlight"

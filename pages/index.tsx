@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-
+import Head from "next/head";
 // Uniform
 import {
   BasePlaceholder,
@@ -29,9 +29,11 @@ import { Accordion as AccordionComponent } from "../components/Accordion";
 import { Image as ImageComponent } from "../components/Image";
 import { CardArticle as CardArticleComponent } from "../components/CardArticle";
 import { Video as VideoComponent } from "../components/Video";
+import { CookiePreferences as CookiePreferencesComponent } from "../components/CookiePreferences";
 import MVCLayout from "../components/Layout";
 import MetadataLayout from "../components/MetadataLayout";
 import { theme } from "../theme";
+import { CampaignSearch } from "../components/CampaignSearch";
 
 // Components Index
 const componentsIndex: any = {};
@@ -51,6 +53,8 @@ componentsIndex["CaseStudySpotlight"] = CardArticleComponent;
 componentsIndex["Video"] = VideoComponent;
 componentsIndex["MVCLayout"] = MVCLayout;
 componentsIndex["MetadataLayout"] = MetadataLayout;
+componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
+componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
@@ -67,19 +71,25 @@ export default class extends React.Component<NextPageProps> {
   }
 
   render() {
+    const { title } = this.props?.page?.fields;
     return (
-      <UniformContext.Provider value={context}>
-        <ThemeProvider theme={theme}>
-          <PageComponent {...this.props} components={componentsIndex}>
-            {(renderingContext) => (
-              <Placeholder
-                placeholderKey="/"
-                renderingContext={renderingContext}
-              />
-            )}
-          </PageComponent>
-        </ThemeProvider>
-      </UniformContext.Provider>
+      <>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <UniformContext.Provider value={context}>
+          <ThemeProvider theme={theme}>
+            <PageComponent {...this.props} components={componentsIndex}>
+              {(renderingContext) => (
+                <Placeholder
+                  placeholderKey="/"
+                  renderingContext={renderingContext}
+                />
+              )}
+            </PageComponent>
+          </ThemeProvider>
+        </UniformContext.Provider>
+      </>
     );
   }
 }

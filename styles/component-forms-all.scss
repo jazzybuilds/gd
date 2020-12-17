@@ -1096,6 +1096,7 @@ input[type='file'] {
 input[type="submit"],
 input[type="reset"],
 .search-box-button[type="submit"],
+.search-box-button[type="button"],
 .button--primary {
     @include cta-button();
 
@@ -1154,7 +1155,7 @@ input[type="reset"],
 
 // Custom submit button classes
 .search-box-button, .search-box-button-with-redirect {
-    &[type="submit"] {
+    &[type="submit"], &[type="button"] {
         background-image: url(/images/icon-search--black.svg);
         &:active,
         &.active,

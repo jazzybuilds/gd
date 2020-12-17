@@ -155,7 +155,7 @@ if (process.browser) {
           elements.step2.style.display = "none";
   
           // don't show the change postcode button on volunteering form
-          var hiddenPostcode = $('.js-volunteeringSavedPostcode');
+          var hiddenPostcode = jQuery('.js-volunteeringSavedPostcode');
           if(!hiddenPostcode.length){
             elements.postcodeChangeAddress.style.display = "block";
           }
@@ -346,10 +346,10 @@ if (process.browser) {
       // Trigger this postcode script when postcode is saved in cookie
       setTimeout(function(){
   
-        var hiddenPostcode = $('.js-volunteeringSavedPostcode');
+        var hiddenPostcode = jQuery('.js-volunteeringSavedPostcode');
   
        if(hiddenPostcode.length){
-        var hiddenPostcode = $('input[data-sc-field-name="Postcode"]').val();
+        var hiddenPostcode = jQuery('input[data-sc-field-name="Postcode"]').val();
         postcodeLookupService.getAddressesFromPostcode(hiddenPostcode, function (addresses) {
           populateResultsSelect(addresses);
   
@@ -358,7 +358,7 @@ if (process.browser) {
   
           elements.enteredPostcode.innerText = hiddenPostcode;
           elements.postcode[0].readOnly = true;
-          $('.auto-fill-address-postcode').val(hiddenPostcode)
+          jQuery('.auto-fill-address-postcode').val(hiddenPostcode)
           elements.backToStep1.style.display = "none";
         });
   
@@ -426,7 +426,7 @@ if (process.browser) {
           }
   
           if (elements.postcode.length) {
-            var hiddenPostcode = $('input[data-sc-field-name="Postcode"]');
+            var hiddenPostcode = jQuery('input[data-sc-field-name="Postcode"]');
             if(hiddenPostcode.length === 0){
               elements.postcode[0].value = '';
             }

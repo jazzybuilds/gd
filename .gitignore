@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+_redirects
+netlify.toml
+
 # dependencies
 /node_modules
 /.pnp
@@ -33,6 +36,9 @@ netlify.config.json
 aws.config.json
 .npmrc
 
+public/sitemap.xml
+public/documents.xml
+public/images.xml
 public/styles.css
 public/_redirects
 

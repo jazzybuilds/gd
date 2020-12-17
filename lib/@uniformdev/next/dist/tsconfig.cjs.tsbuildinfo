@@ -512,7 +512,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/getdefaultprocessinginstructions.ts": {
-        "version": "87eca8b5de98db04357f2efedeef0457a1a10a9d803cec6b1601cdece45b95d7",
+        "version": "f4f7eaf65c46c7c884d6e2cf955f90854952f1f0d9d2aee931c1973b03626bb9",
         "signature": "421f5cc4f16871c1972c91f42066b219f00ec677625d09f3d3cbf57e83871b31",
         "affectsGlobalScope": false
       },
@@ -522,7 +522,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/createrenderingfromhtml.ts": {
-        "version": "c2356cea6fa8e78ad0d0e96afae4522d7b34865472877fea9e6e737e443f2575",
+        "version": "50489c0f8b21d7359782a8d8f674bfbe4ac5d8cd9655fb3a08adb10d8152dd74",
         "signature": "992c8c328a84c8bf64caae76228c88f736d411c0e28a434a226acaf02c8e9823",
         "affectsGlobalScope": false
       },
