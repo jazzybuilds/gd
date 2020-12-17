@@ -21,7 +21,7 @@ export const ContactDetails = (props) => {
             </p>
           }
 
-          {fields.getintouchtelephonetext &&
+          {fields.getintouchtelephonetext && !fields.getintouchtelephonetext.includes("&lt;") &&
             <p className="c-getInTouch__telephone field-getintouchtelephonetext" data-rel="external">
               <a title="fundraising getintouch" href={`tel:${fields.getintouchtelephonetext}`}>{fields.getintouchtelephonetext}</a>
             </p>
