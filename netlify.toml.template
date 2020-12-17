@@ -75,7 +75,14 @@ package = "netlify-plugin-contextual-env"
 	force = true
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
-		
+
+[[redirects]]
+	from = '/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/personal-details'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/personal-details'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
 
 [[redirects]]
 	from = '/:slug1/thank-you'
