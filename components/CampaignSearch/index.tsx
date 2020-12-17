@@ -28,7 +28,7 @@ export const CampaignSearch = (props) => {
         <div className="component c-searchBox small-12 columns">
           <div className="c-searchBox__wrapper c-searchBox__wrapper--increased-padding">
             <div className="c-searchBox__input c-searchBox__input--inline">
-              <label htmlFor="searchLocation">Enter your postcode!!</label>
+              <label htmlFor="searchLocation">Enter your postcode</label>
               <input type="text" id="postcode" placeholder="Please enter postcode..." value={postCode} onChange={(e) => {
                 setPostcode(e.target.value)
               }}/>
