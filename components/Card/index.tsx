@@ -12,8 +12,11 @@ export const Card = (props: any) => {
   const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
   const isLarge = datsource?.settings.Parameters.includes('0199A687-14BF-4599-A99A-6A97576E18D8')
 
+  let formattedUrl = fields.link?.url.split("/") ?? []
+  formattedUrl = formattedUrl[formattedUrl.length -1].replace(/-/g, " ")
+
   return (
-    <Root className="small-12 columns js-equalHeight"  >
+    <Root className="c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight"  >
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
           {fields['pod image'] &&
@@ -24,7 +27,7 @@ export const Card = (props: any) => {
           <Content>
             {fields.link &&
               <div className=" field-link">
-                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text}</Link>
+                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text || formattedUrl}</Link>
               </div>
             }
             <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
