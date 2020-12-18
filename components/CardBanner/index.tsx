@@ -13,7 +13,7 @@ export const CardBanner = (props) => {
   return (
     <Root className="component small-12 columns">
       <div className="component-content">
-        <Wrapper>
+        <Wrapper className="c-imageSpotlight__wrapper">
           {fields.image &&
             <div className="c-imageSpotlight__image">
               <div className="ar-16-9">

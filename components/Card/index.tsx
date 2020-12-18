@@ -7,14 +7,17 @@ export const Card = (props: any) => {
     return null
   }
 
-  const { id, item: { fields } } = renderingContext
+  const { item: { id, name, fields } } = renderingContext
+
+  const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
+  const isLarge = datsource?.settings.Parameters.includes('0199A687-14BF-4599-A99A-6A97576E18D8')
 
   return (
     <Root className="small-12 columns js-equalHeight"  >
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
           {fields['pod image'] &&
-            <ImageWrapper >
+            <ImageWrapper isLarge={isLarge}>
               <Image src={fields['pod image'].url} alt={fields['pod image'].alt} />
             </ImageWrapper>
           }
@@ -25,6 +28,11 @@ export const Card = (props: any) => {
               </div>
             }
             <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
+            {fields['cta link'] &&
+              <div className="c-navigationPod__cta field-cta-link">
+                <a href={`${fields['cta link'].url}/?puppy_selected=${name.replace(" ", "_").toLowerCase()}${fields['cta link'].anchor}`} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
+              </div>
+            }
           </Content>
         </Wrapper>
       </div>
