@@ -72,7 +72,6 @@ export default class extends React.Component<NextPageProps> {
 
   render() {
     const { title } = this.props?.page?.fields;
-    console.log(this.props?.page)
     return (
       <>
         <Head>
