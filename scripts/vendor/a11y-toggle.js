@@ -1,3 +1,5 @@
+if (process.browser) {
+
 (function () {
     'use strict';
 
@@ -124,3 +126,4 @@
 
     window && (window.a11yToggle = initA11yToggle);
   })();
+}
