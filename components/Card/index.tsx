@@ -13,7 +13,11 @@ export const Card = (props: any) => {
   const isLarge = datsource?.settings.Parameters.includes('0199A687-14BF-4599-A99A-6A97576E18D8')
 
   let formattedUrl = fields.link?.url.split("/") ?? []
-  formattedUrl = formattedUrl[formattedUrl.length -1].replace(/-/g, " ")
+  if (formattedUrl.length > 0) {
+    formattedUrl = formattedUrl[formattedUrl.length - 1].replace(/-/g, " ")
+  } else {
+    formattedUrl = ""
+  }
 
   return (
     <Root className="c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight">
