@@ -11,11 +11,11 @@ exports[`Card renders correctly 1`] = `
       className="sc-gsTCUz lgbzsf c-navigationPod__wrapper"
     >
       <div
-        className="sc-eCssSg kZyMUE"
+        className="sc-eCssSg flaySL"
       >
         <img
           alt="cute monkey"
-          className="sc-jSgupP qOnTl"
+          className="sc-jSgupP gbrltj"
           src="https://img.posterlounge.co.uk/images/big/1592909.jpg"
         />
       </div>
@@ -28,7 +28,7 @@ exports[`Card renders correctly 1`] = `
           <a
             className="sc-gKsewC cKBQWx"
             data-variantfieldname="Link"
-            data-variantitemid="{undefined}"
+            data-variantitemid="{123}"
             href="/"
           >
             button text
