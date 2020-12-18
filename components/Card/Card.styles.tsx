@@ -38,8 +38,8 @@ export const Text = styled.p`
   display: block;
 `
 
-export const ImageWrapper = styled.div`
-  padding-bottom: 56.25%;
+export const ImageWrapper = styled.div<{isLarge: boolean}>`
+  padding-bottom: ${props => props.isLarge ? '75%' : '56.25%'};
   overflow: hidden;
   display: block;
   height: 0;
@@ -49,9 +49,8 @@ export const ImageWrapper = styled.div`
 export const Image = styled.img`
   height: 100%;
   width: 100%;
-  -o-object-fit: cover;
   object-fit: cover;
-  font-family: 'object-fit:  cover;';
+  font-family: 'object-fit: cover;';
   position: absolute;
   top: 0;
   right: 0;
