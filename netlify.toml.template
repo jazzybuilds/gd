@@ -82,7 +82,15 @@ package = "netlify-plugin-contextual-env"
 	status = 200
 	force = true
 	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
+
+[[redirects]]
+	from = '/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/personal-details'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/personal-details'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"					
 
 [[redirects]]
 	from = '/:slug1/thank-you'
@@ -114,7 +122,7 @@ package = "netlify-plugin-contextual-env"
 	status = 200
 	force = true
 	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"			
 
 [[redirects]]
 	from = '/:slug1/:slug2/thank-you'
@@ -178,7 +186,103 @@ package = "netlify-plugin-contextual-env"
 	status = 200
 	force = true
 	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"	
+
+[[redirects]]
+	from = '/play-and-win/lucky-lottery/play-the-lucky-lottery/thank-you'
+	to = '{SITECORE_ORIGIN}/play-and-win/lucky-lottery/play-the-lucky-lottery/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+		
+[[redirects]]
+	from = '/campaign-single-donation/single-donation-thank-you'
+	to = '{SITECORE_ORIGIN}/campaign-single-donation/single-donation-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/campaign-regular-donation/monthly-donation-thank-you'
+	to = '{SITECORE_ORIGIN}/campaign-regular-donation/monthly-donation-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/campaign-bundle-single-donation/campaign-bundle-single-donation-thank-you'
+	to = '{SITECORE_ORIGIN}/campaign-bundle-single-donation/campaign-bundle-single-donation-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/campaign-today-single-donation/campaign-today-single-donation-thank-you'
+	to = '{SITECORE_ORIGIN}/campaign-today-single-donation/campaign-today-single-donation-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/donate-in-memory-of-your-loved-one/thank-you'
+	to = '{SITECORE_ORIGIN}/donate-in-memory-of-your-loved-one/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/donate-now/single-donation/thank-you'
+	to = '{SITECORE_ORIGIN}/donate-now/single-donation/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+		
+[[redirects]]
+	from = '/donate-now/monthly-donation/monthly-donation---thank-you'
+	to = '{SITECORE_ORIGIN}/donate-now/monthly-donation/monthly-donation---thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/good-dog/sign-up-now/thank-you'
+	to = '{SITECORE_ORIGIN}/good-dog/sign-up-now/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+		
+[[redirects]]
+	from = '/sponsor-a-puppy-today/monthly-payment-thank-you'
+	to = '{SITECORE_ORIGIN}/sponsor-a-puppy-today/monthly-payment-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
+[[redirects]]
+	from = '/sponsor-a-puppy-today/single-payment-thank-you'
+	to = '{SITECORE_ORIGIN}/sponsor-a-puppy-today/single-payment-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+		
+[[redirects]]
+	from = '/stripe-test-form/single-donation/thank-you'
+	to = '{SITECORE_ORIGIN}/stripe-test-form/single-donation/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
 
 # This is ultimate fallback proxy, and is the last redirect processed. This matches any remaining URL and redirects back to Sitecore.
 # This is NOT forced, so a matching file locally will take precedence.
