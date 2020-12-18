@@ -7,7 +7,7 @@ export const CardArticle = (props) => {
     return null
   }
 
-  const { id, item: { fields } } = renderingContext
+  const { item: { id, fields } } = renderingContext
 
   return (
     <div className="component c-caseStudy small-12 columns">
@@ -21,11 +21,11 @@ export const CardArticle = (props) => {
           <div className="c-caseStudy__content">
             <h3 className="c-caseStudy__title field-title" dangerouslySetInnerHTML={{ __html: fields.title }} />
             <p className="c-caseStudy__summary field-summary" dangerouslySetInnerHTML={{ __html: fields.summary }} />
-            {fields.link &&
-              <p className="c-caseStudy__link field-link">
-                <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
-              </p>
-            }
+            <p className="c-caseStudy__link field-link">
+              {fields.link &&
+                <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
+              }
+            </p>
           </div>
         </div>
       </div>
