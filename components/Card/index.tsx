@@ -11,7 +11,8 @@ export const Card = (props: any) => {
 
   const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
   const isLarge = datsource?.settings.Parameters.includes('0199A687-14BF-4599-A99A-6A97576E18D8')
-
+  const jsClass = datsource?.settings.Parameters.includes('3182392E-93CD-425C-8778-611B677FA58A')
+  
   let formattedUrl = fields.link?.url.split("/") ?? []
   if (formattedUrl.length > 0) {
     formattedUrl = formattedUrl[formattedUrl.length - 1].replace(/-/g, " ")
@@ -20,7 +21,7 @@ export const Card = (props: any) => {
   }
 
   return (
-    <Root className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight">
+    <Root className={`component c-navigationPod c-navigationPod--manual small-12 columns ${jsClass ? "js-equalHeight" : ""}`}>
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
           {fields['pod image'] &&
