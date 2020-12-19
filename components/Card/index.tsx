@@ -20,7 +20,7 @@ export const Card = (props: any) => {
   }
 
   return (
-    <Root className="c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight">
+    <Root className="component c-navigationPod c-navigationPod--manual small-12 columns js-equalHeight">
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
           {fields['pod image'] &&
