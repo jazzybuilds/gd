@@ -36,9 +36,9 @@ export const Card = (props: any) => {
               </div>
             }
             <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
-            {fields['cta link'] &&
+            {isLarge && fields['cta link'] &&
               <div className="c-navigationPod__cta field-cta-link">
-                <a href={`${fields['cta link'].url}/?puppy_selected=${name.replace(" ", "_").toLowerCase()}${fields['cta link'].anchor}`} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
+                <a href={`${fields['cta link'].url}/${fields['cta link'].url.includes('sponsor-a-puppy-today') ? `?puppy_selected=${name.replace(" ", "_").toLowerCase()}${fields['cta link'].anchor}` : ""}`} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
               </div>
             }
           </Content>
