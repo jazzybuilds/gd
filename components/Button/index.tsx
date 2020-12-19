@@ -11,7 +11,7 @@ export const Button = (props) => {
     <div className="component c-ctaButton ctaWrapper columns c-header__cta">
       <div className="component-content">
         <div className="field-link">
-          <a href={link.url} data-variantitemid={`{${id}}`} className="cta-plain" role="button" data-variantfieldname="Link">{link.text}</a>
+          <a href={link.url} data-variantitemid={`{${id}}`} className="cta-plain" role="button" data-variantfieldname="Link" target={link.target}>{link.text}</a>
         </div>
       </div>
     </div>
