@@ -15,7 +15,7 @@ export const CardArticle = (props) => {
         <div className="c-caseStudy__wrapper">
           <div className="c-caseStudy__image">
             {fields.image &&
-              <img src={`${fields.image.url}?h=${fields.image.height}&amp;w=${fields.image.widht}&amp;hash=6940A9C3A97A0F58BB776EAB35A8B2E9`} alt={fields.image.alt} width={fields.image.width} height={fields.image.height} data-variantitemid={`{${id}}`} data-variantfieldname="Image" />
+              <img src={`${fields.image.url}?h=${fields.image.height}&amp;w=${fields.image.width}&amp;hash=6940A9C3A97A0F58BB776EAB35A8B2E9`} alt={fields.image.alt} width={fields.image.width} height={fields.image.height} data-variantitemid={`{${id}}`} data-variantfieldname="Image" />
             }
           </div>
           <div className="c-caseStudy__content">
