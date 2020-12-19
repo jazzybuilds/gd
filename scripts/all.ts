@@ -1,4 +1,3 @@
-import "./_main.js"
 import "./back-to-top.js"
 import "./accordion.js"
 import "./breadcrumb-styling.js"
