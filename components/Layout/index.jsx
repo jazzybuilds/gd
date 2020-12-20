@@ -1,9 +1,28 @@
+import React from "react"
 import Head from "next/head";
 import UniformPlaceholder from "../UniformPlaceholder";
+import * as objectFitImages from 'object-fit-images';
+import { equalHeightPods } from "../../scripts/equal-height-columns"
+import { checkRowBgs } from "../../scripts/row-bg"
 
 const MVCLayout = (props) => {
 
   const { placeholderComponent } = props;
+
+  React.useEffect(() => {
+    equalHeightPods('.js-equalHeight');
+    checkRowBgs();
+    objectFitImages();
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        equalHeightPods('.js-equalHeight');
+      }, 500);
+    });
+
+  }, [])
 
   return (
     <>

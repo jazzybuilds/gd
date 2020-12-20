@@ -2,7 +2,7 @@
 
 exports[`Card renders correctly 1`] = `
 <div
-  className="sc-bdfBwQ fzlwWY small-12 columns js-equalHeight"
+  className="sc-bdfBwQ fzlwWY component c-navigationPod c-navigationPod--manual small-12 columns "
 >
   <div
     className="component-content"

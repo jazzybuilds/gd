@@ -11,9 +11,17 @@ export const Card = (props: any) => {
 
   const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
   const isLarge = datsource?.settings.Parameters.includes('0199A687-14BF-4599-A99A-6A97576E18D8')
+  const jsClass = datsource?.settings.Parameters.includes('3182392E-93CD-425C-8778-611B677FA58A')
+  
+  let formattedUrl = fields.link?.url.split("/") ?? []
+  if (formattedUrl.length > 0) {
+    formattedUrl = formattedUrl[formattedUrl.length - 1].replace(/-/g, " ")
+  } else {
+    formattedUrl = ""
+  }
 
   return (
-    <Root className="small-12 columns js-equalHeight"  >
+    <Root className={`component c-navigationPod c-navigationPod--manual small-12 columns ${jsClass ? "js-equalHeight" : ""}`}>
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
           {fields['pod image'] &&
@@ -24,13 +32,13 @@ export const Card = (props: any) => {
           <Content>
             {fields.link &&
               <div className=" field-link">
-                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text}</Link>
+                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text || formattedUrl}</Link>
               </div>
             }
             <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
-            {fields['cta link'] &&
+            {isLarge && fields['cta link'] &&
               <div className="c-navigationPod__cta field-cta-link">
-                <a href={`${fields['cta link'].url}/?puppy_selected=${name.replace(" ", "_").toLowerCase()}${fields['cta link'].anchor}`} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
+                <a href={`${fields['cta link'].url}/${fields['cta link'].url.includes('sponsor-a-puppy-today') ? `?puppy_selected=${name.replace(" ", "_").toLowerCase()}${fields['cta link'].anchor}` : ""}`} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
               </div>
             }
           </Content>

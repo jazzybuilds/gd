@@ -7,16 +7,19 @@ export const TextBanner = (props) => {
     return null
   }
 
-  const { id, item: { fields } } = renderingContext
+  const {  item: { id, fields } } = renderingContext
+
+  const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
+  const blueBg = datsource?.settings.Parameters.includes("F3715535-4F33-4543-8217-4B17B810ECD1") 
 
   return (
-    <div className="component c-promoPod c-promoPod--blue small-12 columns">
+    <div className={`component c-promoPod ${blueBg ? "c-promoPod--blue" : ""} small-12 columns`}>
       <div className="component-content">
         <div className="c-promoPod__wrapper">
           <p className="c-promoPod__text field-text" dangerouslySetInnerHTML={{ __html: fields.text }} />
           <p className="c-promoPod__link field-link">
             {fields.link &&
-              <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
+              <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
             }
           </p>
         </div>

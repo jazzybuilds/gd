@@ -522,12 +522,12 @@
         "affectsGlobalScope": false
       },
       "../src/utils/createrenderingfromhtml.ts": {
-        "version": "50489c0f8b21d7359782a8d8f674bfbe4ac5d8cd9655fb3a08adb10d8152dd74",
+        "version": "26ebefe66f08be47a621e9e64cef580d6ce3f30187744b005de6dffe06c195d7",
         "signature": "992c8c328a84c8bf64caae76228c88f736d411c0e28a434a226acaf02c8e9823",
         "affectsGlobalScope": false
       },
       "../src/utils/createrendering.tsx": {
-        "version": "19a8725ccc1899e6f85a3b1e688b681631f1a457fbb675960f126bb3bb98dce4",
+        "version": "f85cba86198b4a0a4235035a3d10aa6c318a4df7d6c00787566107e024787656",
         "signature": "d703e4b12d11a4be782b5d362c445b31c978c4946e5d75d4715c8336c236ae78",
         "affectsGlobalScope": false
       },

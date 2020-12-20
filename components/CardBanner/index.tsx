@@ -8,10 +8,13 @@ export const CardBanner = (props) => {
     return null
   }
 
-  const { id, item: { fields } } = renderingContext
+  const { item: { id, fields } } = renderingContext
+
+  const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
+  const blueBg = datsource?.settings.Parameters.includes('76720053-27F8-4CCF-8652-69A6A91FA586')
 
   return (
-    <Root className="component small-12 columns">
+    <Root className={`component small-12 columns ${blueBg ? "row-bg row-bg--blue" : ""}`}>
       <div className="component-content">
         <Wrapper className="c-imageSpotlight__wrapper">
           {fields.image &&
