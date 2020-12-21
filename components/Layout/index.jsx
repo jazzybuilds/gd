@@ -4,6 +4,7 @@ import UniformPlaceholder from "../UniformPlaceholder";
 import * as objectFitImages from 'object-fit-images';
 import { equalHeightPods } from "../../scripts/equal-height-columns"
 import { checkRowBgs } from "../../scripts/row-bg"
+import { initMobileNav } from "../../scripts/mobile-navigation"
 
 const MVCLayout = (props) => {
 
@@ -13,6 +14,7 @@ const MVCLayout = (props) => {
     equalHeightPods('.js-equalHeight');
     checkRowBgs();
     objectFitImages();
+    initMobileNav()
 
     var resizeTimer;
     window.addEventListener('resize', function () {

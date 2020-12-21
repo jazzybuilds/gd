@@ -18,7 +18,11 @@ export const equalHeightPods = (pod) => {
 
     // reset pod height to natural height
     for (var i = 0; i < arrayLength; i++) {
-      podsInside[i].querySelector('div[class*="__wrapper"]').style.minHeight = '72px';
+      const podWrapper = podsInside[i].querySelector('div[class*="__wrapper"]')
+      if (podWrapper) {
+        podWrapper.style.minHeight = '72px';
+      }
+      
     }
 
     setTimeout(function(){
@@ -39,7 +43,10 @@ export const equalHeightPods = (pod) => {
       var tallest = Math.max.apply(this, heights);
 
       for (var j = 0; j < arrayLength; j++) {
-        podsInside[j].querySelector('div[class*="__wrapper"]').style.minHeight = tallest + "px";
+        const podWrapper = podsInside[j].querySelector('div[class*="__wrapper"]')
+        if (podWrapper) {
+          podWrapper.style.minHeight = tallest + "px";
+        }
       }
 
     }
