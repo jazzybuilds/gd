@@ -2,7 +2,7 @@ const jQuery = require("jquery");
 
 export const initMobileNav = () => {
   // firstly duplicate the search box for mobile
-  jQuery('.c-header__search.initialized').clone(true).appendTo('.c-mobileNav__search');
+  jQuery('.c-header__search').clone(true).appendTo('.c-mobileNav__search');
 }
 
 if (process.browser) {
