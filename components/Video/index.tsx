@@ -8,7 +8,6 @@ export const Video = (props) => {
 
   const { item: { fields } } = renderingContext
 
-  console.log(renderingContext)
   let videoId = fields.youtubemovie
 
   if (videoId.includes('https')) {
