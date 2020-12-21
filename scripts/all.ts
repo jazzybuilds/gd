@@ -24,5 +24,6 @@ import "./svg-logo.js"
 import "./volunteering.js"
 import "./vendor/a11y-toggle.js"
 
+
 // New scripts to address Sitecore specific-issues
 import "./form-generate-session.js"

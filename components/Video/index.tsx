@@ -59,8 +59,7 @@ export const Video = (props) => {
         </div>
 
         <div className="video-caption" dangerouslySetInnerHTML={{ __html: fields.moviecaption}} />
-        <div className="video-description">
-        </div>
+        <div className="video-description" dangerouslySetInnerHTML={{ __html: fields.moviedescription}} />
       </div>
     </div>
   )
