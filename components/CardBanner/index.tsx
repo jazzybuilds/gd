@@ -12,11 +12,21 @@ export const CardBanner = (props) => {
 
   const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
 
-  const blueBg = datsource?.settings.Parameters.includes('76720053-27F8-4CCF-8652-69A6A91FA586')
+  const lightBlueBg = datsource?.settings.Parameters.includes('76720053-27F8-4CCF-8652-69A6A91FA586')
   const darkBlueBg = datsource?.settings.Parameters.includes('0D887421-9606-4A99-8B97-D20C79EAE2C0')
 
+  let bgClass = "row-bg "
+
+  if (lightBlueBg) {
+    bgClass += "row-bg--blue"
+  }
+
+  if (darkBlueBg) {
+    bgClass += "row-bg--darkBlue"
+  }
+
   return (
-    <Root className={`component small-12 columns ${blueBg ? "row-bg row-bg--blue" : ""} ${darkBlueBg ? "row-bg row-bg--darkBlue" : ""} `}>
+    <Root className={`component small-12 columns ${lightBlueBg || darkBlueBg ? bgClass : ""}`}>
       <div className="component-content">
         <Wrapper className="c-imageSpotlight__wrapper">
           {fields.image &&
