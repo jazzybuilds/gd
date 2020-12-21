@@ -1,9 +1,11 @@
 const jQuery = require("jquery");
 
-if (process.browser) {
+export const initMobileNav = () => {
   // firstly duplicate the search box for mobile
-  jQuery('.c-header__search').clone(true).appendTo('.c-mobileNav__search');
-  
+  jQuery('.c-header__search.initialized').clone(true).appendTo('.c-mobileNav__search');
+}
+
+if (process.browser) {
   // the actual button click
   var mobileNavBtn = document.querySelector(".js-mobNavToggle");
   var mobileNavClose = document.querySelector(".js-mobNavClose");
