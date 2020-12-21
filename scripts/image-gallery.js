@@ -1,4 +1,6 @@
 const jQuery = require("jquery");
+import * as PhotoSwipe from 'photoswipe'
+import * as PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
 
 if (process.browser) {
     window.onresize = function(event) {
