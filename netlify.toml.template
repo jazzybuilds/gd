@@ -282,7 +282,79 @@ package = "netlify-plugin-contextual-env"
 	status = 200
 	force = true
 	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"				
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"	
+
+[[redirects]]
+	from = '/getting-support/getting-in-touch-form/getting-in-touch-confirmation'
+	to = '{SITECORE_ORIGIN}/getting-support/getting-in-touch-form/getting-in-touch-confirmation'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/how-you-can-help/how-your-school-or-youth-group-can-help/stem-projects/stem-thank-you'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/how-your-school-or-youth-group-can-help/stem-projects/stem-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/thank-you'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
+[[redirects]]
+	from = '/how-you-can-help/volunteering-for-guide-dogs/awards-and-recognition/local-volunteer-awards/thank-you'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/volunteering-for-guide-dogs/awards-and-recognition/local-volunteer-awards/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+		
+[[redirects]]
+	from = '/how-you-can-help/invite-a-speaker/invite-a-speaker-form/thank-you'
+	to = '{SITECORE_ORIGIN}/how-you-can-help/invite-a-speaker/invite-a-speaker-form/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/services-getting-in-touch-confirmation'
+	to = '{SITECORE_ORIGIN}/services-getting-in-touch-confirmation'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+		
+[[redirects]]
+	from = '/the-great-british-dog-survey/dog-survey/thank-you'
+	to = '{SITECORE_ORIGIN}/the-great-british-dog-survey/dog-survey/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
+[[redirects]]
+	from = '/walk-your-socks-off/sign-up-now/group-thank-you'
+	to = '{SITECORE_ORIGIN}/walk-your-socks-off/sign-up-now/group-thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+		
+[[redirects]]
+	from = '/walk-your-socks-off/sign-up-now/thank-you'
+	to = '{SITECORE_ORIGIN}/walk-your-socks-off/sign-up-now/thank-you'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
 
 # This is ultimate fallback proxy, and is the last redirect processed. This matches any remaining URL and redirects back to Sitecore.
 # This is NOT forced, so a matching file locally will take precedence.
