@@ -7,8 +7,15 @@ it('Button renders correctly', () => {
   const tree = renderer
     .create(<TestWrapper>
       <Button renderingContext={{
-        id: 'test',
+        page: {
+          renderings: [{
+            settings: {
+              DataSource: ''
+            }
+          }]
+        },
         item: {
+          id: 'test',
           fields: {
             link: {
               url: "/",
