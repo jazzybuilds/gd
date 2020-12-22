@@ -23,6 +23,9 @@ export const Video = (props) => {
       let parts = videoId.split("be/")
       videoId = parts[1]
     }
+  } else if (videoId.includes('&amp')) {
+    let parts = videoId.split("&amp")
+    videoId = parts[0]
   }
   
   videoId = videoId.replace(" ", "").replace("v=", "")
