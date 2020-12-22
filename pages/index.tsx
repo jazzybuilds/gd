@@ -75,7 +75,7 @@ export default class extends React.Component<NextPageProps> {
     return (
       <>
         <Head>
-          <title>{title}</title>
+          <title dangerouslySetInnerHTML={{__html: title}} />
         </Head>
         <UniformContext.Provider value={context}>
           <ThemeProvider theme={theme}>
