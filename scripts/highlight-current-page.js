@@ -12,7 +12,7 @@ if (process.browser) {
       for (var i = 0; i < navLinks.length; i++) {
         //if (navLinks[i].href.includes(currentPage)) {
         var n = navLinks[i];
-        if (currentPage.toLowerCase().includes(n.href.toLowerCase())) {
+        if (n.href.toLowerCase() === currentPage.toLowerCase()) {
           n.classList.add("active");
         }
       }
