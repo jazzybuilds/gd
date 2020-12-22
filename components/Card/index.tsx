@@ -10,9 +10,11 @@ export const Card = (props: any) => {
   const { item: { id, name, fields } } = renderingContext
 
   const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
+
   const isLarge = datsource?.settings.Parameters.includes('0199A687-14BF-4599-A99A-6A97576E18D8')
+  const noImage = datsource?.settings.Parameters.includes('83D702CA-4797-4B98-9C9A-E861370CE490')
+
   const jsClass = datsource?.settings.Parameters.includes('3182392E-93CD-425C-8778-611B677FA58A')
-  
   const lightBlueBg = datsource?.settings.Parameters.includes('76720053-27F8-4CCF-8652-69A6A91FA586')
   const darkBlueBg = datsource?.settings.Parameters.includes('0D887421-9606-4A99-8B97-D20C79EAE2C0')
 
@@ -38,7 +40,7 @@ export const Card = (props: any) => {
     <Root className={`component c-navigationPod c-navigationPod--manual small-12 columns ${lightBlueBg || darkBlueBg ? bgClass : ""} ${jsClass ? "js-equalHeight" : ""}`}>
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
-          {fields['pod image'] &&
+          {!noImage && fields['pod image'] &&
             <ImageWrapper isLarge={isLarge}>
               <Image src={fields['pod image'].url} alt={fields['pod image'].alt} />
             </ImageWrapper>
