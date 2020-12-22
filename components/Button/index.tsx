@@ -10,6 +10,7 @@ export const Button = (props) => {
   const isLarge = datsource?.settings.Parameters.includes('69244147-9040-432C-A6AC-16BAE4863271')
   const isMedium = datsource?.settings.Parameters.includes('859E750E-BF54-4DA2-8DD4-9786565E3640')
   const isSmall = datsource?.settings.Parameters.includes('19AE9B21-88B6-4D17-82B1-CA605DB70EA7')
+  const isLink = datsource?.settings.Parameters.includes('0D07C7F0-4367-4647-BFAF-8AAD9A8B1E27')
 
   let buttonClass = "cta-plain"
 
@@ -24,6 +25,10 @@ export const Button = (props) => {
 
   if (isSmall) {
     buttonClass = "cta-small"
+  }
+
+  if (isLink) {
+    buttonClass = "cta-link"
   }
 
   return (

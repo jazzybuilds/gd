@@ -10,7 +10,6 @@ export const Video = (props) => {
 
   let videoId = fields.youtubemovie
 
-  console.log({videoId})
   if (videoId.includes('https')) {
     if (videoId.includes("v=")) {
       let parts = videoId.split("v=")
