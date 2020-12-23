@@ -34,6 +34,7 @@ import MVCLayout from "../components/Layout";
 import MetadataLayout from "../components/MetadataLayout";
 import { theme } from "../theme";
 import { CampaignSearch } from "../components/CampaignSearch";
+import BrowserTitle from "../components/Meta/BrowserTitle";
 
 // Components Index
 const componentsIndex: any = {};
@@ -55,6 +56,7 @@ componentsIndex["MVCLayout"] = MVCLayout;
 componentsIndex["MetadataLayout"] = MetadataLayout;
 componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
 componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
+componentsIndex["BrowserTitle"] = BrowserTitle;
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
@@ -71,12 +73,8 @@ export default class extends React.Component<NextPageProps> {
   }
 
   render() {
-    const { title } = this.props?.page?.fields;
     return (
       <>
-        <Head>
-          <title dangerouslySetInnerHTML={{__html: title}} />
-        </Head>
         <UniformContext.Provider value={context}>
           <ThemeProvider theme={theme}>
             <PageComponent {...this.props} components={componentsIndex}>
