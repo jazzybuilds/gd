@@ -31,7 +31,7 @@ const MVCLayout = (props) => {
   return (
     <>
       <Head>
-        {metaTitle && <title>{metaTitle}</title>}
+        {metaTitle && <title dangerouslySetInnerHTML={{ __html: metaTitle}} />}
         <UniformPlaceholder
           placeholderKey="/head"
           placeholderComponent={placeholderComponent}
