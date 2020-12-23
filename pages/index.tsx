@@ -35,6 +35,7 @@ import MetadataLayout from "../components/MetadataLayout";
 import { theme } from "../theme";
 import { CampaignSearch } from "../components/CampaignSearch";
 import BrowserTitle from "../components/Meta/BrowserTitle";
+import { Content as ContentComponent } from "../components/Content";
 
 // Components Index
 const componentsIndex: any = {};
@@ -57,6 +58,7 @@ componentsIndex["MetadataLayout"] = MetadataLayout;
 componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
 componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
 componentsIndex["BrowserTitle"] = BrowserTitle;
+componentsIndex["RichText"] = ContentComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
