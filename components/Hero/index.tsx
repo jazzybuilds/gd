@@ -1,12 +1,7 @@
-import React from "react";
 import "../../styles/component-hero.scss";
 
 export const Hero = (props) => {
-  const { item } = props.renderingContext;
-  if (!item) {
-    return null;
-  }
-  const { fields } = item;
+  const fields = props?.renderingContext?.item?.fields;
   if (!fields) {
     return null;
   }
