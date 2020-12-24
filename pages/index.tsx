@@ -36,6 +36,7 @@ import { theme } from "../theme";
 import { CampaignSearch } from "../components/CampaignSearch";
 import BrowserTitle from "../components/Meta/BrowserTitle";
 import { Content as ContentComponent } from "../components/Content";
+import { Divider as DividerComponent } from "../components/Divider";
 
 // Components Index
 const componentsIndex: any = {};
@@ -59,6 +60,7 @@ componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
 componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
 componentsIndex["BrowserTitle"] = BrowserTitle;
 componentsIndex["RichText"] = ContentComponent
+componentsIndex["Divider"] = DividerComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
