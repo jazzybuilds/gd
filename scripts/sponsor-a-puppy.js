@@ -214,8 +214,8 @@ if (process.browser) {
             parent.find('.js-amountPodAmountRadio').val(finalPrice);
     
             // update custom amount input value when nr of puppies change
+            jQuery('.js-amountPod').val(finalPrice);
             if(_this.is(':checked')){
-                jQuery('.js-amountPod').val(finalPrice);
                 sessionStorage.setItem("donation_amount", finalPrice);
             }
             fillInWhyThisAmount();
