@@ -39,6 +39,7 @@ export default class CustomDocument extends Document {
           />
           <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" type="font/woff2" />
           <link rel="preload" href="/fonts/castledown/castledown-heavy.woff2" as="font" type="font/woff2" />
+          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff" as="font" type="font/woff" />
 
           {/* @ts-ignore */}
           {this.props.styleTags}
