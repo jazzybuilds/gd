@@ -1,11 +1,15 @@
 import React from 'react'
 
-
 export const CookiePreferences = (props) => {
   const [advertising, setAdvertising] = React.useState(false)
   const [functional, setFunctional] = React.useState(false)
+  const fields = props?.renderingContext?.item?.fields;
+  const cookieName = fields && fields["cookie name"] ? fields["cookie name"]: 'GDUK_GDPR_PREF'
+  if (!fields) {
+    return null
+  }
 
-  const cookieName = props.renderingContext.item?.fields["cookie name"] ?? 'GDUK_GDPR_PREF'
+  const {title, yestext, notext, submitbuttontext} = fields;
 
   React.useEffect(() => {
     const parts = `; ${document.cookie}`.split(`; ${cookieName}=`);
@@ -16,10 +20,6 @@ export const CookiePreferences = (props) => {
     }
 
   }, [cookieName])
-
-  if (!props.renderingContext.item || !props.renderingContext.item.fields) {
-    return null
-  }
 
   const onSubmit = () => {
     const updatedCookieData = {
@@ -41,18 +41,18 @@ export const CookiePreferences = (props) => {
   return (
     <div className="component cookiepreferences small-12 columns" id="TopOfCookiePreferences">
       <div className="container cookie-preferences">
-        <h2 id="cookie-consent">{props.renderingContext.item.fields.title}</h2>
-        <p>{props.renderingContext.item.fields["intro content"]}</p>
+        <h2 id="cookie-consent">{title}</h2>
+        <p>{fields["intro content"]}</p>
 
         <div className="cookie-preferences__section">
           <fieldset>
             <legend><strong>Required cookies</strong></legend>
-            <p id="requiredIntro">{props.renderingContext.item.fields["required cookie intro"]}</p>
+            <p id="requiredIntro">{fields["required cookie intro"]}</p>
 
             <div className="cookie-preferences__choices">
               <div className="cookie-preferences__choice">
                 <input aria-describedby="requiredIntro" checked={true} className="customRadio" id="RequiredCookieIsAlwaysTrue" name="RequiredCookieIsAlwaysTrue" type="radio" value="True" />
-                <label htmlFor="RequiredCookieIsAlwaysTrue">{props.renderingContext.item.fields.yestext}</label>
+                <label htmlFor="RequiredCookieIsAlwaysTrue">{yestext}</label>
               </div>
             </div>
           </fieldset>
@@ -66,11 +66,11 @@ export const CookiePreferences = (props) => {
             <div className="cookie-preferences__choices">
               <div className="cookie-preferences__choice" onClick={() => setAdvertising(true)} >
                 <input aria-describedby="cookie_section0" className="customRadio" id="ChildItems_0__IsSelectedyes" name="ChildItems[0].IsSelected" type="radio" value="True" checked={advertising} />
-                <label htmlFor="ChildItems_0__IsSelectedyes">{props.renderingContext.item.fields.yestext}</label>
+                <label htmlFor="ChildItems_0__IsSelectedyes">{yestext}</label>
               </div>
               <div className="cookie-preferences__choice" onClick={() => setAdvertising(false)} >
                 <input aria-describedby="cookie_section0" className="customRadio" id="ChildItems_0__IsSelectedno" name="ChildItems[0].IsSelected" type="radio" value="False" checked={!advertising} />
-                <label htmlFor="ChildItems_0__IsSelectedno">{props.renderingContext.item.fields.notext}</label>
+                <label htmlFor="ChildItems_0__IsSelectedno">{notext}</label>
               </div>
             </div>
           </fieldset>
@@ -83,17 +83,17 @@ export const CookiePreferences = (props) => {
             <div className="cookie-preferences__choices">
               <div className="cookie-preferences__choice">
                 <input type="radio" aria-describedby="cookie_section1" id="ChildItems_1__IsSelectedyes" name="ChildItems[1].IsSelected" className="customRadio" value="True" checked={functional} onClick={() => setFunctional(true)} />
-                <label htmlFor="ChildItems_1__IsSelectedyes">{props.renderingContext.item.fields.yestext}</label>
+                <label htmlFor="ChildItems_1__IsSelectedyes">{yestext}</label>
               </div>
               <div className="cookie-preferences__choice">
                 <input type="radio" aria-describedby="cookie_section1" className="customRadio" id="ChildItems_1__IsSelectedno" name="ChildItems[1].IsSelected" value="False" checked={!functional} onClick={() => setFunctional(false)} />
-                <label htmlFor="ChildItems_1__IsSelectedno">{props.renderingContext.item.fields.notext}</label>
+                <label htmlFor="ChildItems_1__IsSelectedno">{notext}</label>
               </div>
             </div>
           </fieldset>
         </div>
 
-        <button type="button" className="cta-secondary cookie-preferences__button" onClick={onSubmit}>{props.renderingContext.item.fields.submitbuttontext}</button>
+        <button type="button" className="cta-secondary cookie-preferences__button" onClick={onSubmit}>{submitbuttontext}</button>
       </div>
     </div>
   )
