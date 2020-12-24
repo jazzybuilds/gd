@@ -364,15 +364,3 @@ package = "netlify-plugin-contextual-env"
 	status = 200
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"										
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-	cache-control = '''
-	max-age=31536000,
-	no-cache,
-	no-store,
-	must-revalidate'''
-
-[build.environment]
-  UNIFORM_REACT_RENDERINGS = "MVCLayout|MetadataLayout|CookiePreferences|Video|ManualNavigationPod|PrimaryHero|PromoPod|ImageSpotlight|GetInTouch|CTAButton|MessageBlock|Quote|SecondaryHero|Accordion|CaptionedImage|CaseStudySpotlight"
