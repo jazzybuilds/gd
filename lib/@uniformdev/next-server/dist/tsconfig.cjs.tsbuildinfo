@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/uniformconfig.d.ts": {
-        "version": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
-        "signature": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
+        "version": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
+        "signature": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/index.d.ts": {
@@ -661,19 +661,14 @@
         "signature": "bd337a43afabb4cef1d4d73278b183746b55fc8a42a6f5ea1b07baf604023005",
         "affectsGlobalScope": false
       },
-      "../../common-server/dist/cjs/pathandrevision.d.ts": {
-        "version": "19790df7055cbd214e3590e3860cc5764e9b874339d76233b791785c61cec271",
-        "signature": "19790df7055cbd214e3590e3860cc5764e9b874339d76233b791785c61cec271",
-        "affectsGlobalScope": false
-      },
       "../../common-server/dist/cjs/buildarrayofpaths.d.ts": {
-        "version": "98b8b13990403834b74ffc06564782e3d996e018840eba789a936d729335b01f",
-        "signature": "98b8b13990403834b74ffc06564782e3d996e018840eba789a936d729335b01f",
+        "version": "83866f032cc8909fb0eb780e67946f4ca4337c83a8792fed8aaf006c3b1e0dce",
+        "signature": "83866f032cc8909fb0eb780e67946f4ca4337c83a8792fed8aaf006c3b1e0dce",
         "affectsGlobalScope": false
       },
       "../../common-server/dist/cjs/dumpjsondata.d.ts": {
-        "version": "d45b59c739a04ddb33cdccd262cbd1677125094d27ea68a880ad822b3021a325",
-        "signature": "d45b59c739a04ddb33cdccd262cbd1677125094d27ea68a880ad822b3021a325",
+        "version": "e305f218881a18d808d428833ebae3e612ca106ca0c70c830f8acba217247dfa",
+        "signature": "e305f218881a18d808d428833ebae3e612ca106ca0c70c830f8acba217247dfa",
         "affectsGlobalScope": false
       },
       "../../common-server/dist/cjs/downloadsitemap.d.ts": {
@@ -767,8 +762,8 @@
         "affectsGlobalScope": false
       },
       "../../common-server/dist/cjs/index.d.ts": {
-        "version": "1d4c0bab37148d72ea312f5da75397b0eb2873fc366e4f0af7584e225dd946e1",
-        "signature": "1d4c0bab37148d72ea312f5da75397b0eb2873fc366e4f0af7584e225dd946e1",
+        "version": "a77c5cfab5f5eba1483a082110410a2cd39a1fee457724a7fcec3ec5f5a398ec",
+        "signature": "a77c5cfab5f5eba1483a082110410a2cd39a1fee457724a7fcec3ec5f5a398ec",
         "affectsGlobalScope": false
       },
       "../src/server.ts": {
@@ -3493,7 +3488,6 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
-        "../../common-server/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
       ],
       "../../common-server/dist/cjs/countfiles.d.ts": [
@@ -3523,7 +3517,6 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
-        "../../common-server/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
       ],
       "../../common-server/dist/cjs/exportpathmap.d.ts": [
@@ -3550,7 +3543,6 @@
         "../../common-server/dist/cjs/dumpjsondata.d.ts",
         "../../common-server/dist/cjs/exportpathmap.d.ts",
         "../../common-server/dist/cjs/parseuniformserverconfig.d.ts",
-        "../../common-server/dist/cjs/pathandrevision.d.ts",
         "../../common-server/dist/cjs/serverlogger.d.ts",
         "../../common-server/dist/cjs/trygetuniformversion.d.ts",
         "../../common-server/dist/cjs/uniformserver.d.ts",
@@ -3567,15 +3559,6 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../common-server/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
-      ],
-      "../../common-server/dist/cjs/pathandrevision.d.ts": [
-        "../../../node_modules/@types/graceful-fs/index.d.ts",
-        "../../../node_modules/@types/node/fs.d.ts",
-        "../../../node_modules/@types/node/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../../node_modules/@types/node/ts3.2/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts",
-        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../common-server/dist/cjs/serverlogger.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -6172,7 +6155,6 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
-        "../../common-server/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
       ],
       "../../common-server/dist/cjs/countfiles.d.ts": [
@@ -6202,7 +6184,6 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
-        "../../common-server/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
       ],
       "../../common-server/dist/cjs/exportpathmap.d.ts": [
@@ -6229,7 +6210,6 @@
         "../../common-server/dist/cjs/dumpjsondata.d.ts",
         "../../common-server/dist/cjs/exportpathmap.d.ts",
         "../../common-server/dist/cjs/parseuniformserverconfig.d.ts",
-        "../../common-server/dist/cjs/pathandrevision.d.ts",
         "../../common-server/dist/cjs/serverlogger.d.ts",
         "../../common-server/dist/cjs/trygetuniformversion.d.ts",
         "../../common-server/dist/cjs/uniformserver.d.ts",
@@ -6246,15 +6226,6 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../common-server/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts"
-      ],
-      "../../common-server/dist/cjs/pathandrevision.d.ts": [
-        "../../../node_modules/@types/graceful-fs/index.d.ts",
-        "../../../node_modules/@types/node/fs.d.ts",
-        "../../../node_modules/@types/node/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../../node_modules/@types/node/ts3.2/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts",
-        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../common-server/dist/cjs/serverlogger.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -6814,7 +6785,6 @@
       "../../common-server/dist/cjs/exportpathmap.d.ts",
       "../../common-server/dist/cjs/index.d.ts",
       "../../common-server/dist/cjs/parseuniformserverconfig.d.ts",
-      "../../common-server/dist/cjs/pathandrevision.d.ts",
       "../../common-server/dist/cjs/serverlogger.d.ts",
       "../../common-server/dist/cjs/trygetuniformversion.d.ts",
       "../../common-server/dist/cjs/uniformserver.d.ts",

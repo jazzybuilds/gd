@@ -141,11 +141,6 @@
         "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
         "affectsGlobalScope": true
       },
-      "../src/pathandrevision.ts": {
-        "version": "6ccd668278ecff8ce843ffc7004254747e85f58c73a72eb5aed7c8727e3210b1",
-        "signature": "19790df7055cbd214e3590e3860cc5764e9b874339d76233b791785c61cec271",
-        "affectsGlobalScope": false
-      },
       "../../common/dist/cjs/events/subscriptions.d.ts": {
         "version": "af02651bbfc1908e22cd2b56ea65b0e9da61be0b0a36e0fa24c926c88bbc61fe",
         "signature": "af02651bbfc1908e22cd2b56ea65b0e9da61be0b0a36e0fa24c926c88bbc61fe",
@@ -167,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/uniformconfig.d.ts": {
-        "version": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
-        "signature": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
+        "version": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
+        "signature": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/index.d.ts": {
@@ -292,8 +287,8 @@
         "affectsGlobalScope": false
       },
       "../src/buildarrayofpaths.ts": {
-        "version": "22cd5e44dda8368616710a0b02decc41b33645d02f4bca02e880be4142fa5a84",
-        "signature": "98b8b13990403834b74ffc06564782e3d996e018840eba789a936d729335b01f",
+        "version": "f9c0a63d08efa893923881555551da2e1ab39445c85c67fa5aa9eafc35dc3df5",
+        "signature": "83866f032cc8909fb0eb780e67946f4ca4337c83a8792fed8aaf006c3b1e0dce",
         "affectsGlobalScope": false
       },
       "../../../node_modules/p-limit/index.d.ts": {
@@ -317,8 +312,8 @@
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/utils/getpageprops.d.ts": {
-        "version": "6dd9e2a5bac669498b3b4a8cbff4688f907e87f1c2493b62af593076541c28d2",
-        "signature": "6dd9e2a5bac669498b3b4a8cbff4688f907e87f1c2493b62af593076541c28d2",
+        "version": "911f1e91050b79815eb995c764541bf4e5b9fcf07af73e3d4d2aa3f1939701a9",
+        "signature": "911f1e91050b79815eb995c764541bf4e5b9fcf07af73e3d4d2aa3f1939701a9",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/utils/getpageurl.d.ts": {
@@ -377,8 +372,8 @@
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/renderingnode.d.ts": {
-        "version": "a443bc7b34711efd1784eead24f6d20d0308df104f5ba3da1c392d9839d87139",
-        "signature": "a443bc7b34711efd1784eead24f6d20d0308df104f5ba3da1c392d9839d87139",
+        "version": "03afabcfef8a04b07af7f9396219fb98fa3c2e8e130fc5552f74c1980efbd8de",
+        "signature": "03afabcfef8a04b07af7f9396219fb98fa3c2e8e130fc5552f74c1980efbd8de",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/trackingnode.d.ts": {
@@ -386,19 +381,24 @@
         "signature": "4f9addbb479c854c7108a7eff7d09764148d801d3bfff32f2ff79b1443f59562",
         "affectsGlobalScope": false
       },
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts": {
+        "version": "1e4f4980b005edfc22495df81cd76c63699509ffe100b4cc5ebe8e615f44742f",
+        "signature": "1e4f4980b005edfc22495df81cd76c63699509ffe100b4cc5ebe8e615f44742f",
+        "affectsGlobalScope": false
+      },
       "../../common-client/dist/cjs/model/pageitem.d.ts": {
-        "version": "983f36bbc73587f5dc17b0a787ac1db267fde0eccf73d8de9caaadc948561874",
-        "signature": "983f36bbc73587f5dc17b0a787ac1db267fde0eccf73d8de9caaadc948561874",
+        "version": "1cfe0c5d580aac17f875a2b37db38e14f995035eb5a40cceca5a2ec0de5ae8e4",
+        "signature": "1cfe0c5d580aac17f875a2b37db38e14f995035eb5a40cceca5a2ec0de5ae8e4",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/renderingcontext.d.ts": {
-        "version": "4a2059fe63f28c0fbaa8150f76237b8905aaa4c2da844a099e7cb7b357291ea6",
-        "signature": "4a2059fe63f28c0fbaa8150f76237b8905aaa4c2da844a099e7cb7b357291ea6",
+        "version": "08b9c6635f7d11a6493b1fc6b0ebf3a4f13adbca821a75c9352be5ed120a7831",
+        "signature": "08b9c6635f7d11a6493b1fc6b0ebf3a4f13adbca821a75c9352be5ed120a7831",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/index.d.ts": {
-        "version": "7748ab83222bb909cb57e61c01ced145aaae70b10734e95fab7e219db8c5f841",
-        "signature": "7748ab83222bb909cb57e61c01ced145aaae70b10734e95fab7e219db8c5f841",
+        "version": "c9c19ec6dfdd9db93a90c77545b14e7b4e1721ac68a784afffc379d90c59549a",
+        "signature": "c9c19ec6dfdd9db93a90c77545b14e7b4e1721ac68a784afffc379d90c59549a",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/index.d.ts": {
@@ -407,8 +407,8 @@
         "affectsGlobalScope": false
       },
       "../src/dumpjsondata.ts": {
-        "version": "501541eb0468a4cad8507bed71cfe0336d47b795ff88d7f93ccb9df7290d304e",
-        "signature": "d45b59c739a04ddb33cdccd262cbd1677125094d27ea68a880ad822b3021a325",
+        "version": "9ada0fd28576a1f30e42512ec4ba535f4fe6fb619d3fb4eadf0a1cfeb64eca3a",
+        "signature": "e305f218881a18d808d428833ebae3e612ca106ca0c70c830f8acba217247dfa",
         "affectsGlobalScope": false
       },
       "../src/downloadsitemap.ts": {
@@ -797,8 +797,8 @@
         "affectsGlobalScope": false
       },
       "../src/index.ts": {
-        "version": "9b44a089ea0e505ff3fac7d8f65d85340f4652a1bfaae5f7f87b2bed39f2c73f",
-        "signature": "1d4c0bab37148d72ea312f5da75397b0eb2873fc366e4f0af7584e225dd946e1",
+        "version": "799bc342adfd41d13c062a037743bb007dc09a53e2007b7b44d101bdf53042ff",
+        "signature": "a77c5cfab5f5eba1483a082110410a2cd39a1fee457724a7fcec3ec5f5a398ec",
         "affectsGlobalScope": false
       },
       "../src/uniformserverconfig.ts": {
@@ -3355,6 +3355,7 @@
         "../../common-client/dist/cjs/model/dataitem.d.ts",
         "../../common-client/dist/cjs/model/datasourceitem.d.ts",
         "../../common-client/dist/cjs/model/pageitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingcontext.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
@@ -3368,8 +3369,18 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../common-client/dist/cjs/model/dataitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
+      ],
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../common-client/dist/cjs/model/renderingcontext.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -3549,8 +3560,7 @@
         "../../../node_modules/@types/node/ts3.2/process.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
-        "../../common/dist/cjs/index.d.ts",
-        "../src/index.ts"
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/countfiles.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -3595,7 +3605,6 @@
         "../../../node_modules/p-limit/index.d.ts",
         "../../common-client/dist/cjs/index.d.ts",
         "../../common/dist/cjs/index.d.ts",
-        "../src/index.ts",
         "../src/uniformserverconfig.ts"
       ],
       "../src/exportpathmap.ts": [
@@ -3623,7 +3632,6 @@
         "../src/dumpjsondata.ts",
         "../src/exportpathmap.ts",
         "../src/parseuniformserverconfig.ts",
-        "../src/pathandrevision.ts",
         "../src/serverlogger.ts",
         "../src/trygetuniformversion.ts",
         "../src/uniformserver.ts",
@@ -3663,15 +3671,6 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../common/dist/cjs/index.d.ts",
         "../src/index.ts"
-      ],
-      "../src/pathandrevision.ts": [
-        "../../../node_modules/@types/graceful-fs/index.d.ts",
-        "../../../node_modules/@types/node/fs.d.ts",
-        "../../../node_modules/@types/node/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../../../node_modules/@types/node/ts3.2/process.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts",
-        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../src/serverlogger.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -6048,6 +6047,7 @@
         "../../common-client/dist/cjs/model/dataitem.d.ts",
         "../../common-client/dist/cjs/model/datasourceitem.d.ts",
         "../../common-client/dist/cjs/model/pageitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingcontext.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
@@ -6061,8 +6061,18 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../common-client/dist/cjs/model/dataitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
+      ],
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../common-client/dist/cjs/model/renderingcontext.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -6235,8 +6245,7 @@
         "../../common-client/dist/cjs/utils/index.d.ts"
       ],
       "../src/buildarrayofpaths.ts": [
-        "../../common/dist/cjs/index.d.ts",
-        "../src/index.ts"
+        "../../common/dist/cjs/index.d.ts"
       ],
       "../src/createserver.ts": [
         "../../../node_modules/@types/express/index.d.ts",
@@ -6248,7 +6257,6 @@
       ],
       "../src/dumpjsondata.ts": [
         "../../common/dist/cjs/index.d.ts",
-        "../src/index.ts",
         "../src/uniformserverconfig.ts"
       ],
       "../src/exportpathmap.ts": [
@@ -6261,7 +6269,6 @@
         "../src/dumpjsondata.ts",
         "../src/exportpathmap.ts",
         "../src/parseuniformserverconfig.ts",
-        "../src/pathandrevision.ts",
         "../src/serverlogger.ts",
         "../src/trygetuniformversion.ts",
         "../src/uniformserver.ts",
@@ -6760,6 +6767,7 @@
       "../../common-client/dist/cjs/model/datasourceitem.d.ts",
       "../../common-client/dist/cjs/model/index.d.ts",
       "../../common-client/dist/cjs/model/pageitem.d.ts",
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
       "../../common-client/dist/cjs/model/renderingcontext.d.ts",
       "../../common-client/dist/cjs/model/renderingnode.d.ts",
       "../../common-client/dist/cjs/model/trackingnode.d.ts",
@@ -6786,7 +6794,6 @@
       "../src/middleware/mediamiddleware.ts",
       "../src/middleware/previewmiddleware.ts",
       "../src/parseuniformserverconfig.ts",
-      "../src/pathandrevision.ts",
       "../src/serverlogger.ts",
       "../src/trygetuniformversion.ts",
       "../src/uniformserver.ts",
