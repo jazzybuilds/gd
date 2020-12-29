@@ -9,6 +9,8 @@ import { initMobileNav } from "../../scripts/mobile-navigation"
 const MVCLayout = (props) => {
 
   const { placeholderComponent } = props;
+  const pageFields = props?.renderingContext.page?.fields;
+  const metaTitle = pageFields?.title;
 
   React.useEffect(() => {
     equalHeightPods('.js-equalHeight');
@@ -29,6 +31,7 @@ const MVCLayout = (props) => {
   return (
     <>
       <Head>
+        {metaTitle && <title dangerouslySetInnerHTML={{ __html: metaTitle}} />}
         <UniformPlaceholder
           placeholderKey="/head"
           placeholderComponent={placeholderComponent}

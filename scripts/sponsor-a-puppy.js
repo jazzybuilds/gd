@@ -1,13 +1,18 @@
 const jQuery = require("jquery");
+// contains list of selected puppies
+var selectedPuppies = [];
+var selectedPuppiesNames = [];
+
 
 if (process.browser) {
-    // contains list of selected puppies
-    var selectedPuppies = [];
-    var selectedPuppiesNames = [];
-    
     // Site url
     var siteUrl = location.protocol + '//' + location.hostname;
-    
+
+    jQuery("body").on("change", "input[name='amount_pod']", function (e) {
+        // e.preventDefault()
+        sponsorAPuppyMonthlyDonation()
+    })
+
     jQuery("body").on("change", ".js-sponsorAPuppyPuppies", function (e) {
         var _this = jQuery(this);
         var thisVal = _this.val();

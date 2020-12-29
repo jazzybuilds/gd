@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../styles/component-accordion.scss";
+import { Image } from '../Image';
 import { Video } from '../Video';
 
 
@@ -21,6 +22,17 @@ const Wrapper: React.FC<{ index: number, heading: string }> = (props) => {
     </li>
   )
 }
+
+const Content: React.FC<{ content: string }> = (props) => {
+  return (
+    <div className="component content small-12 columns">
+      <div className="component-content">
+        <div className="field-content" dangerouslySetInnerHTML={{ __html: props.content }} />
+      </div>
+    </div>
+  )
+}
+
 export const Accordion = (props) => {
   const { renderingContext } = props
   const { item: { children } } = renderingContext
@@ -35,18 +47,36 @@ export const Accordion = (props) => {
         <div>
           <ul className="items">
             {children.map((listItem, index) => {
-              if (listItem.children && listItem.children.length > 0 && listItem.children[0].children && listItem.children[0].children[0].fields.youtubemovie) {
-                return (
-                  <Wrapper index={index} heading={listItem.fields.heading}>
-                    <Video renderingContext={{
-                      item: {
-                        fields: {
-                          youtubemovie: listItem.children[0].children[0].fields.youtubemovie
+              if (listItem.children && listItem.children.length > 0 && listItem.children[0].children) {
+
+                if (listItem.children[0].children[0].fields.image) {
+                  return (
+                    <Wrapper index={index} heading={listItem.fields.heading}>
+                      <Image
+                        renderingContext={{
+                          item: {
+                            fields: listItem.children[0].children[0].fields
+                          }
+                        }}
+                      />
+                      <Content content={listItem.fields.content} />
+                    </Wrapper>
+                  )
+                }
+
+                if (listItem.children[0].children[0].fields.youtubemovie) {
+                  return (
+                    <Wrapper index={index} heading={listItem.fields.heading}>
+                      <Video renderingContext={{
+                        item: {
+                          fields: {
+                            youtubemovie: listItem.children[0].children[0].fields.youtubemovie
+                          }
                         }
-                      }
-                    }} />
-                  </Wrapper>
-                )
+                      }} />
+                    </Wrapper>
+                  )
+                }
               }
 
               return (
