@@ -38,8 +38,10 @@ export const CardBanner = (props) => {
           }
           <div className="c-imageSpotlight__content">
             <h3 className="c-imageSpotlight__title field-title" dangerouslySetInnerHTML={{ __html: fields.title }} />
-            <div dangerouslySetInnerHTML={{ __html: fields.summary }} />
-            <p />
+            {fields.summary.includes("<p>")
+              ? <React.Fragment><div dangerouslySetInnerHTML={{ __html: fields.summary }} /> <p /></React.Fragment>
+              : <p dangerouslySetInnerHTML={{ __html: fields.summary }} />
+            }
             {fields.link &&
               <p className="c-imageSpotlight__link field-link">
                 <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
