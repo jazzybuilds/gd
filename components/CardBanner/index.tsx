@@ -38,7 +38,7 @@ export const CardBanner = (props) => {
           }
           <div className="c-imageSpotlight__content">
             <h3 className="c-imageSpotlight__title field-title" dangerouslySetInnerHTML={{ __html: fields.title }} />
-            {fields.summary.includes("<p>")
+            {fields.summary && fields.summary.includes("<p>")
               ? <React.Fragment><div dangerouslySetInnerHTML={{ __html: fields.summary }} /> <p /></React.Fragment>
               : <p dangerouslySetInnerHTML={{ __html: fields.summary }} />
             }
