@@ -192,8 +192,8 @@
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/uniformconfig.d.ts": {
-        "version": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
-        "signature": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
+        "version": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
+        "signature": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/index.d.ts": {
@@ -332,8 +332,8 @@
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/utils/getpageprops.d.ts": {
-        "version": "6dd9e2a5bac669498b3b4a8cbff4688f907e87f1c2493b62af593076541c28d2",
-        "signature": "6dd9e2a5bac669498b3b4a8cbff4688f907e87f1c2493b62af593076541c28d2",
+        "version": "911f1e91050b79815eb995c764541bf4e5b9fcf07af73e3d4d2aa3f1939701a9",
+        "signature": "911f1e91050b79815eb995c764541bf4e5b9fcf07af73e3d4d2aa3f1939701a9",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/utils/getpageurl.d.ts": {
@@ -392,8 +392,8 @@
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/renderingnode.d.ts": {
-        "version": "a443bc7b34711efd1784eead24f6d20d0308df104f5ba3da1c392d9839d87139",
-        "signature": "a443bc7b34711efd1784eead24f6d20d0308df104f5ba3da1c392d9839d87139",
+        "version": "03afabcfef8a04b07af7f9396219fb98fa3c2e8e130fc5552f74c1980efbd8de",
+        "signature": "03afabcfef8a04b07af7f9396219fb98fa3c2e8e130fc5552f74c1980efbd8de",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/trackingnode.d.ts": {
@@ -401,19 +401,24 @@
         "signature": "4f9addbb479c854c7108a7eff7d09764148d801d3bfff32f2ff79b1443f59562",
         "affectsGlobalScope": false
       },
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts": {
+        "version": "1e4f4980b005edfc22495df81cd76c63699509ffe100b4cc5ebe8e615f44742f",
+        "signature": "1e4f4980b005edfc22495df81cd76c63699509ffe100b4cc5ebe8e615f44742f",
+        "affectsGlobalScope": false
+      },
       "../../common-client/dist/cjs/model/pageitem.d.ts": {
-        "version": "983f36bbc73587f5dc17b0a787ac1db267fde0eccf73d8de9caaadc948561874",
-        "signature": "983f36bbc73587f5dc17b0a787ac1db267fde0eccf73d8de9caaadc948561874",
+        "version": "1cfe0c5d580aac17f875a2b37db38e14f995035eb5a40cceca5a2ec0de5ae8e4",
+        "signature": "1cfe0c5d580aac17f875a2b37db38e14f995035eb5a40cceca5a2ec0de5ae8e4",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/renderingcontext.d.ts": {
-        "version": "4a2059fe63f28c0fbaa8150f76237b8905aaa4c2da844a099e7cb7b357291ea6",
-        "signature": "4a2059fe63f28c0fbaa8150f76237b8905aaa4c2da844a099e7cb7b357291ea6",
+        "version": "08b9c6635f7d11a6493b1fc6b0ebf3a4f13adbca821a75c9352be5ed120a7831",
+        "signature": "08b9c6635f7d11a6493b1fc6b0ebf3a4f13adbca821a75c9352be5ed120a7831",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/model/index.d.ts": {
-        "version": "7748ab83222bb909cb57e61c01ced145aaae70b10734e95fab7e219db8c5f841",
-        "signature": "7748ab83222bb909cb57e61c01ced145aaae70b10734e95fab7e219db8c5f841",
+        "version": "c9c19ec6dfdd9db93a90c77545b14e7b4e1721ac68a784afffc379d90c59549a",
+        "signature": "c9c19ec6dfdd9db93a90c77545b14e7b4e1721ac68a784afffc379d90c59549a",
         "affectsGlobalScope": false
       },
       "../../common-client/dist/cjs/index.d.ts": {
@@ -507,7 +512,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/html/buildscripttag.ts": {
-        "version": "c65448b79f23c291e99c0f8ad2a757cca5b76448057046a396ee6dd727419a59",
+        "version": "00555e7eb78cf1c15e4c13a6939cbb1342d8831091fd327f66ab14dbb6f268a9",
         "signature": "08aa0df045baa94c4f9767870480e8f6b2172df2d33f4893a1f7ad764ddebd98",
         "affectsGlobalScope": false
       },
@@ -527,7 +532,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/createrendering.tsx": {
-        "version": "19a8725ccc1899e6f85a3b1e688b681631f1a457fbb675960f126bb3bb98dce4",
+        "version": "f85cba86198b4a0a4235035a3d10aa6c318a4df7d6c00787566107e024787656",
         "signature": "d703e4b12d11a4be782b5d362c445b31c978c4946e5d75d4715c8336c236ae78",
         "affectsGlobalScope": false
       },
@@ -3425,6 +3430,7 @@
         "../../common-client/dist/cjs/model/dataitem.d.ts",
         "../../common-client/dist/cjs/model/datasourceitem.d.ts",
         "../../common-client/dist/cjs/model/pageitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingcontext.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
@@ -3438,8 +3444,18 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../common-client/dist/cjs/model/dataitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
+      ],
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../common-client/dist/cjs/model/renderingcontext.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -6216,6 +6232,7 @@
         "../../common-client/dist/cjs/model/dataitem.d.ts",
         "../../common-client/dist/cjs/model/datasourceitem.d.ts",
         "../../common-client/dist/cjs/model/pageitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingcontext.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
@@ -6229,8 +6246,18 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../common-client/dist/cjs/model/dataitem.d.ts",
+        "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
         "../../common-client/dist/cjs/model/renderingnode.d.ts",
         "../../common-client/dist/cjs/model/trackingnode.d.ts"
+      ],
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../../common-client/dist/cjs/model/renderingcontext.d.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -6956,6 +6983,7 @@
       "../../common-client/dist/cjs/model/datasourceitem.d.ts",
       "../../common-client/dist/cjs/model/index.d.ts",
       "../../common-client/dist/cjs/model/pageitem.d.ts",
+      "../../common-client/dist/cjs/model/pagemvcnode.d.ts",
       "../../common-client/dist/cjs/model/renderingcontext.d.ts",
       "../../common-client/dist/cjs/model/renderingnode.d.ts",
       "../../common-client/dist/cjs/model/trackingnode.d.ts",
