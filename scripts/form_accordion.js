@@ -427,7 +427,7 @@ if (process.browser) {
 			el.setAttribute('aria-hidden', state);
 			// turn string to bool
 			var stateBool = (state === 'true');
-			stateBool ? el.previousSibling.classList.remove('is-open') : el.previousSibling.classList.add('is-open');
+			stateBool ? el.previousElementSibling.classList.remove('is-open') : el.previousElementSibling.classList.add('is-open');
 		};
 	
 		var ariaExpanded = function ( el, state ) {
