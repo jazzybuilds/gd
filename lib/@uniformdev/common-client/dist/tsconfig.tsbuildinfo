@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/uniformconfig.d.ts": {
-        "version": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
-        "signature": "e4979525ba33e89e9384c24a7cafd3b76cff519d4999a757fb72e1e483a78b28",
+        "version": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
+        "signature": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/index.d.ts": {
@@ -287,7 +287,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/buildlayout.ts": {
-        "version": "2ddafe73e38d5cd4570f15289712fc0d156eee6cc77c8a6992047263641b1c6a",
+        "version": "8eebb2d3922ac73252948f065701617be6d1cf7535d96fd9a6bd94df37cd40d8",
         "signature": "d086f0c04a7a8d320f37396ed93fda17e782edfa97f1404c9455831e57875f4b",
         "affectsGlobalScope": false
       },
@@ -307,8 +307,8 @@
         "affectsGlobalScope": false
       },
       "../src/model/renderingnode.ts": {
-        "version": "7ded53b25761293eb10304428f5aa4f858bb8b7f5baa79e1824ec42b14113c9f",
-        "signature": "a443bc7b34711efd1784eead24f6d20d0308df104f5ba3da1c392d9839d87139",
+        "version": "8006dc58fd5955b8b6f72bf3ee7b67ab638d8a8dbec738356f7322f084d48802",
+        "signature": "03afabcfef8a04b07af7f9396219fb98fa3c2e8e130fc5552f74c1980efbd8de",
         "affectsGlobalScope": false
       },
       "../src/model/trackingnode.ts": {
@@ -316,19 +316,24 @@
         "signature": "4f9addbb479c854c7108a7eff7d09764148d801d3bfff32f2ff79b1443f59562",
         "affectsGlobalScope": false
       },
+      "../src/model/pagemvcnode.ts": {
+        "version": "e940c1b6c90ef8b43c8196fc0d05e2ba41be175a640c8cdf9b6ed7422f829e99",
+        "signature": "1e4f4980b005edfc22495df81cd76c63699509ffe100b4cc5ebe8e615f44742f",
+        "affectsGlobalScope": false
+      },
       "../src/model/pageitem.ts": {
-        "version": "218c003b6b5a5b214fc98efdb9d86d57b298f8b518b7ef16ba17c4c5dc62d426",
-        "signature": "983f36bbc73587f5dc17b0a787ac1db267fde0eccf73d8de9caaadc948561874",
+        "version": "219715de8573ba4a73e22d6def70b0472d8192043931ef807e940e7a7b7bdb2b",
+        "signature": "1cfe0c5d580aac17f875a2b37db38e14f995035eb5a40cceca5a2ec0de5ae8e4",
         "affectsGlobalScope": false
       },
       "../src/model/renderingcontext.ts": {
-        "version": "fe47e89f6776590abdf8886eddb41dc617cda22337d425550639dbe60c3c2d7a",
-        "signature": "4a2059fe63f28c0fbaa8150f76237b8905aaa4c2da844a099e7cb7b357291ea6",
+        "version": "97fed754ba4d4ceb949bf3d4eeb537826d271a805668cb81d8c44cbd54143a0c",
+        "signature": "08b9c6635f7d11a6493b1fc6b0ebf3a4f13adbca821a75c9352be5ed120a7831",
         "affectsGlobalScope": false
       },
       "../src/model/index.ts": {
-        "version": "2daf403860cbbe9c932596ecd0294f5714b7f9fb0c9eb9e8e9740524243b871b",
-        "signature": "7748ab83222bb909cb57e61c01ced145aaae70b10734e95fab7e219db8c5f841",
+        "version": "2c8a1b7edfbb8ec1464799708c5310d0c2ed1667c6ce3cab31293dc5ab2a94c0",
+        "signature": "c9c19ec6dfdd9db93a90c77545b14e7b4e1721ac68a784afffc379d90c59549a",
         "affectsGlobalScope": false
       },
       "../src/utils/popvisiblerenderingsfromplaceholdersmap.ts": {
@@ -347,8 +352,8 @@
         "affectsGlobalScope": false
       },
       "../src/utils/getpageprops.ts": {
-        "version": "97dbd74a71d9deb502fee438bf42d7f551014c96ebfb43d4236b7c2bf08cb2d8",
-        "signature": "6dd9e2a5bac669498b3b4a8cbff4688f907e87f1c2493b62af593076541c28d2",
+        "version": "a04a6c30f956a0e7acbf1604815c7e4a7e8f06a76725ecac118d0c1c5b9c39cd",
+        "signature": "911f1e91050b79815eb995c764541bf4e5b9fcf07af73e3d4d2aa3f1939701a9",
         "affectsGlobalScope": false
       },
       "../src/utils/parseplaceholderkey.ts": {
@@ -3260,6 +3265,7 @@
         "../src/model/dataitem.ts",
         "../src/model/datasourceitem.ts",
         "../src/model/pageitem.ts",
+        "../src/model/pagemvcnode.ts",
         "../src/model/renderingcontext.ts",
         "../src/model/renderingnode.ts",
         "../src/model/trackingnode.ts"
@@ -3273,8 +3279,18 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../src/model/dataitem.ts",
+        "../src/model/pagemvcnode.ts",
         "../src/model/renderingnode.ts",
         "../src/model/trackingnode.ts"
+      ],
+      "../src/model/pagemvcnode.ts": [
+        "../../../node_modules/@types/graceful-fs/index.d.ts",
+        "../../../node_modules/@types/node/fs.d.ts",
+        "../../../node_modules/@types/node/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../../../node_modules/@types/node/ts3.2/process.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts",
+        "../../../node_modules/@types/node/util.d.ts"
       ],
       "../src/model/renderingcontext.ts": [
         "../../../node_modules/@types/graceful-fs/index.d.ts",
@@ -5735,12 +5751,14 @@
         "../src/model/dataitem.ts",
         "../src/model/datasourceitem.ts",
         "../src/model/pageitem.ts",
+        "../src/model/pagemvcnode.ts",
         "../src/model/renderingcontext.ts",
         "../src/model/renderingnode.ts",
         "../src/model/trackingnode.ts"
       ],
       "../src/model/pageitem.ts": [
         "../src/model/dataitem.ts",
+        "../src/model/pagemvcnode.ts",
         "../src/model/renderingnode.ts",
         "../src/model/trackingnode.ts"
       ],
@@ -6260,6 +6278,7 @@
       "../src/model/datasourceitem.ts",
       "../src/model/index.ts",
       "../src/model/pageitem.ts",
+      "../src/model/pagemvcnode.ts",
       "../src/model/renderingcontext.ts",
       "../src/model/renderingnode.ts",
       "../src/model/trackingnode.ts",
