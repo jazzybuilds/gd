@@ -54,12 +54,23 @@ function parseLegacyRedirects(path) {
   return `# Legacy Redirects\r\n${paths.join('\r\n').toLowerCase()}`
 }
 
-function parseManagedRedirectData(data) {
-  const paths = data.redirects.map(item => {
+function processNode(node) 
+{
+	let combinedRedirects = [];
+	for (let [, value] of Object.entries(node.children)) {
+    combinedRedirects = combinedRedirects.concat(processNode(value));
+	}
+  var redirects = node.redirects.map(item => {
     const fromUrl = cleanFromUrl(item.source);
     const toUrl = cleanToUrl(item.target);
     return `${fromUrl} ${toUrl} 301`;
-  })
+  });
+
+  return combinedRedirects.concat(redirects);
+}
+function parseManagedRedirectData(data) {
+  const paths = processNode(data);
+  
   return `# Managed Redirects\r\n${paths.join('\r\n').toLowerCase()}`;
 }
 
