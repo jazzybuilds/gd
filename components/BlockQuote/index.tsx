@@ -1,15 +1,20 @@
 import React from 'react'
 import "../../styles/component-blockquote.scss";
 
+const Variants = {
+  NoAuthor: "{21C4DBE4-994A-4E7B-B0DC-128E2A9A0182}",
+}
+
 export const BlockQuote = (props) => {
   const { renderingContext } = props
+
   if (!renderingContext.item || !renderingContext.item.fields) {
+    console.error("No item supplied for BlockQuote")
     return null
   }
-  const {  item: { id, fields } } = renderingContext
 
-  const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
-  const noAuthor = datsource?.settings.Parameters.includes("21C4DBE4-994A-4E7B-B0DC-128E2A9A0182") 
+  const { item: { fields }, parameters } = renderingContext
+  const noAuthor = parameters?.FieldNames === Variants.NoAuthor;
 
   return (
     <div className="component c-quote small-12 columns">

@@ -2,13 +2,13 @@ import React from 'react'
 import { getBlueBackground } from '../../utils/styleClass'
 import { Root, Wrapper, Content, Text, ImageWrapper, Image, Link } from "./Card.styles"
 
-const ManualNavigationPodVariants = {
+const Variants = {
   Default: "{D288AE53-0DFF-418F-9773-52A51A40B582}",
   NoImage: "{83D702CA-4797-4B98-9C9A-E861370CE490}",
   Large: "{0199A687-14BF-4599-A99A-6A97576E18D8}"
 }
 
-const ManualNavigationPodStyles = {
+const Styles = {
   MakeEqualHeight: "{3182392E-93CD-425C-8778-611B677FA58A}",
 }
 
@@ -22,9 +22,9 @@ export const Card = (props: any) => {
 
   const { item: { id, name, fields }, parameters } = renderingContext
 
-  const isLarge = parameters?.FieldNames === ManualNavigationPodVariants.Large;
-  const noImage = parameters?.FieldNames === ManualNavigationPodVariants.NoImage;
-  const jsClass = parameters?.Styles === ManualNavigationPodStyles.MakeEqualHeight;
+  const isLarge = parameters?.FieldNames === Variants.Large;
+  const noImage = parameters?.FieldNames === Variants.NoImage;
+  const jsClass = parameters?.Styles === Styles.MakeEqualHeight;
   const backgroundStyle = getBlueBackground(parameters?.Styles)
 
   let formattedUrl = fields.link?.url.split("/") ?? []
