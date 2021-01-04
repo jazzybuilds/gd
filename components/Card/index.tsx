@@ -1,4 +1,5 @@
 import React from 'react'
+import { getBlueBackground } from '../../utils/styleClass'
 import { Root, Wrapper, Content, Text, ImageWrapper, Image, Link } from "./Card.styles"
 
 const ManualNavigationPodVariants = {
@@ -9,8 +10,6 @@ const ManualNavigationPodVariants = {
 
 const ManualNavigationPodStyles = {
   MakeEqualHeight: "{3182392E-93CD-425C-8778-611B677FA58A}",
-  LightBlue: "{76720053-27F8-4CCF-8652-69A6A91FA586}",
-  DarkBlue: "{0D887421-9606-4A99-8B97-D20C79EAE2C0}",
 }
 
 export const Card = (props: any) => {
@@ -26,18 +25,7 @@ export const Card = (props: any) => {
   const isLarge = parameters?.FieldNames === ManualNavigationPodVariants.Large;
   const noImage = parameters?.FieldNames === ManualNavigationPodVariants.NoImage;
   const jsClass = parameters?.Styles === ManualNavigationPodStyles.MakeEqualHeight;
-  const lightBlueBg = parameters?.Styles === ManualNavigationPodStyles.LightBlue;
-  const darkBlueBg = parameters?.Styles === ManualNavigationPodStyles.DarkBlue;
-
-  let bgClass = "row-bg "
-
-  if (lightBlueBg) {
-    bgClass += "row-bg--blue"
-  }
-
-  if (darkBlueBg) {
-    bgClass += "row-bg--darkBlue"
-  }
+  const backgroundStyle = getBlueBackground(parameters?.Styles)
 
   let formattedUrl = fields.link?.url.split("/") ?? []
   if (formattedUrl.length > 0) {
@@ -47,7 +35,7 @@ export const Card = (props: any) => {
   }
 
   return (
-    <Root className={`component c-navigationPod c-navigationPod--manual small-12 columns ${lightBlueBg || darkBlueBg ? bgClass : ""} ${jsClass ? "js-equalHeight" : ""}`}>
+    <Root className={`component c-navigationPod c-navigationPod--manual small-12 columns ${backgroundStyle} ${jsClass ? "js-equalHeight" : ""}`}>
       <div className="component-content">
         <Wrapper className="c-navigationPod__wrapper">
           {!noImage && fields['pod image'] &&
