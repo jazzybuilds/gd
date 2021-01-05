@@ -1,23 +1,34 @@
 import React from 'react'
 
+const Variants = {
+  Plain: "{1231EFBC-DE7A-489F-9410-C25C2B2DEBBB}",
+  Large: "{69244147-9040-432C-A6AC-16BAE4863271}",
+  Medium: "{859E750E-BF54-4DA2-8DD4-9786565E3640}",
+  Small: "{19AE9B21-88B6-4D17-82B1-CA605DB70EA7}",
+  Link: "{0D07C7F0-4367-4647-BFAF-8AAD9A8B1E27}",
+}
+
 export const Button = (props) => {
   const { renderingContext } = props
+
   if (!renderingContext.item || !renderingContext.item.fields || !renderingContext.item.fields.link) {
+    console.error("No item supplied for Button")
     return null
   }
-  const {  item: { id, fields: { link } } } = renderingContext
-  const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
-  const isLarge = datsource?.settings.Parameters.includes('69244147-9040-432C-A6AC-16BAE4863271')
-  const isMedium = datsource?.settings.Parameters.includes('859E750E-BF54-4DA2-8DD4-9786565E3640')
-  const isSmall = datsource?.settings.Parameters.includes('19AE9B21-88B6-4D17-82B1-CA605DB70EA7')
-  const isLink = datsource?.settings.Parameters.includes('0D07C7F0-4367-4647-BFAF-8AAD9A8B1E27')
 
-  let buttonClass = "cta-plain"
+  const { item: { id, fields: { link } }, parameters } = renderingContext
+
+  const isPlain = parameters?.FieldNames === Variants.Plain;
+  const isLarge = parameters?.FieldNames === Variants.Large;
+  const isMedium = parameters?.FieldNames === Variants.Medium;
+  const isSmall = parameters?.FieldNames === Variants.Small;
+  const isLink = parameters?.FieldNames === Variants.Link;
+
+  let buttonClass = isPlain ? "cta-plain" : ""
 
   if (isLarge) {
     buttonClass = "cta-large"
   }
-
 
   if (isMedium) {
     buttonClass = "cta-medium"

@@ -1,32 +1,20 @@
 import React from 'react'
 import { Root, Wrapper } from './CardBanner.styles'
 import "../../styles/component-image-spotlight.scss";
+import { getBlueBackground } from '../../utils/styleClass';
 
 export const CardBanner = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields) {
+    console.error("No item supplied for CardBanner")
     return null
   }
 
-  const { item: { id, fields } } = renderingContext
-
-  const datsource = renderingContext.page.renderings.find(rendering => rendering.settings.DataSource.includes(id.toUpperCase()))
-
-  const lightBlueBg = datsource?.settings.Parameters.includes('76720053-27F8-4CCF-8652-69A6A91FA586')
-  const darkBlueBg = datsource?.settings.Parameters.includes('0D887421-9606-4A99-8B97-D20C79EAE2C0')
-
-  let bgClass = "row-bg "
-
-  if (lightBlueBg) {
-    bgClass += "row-bg--blue"
-  }
-
-  if (darkBlueBg) {
-    bgClass += "row-bg--darkBlue"
-  }
+  const { item: { id, fields }, parameters } = renderingContext
+  const backgroundStyle = getBlueBackground(parameters?.Styles)
 
   return (
-    <Root className={`component small-12 columns ${lightBlueBg || darkBlueBg ? bgClass : ""}`}>
+    <Root className={`component small-12 columns ${backgroundStyle}`}>
       <div className="component-content">
         <Wrapper className="c-imageSpotlight__wrapper">
           {fields.image &&
