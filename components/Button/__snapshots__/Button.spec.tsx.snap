@@ -11,7 +11,7 @@ exports[`Button renders correctly 1`] = `
       className="field-link"
     >
       <a
-        className="cta-plain"
+        className=""
         data-variantfieldname="Link"
         data-variantitemid="{test}"
         href="/"
