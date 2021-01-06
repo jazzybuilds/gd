@@ -67,6 +67,14 @@ package = "netlify-plugin-contextual-env"
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
 
+[[redirects]]
+	from = '/sitecore%20modules/Web/EXM/*'
+	to = '{SITECORE_ORIGIN}/sitecore%20modules/Web/EXM/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
+
 # Volunteering Apply For A Role page renders search results at run time, so we must proxy it
 [[redirects]]
 	from = '/how-you-can-help/volunteering-for-guide-dogs/apply-for-a-role'
