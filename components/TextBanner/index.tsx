@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../styles/component-promo-pod.scss";
+import { linkFormatter } from '../../utils/formatter';
 
 const Styles = {
   BlueBackground: "{F3715535-4F33-4543-8217-4B17B810ECD1}",
@@ -32,7 +33,7 @@ export const TextBanner = (props) => {
           <p className="c-promoPod__text field-text" dangerouslySetInnerHTML={{ __html: fields.text }} />
           <p className="c-promoPod__link field-link">
             {fields.link &&
-              <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
+              <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
             }
           </p>
         </div>

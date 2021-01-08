@@ -2,6 +2,7 @@ import React from 'react'
 import { Root, Wrapper } from './CardBanner.styles'
 import "../../styles/component-image-spotlight.scss";
 import { getBlueBackground } from '../../utils/styleClass';
+import { linkFormatter } from '../../utils/formatter';
 
 export const CardBanner = (props) => {
   const { renderingContext } = props
@@ -32,7 +33,7 @@ export const CardBanner = (props) => {
             }
             {fields.link &&
               <p className="c-imageSpotlight__link field-link">
-                <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
+                <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
               </p>
             }
           </div>

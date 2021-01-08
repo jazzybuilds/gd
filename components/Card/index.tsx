@@ -1,4 +1,5 @@
 import React from 'react'
+import { linkFormatter } from '../../utils/formatter'
 import { getBlueBackground } from '../../utils/styleClass'
 import { Root, Wrapper, Content, Text, ImageWrapper, Image, Link } from "./Card.styles"
 
@@ -46,7 +47,7 @@ export const Card = (props: any) => {
           <Content>
             {fields.link &&
               <div className=" field-link">
-                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text || formattedUrl}</Link>
+                <Link href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text || formattedUrl}</Link>
               </div>
             }
             <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
