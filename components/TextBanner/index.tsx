@@ -2,7 +2,7 @@ import React from 'react'
 import "../../styles/component-promo-pod.scss";
 import { linkFormatter } from '../../utils/formatter';
 
-const Styles = {
+const Variant = {
   BlueBackground: "{F3715535-4F33-4543-8217-4B17B810ECD1}",
   BlueNoCTABackground: "{462ECBEC-C6C3-410C-98D5-4632822D72BE}",
 }
@@ -17,8 +17,8 @@ export const TextBanner = (props) => {
 
   const {  item: { id, fields }, parameters } = renderingContext
 
-  const blueBg = parameters?.Styles === Styles.BlueBackground;
-  const blueNoCTA = parameters?.Styles === Styles.BlueNoCTABackground;
+  const blueBg = parameters?.FieldNames === Variant.BlueBackground;
+  const blueNoCTA = parameters?.FieldNames === Variant.BlueNoCTABackground;
 
   let className = 'c-promoPod--blue'
 
