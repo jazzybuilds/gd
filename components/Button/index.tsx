@@ -1,4 +1,5 @@
 import React from 'react'
+import { linkFormatter } from '../../utils/formatter'
 
 const Variants = {
   Plain: "{1231EFBC-DE7A-489F-9410-C25C2B2DEBBB}",
@@ -42,11 +43,13 @@ export const Button = (props) => {
     buttonClass = "cta-link"
   }
 
+  const url = linkFormatter(link)
+
   return (
     <div className="component c-ctaButton ctaWrapper columns c-header__cta">
       <div className="component-content">
         <div className="field-link">
-          <a href={link.url} data-variantitemid={`{${id}}`} className={buttonClass} role="button" data-variantfieldname="Link" target={link.target}>{link.text}</a>
+          <a href={url} data-variantitemid={`{${id}}`} className={buttonClass} role="button" data-variantfieldname="Link" target={link.target}>{link.text}</a>
         </div>
       </div>
     </div>

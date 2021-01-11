@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../styles/component-case-study.scss";
+import { linkFormatter } from '../../utils/formatter';
 import { getBlueBackground } from '../../utils/styleClass';
 
 export const CardArticle = (props) => {
@@ -28,7 +29,7 @@ export const CardArticle = (props) => {
             <p />
             {fields.link &&
               <p className="c-caseStudy__link field-link">
-                <a href={fields.link.url} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
+                <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
               </p>
             }
           </div>

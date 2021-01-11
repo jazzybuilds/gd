@@ -1,4 +1,5 @@
 import React from 'react'
+import { linkFormatter } from '../../utils/formatter'
 import { getBlueBackground } from '../../utils/styleClass'
 import { Root, Wrapper, Content, Text, ImageWrapper, Image, Link } from "./Card.styles"
 
@@ -46,13 +47,13 @@ export const Card = (props: any) => {
           <Content>
             {fields.link &&
               <div className=" field-link">
-                <Link href={fields.link.url} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text || formattedUrl}</Link>
+                <Link href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} data-variantfieldname="Link">{fields.link.text || formattedUrl}</Link>
               </div>
             }
             <Text className="field-pod-text" dangerouslySetInnerHTML={{ __html: fields['pod text'] }} />
             {isLarge && fields['cta link'] &&
               <div className="c-navigationPod__cta field-cta-link">
-                <a href={`${fields['cta link'].url}/${fields['cta link'].url.includes('sponsor-a-puppy-today') ? `?puppy_selected=${name.replace(" ", "_").toLowerCase()}${fields['cta link'].anchor}` : ""}`} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
+                <a href={linkFormatter(fields['cta link'])} data-variantitemid={`{${id.toUpperCase()}}`} data-variantfieldname="CTA link">{fields['cta link'].text}</a>
               </div>
             }
           </Content>
