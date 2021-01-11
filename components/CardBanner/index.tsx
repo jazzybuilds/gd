@@ -33,7 +33,7 @@ export const CardBanner = (props) => {
             }
             {fields.link &&
               <p className="c-imageSpotlight__link field-link">
-                <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link">{fields.link.text}</a>
+                <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
               </p>
             }
           </div>
