@@ -125,7 +125,10 @@ async function updateNetlifyToml() {
 
     let text = data.toString();
 
-    // Update redirects in netlify.toml with origin hosts.
+    // Update redirects in netlify.toml.template with origin hosts.
+    console.log("Using URL as: " + process.env.URL);
+    text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
+
     console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
 
