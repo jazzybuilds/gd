@@ -11,6 +11,11 @@ package = "netlify-plugin-contextual-env"
 	[plugins.inputs]
 	mode = 'suffix'
 
+[[headers]]
+	for = "/*"
+	[headers.values]
+	"Strict-Transport-Security: max-age=63072000; includeSubDomains; preload"
+
 [[redirects]]
 	from = '/-/media/*'
 	to = '{MEDIA_ORIGIN}/-/media/:splat'
