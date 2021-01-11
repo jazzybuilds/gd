@@ -51,6 +51,8 @@ function parseLegacyRedirects(path) {
     return `${fromUrl} ${cleanRules[fromUrl]} 301`;
   })
 
+  console.log(`Added ${paths.length} legacy redirect(s)`);
+
   return `# Legacy Redirects\r\n${paths.join('\r\n').toLowerCase()}`
 }
 
@@ -68,7 +70,7 @@ function processNode(node)
       return `${fromUrl} ${toUrl} 301`;
     });
 
-    console.log(`Added ${redirects.length} redirects from ${node.path}`);
+    console.log(`Added ${redirects.length} managed redirect(s) from Sitecore path: ${node.path}`);
 
     return combinedRedirects.concat(redirects);
   }
@@ -103,7 +105,7 @@ async function parseManagedRedirects() {
 }
 
 async function parseRedirects() {
-  console.log("Creating _redirects file");
+  console.log("Creating _redirects file from _redirects.template");
 
   const managedRedirects = await parseManagedRedirects();
   const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
@@ -115,39 +117,30 @@ async function parseRedirects() {
     let text = data.toString();
 
     // Update redirects template with origin hosts.
-    console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
-
-    console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
 
     fs.writeFile("./public/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
       if (err) {
         throw err;
       }
-      console.log("Created _redirects file!");
+      console.log("Created ./public/_redirects");
     });
   });
 }
 
-async function updateNetlifyToml() {
-  console.log("Updating netlify.toml");
+async function parseNetlifyToml() {
+  console.log("Creating netlify.toml from netlify.toml.template");
 
   fs.readFile('./netlify.toml.template', 'utf8', function (err, data) {
 
     let text = data.toString();
 
     // Update redirects in netlify.toml.template with origin hosts.
-    console.log("Using URL as: " + process.env.URL);
+    
     text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
-
-    console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
-
-    console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
-
-    console.log("Using SITECORE_PROXY_BASIC_AUTH as: " + process.env.SITECORE_PROXY_BASIC_AUTH);
     text = text.replace(/{SITECORE_PROXY_BASIC_AUTH}/g, process.env.SITECORE_PROXY_BASIC_AUTH);
 
     fs.writeFile('./netlify.toml', `${text}`, function (err) {
@@ -155,10 +148,14 @@ async function updateNetlifyToml() {
         throw err;
       }
 
-      console.log("Updated netlify.toml!");
+      console.log("Created ./netlify.toml");
     });
   });
 }
 
+console.log("Using URL as: " + process.env.URL);
+console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
+console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
+
 parseRedirects();
-updateNetlifyToml();
+parseNetlifyToml();
