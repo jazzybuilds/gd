@@ -59,14 +59,22 @@ function processNode(node)
 	let combinedRedirects = [];
 	for (let [, value] of Object.entries(node.children)) {
     combinedRedirects = combinedRedirects.concat(processNode(value));
-	}
-  var redirects = node.redirects.map(item => {
-    const fromUrl = cleanFromUrl(item.source);
-    const toUrl = cleanToUrl(item.target);
-    return `${fromUrl} ${toUrl} 301`;
-  });
+  }
+  if (node.redirects)
+  {
+    var redirects = node.redirects.map(item => {
+      const fromUrl = cleanFromUrl(item.source);
+      const toUrl = cleanToUrl(item.target);
+      return `${fromUrl} ${toUrl} 301`;
+    });
 
-  return combinedRedirects.concat(redirects);
+    console.log(`Added ${redirects.length} redirects from ${node.path}`);
+
+    return combinedRedirects.concat(redirects);
+  }
+
+  return combinedRedirects;
+  
 }
 function parseManagedRedirectData(data) {
   const paths = processNode(data);
@@ -75,7 +83,11 @@ function parseManagedRedirectData(data) {
 }
 
 async function parseManagedRedirects() {
-  return fetch(`${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`)
+  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
+
+  console.log(`Fetching map.json for redirects from: ${mapUrl}`)
+
+  return fetch(mapUrl)
     .then(res => res.json())
     .then(data => parseManagedRedirectData(data))
     .then(data => {
