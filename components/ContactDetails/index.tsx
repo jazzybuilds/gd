@@ -35,7 +35,7 @@ export const ContactDetails = (props) => {
 
           {fields.getintouchtelephonetext && (!emailOnly || all) &&
             <p className="c-getInTouch__telephone field-getintouchtelephonetext" data-rel="external">
-              <a title="fundraising getintouch" href={`tel:${fields.getintouchtelephonetext}`}>{fields.getintouchtelephonetext}</a>
+              <a title="fundraising getintouch" aria-label={`Telephone Number ${fields.getintouchtelephonetext}`} href={`tel:${fields.getintouchtelephonetext}`}>{fields.getintouchtelephonetext}</a>
             </p>
           }
         </div>
