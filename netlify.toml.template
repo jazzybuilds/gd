@@ -369,12 +369,3 @@ package = "netlify-plugin-contextual-env"
 	force = true
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
-
-# This is ultimate fallback proxy, and is the last redirect processed. This matches any remaining URL and redirects back to Sitecore.
-# This is NOT forced, so a matching file locally will take precedence.
-[[redirects]]
-	from = '/*'
-	to = '{SITECORE_ORIGIN}/:splat'
-	status = 200
-	[redirects.headers]
-    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"										
