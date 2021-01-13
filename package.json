@@ -28,7 +28,7 @@
     "download:sitemap-images": "node download-file.js SITECORE_ORIGIN images.xml SITECORE_PROXY_BASIC_AUTH",
     "download:sitemap-documents": "node download-file.js SITECORE_ORIGIN documents.xml SITECORE_PROXY_BASIC_AUTH",
     "update-static-files": "npm-run-all updatehost:* ",
-    "updatehost:robots": "if-env DOWNLOAD_ROBOTS=true && node update-host.js public/robots.txt",
+    "updatehost:robots": "if-env DOWNLOAD_ROBOTS=true && node update-host.js public/robots.txt || exit 0",
     "updatehost:sitemap-images": "node update-host.js public/images.xml",
     "updatehost:sitemap-documents": "node update-host.js public/documents.xml",
     "generate-sitemap": "node generate-sitemap.js",
