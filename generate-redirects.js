@@ -51,6 +51,8 @@ function parseLegacyRedirects(path) {
     return `${fromUrl} ${cleanRules[fromUrl]} 301`;
   })
 
+  console.log(`Added ${paths.length} legacy redirect(s)`);
+
   return `# Legacy Redirects\r\n${paths.join('\r\n').toLowerCase()}`
 }
 
@@ -59,14 +61,22 @@ function processNode(node)
 	let combinedRedirects = [];
 	for (let [, value] of Object.entries(node.children)) {
     combinedRedirects = combinedRedirects.concat(processNode(value));
-	}
-  var redirects = node.redirects.map(item => {
-    const fromUrl = cleanFromUrl(item.source);
-    const toUrl = cleanToUrl(item.target);
-    return `${fromUrl} ${toUrl} 301`;
-  });
+  }
+  if (node.redirects)
+  {
+    var redirects = node.redirects.map(item => {
+      const fromUrl = cleanFromUrl(item.source);
+      const toUrl = cleanToUrl(item.target);
+      return `${fromUrl} ${toUrl} 301`;
+    });
 
-  return combinedRedirects.concat(redirects);
+    console.log(`Added ${redirects.length} managed redirect(s) from Sitecore path: ${node.path}`);
+
+    return combinedRedirects.concat(redirects);
+  }
+
+  return combinedRedirects;
+  
 }
 function parseManagedRedirectData(data) {
   const paths = processNode(data);
@@ -75,7 +85,11 @@ function parseManagedRedirectData(data) {
 }
 
 async function parseManagedRedirects() {
-  return fetch(`${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`)
+  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
+
+  console.log(`Fetching map.json for redirects from: ${mapUrl}`)
+
+  return fetch(mapUrl)
     .then(res => res.json())
     .then(data => parseManagedRedirectData(data))
     .then(data => {
@@ -91,7 +105,7 @@ async function parseManagedRedirects() {
 }
 
 async function parseRedirects() {
-  console.log("Creating _redirects file");
+  console.log("Creating _redirects file from _redirects.template");
 
   const managedRedirects = await parseManagedRedirects();
   const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
@@ -103,36 +117,64 @@ async function parseRedirects() {
     let text = data.toString();
 
     // Update redirects template with origin hosts.
-    console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
-
-    console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
 
     fs.writeFile("./public/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
       if (err) {
         throw err;
       }
-      console.log("Created _redirects file!");
+      console.log("Created ./public/_redirects");
     });
   });
 }
 
-async function updateNetlifyToml() {
-  console.log("Updating netlify.toml");
+const sitecoreProxyRedirectTemplate = `[[redirects]]
+  from = '{SITECORE_PATH}'
+  to = '{SITECORE_ORIGIN}{SITECORE_PATH}'
+  status = 200
+  force = true
+  [redirects.headers]
+      Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+`;
+
+async function parseManagedExclusions() {
+  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
+
+  console.log(`Fetching map.json for exclusions from: ${mapUrl}`)
+
+  return fetch(mapUrl)
+    .then(res => res.json())
+    .then(data => {
+      return data.excluded.map(path => {
+        console.log("Creating proxy to Sitecore for " + path);
+        return sitecoreProxyRedirectTemplate.replace(/{SITECORE_PATH}/g, path)
+      }).join("\r\n");
+    })
+    .catch(error => {
+      // Could use environment variable here to define behaviour, e.g. throw error.
+      console.log("Error retrieving managed exclusions.");
+      console.log(error);
+
+      return "";
+    })
+}
+
+async function parseNetlifyToml() {
+  console.log("Creating netlify.toml from netlify.toml.template");
+
+  const proxyRedirects = await parseManagedExclusions();
 
   fs.readFile('./netlify.toml.template', 'utf8', function (err, data) {
 
     let text = data.toString();
 
-    // Update redirects in netlify.toml with origin hosts.
-    console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
+    // Update redirects in netlify.toml.template with origin hosts.
+    text = text.replace(/{PROXIES_TO_SITECORE}/g, proxyRedirects);
+    
+    text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
-
-    console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
-
-    console.log("Using SITECORE_PROXY_BASIC_AUTH as: " + process.env.SITECORE_PROXY_BASIC_AUTH);
     text = text.replace(/{SITECORE_PROXY_BASIC_AUTH}/g, process.env.SITECORE_PROXY_BASIC_AUTH);
 
     fs.writeFile('./netlify.toml', `${text}`, function (err) {
@@ -140,10 +182,14 @@ async function updateNetlifyToml() {
         throw err;
       }
 
-      console.log("Updated netlify.toml!");
+      console.log("Created ./netlify.toml");
     });
   });
 }
 
+console.log("Using URL as: " + process.env.URL);
+console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
+console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
+
 parseRedirects();
-updateNetlifyToml();
+parseNetlifyToml();
