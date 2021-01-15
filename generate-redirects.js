@@ -160,10 +160,34 @@ async function parseManagedExclusions() {
     })
 }
 
+async function parseSecurityHeaders() {
+  let pageUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/page.json`;
+
+  console.log(`Fetching page.json for security headers from: ${pageUrl}`)
+
+  return fetch(pageUrl)
+    .then(res => res.json())
+    .then(data => {
+      if (data.fields.securityheaders && data.fields.securityheaders["Content-Security-Policy"])
+      {
+        return `Content-Security-Policy = "${data.fields.securityheaders["Content-Security-Policy"]}"`
+      }
+      return "";
+    })
+    .catch(error => {
+      // Could use environment variable here to define behaviour, e.g. throw error.
+      console.log("Error retrieving security headers.");
+      console.log(error);
+
+      return "";
+    })
+}
+
 async function parseNetlifyToml() {
   console.log("Creating netlify.toml from netlify.toml.template");
 
   const proxyRedirects = await parseManagedExclusions();
+  const headers = await parseSecurityHeaders();
 
   fs.readFile('./netlify.toml.template', 'utf8', function (err, data) {
 
@@ -171,6 +195,8 @@ async function parseNetlifyToml() {
 
     // Update redirects in netlify.toml.template with origin hosts.
     text = text.replace(/{PROXIES_TO_SITECORE}/g, proxyRedirects);
+    
+    text = text.replace(/{PARSED_HEADERS}/g, headers);
     
     text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
