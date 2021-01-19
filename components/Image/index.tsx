@@ -10,13 +10,19 @@ interface ImageProps {
   title?: string
 }
 
+const Variant = {
+  WithCaption: "{446FE21B-8B41-4CA4-A06A-A9D5A76E59B5}",
+}
+
 export const Image = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields || !renderingContext.item.fields.image) {
     return null
   }
 
-  const { item: {id, fields: { imagecaption, image }}} = renderingContext
+  const { item: {id, fields: { imagecaption, image }}, parameters } = renderingContext
+
+  const withCaption = parameters?.FieldNames === Variant.WithCaption;
 
   let imageAttr: ImageProps = {
     src: `${image.url}?h=${image.height}&amp;w=${image.width}&amp;`,
@@ -40,7 +46,7 @@ export const Image = (props) => {
         <div className="c-imagePod__image">
           <img {...imageAttr} />
         </div>
-        {imagecaption &&
+        {imagecaption && withCaption &&
           <div className="c-imagePod__content">
             <p className="c-imagePod__caption field-imagecaption" dangerouslySetInnerHTML={{ __html: imagecaption }}/>
           </div>
