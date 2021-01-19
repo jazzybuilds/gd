@@ -26,6 +26,14 @@ export const TextBanner = (props) => {
     className += ' c-promoPod--noCTA'
   }
 
+  let linkText = fields.link?.text || ""
+
+  if (!linkText && fields.link && fields.link.url) {
+    const splitURL = fields.link.url.split("/")
+    const url = splitURL[splitURL.length - 1]
+    linkText = url.replace(/-/g, " ");
+  }
+
   return (
     <div className={`component c-promoPod ${blueBg || blueNoCTA ? className : ""} small-12 columns`}>
       <div className="component-content">
@@ -33,7 +41,7 @@ export const TextBanner = (props) => {
           <p className="c-promoPod__text field-text" dangerouslySetInnerHTML={{ __html: fields.text }} />
           <p className="c-promoPod__link field-link">
             {fields.link &&
-              <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{fields.link.text}</a>
+              <a href={linkFormatter(fields.link)} data-variantitemid={`{${id}}`} role="button" data-variantfieldname="Link" target={fields.link.target}>{linkText}</a>
             }
           </p>
         </div>
