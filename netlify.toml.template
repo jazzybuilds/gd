@@ -27,6 +27,15 @@ package = "netlify-plugin-contextual-env"
 	[redirects.headers]
     	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"
 
+# Proxy for media items with alternate casing
+[[redirects]]
+	from = '/-/Media/*'
+	to = '{MEDIA_ORIGIN}/-/media/:splat'
+	status = 200
+	force = true
+	[redirects.headers]
+    	Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+
 # Proxy for SXA Search
 [[redirects]]
 	from = '/sxa/search/*'
