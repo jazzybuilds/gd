@@ -6,6 +6,33 @@ require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
 
+function writeMetaFile(source, target) {
+  var destPath = './out' + source;
+
+  fs.mkdir(destPath, { recursive: true }, (err) => {
+    if (err) throw err;
+
+    let destFile = destPath + '/index.html';
+
+    let metaHtmlContext = metaRefreshHtmlTemplate.replace(/{TARGET_URL}/g, target);
+
+    // Flag: w will replace existing files, wx will throw error if file exists.
+    fs.writeFile(destFile, metaHtmlContext, { flag: 'w'}, function (err) {
+      if (err) {
+        if (err.code === 'EEXIST') {
+          console.log(`Skipping redirect as already created for ${source}`);
+          return;
+        }
+        throw err;
+      }
+  
+      console.log(`Generated meta for ${source} -> ${target}`);
+    }); 
+  });
+
+
+}
+
 function escapeRegex(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
@@ -50,6 +77,9 @@ function parseLegacyRedirects(path) {
         cleanRules[`_L_${fromUrl}`] = toUrl;
       }
     }
+
+    // Generate meta tags
+    //writeMetaFile(normalisedFromUrl, toUrl);
   })
   const paths = Object.keys(cleanRules).map(fromUrl => {
     return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
@@ -70,6 +100,10 @@ function processNode(node) {
       const fromUrl = cleanFromUrl(item.source);
       const toUrl = cleanToUrl(item.target).toLowerCase();
       const normalisedFromUrl = fromUrl.toLowerCase();
+
+      // Generate meta tags
+      writeMetaFile(normalisedFromUrl, toUrl);
+
       if (normalisedFromUrl !== fromUrl) {
         return [`${normalisedFromUrl} ${toUrl} 301`, `${fromUrl} ${toUrl} 301`];
       }
@@ -143,6 +177,17 @@ const sitecoreProxyRedirectTemplate = `[[redirects]]
   [redirects.headers]
       Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
 `;
+
+
+const metaRefreshHtmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml">    
+<head>      
+  <title>Redirect</title>      
+  <meta http-equiv="refresh" content="0;URL='{TARGET_URL}'" />    
+</head>    
+<body> 
+  <p>This page has moved to a <a href="{TARGET_URL}">new location</a>.</p> 
+</body>  
+</html>`;
 
 async function parseManagedExclusions() {
   let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
