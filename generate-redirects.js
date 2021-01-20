@@ -7,10 +7,20 @@ require("dotenv").config();
 const { UNIFORM_API_URL } = process.env;
 
 function writeMetaFile(source, target) {
+  // if (source.match(/\./))
+  // {
+  //   console.log(`Skipping redirect as for unsupported path, skipping for source: ${source}`);
+  //   return;
+  // }
+
   var destPath = './public' + source;
 
   fs.mkdir(destPath, { recursive: true }, (err) => {
-    if (err) throw err;
+    if (err) 
+    {
+      console.log(`Cannot create directory, skipping for source: ${destPath}`);
+      return;
+    }
 
     let destFile = destPath + '/index.html';
 
@@ -20,7 +30,7 @@ function writeMetaFile(source, target) {
     fs.writeFile(destFile, metaHtmlContext, { flag: 'wx'}, function (err) {
       if (err) {
         if (err.code === 'EEXIST') {
-          console.log(`Skipping redirect as already created for ${source}`);
+          console.log(`Skipping redirect as already path already exists for ${source}`);
           return;
         }
         throw err;
@@ -79,7 +89,7 @@ function parseLegacyRedirects(path) {
     }
 
     // Generate meta tags
-    //writeMetaFile(normalisedFromUrl, toUrl);
+    writeMetaFile(normalisedFromUrl, toUrl);
   })
   const paths = Object.keys(cleanRules).map(fromUrl => {
     return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
