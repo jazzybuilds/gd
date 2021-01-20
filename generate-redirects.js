@@ -7,7 +7,7 @@ require("dotenv").config();
 const { UNIFORM_API_URL } = process.env;
 
 function writeMetaFile(source, target) {
-  var destPath = './out' + source;
+  var destPath = './public' + source;
 
   fs.mkdir(destPath, { recursive: true }, (err) => {
     if (err) throw err;
