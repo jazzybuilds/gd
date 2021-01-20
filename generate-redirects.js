@@ -9,6 +9,12 @@ const { UNIFORM_API_URL } = process.env;
 function writeMetaFile(source, target) {
   var destPath = './public' + source;
 
+  if (source.match(/[\\#?]/g))
+  {
+    console.log(`Skipping redirect as for unsupported path, skipping for source: ${source}`);
+    return;
+  }
+
   try {
     fs.mkdirSync(destPath, { recursive: true });
     
