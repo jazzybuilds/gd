@@ -13,7 +13,7 @@ function writeMetaFile(source, target) {
   //   return;
   // }
 
-  var destPath = './public' + source;
+  var destPath = './out' + source;
 
   fs.mkdir(destPath, { recursive: true }, (err) => {
     if (err) 
@@ -170,11 +170,11 @@ async function parseRedirects() {
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
 
-    fs.writeFile("./public/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
+    fs.writeFile("./out/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
       if (err) {
         throw err;
       }
-      console.log("Created ./public/_redirects");
+      console.log("Created ./out/_redirects");
     });
   });
 }
