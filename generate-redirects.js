@@ -16,8 +16,8 @@ function writeMetaFile(source, target) {
 
     let metaHtmlContext = metaRefreshHtmlTemplate.replace(/{TARGET_URL}/g, target);
 
-    // Flag: w will replace existing files, wx will throw error if file exists.
-    fs.writeFile(destFile, metaHtmlContext, { flag: 'w'}, function (err) {
+    // Flag: w will replace existing files, wx will throw error if file exists and skip that.
+    fs.writeFile(destFile, metaHtmlContext, { flag: 'wx'}, function (err) {
       if (err) {
         if (err.code === 'EEXIST') {
           console.log(`Skipping redirect as already created for ${source}`);
@@ -55,7 +55,7 @@ function cleanFromUrl(url) {
 }
 
 function cleanToUrl(url) {
-  const toUrlParse = url.trim().replace('https://{HTTP_HOST}', '').replace('www.guidedogs.org.uk/', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
+  const toUrlParse = url.trim().replace('https://{HTTP_HOST}', '').replace('www.guidedogs.org.uk/', '/').replace('https:///', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
   const toUrl = (toUrlParse ? toUrlParse : '/').replace(/ /gi, '%20');
   return addTrailingSlash(toUrl.startsWith('http') || toUrl === '/' ? toUrl : `/${toUrl}`);
 }
