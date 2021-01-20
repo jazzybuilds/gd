@@ -42,46 +42,53 @@ function parseLegacyRedirects(path) {
       throw new Error(`${rule.action.redirectType} not supported`)
     }
     const fromUrl = cleanFromUrl(rule.match.url);
-    const toUrl = cleanToUrl(rule.action.url);
-    if (!cleanRules[fromUrl]) {
-      cleanRules[fromUrl] = toUrl;
+    const toUrl = cleanToUrl(rule.action.url).toLowerCase();
+    const normalisedFromUrl = fromUrl.toLowerCase();
+    if (!cleanRules[normalisedFromUrl]) {
+      cleanRules[normalisedFromUrl] = toUrl;
+      if (normalisedFromUrl !== fromUrl) {
+        cleanRules[`_L_${fromUrl}`] = toUrl;
+      }
     }
   })
   const paths = Object.keys(cleanRules).map(fromUrl => {
-    return `${fromUrl} ${cleanRules[fromUrl]} 301`;
+    return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
   })
 
   console.log(`Added ${paths.length} legacy redirect(s)`);
 
-  return `# Legacy Redirects\r\n${paths.join('\r\n').toLowerCase()}`
+  return `# Legacy Redirects\r\n${paths.join('\r\n')}`
 }
 
-function processNode(node) 
-{
-	let combinedRedirects = [];
-	for (let [, value] of Object.entries(node.children)) {
+function processNode(node) {
+  let combinedRedirects = [];
+  for (let [, value] of Object.entries(node.children)) {
     combinedRedirects = combinedRedirects.concat(processNode(value));
   }
-  if (node.redirects)
-  {
+  if (node.redirects) {
     var redirects = node.redirects.map(item => {
       const fromUrl = cleanFromUrl(item.source);
-      const toUrl = cleanToUrl(item.target);
-      return `${fromUrl} ${toUrl} 301`;
+      const toUrl = cleanToUrl(item.target).toLowerCase();
+      const normalisedFromUrl = fromUrl.toLowerCase();
+      if (normalisedFromUrl !== fromUrl) {
+        console.log(fromUrl);
+        return [`${normalisedFromUrl} ${toUrl} 301`, `${fromUrl} ${toUrl} 301`];
+      }
+      return `${normalisedFromUrl} ${toUrl} 301`;
     });
-
+    redirects = redirects.flat(2)
     console.log(`Added ${redirects.length} managed redirect(s) from Sitecore path: ${node.path}`);
 
     return combinedRedirects.concat(redirects);
   }
 
   return combinedRedirects;
-  
+
 }
 function parseManagedRedirectData(data) {
   const paths = processNode(data);
-  
-  return `# Managed Redirects\r\n${paths.join('\r\n').toLowerCase()}`;
+
+  return `# Managed Redirects\r\n${paths.join('\r\n')}`;
 }
 
 async function parseManagedRedirects() {
@@ -168,8 +175,7 @@ async function parseSecurityHeaders() {
   return fetch(pageUrl)
     .then(res => res.json())
     .then(data => {
-      if (data.fields.securityheaders && data.fields.securityheaders["Content-Security-Policy"])
-      {
+      if (data.fields.securityheaders && data.fields.securityheaders["Content-Security-Policy"]) {
         return `Content-Security-Policy = "${data.fields.securityheaders["Content-Security-Policy"]}"`
       }
       return "";
@@ -195,9 +201,9 @@ async function parseNetlifyToml() {
 
     // Update redirects in netlify.toml.template with origin hosts.
     text = text.replace(/{PROXIES_TO_SITECORE}/g, proxyRedirects);
-    
+
     text = text.replace(/{PARSED_HEADERS}/g, headers);
-    
+
     text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
