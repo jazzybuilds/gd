@@ -182,6 +182,7 @@ const sitecoreProxyRedirectTemplate = `[[redirects]]
 const metaRefreshHtmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml">    
 <head>      
   <title>Redirect</title>      
+  <style>body{background:#002c5c;color:#fff;font-family:sans-serif;text-align:center;padding:20px}a{color:#fff;text-decoration:underline}	</style>
   <meta http-equiv="refresh" content="0;URL='{TARGET_URL}'" />    
 </head>    
 <body> 
