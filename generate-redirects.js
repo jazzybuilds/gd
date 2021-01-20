@@ -7,20 +7,10 @@ require("dotenv").config();
 const { UNIFORM_API_URL } = process.env;
 
 function writeMetaFile(source, target) {
-  // if (source.match(/\./))
-  // {
-  //   console.log(`Skipping redirect as for unsupported path, skipping for source: ${source}`);
-  //   return;
-  // }
-
-  var destPath = './out' + source;
+  var destPath = './public' + source;
 
   fs.mkdir(destPath, { recursive: true }, (err) => {
-    if (err) 
-    {
-      console.log(`Cannot create directory, skipping for source: ${destPath}`);
-      return;
-    }
+    if (err) throw err;
 
     let destFile = destPath + '/index.html';
 
@@ -30,7 +20,7 @@ function writeMetaFile(source, target) {
     fs.writeFile(destFile, metaHtmlContext, { flag: 'wx'}, function (err) {
       if (err) {
         if (err.code === 'EEXIST') {
-          console.log(`Skipping redirect as already path already exists for ${source}`);
+          console.log(`Skipping redirect as already created for ${source}`);
           return;
         }
         throw err;
@@ -89,7 +79,7 @@ function parseLegacyRedirects(path) {
     }
 
     // Generate meta tags
-    writeMetaFile(normalisedFromUrl, toUrl);
+    //writeMetaFile(normalisedFromUrl, toUrl);
   })
   const paths = Object.keys(cleanRules).map(fromUrl => {
     return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
@@ -170,14 +160,24 @@ async function parseRedirects() {
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
 
-    fs.writeFile("./out/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
+    fs.writeFile("./public/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
       if (err) {
         throw err;
       }
-      console.log("Created ./out/_redirects");
+      console.log("Created ./public/_redirects");
     });
   });
 }
+
+const sitecoreProxyRedirectTemplate = `[[redirects]]
+  from = '{SITECORE_PATH}'
+  to = '{SITECORE_ORIGIN}{SITECORE_PATH}'
+  status = 200
+  force = true
+  [redirects.headers]
+      Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
+`;
+
 
 const metaRefreshHtmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml">    
 <head>      
@@ -190,9 +190,83 @@ const metaRefreshHtmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml">
 </body>  
 </html>`;
 
+async function parseManagedExclusions() {
+  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
+
+  console.log(`Fetching map.json for exclusions from: ${mapUrl}`)
+
+  return fetch(mapUrl)
+    .then(res => res.json())
+    .then(data => {
+      return data.excluded.map(path => {
+        console.log("Creating proxy to Sitecore for " + path);
+        return sitecoreProxyRedirectTemplate.replace(/{SITECORE_PATH}/g, path)
+      }).join("\r\n");
+    })
+    .catch(error => {
+      // Could use environment variable here to define behaviour, e.g. throw error.
+      console.log("Error retrieving managed exclusions.");
+      console.log(error);
+
+      return "";
+    })
+}
+
+async function parseSecurityHeaders() {
+  let pageUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/page.json`;
+
+  console.log(`Fetching page.json for security headers from: ${pageUrl}`)
+
+  return fetch(pageUrl)
+    .then(res => res.json())
+    .then(data => {
+      if (data.fields.securityheaders && data.fields.securityheaders["Content-Security-Policy"]) {
+        return `Content-Security-Policy = "${data.fields.securityheaders["Content-Security-Policy"]}"`
+      }
+      return "";
+    })
+    .catch(error => {
+      // Could use environment variable here to define behaviour, e.g. throw error.
+      console.log("Error retrieving security headers.");
+      console.log(error);
+
+      return "";
+    })
+}
+
+async function parseNetlifyToml() {
+  console.log("Creating netlify.toml from netlify.toml.template");
+
+  const proxyRedirects = await parseManagedExclusions();
+  const headers = await parseSecurityHeaders();
+
+  fs.readFile('./netlify.toml.template', 'utf8', function (err, data) {
+
+    let text = data.toString();
+
+    // Update redirects in netlify.toml.template with origin hosts.
+    text = text.replace(/{PROXIES_TO_SITECORE}/g, proxyRedirects);
+
+    text = text.replace(/{PARSED_HEADERS}/g, headers);
+
+    text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
+    text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
+    text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
+    text = text.replace(/{SITECORE_PROXY_BASIC_AUTH}/g, process.env.SITECORE_PROXY_BASIC_AUTH);
+
+    fs.writeFile('./netlify.toml', `${text}`, function (err) {
+      if (err) {
+        throw err;
+      }
+
+      console.log("Created ./netlify.toml");
+    });
+  });
+}
 
 console.log("Using URL as: " + process.env.URL);
 console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
 console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
 
 parseRedirects();
+parseNetlifyToml();
