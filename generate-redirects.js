@@ -9,26 +9,32 @@ const { UNIFORM_API_URL } = process.env;
 function writeMetaFile(source, target) {
   var destPath = './public' + source;
 
-  fs.mkdir(destPath, { recursive: true }, (err) => {
-    if (err) throw err;
-
+  try {
+    fs.mkdirSync(destPath, { recursive: true });
+    
     let destFile = destPath + '/index.html';
 
     let metaHtmlContext = metaRefreshHtmlTemplate.replace(/{TARGET_URL}/g, target);
 
     // Flag: w will replace existing files, wx will throw error if file exists and skip that.
-    fs.writeFile(destFile, metaHtmlContext, { flag: 'wx'}, function (err) {
-      if (err) {
-        if (err.code === 'EEXIST') {
-          console.log(`Skipping redirect as already created for ${source}`);
-          return;
-        }
-        throw err;
-      }
-  
+    try {
+      fs.writeFileSync(destFile, metaHtmlContext, { flag: 'wx'});
       console.log(`Generated meta for ${source} -> ${target}`);
-    }); 
-  });
+    }
+    catch( err )
+    {
+      if (err.code === 'EEXIST') {
+        console.log(`Skipping redirect as path already exists for ${source}`);
+        return;
+      }
+      throw err;
+    }
+ 
+  }
+  catch( err )
+  {
+    console.log(`Cannot create directory, skipping for source: ${destPath}`);
+  }
 
 
 }
@@ -79,7 +85,7 @@ function parseLegacyRedirects(path) {
     }
 
     // Generate meta tags
-    //writeMetaFile(normalisedFromUrl, toUrl);
+    writeMetaFile(normalisedFromUrl, toUrl);
   })
   const paths = Object.keys(cleanRules).map(fromUrl => {
     return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
@@ -148,7 +154,10 @@ async function parseRedirects() {
   console.log("Creating _redirects file from _redirects.template");
 
   const managedRedirects = await parseManagedRedirects();
-  const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
+  const legacyRedirects = await parseLegacyRedirects('./RewriteRules.config');
+
+  console.log("Collected all redirects");
+
   fs.readFile('./_redirects.template', 'utf8', function (err, data) {
     if (err) {
       throw err;
