@@ -71,7 +71,6 @@ function processNode(node) {
       const toUrl = cleanToUrl(item.target).toLowerCase();
       const normalisedFromUrl = fromUrl.toLowerCase();
       if (normalisedFromUrl !== fromUrl) {
-        console.log(fromUrl);
         return [`${normalisedFromUrl} ${toUrl} 301`, `${fromUrl} ${toUrl} 301`];
       }
       return `${normalisedFromUrl} ${toUrl} 301`;
