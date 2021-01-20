@@ -24,17 +24,15 @@
     "export": "npm-run-all --serial generate-redirects retrieve-static-files update-static-files generate-sitemap build export:site",
     "generate-redirects": "node generate-redirects.js",
     "retrieve-static-files": "npm-run-all download:* ",
+    "download:robots": "if-env DOWNLOAD_ROBOTS=true && node download-file.js SITECORE_ORIGIN robots.txt SITECORE_PROXY_BASIC_AUTH || exit 0",
     "download:sitemap-images": "node download-file.js SITECORE_ORIGIN images.xml SITECORE_PROXY_BASIC_AUTH",
     "download:sitemap-documents": "node download-file.js SITECORE_ORIGIN documents.xml SITECORE_PROXY_BASIC_AUTH",
     "update-static-files": "npm-run-all updatehost:* ",
+    "updatehost:robots": "if-env DOWNLOAD_ROBOTS=true && node update-host.js public/robots.txt || exit 0",
     "updatehost:sitemap-images": "node update-host.js public/images.xml",
     "updatehost:sitemap-documents": "node update-host.js public/documents.xml",
     "generate-sitemap": "node generate-sitemap.js",
     "storybook": "start-storybook -p 6006"
-  },
-  "scriptsDisabled": {
-    "download:robots": "node download-file.js SITECORE_ORIGIN robots.txt SITECORE_PROXY_BASIC_AUTH",
-    "updatehost:robots": "node update-host.js public/robots.txt"
   },
   "browserslist": [
     "last 2 versions",
@@ -56,6 +54,7 @@
     "express-serve-static-core": "^0.1.1",
     "fetch-retry": "^3.1.0",
     "html-to-react": "^1.4.3",
+    "if-env": "^1.0.4",
     "isomorphic-unfetch": "^3.0.0",
     "jquery": "^3.5.1",
     "loglevel": "^1.6.3",

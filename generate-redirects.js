@@ -6,6 +6,45 @@ require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
 
+function writeMetaFile(source, target) {
+  var destPath = './public' + source;
+
+  if (source.match(/[\\#?]/g))
+  {
+    console.log(`Skipping redirect as for unsupported path, skipping for source: ${source}`);
+    return;
+  }
+
+  try {
+    fs.mkdirSync(destPath, { recursive: true });
+    
+    let destFile = destPath + '/index.html';
+
+    let metaHtmlContext = metaRefreshHtmlTemplate.replace(/{TARGET_URL}/g, target);
+
+    // Flag: w will replace existing files, wx will throw error if file exists and skip that.
+    try {
+      fs.writeFileSync(destFile, metaHtmlContext, { flag: 'wx'});
+      console.log(`Generated meta for ${source} -> ${target}`);
+    }
+    catch( err )
+    {
+      if (err.code === 'EEXIST') {
+        console.log(`Skipping redirect as path already exists for ${source}`);
+        return;
+      }
+      throw err;
+    }
+ 
+  }
+  catch( err )
+  {
+    console.log(`Cannot create directory, skipping for source: ${destPath}`);
+  }
+
+
+}
+
 function escapeRegex(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
@@ -28,7 +67,7 @@ function cleanFromUrl(url) {
 }
 
 function cleanToUrl(url) {
-  const toUrlParse = url.trim().replace('https://{HTTP_HOST}', '').replace('www.guidedogs.org.uk/', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
+  const toUrlParse = url.trim().replace('https://{HTTP_HOST}', '').replace('www.guidedogs.org.uk/', '/').replace('https:///', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
   const toUrl = (toUrlParse ? toUrlParse : '/').replace(/ /gi, '%20');
   return addTrailingSlash(toUrl.startsWith('http') || toUrl === '/' ? toUrl : `/${toUrl}`);
 }
@@ -42,46 +81,59 @@ function parseLegacyRedirects(path) {
       throw new Error(`${rule.action.redirectType} not supported`)
     }
     const fromUrl = cleanFromUrl(rule.match.url);
-    const toUrl = cleanToUrl(rule.action.url);
-    if (!cleanRules[fromUrl]) {
-      cleanRules[fromUrl] = toUrl;
+    const toUrl = cleanToUrl(rule.action.url).toLowerCase();
+    const normalisedFromUrl = fromUrl.toLowerCase();
+    if (!cleanRules[normalisedFromUrl]) {
+      cleanRules[normalisedFromUrl] = toUrl;
+      if (normalisedFromUrl !== fromUrl) {
+        cleanRules[`_L_${fromUrl}`] = toUrl;
+      }
     }
+
+    // Generate meta tags
+    writeMetaFile(normalisedFromUrl, toUrl);
   })
   const paths = Object.keys(cleanRules).map(fromUrl => {
-    return `${fromUrl} ${cleanRules[fromUrl]} 301`;
+    return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
   })
 
   console.log(`Added ${paths.length} legacy redirect(s)`);
 
-  return `# Legacy Redirects\r\n${paths.join('\r\n').toLowerCase()}`
+  return `# Legacy Redirects\r\n${paths.join('\r\n')}`
 }
 
-function processNode(node) 
-{
-	let combinedRedirects = [];
-	for (let [, value] of Object.entries(node.children)) {
+function processNode(node) {
+  let combinedRedirects = [];
+  for (let [, value] of Object.entries(node.children)) {
     combinedRedirects = combinedRedirects.concat(processNode(value));
   }
-  if (node.redirects)
-  {
+  if (node.redirects) {
     var redirects = node.redirects.map(item => {
       const fromUrl = cleanFromUrl(item.source);
-      const toUrl = cleanToUrl(item.target);
-      return `${fromUrl} ${toUrl} 301`;
-    });
+      const toUrl = cleanToUrl(item.target).toLowerCase();
+      const normalisedFromUrl = fromUrl.toLowerCase();
 
+      // Generate meta tags
+      writeMetaFile(normalisedFromUrl, toUrl);
+
+      if (normalisedFromUrl !== fromUrl) {
+        return [`${normalisedFromUrl} ${toUrl} 301`, `${fromUrl} ${toUrl} 301`];
+      }
+      return `${normalisedFromUrl} ${toUrl} 301`;
+    });
+    redirects = redirects.flat(2)
     console.log(`Added ${redirects.length} managed redirect(s) from Sitecore path: ${node.path}`);
 
     return combinedRedirects.concat(redirects);
   }
 
   return combinedRedirects;
-  
+
 }
 function parseManagedRedirectData(data) {
   const paths = processNode(data);
-  
-  return `# Managed Redirects\r\n${paths.join('\r\n').toLowerCase()}`;
+
+  return `# Managed Redirects\r\n${paths.join('\r\n')}`;
 }
 
 async function parseManagedRedirects() {
@@ -108,7 +160,10 @@ async function parseRedirects() {
   console.log("Creating _redirects file from _redirects.template");
 
   const managedRedirects = await parseManagedRedirects();
-  const legacyRedirects = parseLegacyRedirects('./RewriteRules.config');
+  const legacyRedirects = await parseLegacyRedirects('./RewriteRules.config');
+
+  console.log("Collected all redirects");
+
   fs.readFile('./_redirects.template', 'utf8', function (err, data) {
     if (err) {
       throw err;
@@ -138,6 +193,18 @@ const sitecoreProxyRedirectTemplate = `[[redirects]]
       Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
 `;
 
+
+const metaRefreshHtmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml">    
+<head>      
+  <title>Redirect</title>      
+  <style>body{background:#002c5c;color:#fff;font-family:sans-serif;text-align:center;padding:20px}a{color:#fff;text-decoration:underline}	</style>
+  <meta http-equiv="refresh" content="0;URL='{TARGET_URL}'" />    
+</head>    
+<body> 
+  <p>This page has moved to a <a href="{TARGET_URL}">new location</a>.</p> 
+</body>  
+</html>`;
+
 async function parseManagedExclusions() {
   let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
 
@@ -160,10 +227,33 @@ async function parseManagedExclusions() {
     })
 }
 
+async function parseSecurityHeaders() {
+  let pageUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/page.json`;
+
+  console.log(`Fetching page.json for security headers from: ${pageUrl}`)
+
+  return fetch(pageUrl)
+    .then(res => res.json())
+    .then(data => {
+      if (data.fields.securityheaders && data.fields.securityheaders["Content-Security-Policy"]) {
+        return `Content-Security-Policy = "${data.fields.securityheaders["Content-Security-Policy"]}"`
+      }
+      return "";
+    })
+    .catch(error => {
+      // Could use environment variable here to define behaviour, e.g. throw error.
+      console.log("Error retrieving security headers.");
+      console.log(error);
+
+      return "";
+    })
+}
+
 async function parseNetlifyToml() {
   console.log("Creating netlify.toml from netlify.toml.template");
 
   const proxyRedirects = await parseManagedExclusions();
+  const headers = await parseSecurityHeaders();
 
   fs.readFile('./netlify.toml.template', 'utf8', function (err, data) {
 
@@ -171,7 +261,9 @@ async function parseNetlifyToml() {
 
     // Update redirects in netlify.toml.template with origin hosts.
     text = text.replace(/{PROXIES_TO_SITECORE}/g, proxyRedirects);
-    
+
+    text = text.replace(/{PARSED_HEADERS}/g, headers);
+
     text = text.replace(/{NETLIFY_URL}/g, process.env.URL);
     text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
     text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);

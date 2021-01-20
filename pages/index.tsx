@@ -60,6 +60,7 @@ componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
 componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
 componentsIndex["BrowserTitle"] = BrowserTitle;
 componentsIndex["RichText"] = ContentComponent
+componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 
 class Placeholder extends BasePlaceholder {

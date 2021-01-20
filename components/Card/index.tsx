@@ -41,7 +41,10 @@ export const Card = (props: any) => {
         <Wrapper className="c-navigationPod__wrapper">
           {!noImage && fields['pod image'] &&
             <ImageWrapper isLarge={isLarge}>
-              <Image src={fields['pod image'].url} alt={fields['pod image'].alt} />
+              {fields['pod image'].alt 
+               ? <Image src={fields['pod image'].url} alt={fields['pod image'].alt} />
+               : <Image src={fields['pod image'].url} />
+              }
             </ImageWrapper>
           }
           <Content>

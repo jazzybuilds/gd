@@ -3,6 +3,15 @@ import "../../styles/component-case-study.scss";
 import { linkFormatter } from '../../utils/formatter';
 import { getBlueBackground } from '../../utils/styleClass';
 
+interface ImageProps {
+  src: string
+  width: string
+  height: string
+  "data-variantitemid": string
+  "data-variantfieldname": string
+  alt?: string
+}
+
 export const CardArticle = (props) => {
   const { renderingContext } = props
 
@@ -14,13 +23,28 @@ export const CardArticle = (props) => {
   const { item: { id, fields }, parameters } = renderingContext
   const backgroundStyle = getBlueBackground(parameters?.Styles)
 
+  let imageAttr: ImageProps = {
+    src: `${fields.image.url}?h=${fields.image.height}&amp;w=${fields.image.width}&amp;hash=6940A9C3A97A0F58BB776EAB35A8B2E9`,
+    width: fields.image.width,
+    height: fields.image.height,
+    "data-variantitemid": `{${id}}`,
+    "data-variantfieldname": "Image"
+  }
+
+  if (fields.image.alt) {
+    imageAttr = {
+      ...imageAttr,
+      alt: fields.image.alt
+    }
+  }
+
   return (
     <div className={`component c-caseStudy small-12 columns ${backgroundStyle}`}>
       <div className="component-content">
         <div className="c-caseStudy__wrapper">
           <div className="c-caseStudy__image">
             {fields.image &&
-              <img src={`${fields.image.url}?h=${fields.image.height}&amp;w=${fields.image.width}&amp;hash=6940A9C3A97A0F58BB776EAB35A8B2E9`} alt={fields.image.alt} width={fields.image.width} height={fields.image.height} data-variantitemid={`{${id}}`} data-variantfieldname="Image" />
+              <img {...imageAttr} />
             }
           </div>
           <div className="c-caseStudy__content">
