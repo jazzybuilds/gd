@@ -6,43 +6,13 @@ require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
 
-function writeMetaFile(source, target) {
-  var destPath = './public' + source;
-
-  if (source.match(/[\\#?]/g))
-  {
-    console.log(`Skipping redirect as for unsupported path, skipping for source: ${source}`);
-    return;
-  }
-
-  try {
-    fs.mkdirSync(destPath, { recursive: true });
-    
-    let destFile = destPath + '/index.html';
-
-    let metaHtmlContext = metaRefreshHtmlTemplate.replace(/{TARGET_URL}/g, target);
-
-    // Flag: w will replace existing files, wx will throw error if file exists and skip that.
-    try {
-      fs.writeFileSync(destFile, metaHtmlContext, { flag: 'wx'});
-      console.log(`Generated meta for ${source} -> ${target}`);
-    }
-    catch( err )
-    {
-      if (err.code === 'EEXIST') {
-        console.log(`Skipping redirect as path already exists for ${source}`);
-        return;
-      }
+function writeRedirectsJSON(data) {
+  fs.writeFile("./functions/redirects.json", JSON.stringify(data), function (err) {
+    if (err) {
       throw err;
     }
- 
-  }
-  catch( err )
-  {
-    console.log(`Cannot create directory, skipping for source: ${destPath}`);
-  }
-
-
+    console.log("Created ./functions/redirects.json");
+  });
 }
 
 function escapeRegex(string) {
@@ -73,67 +43,48 @@ function cleanToUrl(url) {
 }
 
 function parseLegacyRedirects(path) {
+  let formattedRedirects = {}
   const data = fs.readFileSync(path);
   const json = JSON.parse(parser.toJson(data));
-  const cleanRules = [];
   json.rewrite.rules.rule.map(rule => {
     if (rule.action.redirectType !== '301') {
       throw new Error(`${rule.action.redirectType} not supported`)
     }
-    const fromUrl = cleanFromUrl(rule.match.url);
+    const fromUrl = cleanFromUrl(rule.match.url).toLowerCase();
     const toUrl = cleanToUrl(rule.action.url).toLowerCase();
-    const normalisedFromUrl = fromUrl.toLowerCase();
-    if (!cleanRules[normalisedFromUrl]) {
-      cleanRules[normalisedFromUrl] = toUrl;
-      if (normalisedFromUrl !== fromUrl) {
-        cleanRules[`_L_${fromUrl}`] = toUrl;
+    if (!formattedRedirects[fromUrl]) {
+      formattedRedirects = {
+        ...formattedRedirects,
+        [fromUrl]: toUrl
       }
     }
-
-    // Generate meta tags
-    writeMetaFile(normalisedFromUrl, toUrl);
   })
-  const paths = Object.keys(cleanRules).map(fromUrl => {
-    return `${fromUrl.replace('_L_', '')} ${cleanRules[fromUrl]} 301`;
-  })
-
-  console.log(`Added ${paths.length} legacy redirect(s)`);
-
-  return `# Legacy Redirects\r\n${paths.join('\r\n')}`
+  return formattedRedirects
 }
 
 function processNode(node) {
-  let combinedRedirects = [];
+  let formattedRedirects = {}
   for (let [, value] of Object.entries(node.children)) {
-    combinedRedirects = combinedRedirects.concat(processNode(value));
+    processNode(value)
   }
   if (node.redirects) {
-    var redirects = node.redirects.map(item => {
-      const fromUrl = cleanFromUrl(item.source);
+    node.redirects.forEach(item => {
+      const fromUrl = cleanFromUrl(item.source).toLowerCase();
       const toUrl = cleanToUrl(item.target).toLowerCase();
-      const normalisedFromUrl = fromUrl.toLowerCase();
-
-      // Generate meta tags
-      writeMetaFile(normalisedFromUrl, toUrl);
-
-      if (normalisedFromUrl !== fromUrl) {
-        return [`${normalisedFromUrl} ${toUrl} 301`, `${fromUrl} ${toUrl} 301`];
+      if (!formattedRedirects[fromUrl]) {
+        formattedRedirects = {
+          ...formattedRedirects,
+          [fromUrl]: toUrl
+        }
       }
-      return `${normalisedFromUrl} ${toUrl} 301`;
-    });
-    redirects = redirects.flat(2)
-    console.log(`Added ${redirects.length} managed redirect(s) from Sitecore path: ${node.path}`);
-
-    return combinedRedirects.concat(redirects);
+    })
   }
 
-  return combinedRedirects;
-
+  return formattedRedirects;
 }
-function parseManagedRedirectData(data) {
-  const paths = processNode(data);
 
-  return `# Managed Redirects\r\n${paths.join('\r\n')}`;
+function parseManagedRedirectData(data) {
+  return processNode(data);
 }
 
 async function parseManagedRedirects() {
@@ -157,31 +108,15 @@ async function parseManagedRedirects() {
 }
 
 async function parseRedirects() {
-  console.log("Creating _redirects file from _redirects.template");
+  console.log("Parsing managed and legacy redirects, please wait...");
 
   const managedRedirects = await parseManagedRedirects();
   const legacyRedirects = await parseLegacyRedirects('./RewriteRules.config');
 
-  console.log("Collected all redirects");
+  const allRedirects = { ...managedRedirects, ...legacyRedirects }
+  console.log(`Collected a total of ${Object.keys(allRedirects).length} redirects`);
 
-  fs.readFile('./_redirects.template', 'utf8', function (err, data) {
-    if (err) {
-      throw err;
-    }
-
-    let text = data.toString();
-
-    // Update redirects template with origin hosts.
-    text = text.replace(/{SITECORE_ORIGIN}/g, process.env.SITECORE_ORIGIN);
-    text = text.replace(/{MEDIA_ORIGIN}/g, process.env.MEDIA_ORIGIN);
-
-    fs.writeFile("./public/_redirects", `${text}\r\n${managedRedirects}\r\n\r\n${legacyRedirects}`, function (err) {
-      if (err) {
-        throw err;
-      }
-      console.log("Created ./public/_redirects");
-    });
-  });
+  writeRedirectsJSON(allRedirects)
 }
 
 const sitecoreProxyRedirectTemplate = `[[redirects]]
@@ -192,18 +127,6 @@ const sitecoreProxyRedirectTemplate = `[[redirects]]
   [redirects.headers]
       Authorization = "Basic {SITECORE_PROXY_BASIC_AUTH}"		
 `;
-
-
-const metaRefreshHtmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml">    
-<head>      
-  <title>Redirect</title>      
-  <style>body{background:#002c5c;color:#fff;font-family:sans-serif;text-align:center;padding:20px}a{color:#fff;text-decoration:underline}	</style>
-  <meta http-equiv="refresh" content="0;URL='{TARGET_URL}'" />    
-</head>    
-<body> 
-  <p>This page has moved to a <a href="{TARGET_URL}">new location</a>.</p> 
-</body>  
-</html>`;
 
 async function parseManagedExclusions() {
   let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;

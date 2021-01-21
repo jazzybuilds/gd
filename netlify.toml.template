@@ -1,15 +1,11 @@
 [build]
-base = "/"
-publish = "out/"
-command = "npm run export"
+	functions = "functions"
+	base = "/"
+	publish = "out/"
+	command = "npm run export"
 
 [[plugins]]
-package = "netlify-plugin-cache-nextjs"
-
-[[plugins]]
-package = "netlify-plugin-contextual-env"
-	[plugins.inputs]
-	mode = 'suffix'
+    package = "netlify-plugin-cache-nextjs"
 
 [[headers]]
 	for = "/*"
@@ -105,5 +101,6 @@ package = "netlify-plugin-contextual-env"
 # This is NOT forced, so a matching file locally will take precedence.
 [[redirects]]
 	from = '/*'
-	to = '/404/index.html'
-	status = 404
+	to = "/.netlify/functions/redirects"
+	status = 200
+	force = false
