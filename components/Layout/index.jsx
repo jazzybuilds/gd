@@ -12,9 +12,9 @@ const MVCLayout = (props) => {
   const pageFields = props?.renderingContext.page?.fields;
   const metaTitle = pageFields?.title;
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     equalHeightPods('.js-equalHeight');
-  }, [])
+  })
 
   React.useEffect(() => {
     checkRowBgs();
