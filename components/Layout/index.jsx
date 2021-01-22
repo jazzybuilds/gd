@@ -13,7 +13,6 @@ const MVCLayout = (props) => {
   const metaTitle = pageFields?.title;
 
   React.useEffect(() => {
-    equalHeightPods('.js-equalHeight');
     document.addEventListener('DOMContentLoaded', function() {
       equalHeightPods('.js-equalHeight');
     })
