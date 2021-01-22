@@ -10,5 +10,5 @@ interface LinkProps {
 }
 
 export const linkFormatter = (link: LinkProps) => {
-  return `${link.url}${link.querystring ? `/?${link.querystring}`: ""}${link.anchor ?? ""}`
+  return `${link.url}${link.querystring ? `/?${link.querystring}`: ""}${link.linktype !== 'anchor' && link.anchor ? link.anchor : ""}`
 }
