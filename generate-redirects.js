@@ -33,13 +33,13 @@ function cleanFromUrl(url) {
   } else if (url.match(escapeRegex('$'))) {
     return `/${url.replace('$', '')}`.trim().replace(/ /gi, '%20');
   }
-  return `/${url.trim().replace(/ /gi, '%20')}`;
+  return `/${url.trim().replace(/ /gi, '%20')}`.toLowerCase();;
 }
 
 function cleanToUrl(url) {
   const toUrlParse = url.trim().replace('https://{HTTP_HOST}', '').replace('www.guidedogs.org.uk/', '/').replace('https:///', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
   const toUrl = (toUrlParse ? toUrlParse : '/').replace(/ /gi, '%20');
-  return addTrailingSlash(toUrl.startsWith('http') || toUrl === '/' ? toUrl : `/${toUrl}`);
+  return addTrailingSlash(toUrl.startsWith('http') || toUrl === '/' ? toUrl : `/${toUrl}`.toLowerCase());
 }
 
 function parseLegacyRedirects(path) {
@@ -50,8 +50,8 @@ function parseLegacyRedirects(path) {
     if (rule.action.redirectType !== '301') {
       throw new Error(`${rule.action.redirectType} not supported`)
     }
-    const fromUrl = cleanFromUrl(rule.match.url).toLowerCase();
-    const toUrl = cleanToUrl(rule.action.url).toLowerCase();
+    const fromUrl = cleanFromUrl(rule.match.url);
+    const toUrl = cleanToUrl(rule.action.url);
     if (!formattedRedirects[fromUrl]) {
       formattedRedirects = {
         ...formattedRedirects,
@@ -69,8 +69,8 @@ function processNode(node) {
   }
   if (node.redirects) {
     node.redirects.forEach(item => {
-      const fromUrl = cleanFromUrl(item.source).toLowerCase();
-      const toUrl = cleanToUrl(item.target).toLowerCase();
+      const fromUrl = cleanFromUrl(item.source);
+      const toUrl = cleanToUrl(item.target);
       if (!formattedRedirects[fromUrl]) {
         formattedRedirects = {
           ...formattedRedirects,

@@ -3,16 +3,17 @@ const redirects = require('./redirects.json');
 
 exports.handler = async function (event, context) {
   const path = event.path.toLowerCase();
-  if (!redirects[path]) {
+  if (path.startsWith('/.netlify/')) {
     return {
-      statusCode: 404,
+      statusCode: 200,
       headers: {
-        "Content-Type": "text/html"
+        "Content-Type": "application/json"
       },
-      body: pageNotFound,
-      isBase64Encoded: true,
+      body: JSON.stringify(redirects),
     };
-  } else {
+  }
+
+  if (redirects[path]) {
     const target = redirects[path];
     return {
       statusCode: 301,
@@ -21,4 +22,14 @@ exports.handler = async function (event, context) {
       },
     };
   }
+
+  return {
+    statusCode: 404,
+    headers: {
+      "Content-Type": "text/html"
+    },
+    body: pageNotFound,
+    isBase64Encoded: true,
+  };
+
 };
