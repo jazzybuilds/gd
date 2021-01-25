@@ -2,7 +2,6 @@ import React from "react"
 import Head from "next/head";
 import UniformPlaceholder from "../UniformPlaceholder";
 import * as objectFitImages from 'object-fit-images';
-import { equalHeightPods } from "../../scripts/equal-height-columns"
 import { checkRowBgs } from "../../scripts/row-bg"
 import { initMobileNav } from "../../scripts/mobile-navigation"
 
@@ -13,24 +12,9 @@ const MVCLayout = (props) => {
   const metaTitle = pageFields?.title;
 
   React.useEffect(() => {
-    document.addEventListener('DOMContentLoaded', function() {
-      equalHeightPods('.js-equalHeight');
-    })
-  })
-
-  React.useEffect(() => {
     checkRowBgs();
     objectFitImages();
     initMobileNav()
-
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        equalHeightPods('.js-equalHeight');
-      }, 500);
-    });
-
   }, [])
 
   return (
