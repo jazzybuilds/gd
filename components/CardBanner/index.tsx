@@ -1,5 +1,5 @@
 import React from 'react'
-import { Root, Wrapper } from './CardBanner.styles'
+import { Root } from './CardBanner.styles'
 import "../../styles/component-image-spotlight.scss";
 import { getBlueBackground } from '../../utils/styleClass';
 import { linkFormatter } from '../../utils/formatter';
@@ -41,7 +41,7 @@ export const CardBanner = (props) => {
   return (
     <Root className={`component small-12 columns ${backgroundStyle}`}>
       <div className="component-content">
-        <Wrapper className="c-imageSpotlight__wrapper">
+        <div className="c-imageSpotlight__wrapper">
           {fields.image &&
             <div className="c-imageSpotlight__image">
               <div className="ar-16-9">
@@ -61,7 +61,7 @@ export const CardBanner = (props) => {
               </p>
             }
           </div>
-        </Wrapper>
+        </div>
       </div>
     </Root>
   )
