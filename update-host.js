@@ -20,6 +20,10 @@ async function updateFileWithHost(filePath)
     const regex = new RegExp(escapeRegExp(process.env.SITECORE_ORIGIN),"gi");
     text = text.replace(regex, process.env.URL);  
 
+    // Account for Sitecore producing files with incorrect double domain such as https://gd-dev.guidedogs.org.uk/https://gd-dev.azureedge.net
+    // due to media URLs having external paths. In this case we strip out first domain and leave the second.
+    text = text.replace(/https?:\/\/.*\/https?:\/\//g, 'https://')
+
     fs.writeFile(filePath, `${text}`, function (err) {
       if (err) {
         throw err;
