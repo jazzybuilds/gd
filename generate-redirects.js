@@ -20,7 +20,7 @@ function escapeRegex(string) {
 }
 
 function addTrailingSlash(url) {
-  if (url === '/' || url.indexOf('&') > -1 || url.indexOf('?') > -1) {
+  if (url === '/' || url.indexOf('&') > -1 || url.indexOf('?') > -1 || /\.[^?|#]{3,4}/gi.test(url)) {
     return url;
   }
   return url.endsWith('/') ? url : `${url}/`;
