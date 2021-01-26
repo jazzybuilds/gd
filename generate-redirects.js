@@ -62,10 +62,9 @@ function parseLegacyRedirects(path) {
   return formattedRedirects
 }
 
-function processNode(node) {
-  let formattedRedirects = {}
-  for (let [, value] of Object.entries(node.children)) {
-    processNode(value)
+function processNode(node, formattedRedirects = {}) {
+  for (let [key, value] of Object.entries(node.children)) {
+    formattedRedirects = processNode(value, formattedRedirects)
   }
   if (node.redirects) {
     node.redirects.forEach(item => {
@@ -76,6 +75,8 @@ function processNode(node) {
           ...formattedRedirects,
           [fromUrl]: toUrl
         }
+      } else {
+        console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
       }
     })
   }
