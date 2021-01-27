@@ -216,14 +216,6 @@
       Authorization = "Basic Z3VpZGVkb2dzOmM4N2J0R0hRWUhVWENqc1FNQTV5dHRKWg=="		
 
 [[redirects]]
-  from = '/500'
-  to = 'https://gd-dev-origin.guidedogs.org.uk/500'
-  status = 200
-  force = true
-  [redirects.headers]
-      Authorization = "Basic Z3VpZGVkb2dzOmM4N2J0R0hRWUhVWENqc1FNQTV5dHRKWg=="		
-
-[[redirects]]
   from = '/sponsor-a-puppy-today/monthly-payment-thank-you'
   to = 'https://gd-dev-origin.guidedogs.org.uk/sponsor-a-puppy-today/monthly-payment-thank-you'
   status = 200
