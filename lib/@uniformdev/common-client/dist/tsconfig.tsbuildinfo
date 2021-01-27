@@ -287,7 +287,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/buildlayout.ts": {
-        "version": "1db4d15129abfa410e6f2c978e11f5f522bcf661fcd93faa315c6d5d7d51f87e",
+        "version": "6d7ab6578a3448f534877547b846b19a5b1195a67a9345b1478753428ae7a0e4",
         "signature": "d086f0c04a7a8d320f37396ed93fda17e782edfa97f1404c9455831e57875f4b",
         "affectsGlobalScope": false
       },
@@ -352,7 +352,7 @@
         "affectsGlobalScope": false
       },
       "../src/utils/getpageprops.ts": {
-        "version": "a04a6c30f956a0e7acbf1604815c7e4a7e8f06a76725ecac118d0c1c5b9c39cd",
+        "version": "7661c588075dbb31d820c9e79d1c574a2c30a44802390747756f1e58671740ed",
         "signature": "911f1e91050b79815eb995c764541bf4e5b9fcf07af73e3d4d2aa3f1939701a9",
         "affectsGlobalScope": false
       },
