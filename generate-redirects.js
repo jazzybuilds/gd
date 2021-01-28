@@ -29,9 +29,9 @@ function addTrailingSlash(url) {
 function cleanFromUrl(url) {
   url = url.trim().replace(/^\^/ig, '').replace(/^\//ig, '').replace(/\\\./ig, '.').replace(/\/$/ig, '');
   if (url.match(escapeRegex('(/)?$'))) {
-    return `/${url.replace('(/)?$', '')}`.trim().replace(/ /gi, '%20');
+    return addTrailingSlash(`/${url.replace('(/)?$', '')}`.trim().replace(/ /gi, '%20'));
   } else if (url.match(escapeRegex('$'))) {
-    return `/${url.replace('$', '')}`.trim().replace(/ /gi, '%20');
+    return addTrailingSlash(`/${url.replace('$', '')}`.trim().replace(/ /gi, '%20'));
   }
   return addTrailingSlash(`/${url.trim().replace(/ /gi, '%20')}`.toLowerCase());
 }
