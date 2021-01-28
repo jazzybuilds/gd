@@ -2,17 +2,17 @@ const fs = require("fs");
 const qs = require("query-string");
 const fetch = require("node-fetch");
 const parser = require('xml2json');
-const { cleanToUrl, cleanFromUrl } = require('./functions/utils/url-parser.js');
+const { cleanToUrl, cleanFromUrl } = require('./lib/helpers/redirect-url-parser.js');
 require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
 
 function writeRedirectsJSON(data) {
-  fs.writeFile("./functions/redirects.json", JSON.stringify(data), function (err) {
+  fs.writeFile("./functions_src/redirects.json", JSON.stringify(data), function (err) {
     if (err) {
       throw err;
     }
-    console.log("Created ./functions/redirects.json");
+    console.log("Created ./functions_src/redirects.json");
   });
 }
 

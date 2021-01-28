@@ -1,6 +1,6 @@
 const { pageNotFound } = require('./404.html.json');
 const redirects = require('./redirects.json');
-const { cleanFromUrl } = require('./functions/utils/url-parser.js');
+const { cleanFromUrl } = require('../lib/helpers/redirect-url-parser.js');
 
 const filterBy = str => Object.keys(redirects).filter(
   item => new RegExp('^' + item.replace(/\*/g, '.*') + '$').test(str)

@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 _redirects
-/functions/*.json
+/functions_src/*.json
+/functions/
 
 # dependencies
 /node_modules
