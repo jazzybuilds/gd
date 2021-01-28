@@ -2,6 +2,7 @@ const fs = require("fs");
 const qs = require("query-string");
 const fetch = require("node-fetch");
 const parser = require('xml2json');
+const { cleanToUrl, cleanFromUrl } = require('./functions/utils/url-parser.js');
 require("dotenv").config();
 
 const { UNIFORM_API_URL } = process.env;
@@ -13,33 +14,6 @@ function writeRedirectsJSON(data) {
     }
     console.log("Created ./functions/redirects.json");
   });
-}
-
-function escapeRegex(string) {
-  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
-
-function addTrailingSlash(url) {
-  if (url === '/' || url.indexOf('&') > -1 || url.indexOf('?') > -1 || /\.[^?|#]{3,4}(\?|#|$)/gi.test(url)) {
-    return url;
-  }
-  return url.endsWith('/') ? url : `${url}/`;
-}
-
-function cleanFromUrl(url) {
-  url = url.trim().replace(/^\^/ig, '').replace(/^\//ig, '').replace(/\\\./ig, '.').replace(/\/$/ig, '');
-  if (url.match(escapeRegex('(/)?$'))) {
-    return addTrailingSlash(`/${url.replace('(/)?$', '')}`.trim().replace(/ /gi, '%20'));
-  } else if (url.match(escapeRegex('$'))) {
-    return addTrailingSlash(`/${url.replace('$', '')}`.trim().replace(/ /gi, '%20'));
-  }
-  return addTrailingSlash(`/${url.trim().replace(/ /gi, '%20')}`.toLowerCase());
-}
-
-function cleanToUrl(url) {
-  const toUrlParse = url.trim().replace(/http(s)?\:\/\/\{HTTP_HOST\}/gi, '').replace('www.guidedogs.org.uk/', '/').replace('https:///', '/').trim().replace(/\/$/gi, '').replace(/^\//gi, '');
-  const toUrl = (toUrlParse ? toUrlParse : '/').replace(/ /gi, '%20');
-  return addTrailingSlash(toUrl.startsWith('http') || toUrl === '/' ? toUrl : `/${toUrl}`.toLowerCase());
 }
 
 function parseLegacyRedirects(path) {
@@ -209,3 +183,5 @@ console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
 
 parseRedirects();
 parseNetlifyToml();
+
+module.exports = { cleanFromUrl }

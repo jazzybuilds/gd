@@ -1,19 +1,13 @@
 const { pageNotFound } = require('./404.html.json');
 const redirects = require('./redirects.json');
-
-function addTrailingSlash(url) {
-  if (url === '/' || url.indexOf('&') > -1 || url.indexOf('?') > -1 || /\.[^?|#]{3,4}(\?|#|$)/gi.test(url)) {
-    return url;
-  }
-  return url.endsWith('/') ? url : `${url}/`;
-}
+c
 
 const filterBy = str => Object.keys(redirects).filter(
   item => new RegExp('^' + item.replace(/\*/g, '.*') + '$').test(str)
 );
 
 exports.handler = async function (event, context) {
-  const path = addTrailingSlash(event.path.toLowerCase());
+  const path = cleanFromUrl(event.path);
   if (path.startsWith('/.netlify/')) {
     return {
       statusCode: 200,
