@@ -1,6 +1,13 @@
 const { pageNotFound } = require('./404.html.json');
 const redirects = require('./redirects.json');
-c
+const { cleanFromUrl } = require('./functions/utils/url-parser.js');
+
+function addTrailingSlash(url) {
+  if (url === '/' || url.indexOf('&') > -1 || url.indexOf('?') > -1 || /\.[^?|#]{3,4}(\?|#|$)/gi.test(url)) {
+    return url;
+  }
+  return url.endsWith('/') ? url : `${url}/`;
+}
 
 const filterBy = str => Object.keys(redirects).filter(
   item => new RegExp('^' + item.replace(/\*/g, '.*') + '$').test(str)
