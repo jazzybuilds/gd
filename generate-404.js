@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const notFoundPage = fs.readFileSync('./out/404/index.html');
-const textBuffer = new Buffer(notFoundPage);
+const textBuffer = Buffer.from(notFoundPage);
 
 console.log(textBuffer.toString('base64'));
 
