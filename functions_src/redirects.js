@@ -1,10 +1,7 @@
 const { pageNotFound } = require('./404.html.json');
 const redirects = require('./redirects.json');
-const { cleanFromUrl } = require('../lib/helpers/redirect-url-parser.js');
+const { cleanFromUrl, getRedirectURL } = require('../lib/helpers/redirect-url-parser.js');
 
-const filterBy = str => Object.keys(redirects).filter(
-  item => new RegExp('^' + item.replace(/\*/g, '.*') + '$').test(str)
-);
 
 exports.handler = async function (event, context) {
   const path = cleanFromUrl(event.path);
@@ -18,22 +15,8 @@ exports.handler = async function (event, context) {
     };
   }
 
-  if (redirects[path]) {
-    const target = redirects[path];
-    return {
-      statusCode: 301,
-      headers: {
-        location: target,
-      },
-    };
-  }
-
-  const matches = filterBy(path)
-  if (matches.length > 0) {
-    const match = matches.sort(function (a, b) {
-      return a.length - b.length || a.localeCompare(b);
-    }).pop()
-    const target = redirects[match];
+  const target = getRedirectURL(path, redirects)
+  if (target) {
     return {
       statusCode: 301,
       headers: {

@@ -182,6 +182,6 @@ console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
 console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
 
 parseRedirects();
-parseNetlifyToml();
+// parseNetlifyToml();
 
 module.exports = { cleanFromUrl }
