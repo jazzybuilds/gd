@@ -16,26 +16,6 @@ function writeRedirectsJSON(data) {
   });
 }
 
-function parseLegacyRedirects(path) {
-  let formattedRedirects = {}
-  const data = fs.readFileSync(path);
-  const json = JSON.parse(parser.toJson(data));
-  json.rewrite.rules.rule.map(rule => {
-    if (rule.action.redirectType !== '301') {
-      throw new Error(`${rule.action.redirectType} not supported`)
-    }
-    const fromUrl = cleanFromUrl(rule.match.url);
-    const toUrl = cleanToUrl(rule.action.url);
-    if (!formattedRedirects[fromUrl]) {
-      formattedRedirects = {
-        ...formattedRedirects,
-        [fromUrl]: toUrl
-      }
-    }
-  })
-  return formattedRedirects
-}
-
 function processNode(node, formattedRedirects = {}) {
   for (let [key, value] of Object.entries(node.children)) {
     formattedRedirects = processNode(value, formattedRedirects)
@@ -86,12 +66,10 @@ async function parseRedirects() {
   console.log("Parsing managed and legacy redirects, please wait...");
 
   const managedRedirects = await parseManagedRedirects();
-  const legacyRedirects = await parseLegacyRedirects('./RewriteRules.config');
 
-  const allRedirects = { ...managedRedirects, ...legacyRedirects }
-  console.log(`Collected a total of ${Object.keys(allRedirects).length} redirects`);
+  console.log(`Collected a total of ${Object.keys(managedRedirects).length} redirects`);
 
-  writeRedirectsJSON(allRedirects)
+  writeRedirectsJSON(managedRedirects)
 }
 
 const sitecoreProxyRedirectTemplate = `[[redirects]]
@@ -182,6 +160,6 @@ console.log("Using SITECORE_ORIGIN as: " + process.env.SITECORE_ORIGIN);
 console.log("Using MEDIA_ORIGIN as: " + process.env.MEDIA_ORIGIN);
 
 parseRedirects();
-// parseNetlifyToml();
+parseNetlifyToml();
 
 module.exports = { cleanFromUrl }
