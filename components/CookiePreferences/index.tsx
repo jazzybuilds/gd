@@ -35,7 +35,7 @@ export const CookiePreferences = (props) => {
     document.cookie = `${cookieName}=${JSON.stringify(updatedCookieData)};`
     document.cookie = 'privacy-notification=1'
 
-    window.location.reload();
+    window.location.replace(window.location.origin + window.location.pathname);
   }
 
   return (
