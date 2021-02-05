@@ -23,6 +23,9 @@ export const CookiePreferences = (props) => {
   }, [cookieName])
 
   const onSubmit = () => {
+    const expiryDate = new Date()
+    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+
     const updatedCookieData = {
       a: true, rm: false, ac: false, so: false,
       cc: {
@@ -33,8 +36,8 @@ export const CookiePreferences = (props) => {
       ed: new Date().toISOString()
     }
 
-    cookies.set(cookieName, updatedCookieData, { path: '/' });
-    cookies.set('privacy-notification', '1', { path: '/' });
+    cookies.set(cookieName, updatedCookieData, { path: '/', expires: expiryDate });
+    cookies.set('privacy-notification', '1', { path: '/', expires: expiryDate });
     window.location.replace(window.location.origin + window.location.pathname);
   }
 
