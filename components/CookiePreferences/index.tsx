@@ -1,7 +1,4 @@
 import React from 'react'
-import Cookies from 'universal-cookie';
-
-const cookies = new Cookies();
 
 export const CookiePreferences = (props) => {
   const [advertising, setAdvertising] = React.useState(false)
@@ -15,8 +12,9 @@ export const CookiePreferences = (props) => {
   const {title, yestext, notext, submitbuttontext} = fields;
 
   React.useEffect(() => {
-    const value = cookies.get(cookieName)
-    if (value) {
+    const parts = `; ${document.cookie}`.split(`; ${cookieName}=`);
+    if (parts.length >= 2) {
+      const value = JSON.parse(parts.pop().split(';').shift())
       setAdvertising(value.cc.Advertising)
       setFunctional(value.cc.Functional)
     }
@@ -33,11 +31,11 @@ export const CookiePreferences = (props) => {
         Advertising: advertising,
         Functional: functional,
       },
-      ed: new Date().toISOString()
+      ed: expiryDate.toISOString()
     }
 
-    cookies.set(cookieName, updatedCookieData, { path: '/', expires: expiryDate });
-    cookies.set('privacy-notification', '1', { path: '/', expires: expiryDate });
+    document.cookie = `${cookieName}=${JSON.stringify(updatedCookieData)};expires='${expiryDate.toString()}';path=/`
+    document.cookie = `privacy-notification=1;expires='${expiryDate.toString()}';path=/`
     window.location.replace(window.location.origin + window.location.pathname);
   }
 
