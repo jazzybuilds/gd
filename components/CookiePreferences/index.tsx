@@ -18,10 +18,12 @@ export const CookiePreferences = (props) => {
       setAdvertising(value.cc.Advertising)
       setFunctional(value.cc.Functional)
     }
-
   }, [cookieName])
 
   const onSubmit = () => {
+    const expiryDate = new Date()
+    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+
     const updatedCookieData = {
       a: true, rm: false, ac: false, so: false,
       cc: {
@@ -29,13 +31,12 @@ export const CookiePreferences = (props) => {
         Advertising: advertising,
         Functional: functional,
       },
-      ed: new Date().toISOString()
+      ed: expiryDate.toISOString()
     }
 
-    document.cookie = `${cookieName}=${JSON.stringify(updatedCookieData)};`
-    document.cookie = 'privacy-notification=1'
-
-    window.location.reload();
+    document.cookie = `${cookieName}=${JSON.stringify(updatedCookieData)};expires='${expiryDate.toString()}';path=/`
+    document.cookie = `privacy-notification=1;expires='${expiryDate.toString()}';path=/`
+    window.location.replace(window.location.origin + window.location.pathname);
   }
 
   return (
