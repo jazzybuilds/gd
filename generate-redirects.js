@@ -16,19 +16,17 @@ function writeRedirectsJSON(data) {
   });
 }
 
-function processNode(node, formattedRedirects = {}) {
-  for (let [key, value] of Object.entries(node.children)) {
-    formattedRedirects = processNode(value, formattedRedirects)
-  }
+function processNode(node, formattedRedirects = []) {
   if (node.redirects) {
     node.redirects.forEach(item => {
       const fromUrl = cleanFromUrl(item.source);
       const toUrl = cleanToUrl(item.target);
-      if (!formattedRedirects[fromUrl]) {
-        formattedRedirects = {
-          ...formattedRedirects,
-          [fromUrl]: toUrl
-        }
+      const alreadyExists = formattedRedirects.find(redirect => redirect.from === fromUrl)
+      if (!alreadyExists) {
+        formattedRedirects.push({
+          from: fromUrl,
+          to: toUrl
+        }) 
       } else {
         console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
       }

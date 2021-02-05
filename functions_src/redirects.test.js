@@ -6,15 +6,36 @@ const {
   getRedirectURL
 } = require('../lib/helpers/redirect-url-parser.js')
 
-const data = {
-  "/legacy-url/": "/updated-url/",
-  "/legacy-placeholder/:placeholder/lorem/": "/updated-placeholder/lorem/:placeholder/",
-  "/legacy-placewilder/:placeholder/*": "/updated-placewilder/:placeholder/lorem/*",
-  "/puppy-sponsor/:pupnames/gallery/": "/sponsor-a-puppy/gallery/:pupname/",
-  "/wildcard-url/*": "/updated-wildcard-url/",
-  "/incorrect-wildcard-url/*": "/updated-incorrect-wildcard-url/",
-  "/nested-wildcard-url/*": "/updated-nested-wildcard-url/*",
-}
+const data = [
+  {
+    from: "/legacy-url/",
+    to: "/updated-url/"
+  },
+  {
+    from: "/legacy-placeholder/:placeholder/lorem/",
+    to: "/updated-placeholder/lorem/:placeholder/"
+  },
+  {
+    from: "/legacy-placewilder/:placeholder/*",
+    to: "/updated-placewilder/:placeholder/lorem/*"
+  },
+  {
+    from: "/puppy-sponsor/:pupnames/gallery/",
+    to: "/sponsor-a-puppy/gallery/:pupname/"
+  },
+  {
+    from: "/wildcard-url/*",
+    to: "/updated-wildcard-url/"
+  },
+  {
+    from: "/incorrect-wildcard-url/*",
+    to: "/updated-incorrect-wildcard-url/"
+  },
+  {
+    from: "/nested-wildcard-url/*",
+    to: "/updated-nested-wildcard-url/*"
+  },
+]
 
 describe('integration tests', () => {
   test('default redirect', () => {
@@ -78,7 +99,7 @@ describe('wildcard tests', () => {
 
   test('finds redirect url correctly', () => {
     const match = filterBy("/wildcard-url/some/path/", data)
-    expect(match).toEqual(expect.arrayContaining(["/wildcard-url/*"]));
+    expect(match).toEqual(expect.arrayContaining([{"from": "/wildcard-url/*", "to": "/updated-wildcard-url/"}]));
   });
 })
 
@@ -92,10 +113,9 @@ describe('placeholder tests', () => {
     expect(url).toBe("/sponsor-a-puppy/gallery/ruby/");
   });
 
-
   test('finds redirect url correctly', () => {
     const match = filterByPlaceholder("/puppy-sponsor/ruby/gallery/", data)
-    expect(match).toEqual(expect.arrayContaining(["/puppy-sponsor/:pupnames/gallery/"]));
+    expect(match).toEqual(expect.arrayContaining([{"from": "/puppy-sponsor/:pupnames/gallery/", "to": "/sponsor-a-puppy/gallery/:pupname/"}]));
   });
   
   test('doesnt find path with placeholder', () => {
