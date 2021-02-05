@@ -20,6 +20,10 @@ const data = [
     to: "/updated-placewilder/:placeholder/lorem/*"
   },
   {
+    from: "/legacy-double-placewilder/:placer/:placeholder/*",
+    to: "/updated-double-placewilder/:placeholder/lorem/:placer/*"
+  },
+  {
     from: "/puppy-sponsor/:pupnames/gallery/",
     to: "/sponsor-a-puppy/gallery/:pupname/"
   },
@@ -42,14 +46,23 @@ describe('integration tests', () => {
     const url = getRedirectURL("/legacy-url/", data)
     expect(url).toBe("/updated-url/");
   });
+
+
+  test('formats path with two placeholder and wildcard', () => {
+    const url = getRedirectURL("/legacy-double-placewilder/temp/value/some/path/", data)
+    expect(url).toBe("/updated-double-placewilder/value/lorem/temp/some/path/");
+  });
+
   test('wildcard redirect in both directions', () => {
     const url = getRedirectURL("/wildcard-url/some/path/", data)
     expect(url).toBe("/updated-wildcard-url/");
   });
+
   test('wildcard redirect in single direction', () => {
     const url = getRedirectURL("/nested-wildcard-url/some/path/", data)
     expect(url).toBe("/updated-nested-wildcard-url/some/path/");
   });
+
   test('placeholder redirect', () => {
     const url = getRedirectURL("/legacy-placeholder/the-placeholder/lorem/", data)
     expect(url).toBe("/updated-placeholder/lorem/the-placeholder/");
@@ -107,8 +120,17 @@ describe('placeholder tests', () => {
   test('formats path with placeholder', () => {
     const url = formatPlaceholdeURL(
       "/puppy-sponsor/ruby/gallery/",
-      "/puppy-sponsor/:pupnames/gallery/",
+      "/puppy-sponsor/:pupname/gallery/",
       "/sponsor-a-puppy/gallery/:pupname/")
+
+    expect(url).toBe("/sponsor-a-puppy/gallery/ruby/");
+  });
+
+  test('formats path with two placeholder', () => {
+    const url = formatPlaceholdeURL(
+      "/puppy-sponsor/ruby/gallery/",
+      "/puppy-sponsor/:pupname/:sub/",
+      "/sponsor-a-puppy/:sub/:pupname/")
 
     expect(url).toBe("/sponsor-a-puppy/gallery/ruby/");
   });
