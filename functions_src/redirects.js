@@ -4,7 +4,13 @@ const { cleanFromUrl, getRedirectURL } = require('../lib/helpers/redirect-url-pa
 
 
 exports.handler = async function (event, context) {
-  const path = cleanFromUrl(event.path);
+  let path = cleanFromUrl(event.path);
+  const parameters = Object.keys(event.queryStringParameters).map((param) => `${param}=${event.queryStringParameters[param]}`).join("&")
+
+  if (parameters) {
+    path = `${path}?${parameters}`
+  }
+
   if (path.startsWith('/.netlify/')) {
     return {
       statusCode: 200,
@@ -15,12 +21,12 @@ exports.handler = async function (event, context) {
     };
   }
 
-  const { target, status } = getRedirectURL(path, redirects)
-  if (target) {
+  const redirectValue = getRedirectURL(path, redirects)
+  if (redirectValue) {
     return {
-      statusCode: status,
+      statusCode: redirectValue.status,
       headers: {
-        location: target,
+        location: redirectValue.target,
       },
     };
   }
