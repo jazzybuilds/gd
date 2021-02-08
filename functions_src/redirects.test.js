@@ -13,6 +13,16 @@ const data = [
     status: "301"
   },
   {
+    from: "/legacy-query/?q=test",
+    to: "/updated-query-url/",
+    status: "301"
+  },
+  {
+    from: "/legacy-query-wildcard/*",
+    to: "/updated-query-wildcard/*?q=test",
+    status: "301"
+  },
+  {
     from: "/legacy-placeholder/:placeholder/lorem/",
     to: "/updated-placeholder/lorem/:placeholder/",
     status: "301"
@@ -58,6 +68,21 @@ describe('integration tests', () => {
     }));
   });
 
+  test('redirect with query string', () => {
+    const value = getRedirectURL("/legacy-query/?q=test", data)
+    expect(value).toEqual(expect.objectContaining({
+      target: "/updated-query-url/",
+      status: "301"
+    }));
+  });
+
+  test('redirect with query string and wildcard', () => {
+    const value = getRedirectURL("/legacy-query-wildcard/test", data)
+    expect(value).toEqual(expect.objectContaining({
+      target: "/updated-query-wildcard/test?q=test",
+      status: "301"
+    }));
+  });
 
   test('formats path with two placeholder and wildcard', () => {
     const value = getRedirectURL("/legacy-double-placewilder/temp/value/some/path/", data)
