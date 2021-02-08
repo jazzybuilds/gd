@@ -15,10 +15,10 @@ exports.handler = async function (event, context) {
     };
   }
 
-  const target = getRedirectURL(path, redirects)
+  const { target, status } = getRedirectURL(path, redirects)
   if (target) {
     return {
-      statusCode: 301,
+      statusCode: status,
       headers: {
         location: target,
       },

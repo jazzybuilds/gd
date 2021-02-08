@@ -25,7 +25,8 @@ function processNode(node, formattedRedirects = []) {
       if (!alreadyExists) {
         formattedRedirects.push({
           from: fromUrl,
-          to: toUrl
+          to: toUrl,
+          status: item.status
         }) 
       } else {
         console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
