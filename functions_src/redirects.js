@@ -29,8 +29,6 @@ exports.handler = async function (event, context) {
       headers: {
         location: redirectValue.target,
       },
-      queryStringParameters: null,
-      pathParameters: null
     };
   }
 
