@@ -38,7 +38,7 @@ const data = [
     status: "301"
   },
   {
-    from: "/puppy-sponsor/:pupnames/gallery/",
+    from: "/puppy-sponsor/:pupname/gallery/",
     to: "/sponsor-a-puppy/gallery/:pupname/",
     status: "301"
   },
@@ -71,15 +71,31 @@ describe('integration tests', () => {
   test('redirect with query string', () => {
     const value = getRedirectURL("/legacy-query/?q=test", data)
     expect(value).toEqual(expect.objectContaining({
-      target: "/updated-query-url/",
+      target: "/updated-query-url/?q=test",
       status: "301"
     }));
   });
 
-  test('redirect with query string and wildcard', () => {
+  test('redirect with wildcard and query string in source', () => {
+    const value = getRedirectURL("/wildcard-url/test/testing?q=test", data)
+    expect(value).toEqual(expect.objectContaining({
+      target: "/updated-wildcard-url/?q=test",
+      status: "301"
+    }));
+  });
+
+  test('redirect with wildcard and query string in target', () => {
     const value = getRedirectURL("/legacy-query-wildcard/test", data)
     expect(value).toEqual(expect.objectContaining({
       target: "/updated-query-wildcard/test?q=test",
+      status: "301"
+    }));
+  });
+
+  test('redirect with placeholder and query string in source', () => {
+    const value = getRedirectURL("/puppy-sponsor/molly/gallery/?q=test", data)
+    expect(value).toEqual(expect.objectContaining({
+      target: "/sponsor-a-puppy/gallery/molly/?q=test",
       status: "301"
     }));
   });
@@ -187,7 +203,7 @@ describe('placeholder tests', () => {
 
   test('finds redirect url correctly', () => {
     const match = filterByPlaceholder("/puppy-sponsor/ruby/gallery/", data)
-    expect(match).toEqual(expect.arrayContaining([{"from": "/puppy-sponsor/:pupnames/gallery/", "to": "/sponsor-a-puppy/gallery/:pupname/", status: "301"}]));
+    expect(match).toEqual(expect.arrayContaining([{"from": "/puppy-sponsor/:pupname/gallery/", "to": "/sponsor-a-puppy/gallery/:pupname/", status: "301"}]));
   });
   
   test('doesnt find path with placeholder', () => {
