@@ -20,15 +20,16 @@ const context: UniformContextProps = uniformConfig();
 context.logger = context.logger || createConsoleLogger();
 
 import MVCLayout from '../components/Layout'
+import CardComponent from '../components/Card'
+
 const HeroComponent =  loadable(() => import('../components/Hero'))
+const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'))
 const TextBannerComponent =  loadable(() => import('../components/TextBanner'))
-const CardComponent =  loadable(() => import('../components/Card'))
 const CardBannerComponent =  loadable(() => import('../components/CardBanner'))
 const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'))
 const ButtonComponent =  loadable(() => import('../components/Button'))
 const BlockTextComponent =  loadable(() => import('../components/BlockText'))
 const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'))
-const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'))
 const ImageComponent =  loadable(() => import('../components/Image'))
 const CardArticleComponent =  loadable(() => import('../components/CardArticle'))
 const VideoComponent =  loadable(() => import('../components/Video'))
