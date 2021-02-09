@@ -1,8 +1,9 @@
 import React from 'react'
 import "../../styles/component-accordion.scss";
-import { Image } from '../Image';
-import { Video } from '../Video';
+import loadable from '@loadable/component'
 
+const Image =  loadable(() => import('../Image'))
+const Video =  loadable(() => import('../Video'))
 
 const Wrapper: React.FC<{ index: number, heading: string }> = (props) => {
   return (
@@ -33,7 +34,7 @@ const Content: React.FC<{ content: string }> = (props) => {
   )
 }
 
-export const Accordion = (props) => {
+const Accordion = (props) => {
   const { renderingContext } = props
   const { item: { children } } = renderingContext
 
@@ -95,3 +96,5 @@ export const Accordion = (props) => {
     </div>
   )
 }
+
+export default Accordion
