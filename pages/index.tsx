@@ -17,6 +17,7 @@ import { theme } from "../theme";
 const context: UniformContextProps = uniformConfig();
 context.logger = context.logger || createConsoleLogger();
 
+import MVCLayout from '../components/Layout'
 const HeroComponent =  loadable(() => import('../components/Hero'))
 const TextBannerComponent =  loadable(() => import('../components/TextBanner'))
 const CardComponent =  loadable(() => import('../components/Card'))
@@ -34,9 +35,7 @@ const CampaignSearchComponent =  loadable(() => import('../components/CampaignSe
 const ContentComponent =  loadable(() => import('../components/Content'))
 const DividerComponent =  loadable(() => import('../components/Divider'))
 const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
-const MVCLayout =  loadable(() => import('../components/Layout'))
 const MetadataLayout =  loadable(() => import('../components/MetadataLayout'))
-
 
 // Components Index
 const componentsIndex: any = {};
