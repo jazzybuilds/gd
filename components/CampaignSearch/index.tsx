@@ -1,8 +1,6 @@
 import React from 'react'
 
-
-
-export const CampaignSearch = (props) => {
+const CampaignSearch = (props) => {
   const [postCode, setPostcode] = React.useState("")
   const [error, setError] = React.useState(false)
 
@@ -45,3 +43,5 @@ export const CampaignSearch = (props) => {
     </div>
   )
 }
+
+export default CampaignSearch

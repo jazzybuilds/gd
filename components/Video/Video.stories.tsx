@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Video } from '.';
+import Video from '.';
 
 export default {
   title: 'Video | Video',

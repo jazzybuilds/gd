@@ -5,7 +5,7 @@ const Styles = {
   FooterNav: "{57CAA387-3790-4E66-A92A-16669503D2FC}"
 }
 
-export const Content = (props) => {
+const Content = (props) => {
   const { renderingContext } = props
 
   if (!renderingContext.item || !renderingContext.item.fields) {
@@ -28,3 +28,5 @@ export const Content = (props) => {
     </div>
   )
 }
+
+export default Content

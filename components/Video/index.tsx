@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Video = (props) => {
+const Video = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields) {
     return null
@@ -67,3 +67,5 @@ export const Video = (props) => {
     </div>
   )
 }
+
+export default Video

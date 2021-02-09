@@ -37,9 +37,9 @@ export default class CustomDocument extends Document {
             content="https://www.guidedogs.org.uk:443/-/media/Project/GuideDogs/GuideDogsDotOrg/Images/opengraph/homepage/Black-labrador-looks-up-at-camera.jpg"
             property="og:image"
           />
-          <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" type="font/woff2" />
+          {/* <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" type="font/woff2" />
           <link rel="preload" href="/fonts/castledown/castledown-heavy.woff2" as="font" type="font/woff2" />
-          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff" as="font" type="font/woff" />
+          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff" as="font" type="font/woff" /> */}
 
           {/* @ts-ignore */}
           {this.props.styleTags}

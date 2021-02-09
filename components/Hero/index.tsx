@@ -1,6 +1,6 @@
 import "../../styles/component-hero.scss";
 
-export const Hero = (props) => {
+const Hero = (props) => {
   const fields = props?.renderingContext?.item?.fields;
   if (!fields) {
     return null;
@@ -56,3 +56,5 @@ export const Hero = (props) => {
     </div>
   );
 };
+
+export default Hero

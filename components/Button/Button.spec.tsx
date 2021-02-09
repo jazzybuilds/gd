@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Button } from '.';
+import Button from '.';
 import { TestWrapper } from '../../TestWrapper';
 
 it('Button renders correctly', () => {

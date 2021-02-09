@@ -7,7 +7,7 @@ const Variant = {
   BlueNoCTABackground: "{462ECBEC-C6C3-410C-98D5-4632822D72BE}",
 }
 
-export const TextBanner = (props) => {
+const TextBanner = (props) => {
   const {renderingContext} = props
 
   if (!renderingContext.item || !renderingContext.item.fields) {
@@ -49,3 +49,5 @@ export const TextBanner = (props) => {
     </div>
   )
 }
+
+export default TextBanner

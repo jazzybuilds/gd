@@ -13,7 +13,7 @@ interface ImageProps {
   alt?: string
 }
 
-export const CardBanner = (props) => {
+const CardBanner = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields) {
     console.error("No item supplied for CardBanner")
@@ -66,3 +66,5 @@ export const CardBanner = (props) => {
     </Root>
   )
 }
+
+export default CardBanner

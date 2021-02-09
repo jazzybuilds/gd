@@ -5,7 +5,7 @@ const Variants = {
   NoAuthor: "{21C4DBE4-994A-4E7B-B0DC-128E2A9A0182}",
 }
 
-export const BlockQuote = (props) => {
+const BlockQuote = (props) => {
   const { renderingContext } = props
 
   if (!renderingContext.item || !renderingContext.item.fields) {
@@ -29,3 +29,5 @@ export const BlockQuote = (props) => {
     </div>
   )
 }
+
+export default BlockQuote

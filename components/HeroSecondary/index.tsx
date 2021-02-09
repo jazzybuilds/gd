@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const HeroSecondary = (props) => {
+const HeroSecondary = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields) {
     return null
@@ -29,3 +29,5 @@ export const HeroSecondary = (props) => {
     </div>
   )
 }
+
+export default HeroSecondary

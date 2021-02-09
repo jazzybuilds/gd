@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Divider = (props) => {
+const Divider = (props) => {
   return (
     <div className="component divider small-12 columns">
       <div className="component-content">
@@ -9,3 +9,5 @@ export const Divider = (props) => {
     </div>
   )
 }
+
+export default Divider

@@ -13,7 +13,7 @@ const Styles = {
   MakeEqualHeight: "{3182392E-93CD-425C-8778-611B677FA58A}",
 }
 
-export const Card = (props: any) => {
+const Card = (props: any) => {
   const { renderingContext } = props
 
   if (!renderingContext.item || !renderingContext.item.fields) {
@@ -65,3 +65,5 @@ export const Card = (props: any) => {
     </Root>
   )
 }
+
+export default Card

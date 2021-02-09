@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CookiePreferences = (props) => {
+const CookiePreferences = (props) => {
   const [advertising, setAdvertising] = React.useState(false)
   const [functional, setFunctional] = React.useState(false)
   const fields = props?.renderingContext?.item?.fields;
@@ -99,3 +99,5 @@ export const CookiePreferences = (props) => {
     </div>
   )
 }
+
+export default CookiePreferences

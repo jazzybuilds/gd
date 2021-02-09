@@ -14,7 +14,7 @@ const Variant = {
   WithCaption: "{446FE21B-8B41-4CA4-A06A-A9D5A76E59B5}",
 }
 
-export const Image = (props) => {
+const Image = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields || !renderingContext.item.fields.image) {
     return null
@@ -55,3 +55,5 @@ export const Image = (props) => {
     </div>
   )
 }
+
+export default Image

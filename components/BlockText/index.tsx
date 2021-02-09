@@ -1,7 +1,7 @@
 import React from 'react'
 import "../../styles/component-message-block.scss";
 
-export const BlockText = (props) => {
+const BlockText = (props) => {
   const { renderingContext } = props
   if (!renderingContext.item || !renderingContext.item.fields) {
     return null
@@ -18,3 +18,5 @@ export const BlockText = (props) => {
     </div>
   )
 }
+
+export default BlockText

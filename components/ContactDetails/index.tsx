@@ -7,7 +7,7 @@ const Variants = {
   PhoneOnly: "{FBBFC646-525D-4997-A37F-DD4262F5CB25}",
 }
 
-export const ContactDetails = (props) => {
+const ContactDetails = (props) => {
   const { renderingContext } = props
 
   if (!renderingContext.item || !renderingContext.item.fields) {
@@ -43,3 +43,5 @@ export const ContactDetails = (props) => {
     </div>
   )
 }
+
+export default ContactDetails

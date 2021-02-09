@@ -12,7 +12,7 @@ interface ImageProps {
   alt?: string
 }
 
-export const CardArticle = (props) => {
+const CardArticle = (props) => {
   const { renderingContext } = props
 
   if (!renderingContext.item || !renderingContext.item.fields) {
@@ -60,3 +60,5 @@ export const CardArticle = (props) => {
     </div>
   )
 }
+
+export default CardArticle

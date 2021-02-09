@@ -9,7 +9,7 @@ const Variants = {
   Link: "{0D07C7F0-4367-4647-BFAF-8AAD9A8B1E27}",
 }
 
-export const Button = (props) => {
+const Button = (props) => {
   const { renderingContext } = props
 
   if (!renderingContext.item || !renderingContext.item.fields || !renderingContext.item.fields.link) {
@@ -55,3 +55,5 @@ export const Button = (props) => {
     </div>
   )
 }
+
+export default Button

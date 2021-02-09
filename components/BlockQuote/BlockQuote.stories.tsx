@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { BlockQuote } from '.';
+import BlockQuote from '.';
 
 export default {
   title: 'BlockQuote | Quote',

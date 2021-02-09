@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-
+import loadable from '@loadable/component'
 // Uniform
 import {
   BasePlaceholder,
@@ -11,32 +11,32 @@ import {
   createConsoleLogger,
 } from "@uniformdev/next";
 import { UniformContextProps } from "@uniformdev/common-client";
-
 import uniformConfig from "../uniform.config";
+import { theme } from "../theme";
+
 const context: UniformContextProps = uniformConfig();
 context.logger = context.logger || createConsoleLogger();
 
-import { Hero as HeroComponent } from "../components/Hero";
-import { TextBanner as TextBannerComponent } from "../components/TextBanner";
-import { Card as CardComponent } from "../components/Card";
-import { CardBanner as CardBannerComponent } from "../components/CardBanner";
-import { ContactDetails as ContactDetailsComponent } from "../components/ContactDetails";
-import { Button as ButtonComponent } from "../components/Button";
-import { BlockText as BlockTextComponent } from "../components/BlockText";
-import { BlockQuote as BlockQuoteComponent } from "../components/BlockQuote";
-import { HeroSecondary as HeroSecondaryComponent } from "../components/HeroSecondary";
-import { Accordion as AccordionComponent } from "../components/Accordion";
-import { Image as ImageComponent } from "../components/Image";
-import { CardArticle as CardArticleComponent } from "../components/CardArticle";
-import { Video as VideoComponent } from "../components/Video";
-import { CookiePreferences as CookiePreferencesComponent } from "../components/CookiePreferences";
-import MVCLayout from "../components/Layout";
-import MetadataLayout from "../components/MetadataLayout";
-import { theme } from "../theme";
-import { CampaignSearch } from "../components/CampaignSearch";
-import BrowserTitle from "../components/Meta/BrowserTitle";
-import { Content as ContentComponent } from "../components/Content";
-import { Divider as DividerComponent } from "../components/Divider";
+const HeroComponent =  loadable(() => import('../components/Hero'))
+const TextBannerComponent =  loadable(() => import('../components/TextBanner'))
+const CardComponent =  loadable(() => import('../components/Card'))
+const CardBannerComponent =  loadable(() => import('../components/CardBanner'))
+const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'))
+const ButtonComponent =  loadable(() => import('../components/Button'))
+const BlockTextComponent =  loadable(() => import('../components/BlockText'))
+const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'))
+const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'))
+const ImageComponent =  loadable(() => import('../components/Image'))
+const CardArticleComponent =  loadable(() => import('../components/CardArticle'))
+const VideoComponent =  loadable(() => import('../components/Video'))
+const CookiePreferencesComponent =  loadable(() => import('../components/CookiePreferences'))
+const CampaignSearchComponent =  loadable(() => import('../components/CampaignSearch'))
+const ContentComponent =  loadable(() => import('../components/Content'))
+const DividerComponent =  loadable(() => import('../components/Divider'))
+const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
+const MVCLayout =  loadable(() => import('../components/Layout'))
+const MetadataLayout =  loadable(() => import('../components/MetadataLayout'))
+
 
 // Components Index
 const componentsIndex: any = {};
@@ -50,14 +50,13 @@ componentsIndex["CTAButton"] = ButtonComponent;
 componentsIndex["MessageBlock"] = BlockTextComponent;
 componentsIndex["Quote"] = BlockQuoteComponent;
 componentsIndex["SecondaryHero"] = HeroSecondaryComponent;
-componentsIndex["Accordion"] = AccordionComponent;
 componentsIndex["CaptionedImage"] = ImageComponent;
 componentsIndex["CaseStudySpotlight"] = CardArticleComponent;
 componentsIndex["Video"] = VideoComponent;
 componentsIndex["MVCLayout"] = MVCLayout;
 componentsIndex["MetadataLayout"] = MetadataLayout;
 componentsIndex["CookiePreferences"] = CookiePreferencesComponent;
-componentsIndex["Volunteeringsearchbox"] = CampaignSearch;
+componentsIndex["Volunteeringsearchbox"] = CampaignSearchComponent;
 componentsIndex["BrowserTitle"] = BrowserTitle;
 componentsIndex["RichText"] = ContentComponent
 componentsIndex["ReusableRichText"] = ContentComponent

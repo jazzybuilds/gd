@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Card } from '.';
+import Card from '.';
 import { TestWrapper } from '../../TestWrapper';
 
 it('Card renders correctly', () => {

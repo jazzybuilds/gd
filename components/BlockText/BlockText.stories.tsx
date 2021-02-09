@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { BlockText } from '.';
+import BlockText from '.';
 
 export default {
   title: 'BlockText | MessageBlock',
