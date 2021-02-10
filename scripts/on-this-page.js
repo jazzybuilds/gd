@@ -1,4 +1,5 @@
 if (process.browser) {
+  window.addEventListener('load', () => {
     // On this page component link builder
     var onThisPageList = document.querySelector('.js-onThisPageLinks');
     if (onThisPageList) {
@@ -38,4 +39,5 @@ if (process.browser) {
       .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
       .replace(/\-\-+/g, '-');        // Replace multiple - with single -
     }
+  });
 }
