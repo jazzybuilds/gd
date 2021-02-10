@@ -27,8 +27,8 @@ function processNode(node, formattedRedirects = []) {
           to: toUrl,
           status: Number(item.status) || 301
         }) 
-      } else {
-        console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
+      // } else {
+      //   console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
       }
     })
   }
@@ -59,8 +59,8 @@ function parseLegacyRedirects(path) {
         to: toUrl,
         status: 301
       }) 
-    } else {
-      console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
+    // } else {
+    //   console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
     }
 
   })
@@ -88,12 +88,13 @@ async function parseManagedRedirects() {
 }
 
 async function parseRedirects() {
-  console.log("Parsing managed and legacy redirects, please wait...");
+  console.log("Parsing redirects, please wait...");
 
   const managedRedirects = await parseManagedRedirects();
   let allRedirects = managedRedirects
 
   if (INCLUDE_LEGACY && INCLUDE_LEGACY === 'true') {
+    console.log("Parsing legacy redirects")
     const legacyRedirects = await parseLegacyRedirects('./RewriteRules.config');
     allRedirects = [ ...managedRedirects, ...legacyRedirects ]
   }
