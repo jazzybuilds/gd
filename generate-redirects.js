@@ -16,39 +16,18 @@ function writeRedirectsJSON(data) {
   });
 }
 
-function parseLegacyRedirects(path) {
-  let formattedRedirects = {}
-  const data = fs.readFileSync(path);
-  const json = JSON.parse(parser.toJson(data));
-  json.rewrite.rules.rule.map(rule => {
-    if (rule.action.redirectType !== '301') {
-      throw new Error(`${rule.action.redirectType} not supported`)
-    }
-    const fromUrl = cleanFromUrl(rule.match.url);
-    const toUrl = cleanToUrl(rule.action.url);
-    if (!formattedRedirects[fromUrl]) {
-      formattedRedirects = {
-        ...formattedRedirects,
-        [fromUrl]: toUrl
-      }
-    }
-  })
-  return formattedRedirects
-}
-
-function processNode(node, formattedRedirects = {}) {
-  for (let [key, value] of Object.entries(node.children)) {
-    formattedRedirects = processNode(value, formattedRedirects)
-  }
+function processNode(node, formattedRedirects = []) {
   if (node.redirects) {
     node.redirects.forEach(item => {
       const fromUrl = cleanFromUrl(item.source);
       const toUrl = cleanToUrl(item.target);
-      if (!formattedRedirects[fromUrl]) {
-        formattedRedirects = {
-          ...formattedRedirects,
-          [fromUrl]: toUrl
-        }
+      const alreadyExists = formattedRedirects.find(redirect => redirect.from === fromUrl)
+      if (!alreadyExists) {
+        formattedRedirects.push({
+          from: fromUrl,
+          to: toUrl,
+          status: Number(item.status) || 301
+        }) 
       } else {
         console.log(`Skipping redirect as source already mapped: ${fromUrl} -> ${toUrl}`)
       }
@@ -86,12 +65,10 @@ async function parseRedirects() {
   console.log("Parsing managed and legacy redirects, please wait...");
 
   const managedRedirects = await parseManagedRedirects();
-  const legacyRedirects = await parseLegacyRedirects('./RewriteRules.config');
 
-  const allRedirects = { ...managedRedirects, ...legacyRedirects }
-  console.log(`Collected a total of ${Object.keys(allRedirects).length} redirects`);
+  console.log(`Collected a total of ${Object.keys(managedRedirects).length} redirects`);
 
-  writeRedirectsJSON(allRedirects)
+  writeRedirectsJSON(managedRedirects)
 }
 
 const sitecoreProxyRedirectTemplate = `[[redirects]]

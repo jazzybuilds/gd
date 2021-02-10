@@ -1,13 +1,16 @@
 const { pageNotFound } = require('./404.html.json');
 const redirects = require('./redirects.json');
-const { cleanFromUrl } = require('../lib/helpers/redirect-url-parser.js');
+const { cleanFromUrl, getRedirectURL } = require('../lib/helpers/redirect-url-parser.js');
 
-const filterBy = str => Object.keys(redirects).filter(
-  item => new RegExp('^' + item.replace(/\*/g, '.*') + '$').test(str)
-);
 
 exports.handler = async function (event, context) {
-  const path = cleanFromUrl(event.path);
+  let path = cleanFromUrl(event.path);
+  const parameters = Object.keys(event.queryStringParameters).map((param) => `${param}=${event.queryStringParameters[param]}`).join("&")
+
+  if (parameters) {
+    path = `${path}?${parameters}`
+  }
+
   if (path.startsWith('/.netlify/')) {
     return {
       statusCode: 200,
@@ -18,26 +21,13 @@ exports.handler = async function (event, context) {
     };
   }
 
-  if (redirects[path]) {
-    const target = redirects[path];
+  const redirectValue = getRedirectURL(path, redirects)
+  console.log({ redirectValue })
+  if (redirectValue) {
     return {
-      statusCode: 301,
+      statusCode: redirectValue.status,
       headers: {
-        location: target,
-      },
-    };
-  }
-
-  const matches = filterBy(path)
-  if (matches.length > 0) {
-    const match = matches.sort(function (a, b) {
-      return a.length - b.length || a.localeCompare(b);
-    }).pop()
-    const target = redirects[match];
-    return {
-      statusCode: 301,
-      headers: {
-        location: target,
+        location: redirectValue.target,
       },
     };
   }
