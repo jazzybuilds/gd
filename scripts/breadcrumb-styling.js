@@ -2,7 +2,6 @@
 
 if (process.browser) {
   window.addEventListener('load', () => {
-    console.log('page is fully loaded');
     var breadcrumb = document.querySelector(".c-breadCrumb");
     var hero = document.querySelector(".c-breadCrumb + .c-hero");
           // ^ only if it's in this specific location

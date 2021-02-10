@@ -38,6 +38,11 @@ export default class CustomDocument extends Document {
             property="og:image"
           />
 
+          <link rel="preload" href="/fonts/castledown/castledown-regular.woff2" as="font" crossOrigin="anonymous" type="font/woff2" />
+          <link rel="preload" href="/fonts/castledown/castledown-bold.woff2" as="font" crossOrigin="anonymous" type="font/woff2" />
+          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff2" as="font" crossOrigin="anonymous" type="font/woff2" />
+          <link rel="preload" href="/fonts/castledown/castledown-heavy.woff" as="font" crossOrigin="anonymous" type="font/woff" />
+
           {/* @ts-ignore */}
           {this.props.styleTags}
         </Head>
