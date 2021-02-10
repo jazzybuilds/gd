@@ -86,10 +86,7 @@ describe('integration tests', () => {
 
   test('redirect with wildcard without children specified', () => {
     const value = getRedirectURL("/legacy-query-wildcard/", data)
-    expect(value).toEqual(expect.objectContaining({
-      target: "/legacy-query-wildcard/",
-      status: "301"
-    }));
+    expect(value).toEqual(null);
   });
   
   test('redirect with wildcard and query string in target', () => {
@@ -114,6 +111,11 @@ describe('integration tests', () => {
       target: "/updated-double-placewilder/value/lorem/temp/some/path/",
       status: "301"
     }));
+  });
+
+  test('formats path with two placeholder and wildcard and no children', () => {
+    const value = getRedirectURL("/legacy-double-placewilder/temp/value/", data)
+    expect(value).toEqual(null);
   });
 
   test('wildcard redirect in both directions', () => {
