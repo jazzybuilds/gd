@@ -84,6 +84,14 @@ describe('integration tests', () => {
     }));
   });
 
+  test('redirect with wildcard without children specified', () => {
+    const value = getRedirectURL("/legacy-query-wildcard/", data)
+    expect(value).toEqual(expect.objectContaining({
+      target: "/legacy-query-wildcard/",
+      status: "301"
+    }));
+  });
+  
   test('redirect with wildcard and query string in target', () => {
     const value = getRedirectURL("/legacy-query-wildcard/test", data)
     expect(value).toEqual(expect.objectContaining({

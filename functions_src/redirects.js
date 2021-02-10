@@ -22,7 +22,7 @@ exports.handler = async function (event, context) {
   }
 
   const redirectValue = getRedirectURL(path, redirects)
-  console.log({ redirectValue })
+
   if (redirectValue) {
     return {
       statusCode: redirectValue.status,
