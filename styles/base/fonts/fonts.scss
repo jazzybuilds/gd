@@ -17,6 +17,7 @@
          url('/fonts/castledown/castledown-heavy.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -25,6 +26,7 @@
          url('/fonts/castledown/castledown-bold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -33,4 +35,5 @@
          url('/fonts/castledown/castledown-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
