@@ -39,6 +39,7 @@ const ContentComponent =  loadable(() => import('../components/Content'))
 const DividerComponent =  loadable(() => import('../components/Divider'))
 const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
 const MetadataLayout =  loadable(() => import('../components/MetadataLayout'))
+const FormComponent =  loadable(() => import('../components/Form'))
 
 // Components Index
 const componentsIndex: any = {};
@@ -63,6 +64,7 @@ componentsIndex["BrowserTitle"] = BrowserTitle;
 componentsIndex["RichText"] = ContentComponent
 componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
+componentsIndex["JavaScriptForm"] = FormComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
