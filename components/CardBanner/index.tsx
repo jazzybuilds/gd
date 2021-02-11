@@ -45,7 +45,7 @@ const CardBanner = (props) => {
           {fields.image &&
             <div className="c-imageSpotlight__image">
               <div className="ar-16-9">
-                <img {...imageAttr} />
+                <img {...imageAttr} loading="lazy" />
               </div>
             </div>
           }

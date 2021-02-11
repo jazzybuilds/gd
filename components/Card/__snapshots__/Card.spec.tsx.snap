@@ -16,6 +16,7 @@ exports[`Card renders correctly 1`] = `
         <img
           alt="cute monkey"
           className="sc-jSgupP gbrltj"
+          loading="lazy"
           src="https://img.posterlounge.co.uk/images/big/1592909.jpg"
         />
       </div>

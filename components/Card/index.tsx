@@ -42,8 +42,8 @@ const Card = (props: any) => {
           {!noImage && fields['pod image'] &&
             <ImageWrapper isLarge={isLarge}>
               {fields['pod image'].alt 
-               ? <Image src={fields['pod image'].url} alt={fields['pod image'].alt} />
-               : <Image src={fields['pod image'].url} />
+               ? <Image src={fields['pod image'].url} alt={fields['pod image'].alt} loading="lazy" />
+               : <Image src={fields['pod image'].url} loading="lazy" />
               }
             </ImageWrapper>
           }

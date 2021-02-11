@@ -43,7 +43,7 @@ const CardArticle = (props) => {
       <div className="component-content">
         <div className="c-caseStudy__wrapper">
           <div className="c-caseStudy__image">
-            {fields.image && <img {...imageAttr} />}
+            {fields.image && <img {...imageAttr} loading="lazy"/>}
           </div>
           <div className="c-caseStudy__content">
             <h3 className="c-caseStudy__title field-title" dangerouslySetInnerHTML={{ __html: fields.title }} />

@@ -44,7 +44,7 @@ const Image = (props) => {
     <div className="component c-imagePod file-type-icon-media-link small-12 columns">
       <div className="component-content">
         <div className="c-imagePod__image">
-          <img {...imageAttr} />
+          <img {...imageAttr} loading="lazy" />
         </div>
         {imagecaption && withCaption &&
           <div className="c-imagePod__content">
