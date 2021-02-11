@@ -58,6 +58,7 @@ export default class CustomDocument extends Document {
           <script src="/scripts/components-optimized-min.js"></script>
 
           <script src="/scripts.js"></script>
+          <script async={true} src="/scripts/chatbot.js"></script>
         </body>
       </Html>
     );
