@@ -1,5 +1,5 @@
 // a thing to make some components have an equal height in the same row
-export const equalHeightPods = (pod) => {
+const equalHeightPods = (pod) => {
   var columnWrappers = document.querySelectorAll('.column-splitter');
   if (columnWrappers) {
     // go through all the column splitters and see if there's a match for the pod being checked
@@ -53,3 +53,16 @@ export const equalHeightPods = (pod) => {
   }
 }
 
+if (process.browser) {
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      equalHeightPods('.js-equalHeight');
+    }, 500);
+  });
+
+  window.addEventListener('load', () => {
+    equalHeightPods('.js-equalHeight');
+  });
+}

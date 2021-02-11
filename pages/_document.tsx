@@ -58,7 +58,6 @@ export default class CustomDocument extends Document {
           <script src="/scripts/components-optimized-min.js"></script>
 
           <script src="/scripts.js"></script>
-          <script src="/equal-height-columns.js"></script>
         </body>
       </Html>
     );
