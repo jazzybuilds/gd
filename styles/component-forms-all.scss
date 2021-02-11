@@ -627,7 +627,7 @@
         div[role='group'] {
             display: flex;
             flex-direction: row;
-            justify-content: start;
+            justify-content: flex-start;
         }
         input[type='radio'], input[type='checkbox'] {
             width: 100%;

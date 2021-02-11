@@ -27,9 +27,5 @@ module.exports = function () {
   //process.env.UNIFORM_OPTIONS_MVC_MODE = "mixed";
   process.env.UNIFORM_PUBLISH_TARGET = "none";
 
-  return uniformNextConfig(
-    // {sassOptions: {
-    //   includePaths: [path.join(__dirname, 'styles')],
-    // }}
-  );
+  return uniformNextConfig();
 };
