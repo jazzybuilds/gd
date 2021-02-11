@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/component-case-study.scss";
+// import "../../styles/component-case-study.scss";
 import { linkFormatter } from '../../utils/formatter';
 import { getBlueBackground } from '../../utils/styleClass';
 

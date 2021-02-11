@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/component-blockquote.scss";
+// import "../../styles/component-blockquote.scss";
 
 const Variants = {
   NoAuthor: "{21C4DBE4-994A-4E7B-B0DC-128E2A9A0182}",

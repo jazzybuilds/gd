@@ -13,8 +13,7 @@ import {
 import { UniformContextProps } from "@uniformdev/common-client";
 import uniformConfig from "../uniform.config";
 import { theme } from "../theme";
-import "../styles/core.scss"
-import "../scripts/all"
+
 
 const context: UniformContextProps = uniformConfig();
 context.logger = context.logger || createConsoleLogger();

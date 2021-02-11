@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/component-getintouch.scss";
+// import "../../styles/component-getintouch.scss";
 
 const Variants = {
   All: "{55861F56-E0CD-43F3-96D9-574552AB7D10}",

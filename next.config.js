@@ -1,7 +1,6 @@
 // import libs
 const dotenv = require("dotenv");
 const { uniformNextConfig } = require("@uniformdev/next-server");
-const withSass = require('@zeit/next-sass')
 
 module.exports = function () {
   // load default configuration from uniform.config
@@ -28,5 +27,9 @@ module.exports = function () {
   //process.env.UNIFORM_OPTIONS_MVC_MODE = "mixed";
   process.env.UNIFORM_PUBLISH_TARGET = "none";
 
-  return uniformNextConfig(withSass());
+  return uniformNextConfig(
+    // {sassOptions: {
+    //   includePaths: [path.join(__dirname, 'styles')],
+    // }}
+  );
 };

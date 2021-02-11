@@ -1,4 +1,4 @@
-import "../../styles/component-hero.scss";
+// import "../../styles/component-hero.scss";
 
 const Hero = (props) => {
   const fields = props?.renderingContext?.item?.fields;

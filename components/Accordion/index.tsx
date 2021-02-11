@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/component-accordion.scss";
+// import "../../styles/component-accordion.scss";
 import loadable from '@loadable/component'
 
 const Image =  loadable(() => import('../Image'))

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Root } from './CardBanner.styles'
-import "../../styles/component-image-spotlight.scss";
+// import "../../styles/component-image-spotlight.scss";
 import { getBlueBackground } from '../../utils/styleClass';
 import { linkFormatter } from '../../utils/formatter';
 

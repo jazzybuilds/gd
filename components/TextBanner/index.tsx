@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/component-promo-pod.scss";
+// import "../../styles/component-promo-pod.scss";
 import { linkFormatter } from '../../utils/formatter';
 
 const Variant = {
