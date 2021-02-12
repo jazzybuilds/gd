@@ -2,30 +2,31 @@
 
 if (process.browser) {
   window.addEventListener('load', () => {
+    setTimeout(() => {
+      var inEditor = document.querySelector('.on-page-editor');
 
-    var inEditor = document.querySelector('.on-page-editor');
+      // get chatbot element from the page
+      var chatbot = document.querySelector('.c-chatbot');
+      var iframeOrigin = 'https://chatbot.guidedogs.org.uk';
+      // media query for adding no-scroll or not
+      var mql = window.matchMedia('(min-width: 60em)');
+      
+      if (chatbot && chatbot.dataset.sdk != '' && !inEditor) {
+        // build the iframeorigin based on the path to the sdk being used
+        var path = chatbot.dataset.sdk.split('/');
+        var protocol = path[0];
+        var host = path[2];
+        iframeOrigin = protocol + '//' + host;
+      
+        // append the sdk script to the page and then initialise
+        loadScript(chatbot.dataset.sdk).then(function () {
+          initChatbot();
+        }).catch(function () {
+          console.error('Unable to load chatbot');
+        });
+      }
+    
 
-    // get chatbot element from the page
-    var chatbot = document.querySelector('.c-chatbot');
-    var iframeOrigin = 'https://chatbot.guidedogs.org.uk';
-    // media query for adding no-scroll or not
-    var mql = window.matchMedia('(min-width: 60em)');
-    
-    if (chatbot && chatbot.dataset.sdk != '' && !inEditor) {
-      // build the iframeorigin based on the path to the sdk being used
-      var path = chatbot.dataset.sdk.split('/');
-      var protocol = path[0];
-      var host = path[2];
-      iframeOrigin = protocol + '//' + host;
-    
-      // append the sdk script to the page and then initialise
-      loadScript(chatbot.dataset.sdk).then(function () {
-        initChatbot();
-      }).catch(function () {
-        console.error('Unable to load chatbot');
-      });
-    }
-    
     function loadScript(scriptUrl) {
       var script = document.createElement('script');
       script.src = scriptUrl;
@@ -127,5 +128,6 @@ if (process.browser) {
         }
       }
     }
+  }, 10000);
   });
 }
