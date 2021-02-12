@@ -1,7 +1,5 @@
 'use strict';
 
-if (process.browser) {
-
   var inEditor = document.querySelector('.on-page-editor');
   
   // get chatbot element from the page
@@ -126,4 +124,3 @@ if (process.browser) {
       }
     }
   }
-}
