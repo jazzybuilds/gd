@@ -57,8 +57,7 @@ export default class CustomDocument extends Document {
           <script src="/scripts/search-optimized-min.js"></script>
           <script src="/scripts/components-optimized-min.js"></script>
 
-          <script src="/scripts.js"></script>
-          <script defer={true} src="/scripts/chatbot.js"></script>
+          <script src="/scripts/custom/scripts.js"></script>
         </body>
       </Html>
     );
