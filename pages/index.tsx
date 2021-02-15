@@ -20,9 +20,7 @@ context.logger = context.logger || createConsoleLogger();
 
 import MVCLayout from '../components/Layout'
 
-const CardComponent =  loadable(() => import('../components/Card'), {
-  fallback: <div />
-})
+const LoaderComponent = () => <div />
 const HeroComponent =  loadable(() => import('../components/Hero'), {
   fallback: <div className="c-hero c-hero--primary" style={{height: 560}} />,
 })
@@ -30,22 +28,57 @@ const HeroSecondaryComponent =  loadable(() => import('../components/HeroSeconda
   fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
 })
 
-const TextBannerComponent =  loadable(() => import('../components/TextBanner'))
-const CardBannerComponent =  loadable(() => import('../components/CardBanner'))
-const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'))
-const ButtonComponent =  loadable(() => import('../components/Button'))
-const BlockTextComponent =  loadable(() => import('../components/BlockText'))
-const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'))
-const ImageComponent =  loadable(() => import('../components/Image'))
-const CardArticleComponent =  loadable(() => import('../components/CardArticle'))
-const VideoComponent =  loadable(() => import('../components/Video'))
-const CookiePreferencesComponent =  loadable(() => import('../components/CookiePreferences'))
-const CampaignSearchComponent =  loadable(() => import('../components/CampaignSearch'))
-const ContentComponent =  loadable(() => import('../components/Content'))
-const DividerComponent =  loadable(() => import('../components/Divider'))
-const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
-const MetadataLayout =  loadable(() => import('../components/MetadataLayout'))
-const FormComponent =  loadable(() => import('../components/Form'))
+const CardComponent =  loadable(() => import('../components/Card'), {
+  fallback: LoaderComponent
+})
+const TextBannerComponent =  loadable(() => import('../components/TextBanner'), {
+  fallback: LoaderComponent
+})
+const CardBannerComponent =  loadable(() => import('../components/CardBanner'), {
+  fallback: LoaderComponent
+})
+const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'), {
+  fallback: LoaderComponent
+})
+const ButtonComponent =  loadable(() => import('../components/Button'), {
+  fallback: LoaderComponent
+})
+const BlockTextComponent =  loadable(() => import('../components/BlockText'), {
+  fallback: LoaderComponent
+})
+const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'), {
+  fallback: LoaderComponent
+})
+const ImageComponent =  loadable(() => import('../components/Image'), {
+  fallback: LoaderComponent
+})
+const CardArticleComponent =  loadable(() => import('../components/CardArticle'), {
+  fallback: LoaderComponent
+})
+const VideoComponent =  loadable(() => import('../components/Video'), {
+  fallback: LoaderComponent
+})
+const CookiePreferencesComponent =  loadable(() => import('../components/CookiePreferences'), {
+  fallback: LoaderComponent
+})
+const CampaignSearchComponent =  loadable(() => import('../components/CampaignSearch'), {
+  fallback: LoaderComponent
+})
+const ContentComponent =  loadable(() => import('../components/Content'), {
+  fallback: LoaderComponent
+})
+const DividerComponent =  loadable(() => import('../components/Divider'), {
+  fallback: LoaderComponent
+})
+const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'), {
+  fallback: LoaderComponent
+})
+const MetadataLayout =  loadable(() => import('../components/MetadataLayout'), {
+  fallback: LoaderComponent
+})
+const FormComponent =  loadable(() => import('../components/Form'), {
+  fallback: LoaderComponent
+})
 
 // Components Index
 const componentsIndex: any = {};
