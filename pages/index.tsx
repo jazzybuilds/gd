@@ -21,13 +21,13 @@ context.logger = context.logger || createConsoleLogger();
 import MVCLayout from '../components/Layout'
 
 const CardComponent =  loadable(() => import('../components/Card'), {
-  fallback: <div>Loading...</div>
+  fallback: <div />
 })
 const HeroComponent =  loadable(() => import('../components/Hero'), {
-  fallback: <div className="c-hero c-hero--primary" style={{height: 560}}>Loading...</div>,
+  fallback: <div className="c-hero c-hero--primary" style={{height: 560}} />,
 })
 const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'), {
-  fallback: <div className="c-hero c-hero--secondary" style={{height: 500}}>Loading...</div>,
+  fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
 })
 
 const TextBannerComponent =  loadable(() => import('../components/TextBanner'))
