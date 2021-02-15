@@ -21,6 +21,8 @@ context.logger = context.logger || createConsoleLogger();
 import MVCLayout from '../components/Layout'
 
 const LoaderComponent = () => <div />
+const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
+
 const HeroComponent =  loadable(() => import('../components/Hero'), {
   fallback: <div className="c-hero c-hero--primary" style={{height: 560}} />,
 })
@@ -32,16 +34,16 @@ const CardComponent =  loadable(() => import('../components/Card'), {
   fallback: LoaderComponent
 })
 const TextBannerComponent =  loadable(() => import('../components/TextBanner'), {
-  fallback: LoaderComponent
+  fallback: <div style={{height: 140}} />,
 })
 const CardBannerComponent =  loadable(() => import('../components/CardBanner'), {
   fallback: LoaderComponent
 })
 const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'), {
-  fallback: LoaderComponent
+  fallback: <div style={{height: 200}} />,
 })
 const ButtonComponent =  loadable(() => import('../components/Button'), {
-  fallback: LoaderComponent
+  fallback: <div style={{height: 56}} />,
 })
 const BlockTextComponent =  loadable(() => import('../components/BlockText'), {
   fallback: LoaderComponent
@@ -50,7 +52,7 @@ const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'), 
   fallback: LoaderComponent
 })
 const ImageComponent =  loadable(() => import('../components/Image'), {
-  fallback: LoaderComponent
+  fallback: <div style={{height: 441}} />,
 })
 const CardArticleComponent =  loadable(() => import('../components/CardArticle'), {
   fallback: LoaderComponent
@@ -68,9 +70,6 @@ const ContentComponent =  loadable(() => import('../components/Content'), {
   fallback: LoaderComponent
 })
 const DividerComponent =  loadable(() => import('../components/Divider'), {
-  fallback: LoaderComponent
-})
-const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'), {
   fallback: LoaderComponent
 })
 const MetadataLayout =  loadable(() => import('../components/MetadataLayout'), {
