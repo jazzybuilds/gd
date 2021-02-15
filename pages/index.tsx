@@ -20,9 +20,16 @@ context.logger = context.logger || createConsoleLogger();
 
 import MVCLayout from '../components/Layout'
 
-const CardComponent =  loadable(() => import('../components/Card'))
-const HeroComponent =  loadable(() => import('../components/Hero'))
-const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'))
+const CardComponent =  loadable(() => import('../components/Card'), {
+  fallback: <div>Loading...</div>
+})
+const HeroComponent =  loadable(() => import('../components/Hero'), {
+  fallback: <div className="c-hero c-hero--primary" style={{height: 560}}>Loading...</div>,
+})
+const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'), {
+  fallback: <div className="c-hero c-hero--secondary" style={{height: 500}}>Loading...</div>,
+})
+
 const TextBannerComponent =  loadable(() => import('../components/TextBanner'))
 const CardBannerComponent =  loadable(() => import('../components/CardBanner'))
 const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'))
