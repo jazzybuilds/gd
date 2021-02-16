@@ -4,7 +4,7 @@ const parser = require('xml2json');
 const { cleanToUrl, cleanFromUrl } = require('./lib/helpers/redirect-url-parser.js');
 require("dotenv").config();
 
-const { UNIFORM_API_URL, INCLUDE_LEGACY } = process.env;
+const { UNIFORM_API_URL, UNIFORM_API_SITENAME, INCLUDE_LEGACY } = process.env;
 
 function writeRedirectsJSON(data) {
   fs.writeFile("./functions_src/redirects.json", JSON.stringify(data), function (err) {
@@ -68,7 +68,7 @@ function parseLegacyRedirects(path) {
 }
 
 async function parseManagedRedirects() {
-  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
+  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/${UNIFORM_API_SITENAME}/map.json`;
 
   console.log(`Fetching map.json for redirects from: ${mapUrl}`)
 
@@ -114,7 +114,7 @@ const sitecoreProxyRedirectTemplate = `[[redirects]]
 `;
 
 async function parseManagedExclusions() {
-  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/map.json`;
+  let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/${UNIFORM_API_SITENAME}/map.json`;
 
   console.log(`Fetching map.json for exclusions from: ${mapUrl}`)
 
@@ -136,7 +136,7 @@ async function parseManagedExclusions() {
 }
 
 async function parseSecurityHeaders() {
-  let pageUrl = `${UNIFORM_API_URL}/uniform/api/content/guidedogsdotorg/page.json`;
+  let pageUrl = `${UNIFORM_API_URL}/uniform/api/content/${UNIFORM_API_SITENAME}/page.json`;
 
   console.log(`Fetching page.json for security headers from: ${pageUrl}`)
 
