@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/uniformconfig.d.ts": {
-        "version": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
-        "signature": "552deea18cdacfd71a9648acc84e41e7c700c7e10bc0a05f56a6d7eec98a52aa",
+        "version": "a1ba520fdddee893d080cca0bf131a109b5031d5c0d9617d90b2683b65f8a13e",
+        "signature": "a1ba520fdddee893d080cca0bf131a109b5031d5c0d9617d90b2683b65f8a13e",
         "affectsGlobalScope": false
       },
       "../../common/dist/cjs/model/index.d.ts": {
@@ -767,7 +767,7 @@
         "affectsGlobalScope": false
       },
       "../src/uniformserver.ts": {
-        "version": "d35f31204b661ae1e68e98328863389ba636a3af66b7264a0488daa8b9c76cc1",
+        "version": "dac65c5f7bddd5f7e3b14db6ada5f429f4ace2ba44183d0a1b753021240fdd8b",
         "signature": "cb9202fbadc466ea2d01b56c27a7f9014ee40f2bfda14916e15153f003d8e29e",
         "affectsGlobalScope": false
       },
