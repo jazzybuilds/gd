@@ -16,6 +16,12 @@ function writeRedirectsJSON(data) {
 }
 
 function processNode(node, formattedRedirects = []) {
+  if (INCLUDE_LEGACY && INCLUDE_LEGACY === 'true') {
+    for (let [key, value] of Object.entries(node.children)) {
+      formattedRedirects = processNode(value, formattedRedirects)
+    }
+  }
+
   if (node.redirects) {
     node.redirects.forEach(item => {
       const fromUrl = cleanFromUrl(item.source);
