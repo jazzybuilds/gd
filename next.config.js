@@ -27,5 +27,9 @@ module.exports = function () {
   //process.env.UNIFORM_OPTIONS_MVC_MODE = "mixed";
   process.env.UNIFORM_PUBLISH_TARGET = "none";
 
-  return uniformNextConfig();
+  return uniformNextConfig({
+    env: {
+      NEXT_PUBLIC_CHATBOT_DELAY: process.env.NEXT_PUBLIC_CHATBOT_DELAY || "2000"
+    }
+  });
 };

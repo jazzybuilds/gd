@@ -128,6 +128,6 @@ if (process.browser) {
         }
       }
     }
-  }, 2000);
+  }, Number(process.env.NEXT_PUBLIC_CHATBOT_DELAY));
   });
 }
