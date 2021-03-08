@@ -29,6 +29,7 @@ module.exports = function () {
 
   return uniformNextConfig({
     env: {
+      NEXT_PUBLIC_CDN_URL: process.env.NEXT_PUBLIC_CDN_URL || "https://gd-dev.azureedge.net/",
       NEXT_PUBLIC_CHATBOT_DELAY: process.env.NEXT_PUBLIC_CHATBOT_DELAY || "2000"
     }
   });
