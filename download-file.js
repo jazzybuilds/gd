@@ -2,7 +2,7 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-async function downloadFile(host, filePath, auth) {
+async function downloadFile(host, filePath, auth, retries) {
   console.log(`Will be downloading ${filePath} from host '${host}'`);
 
   headers = new fetch.Headers();
@@ -24,8 +24,11 @@ async function downloadFile(host, filePath, auth) {
     .catch((error) => {
       console.log(`Error retrieving ${filePath}.`);
       console.log(error);
-      console.log('Retrying...')
-      downloadFile(host, filePath, auth)
+      console.log(`Retrying...`)
+      if (retries >= 10) {
+        return ""
+      }
+      downloadFile(host, filePath, auth, retries+1)
     });
 }
 
@@ -71,7 +74,7 @@ if (process.argv) {
       return;
     }
 
-    downloadFile(host, filePath, auth);
+    downloadFile(host, filePath, auth, 0);
   } else {
     console.warn("Bad args");
   }
