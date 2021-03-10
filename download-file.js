@@ -24,7 +24,8 @@ async function downloadFile(host, filePath, auth) {
     .catch((error) => {
       console.log(`Error retrieving ${filePath}.`);
       console.log(error);
-      return "";
+      console.log('Retrying...')
+      downloadFile(host, filePath, auth)
     });
 }
 
