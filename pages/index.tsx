@@ -103,6 +103,7 @@ componentsIndex["RichText"] = ContentComponent
 componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
+componentsIndex["thank-you-event"] = () => <div />
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
