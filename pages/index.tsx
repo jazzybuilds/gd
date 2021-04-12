@@ -103,6 +103,12 @@ componentsIndex["RichText"] = ContentComponent
 componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
+
+componentsIndex["EventsThankyou"] = () => <div />
+componentsIndex["EventsSection"] = () => <div />
+componentsIndex["EventGuide"] = () => <div />
+componentsIndex["EventGuideItem"] = () => <div />
+
 componentsIndex["thank-you-event"] = () => <div />
 
 class Placeholder extends BasePlaceholder {
