@@ -19,6 +19,16 @@ const context: UniformContextProps = uniformConfig();
 context.logger = context.logger || createConsoleLogger();
 
 import MVCLayout from '../components/Layout'
+import CardComponent from '../components/Card'
+import TextBannerComponent from '../components/TextBanner'
+import CardBannerComponent from '../components/CardBanner'
+import ContactDetailsComponent from '../components/ContactDetails'
+import BlockTextComponent from '../components/BlockText'
+import CardArticleComponent from '../components/CardArticle'
+import ContentComponent from '../components/Content'
+import CampaignSearchComponent from '../components/CampaignSearch'
+import BlockQuoteComponent from '../components/BlockQuote'
+
 
 const LoaderComponent = () => <div />
 const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
@@ -30,45 +40,45 @@ const HeroSecondaryComponent =  loadable(() => import('../components/HeroSeconda
   fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
 })
 
-const CardComponent =  loadable(() => import('../components/Card'), {
-  fallback: LoaderComponent
-})
-const TextBannerComponent =  loadable(() => import('../components/TextBanner'), {
-  fallback: <div style={{height: 140}} />,
-})
-const CardBannerComponent =  loadable(() => import('../components/CardBanner'), {
-  fallback: LoaderComponent
-})
-const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'), {
-  fallback: <div style={{height: 200}} />,
-})
+// const CardComponent =  loadable(() => import('../components/Card'), {
+//   fallback: LoaderComponent
+// })
+// const TextBannerComponent =  loadable(() => import('../components/TextBanner'), {
+//   fallback: <div style={{height: 140}} />,
+// })
+// const CardBannerComponent =  loadable(() => import('../components/CardBanner'), {
+//   fallback: LoaderComponent
+// })
+// const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'), {
+//   fallback: <div style={{height: 200}} />,
+// })
 const ButtonComponent =  loadable(() => import('../components/Button'), {
   fallback: <div style={{height: 56}} />,
 })
-const BlockTextComponent =  loadable(() => import('../components/BlockText'), {
-  fallback: LoaderComponent
-})
-const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'), {
-  fallback: LoaderComponent
-})
+// const BlockTextComponent =  loadable(() => import('../components/BlockText'), {
+//   fallback: LoaderComponent
+// })
+// const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'), {
+//   fallback: LoaderComponent
+// })
 const ImageComponent =  loadable(() => import('../components/Image'), {
   fallback: <div style={{height: 441}} />,
 })
-const CardArticleComponent =  loadable(() => import('../components/CardArticle'), {
-  fallback: LoaderComponent
-})
+// const CardArticleComponent =  loadable(() => import('../components/CardArticle'), {
+//   fallback: LoaderComponent
+// })
 const VideoComponent =  loadable(() => import('../components/Video'), {
   fallback: LoaderComponent
 })
 const CookiePreferencesComponent =  loadable(() => import('../components/CookiePreferences'), {
   fallback: LoaderComponent
 })
-const CampaignSearchComponent =  loadable(() => import('../components/CampaignSearch'), {
-  fallback: LoaderComponent
-})
-const ContentComponent =  loadable(() => import('../components/Content'), {
-  fallback: LoaderComponent
-})
+// const CampaignSearchComponent =  loadable(() => import('../components/CampaignSearch'), {
+//   fallback: LoaderComponent
+// })
+// const ContentComponent =  loadable(() => import('../components/Content'), {
+//   fallback: LoaderComponent
+// })
 const DividerComponent =  loadable(() => import('../components/Divider'), {
   fallback: LoaderComponent
 })
@@ -104,12 +114,10 @@ componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
 
-componentsIndex["EventsThankyou"] = () => <div />
 componentsIndex["EventsSection"] = () => <div />
 componentsIndex["EventGuide"] = () => <div />
 componentsIndex["EventGuideItem"] = () => <div />
-
-componentsIndex["thank-you-event"] = () => <div />
+componentsIndex["EventsThankyou"] = () => <div />
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
