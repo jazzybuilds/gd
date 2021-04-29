@@ -10,6 +10,10 @@ const Video = (props) => {
 
   let videoId = fields.youtubemovie
 
+  if (!videoId) {
+    return null
+  }
+
   if (videoId.includes('https')) {
     if (videoId.includes("v=")) {
       let parts = videoId.split("v=")
