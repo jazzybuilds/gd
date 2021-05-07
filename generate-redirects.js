@@ -73,7 +73,7 @@ function parseLegacyRedirects(path) {
   return formattedRedirects
 }
 
-async function parseManagedRedirects() {
+async function parseManagedRedirects(retries = 0) {
   let mapUrl = `${UNIFORM_API_URL}/uniform/api/content/${UNIFORM_API_SITENAME}/map.json`;
 
   console.log(`Fetching map.json for redirects from: ${mapUrl}`)
@@ -88,8 +88,11 @@ async function parseManagedRedirects() {
       // Could use environment variable here to define behaviour, e.g. throw error.
       console.log("Error retrieving managed redirects.");
       console.log(error);
-
-      return "";
+      console.log(`Retrying...`)
+      if (retries >= 10) {
+        return []
+      }
+      return parseManagedRedirects(retries + 1);
     })
 }
 
