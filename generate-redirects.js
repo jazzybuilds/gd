@@ -90,7 +90,7 @@ async function parseManagedRedirects(retries = 0) {
       console.log(error);
       console.log(`Retrying...`)
       if (retries >= 10) {
-        return []
+        throw new Error("Unable to parse redirects")
       }
       return parseManagedRedirects(retries + 1);
     })
