@@ -10,7 +10,7 @@ const SITEMAP_HOST = process.env.URL;
 
 https.globalAgent.maxSockets = 30;
 
-async function downloadMap() {
+async function downloadMap(retries = 0) {
   if (!UNIFORM_API_URL) {
     console.warn(
       `UNIFORM_API_URL environment variable is not defined, will skip.`
@@ -39,7 +39,11 @@ async function downloadMap() {
     .catch((error) => {
       console.log(`Error loading map.`);
       console.log(error);
-      return "";
+      console.log(`Retrying...`)
+      if (retries >= 10) {
+        process.exit(1)
+      }
+      downloadMap(retries + 1)
     });
 }
 
