@@ -26,7 +26,7 @@ async function downloadFile(host, filePath, auth, retries) {
       console.log(error);
       console.log(`Retrying...`)
       if (retries >= 10) {
-        return ""
+        process.exit(1)
       }
       downloadFile(host, filePath, auth, retries+1)
     });
