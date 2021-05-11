@@ -153,5 +153,5 @@ In order to force re-population of cache, add the following query string at the 
 `?blob=regenerate&uniform_token=12345`, for example: `http://tempsitecoreguidedogs.trafficmanager.net/uniform/api/content/guidedogsdotorgpreview/html.json?blob=regenerate&uniform_token=12345`
 
 ### Troubleshooting
-If an error occurs with the message: "Error: resolve-url-loader: CSS error", open "node_modules/resolve-url-loader/index.js". Under "var options" change "removeCR" from "false" to "true".
+If an error occurs with the message: `Error: resolve-url-loader: CSS error`, open `node_modules/resolve-url-loader/index.js`. Under `var options` change `removeCR` from `"false"` to `"true"`.
 
