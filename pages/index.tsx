@@ -114,6 +114,7 @@ componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
 
+componentsIndex["EventThankyouhero"] = () => <div />
 componentsIndex["EventsSection"] = () => <div />
 componentsIndex["EventGuide"] = () => <div />
 componentsIndex["EventGuideItem"] = () => <div />
