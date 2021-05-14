@@ -97,6 +97,11 @@
 
 {PROXIES_TO_SITECORE}
 
+[[redirects]]
+  from = "/api-fe/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
 # This is final fallback proxy, and is the last redirect processed. This matches any remaining URL and redirects to the custom 404 page.
 # This is NOT forced, so a matching file locally will take precedence.
 [[redirects]]

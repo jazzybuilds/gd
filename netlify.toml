@@ -312,10 +312,7 @@
       Authorization = "Basic Z3VpZGVkb2dzOmM4N2J0R0hRWUhVWENqc1FNQTV5dHRKWg=="		
 
 
-# This is final fallback proxy, and is the last redirect processed. This matches any remaining URL and redirects to the custom 404 page.
-# This is NOT forced, so a matching file locally will take precedence.
 [[redirects]]
-	from = '/*'
-	to = "/.netlify/functions/redirects"
-	status = 200
-	force = false
+  from = "/api-fe/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

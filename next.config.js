@@ -29,6 +29,9 @@ module.exports = function () {
 
   return uniformNextConfig({
     env: {
+      NEXT_PUBLIC_STRIPE_KEY: process.env.NEXT_PUBLIC_STRIPE_KEY,
+      NEXT_PUBLIC_PAYPAL_KEY: process.env.NEXT_PUBLIC_PAYPAL_KEY,
+      NEXT_PUBLIC_STRIPE_MERCHANT_ID: process.env.NEXT_PUBLIC_STRIPE_MERCHANT_ID || " ",
       NEXT_PUBLIC_CDN_URL: process.env.NEXT_PUBLIC_CDN_URL || "https://gd-dev.azureedge.net/",
       NEXT_PUBLIC_CHATBOT_DELAY: process.env.NEXT_PUBLIC_CHATBOT_DELAY || "2000"
     }

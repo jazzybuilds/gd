@@ -1401,6 +1401,7 @@ label.label--required + span + .input-validation-error {
     position: relative;
 }
 
+.inline-button,
 #PostcodeLookupButton {
     padding: rem-calc(14 32);
     margin-bottom: 0;
@@ -1437,10 +1438,11 @@ label.label--required + span + .input-validation-error {
     }
 }
 
+
 #PostcodeLookupInput {
-    width: calc(100% - 185px);
+    width: calc(100% - 185px)!important;
     @include respond-to(mobile-horizontal) {
-        width: calc(100% - 130px);
+        width: calc(100% - 130px)!important;
     }
 }
 
@@ -1652,3 +1654,29 @@ main > #content > .component:first-of-type.Donate {
     margin-top: rem-calc(64);
     }
 }
+
+.Stripe {
+    label{
+        display: block;
+    }
+
+    .StripeElement {
+        margin: 0 0 1.5rem;
+        padding: .875rem 1.125rem;
+        background-color: #f5f5f5;
+        border: .0625rem solid #d0d0d0;
+        display: block;
+        font-family: inherit;
+        font-size: 1rem;
+        height: auto;
+        color: #131e29;
+        box-sizing: border-box;
+        max-height: 47px;
+        max-width: 770px;
+        margin-top: .625rem;
+    }
+}
+
+
+
+

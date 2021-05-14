@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { typography } from '../theme';
 
 const fontURL = `${process.env.NEXT_PUBLIC_CDN_URL}-/media/themes/guidedogs/guidedogsdotorg/guidedogstheme/fonts/castledown`
 
@@ -28,6 +29,26 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+  }
+
+  .h1 {
+    ${typography.h1}
+  }
+
+  .h2 {
+    ${typography.h2}
+  }
+
+  .h3 {
+    ${typography.h3}
+  }
+
+  .h4 {
+    ${typography.h4}
+  }
+
+  .h5 {
+    ${typography.h5}
   }
 
 `
