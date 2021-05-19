@@ -28,6 +28,7 @@ interface PaymentOptionProps {
   sessionId: string
   type: string
   summary: string
+  discountCode: string
   onSubmit: (id: string) => void
   onReferenceUpdate: (ref: string) => void
 }
@@ -38,23 +39,28 @@ interface UpdateReferenceProps {
   referenceId: string
   type: 'Stripe' | 'PayPal'
   status: string
-}
-
-const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${amount}`)}`
-
-const updateFormSubmission = async (props: UpdateReferenceProps) => {
-  try {
-    const { data } = await axios.post("/api-fe/formUpdate", props)
-    return data
-  } catch (error) {
-    console.log(error)
-  }
+  amount: number
+  discountCode?: string
 }
 
 interface makeStripePaymentResponse {
   reference: string
   message?: string
   intent?: any
+}
+
+const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${amount}`)}`
+
+const updateFormSubmission = async (props: UpdateReferenceProps) => {
+  try {
+    const { data } = await axios.post("/api-fe/formUpdate", {
+      ...props,
+      amount: props.amount / 100
+    })
+    return data
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<makeStripePaymentResponse> => {
@@ -77,6 +83,8 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
         formId: rest.formId,
         sessionId: rest.sessionId,
         referenceId: rest.referenceNumber,
+        amount: rest.amount,
+        discountCode: rest.discountCode,
         type: "Stripe",
         status: payload.error.code
       })
@@ -85,8 +93,17 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
         reference: newReference.WebsiteReferenceID,
       })
     } else {
+      const newReference = await updateFormSubmission({
+        formId: rest.formId,
+        sessionId: rest.sessionId,
+        referenceId: rest.referenceNumber,
+        amount: rest.amount,
+        discountCode: rest.discountCode,
+        type: "Stripe",
+        status: "200"
+      })
       return Promise.resolve({
-        reference: rest.referenceNumber,
+        reference: newReference.WebsiteReferenceID,
         intent: payload.paymentIntent,
       })
     }
@@ -96,6 +113,8 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
       formId: rest.formId,
       sessionId: rest.sessionId,
       referenceId: rest.referenceNumber,
+      amount: rest.amount,
+      discountCode: rest.discountCode,
       type: "Stripe",
       status: error.code
     })
@@ -234,6 +253,7 @@ const ApplePay = (props: StripeComponentProps) => {
 }
 
 const GooglePay = (props: StripeComponentProps & { googleClient: google.payments.api.PaymentsClient }) => {
+  const [error, setError] =React.useState(null)
   const processPayment = () => {
     props.googleClient
       .loadPaymentData(getGooglePayRequest(props.amount))
@@ -246,7 +266,7 @@ const GooglePay = (props: StripeComponentProps & { googleClient: google.payments
         })
       })
       .catch(function (err) {
-        console.log(err);
+        setError("Unable to take payment, please try again")
       });
   }
 
@@ -268,7 +288,7 @@ const GooglePay = (props: StripeComponentProps & { googleClient: google.payments
           />
         </React.Fragment>
       }
-      {props.error && <span className="field-validation-error">{props.error}</span>}
+      {props.error  || error && <span className="field-validation-error">{props.error ?? error}</span>}
     </React.Fragment>
   )
 }
@@ -335,14 +355,21 @@ const PayPal = (props: PaymentOptionProps) => {
           onError={async (error) => {
             setError("Unable to take payment")
             setIsSubmitting(false)
-            const updatedResponse = await updateFormSubmission({
-              formId: props.formId,
-              sessionId: props.sessionId,
-              referenceId: props.referenceNumber,
-              type: "PayPal",
-              status: "paypal_error"
-            })
-            props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
+            try {
+              const updatedResponse = await updateFormSubmission({
+                formId: props.formId,
+                sessionId: props.sessionId,
+                referenceId: props.referenceNumber,
+                amount: props.amount,
+                discountCode: props.discountCode,
+                type: "PayPal",
+                status: "paypal_error"
+              })
+              props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
+            } catch (error) {
+            setError(error)
+              
+            }
           }}
         />
       </div>
@@ -366,26 +393,28 @@ const StripePayments = (props: StripePaymentsProps) => {
   const [stripeClientId, setStripeClientId] = React.useState<string | null>(null)
   const stripe = useStripe();
 
+  const formSubmissionPayload: UpdateReferenceProps = {
+    formId: props.formId,
+    sessionId: props.sessionId,
+    referenceId: props.referenceNumber,
+    amount: props.amount,
+    discountCode: props.discountCode,
+    type: "Stripe",
+    status: "",
+  }
+
   React.useEffect(() => {
     async function on3DSComplete() {
       setIframe(null)
       setError(null)
       if (stripeClientId) {
-        const updatePayload: UpdateReferenceProps = {
-          formId: props.formId,
-          sessionId: props.sessionId,
-          referenceId: props.referenceNumber,
-          type: "Stripe",
-          status: "",
-        }
-
         try {
           const result = await stripe.retrievePaymentIntent(stripeClientId)
           if (result.paymentIntent.status === "succeeded") {
             props.onSubmit(props.referenceNumber)
           } else if (result.paymentIntent.status === "requires_payment_method") {
             const updatedResponse = await updateFormSubmission({
-              ...updatePayload,
+              ...formSubmissionPayload,
               status: result.paymentIntent.status
             })
             props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
@@ -395,7 +424,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         } catch (error) {
           console.error(error)
           const updatedResponse = await updateFormSubmission({
-            ...updatePayload,
+            ...formSubmissionPayload,
             status: "invalid_request_error"
           })
           props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
@@ -412,7 +441,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       }
     }, false);
 
-  }, [stripeClientId])
+  }, [stripeClientId, formSubmissionPayload])
 
   React.useEffect(() => {
     const handlePaymentMethodReceived = async (event) => {
@@ -422,6 +451,7 @@ const StripePayments = (props: StripePaymentsProps) => {
           stripe,
           formId: props.formId,
           amount: props.amount,
+          discountCode: props.discountCode,
           type: props.type,
           sessionId: props.sessionId,
           referenceNumber: props.referenceNumber,
@@ -449,6 +479,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         amount: props.amount,
         type: props.type,
         sessionId: props.sessionId,
+        discountCode: props.discountCode,
         referenceNumber: props.referenceNumber,
         paymentMethod: paymentMethod
       })
@@ -457,13 +488,6 @@ const StripePayments = (props: StripePaymentsProps) => {
       if (response.intent.next_action) {
         setIframe(response.intent.next_action.redirect_to_url.url)
       } else {
-        await updateFormSubmission({
-          formId: props.formId,
-          sessionId: props.sessionId,
-          referenceId: response.reference,
-          type: "Stripe",
-          status: "200"
-        })
         props.onSubmit(response.reference)
       }
     } catch (error) {
@@ -515,6 +539,7 @@ const PaymentOptions = (props: PaymentProps) => {
     amount: props.amount,
     type: props.type,
     sessionId: props.sessionId,
+    discountCode: props.discountCode,
     referenceNumber: props.referenceNumber,
     onSubmit: props.onSubmit,
     onReferenceUpdate: props.onReferenceUpdate

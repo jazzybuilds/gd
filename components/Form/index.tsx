@@ -5,7 +5,7 @@ import { Formik, Form, getIn, ErrorMessage } from 'formik';
 import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule } from '../../utils/formUtils';
 import Postcode from "./Postcode"
 import { Radio, CheckBox, DropDown, Text, Label, Input, DatePicker, InputError } from './Elements';
-import { BackButton,  FormSectionWrapper,  Section, StyledButton } from './Form.styles';
+import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
 import { FormStorageNames } from '../../utils/constants';
@@ -68,7 +68,7 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
         const isValid = condition.Conditions[cond](rule => {
           const relatedField = fieldValues.id === rule.FieldKey ? isCheckbox ? String(event.target.checked) : event.target.value : formProps.values[rule.FieldKey]
           if (relatedField) {
-            return computeConditionRule({operator: rule.Operator, match: rule.Value, value: relatedField})
+            return computeConditionRule({ operator: rule.Operator, match: rule.Value, value: relatedField })
           }
         })
         condition.Actions.forEach(action => {
@@ -109,7 +109,7 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
       return (
         <React.Fragment>
           <Label gutter={true} name={fieldProps.name} label={fieldProps.label} required={validation.required} tabIndex={0} />
-          {options.map(option => 
+          {options.map(option =>
             <CheckBox
               key={`${fieldProps.id}-${option.value}`}
               {...fieldProps}
@@ -121,7 +121,7 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
                 let checkValues = fieldProps.value
                 if (!e.target.checked) {
                   checkValues = checkValues.filter(val => val !== e.target.value)
-                }  else {
+                } else {
                   checkValues.push(e.target.value)
                 }
                 formProps.setFieldValue(fieldProps.id, checkValues)
@@ -187,7 +187,7 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
 const FormComponent = (props) => {
   const {
     page: { fields: { title: pageTitle, capacity, eventDetails } },
-    item: { fields: { FormData, PaymentOptions }}
+    item: { fields: { FormData, PaymentOptions } }
   } = props.renderingContext
 
   if (!FormData || !FormData.Fields || !eventDetails) {
@@ -345,7 +345,7 @@ const FormComponent = (props) => {
         })
       })
 
-      
+
       if (ownPlaceField && capacityFull) {
         updatedFields = updateFormattedField(updatedFields, ownPlaceField.id, 'type', 'hidden')
       }
@@ -355,7 +355,7 @@ const FormComponent = (props) => {
     }
   }, [hasMounted, formattedFields, conditions, capacityFull, ownPlaceField])
 
-  const getButtonData = (hasSubmittedPayment: boolean): { label: string, action: "payment"| "next" | "submit" } => {
+  const getButtonData = (hasSubmittedPayment: boolean): { label: string, action: "payment" | "next" | "submit" } => {
     const paymentField = formattedFields[currentStep] && formattedFields[currentStep].items.find(item => item.name === "payment")
     if (requiresPayment && paymentField && !hasSubmittedPayment) {
       return {
@@ -423,7 +423,6 @@ const FormComponent = (props) => {
       [FormStorageNames.Email]: values[email.id],
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
-    
 
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
@@ -449,9 +448,9 @@ const FormComponent = (props) => {
             ...sum,
             ...matchFieldByName(key, values.address[key])
           }
-        },{})
+        }, {})
 
-        const ownPlaceValue = capacityFull && ownPlaceField ? { [ownPlaceField.id]: "OWN"} : undefined
+        const ownPlaceValue = capacityFull && ownPlaceField ? { [ownPlaceField.id]: "OWN" } : undefined
 
         let payload = {
           formId: props.renderingContext.item.id,
@@ -460,12 +459,16 @@ const FormComponent = (props) => {
           ...ownPlaceValue
         }
 
-        if (values.paymentId) {
-          const paymentReferenceField = matchFieldByName("payment reference", values.paymentId)
+        if (!requiresPayment) {
           const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
           payload = {
             ...payload,
-            ...paymentReferenceField,
+            ...finalAmountField,
+          }
+        } else {
+          const finalAmountField = matchFieldByName("finalamount", "")
+          payload = {
+            ...payload,
             ...finalAmountField,
           }
         }
@@ -476,13 +479,13 @@ const FormComponent = (props) => {
         delete payload.payment
 
         try {
-          const {data} = await axios.post("/api-fe/formSubmission", payload)
+          const { data } = await axios.post("/api-fe/formSubmission", payload)
           setPaymentReference(data)
 
           if (hasPaymentSection && requiresPayment && currentStep !== formattedFields.length) {
             setCurrentStep(currentStep + 1)
           } else {
-           onSubmit(values)
+            onSubmit(values)
           }
         } catch (error) {
           console.error(error)
@@ -500,7 +503,7 @@ const FormComponent = (props) => {
       {(formProps) => {
         const availableFields = formattedFields.slice(0, currentStep)
         const hasMadePayment = Boolean(formProps.values.paymentId) && Object.keys(formProps.errors).length > 0
-        const showPaymentStep =  renderPaymentStep && requiresPayment && !hasMadePayment
+        const showPaymentStep = renderPaymentStep && requiresPayment && !hasMadePayment
         const buttonData = getButtonData(hasMadePayment)
         if (showPaymentStep) {
           const paymentFields = availableFields[currentStep - 1]
@@ -521,8 +524,9 @@ const FormComponent = (props) => {
                         onDiscountSubmit={discountField ? (code, value) => {
                           formProps.setFieldValue("payment", value)
                           formProps.setFieldValue(discountField.id, code)
-                        }: undefined}
+                        } : undefined}
                         paymentProps={{
+                          discountCode: discountField.value,
                           paymentOptions: paymentSettings,
                           referenceNumber: paymentReference.WebsiteReferenceID,
                           sessionId: paymentReference.SitecoreFormSessionId,
@@ -558,7 +562,7 @@ const FormComponent = (props) => {
             {availableFields.map((availableField, index) => {
               return (
                 <React.Fragment>
-                  {index > 0 && <DashedDivider /> }
+                  {index > 0 && <DashedDivider />}
                   <Section ref={sectionRef} key={`section-${index}`}>
                     {availableField.items.map((field, index) => {
                       return (

@@ -29,7 +29,6 @@ const Share = (props: ShareProps) => {
       setEmailError(null)
       // @TODO send email
     } catch (error) {
-      console.log(error.errors)
       setEmailError(error.errors[0])
     }
   }

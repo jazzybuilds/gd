@@ -116,7 +116,6 @@ exports.handler = async function (event, context) {
       body: JSON.stringify(response.data)
     };
   } catch (error) {
-    console.log({error})
     return {
       statusCode: 502,
       body: "Unable to save form"
