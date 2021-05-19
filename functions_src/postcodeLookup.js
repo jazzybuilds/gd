@@ -18,7 +18,7 @@ function formatResult (items) {
       ...payload,
       addressline2,
       addressline3: addressline2 !== item.Locality ? item.Locality : "",
-      label: `${payload.addressline1}, ${payload.addressline2}, ${payload.city}, ${payload.postcode}`
+      label: `${payload.addressline1}, ${payload.addressline2}, ${payload.town}, ${payload.postcode}`
     }
   })
 
