@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import React from 'react'
 import AddToCalendar from 'react-add-to-calendar';
 import { FormStorageNames } from '../../../utils/constants';
@@ -22,13 +22,10 @@ interface EventProps {
 const ThankYou = (props) => {
   const [user, setUser] = React.useState<UserProps | null>(null)
   const [event, setEvent] = React.useState<EventProps | null>(null)
-  const { page: { fields: { title: pageTitle, eventDetails } }, item: { fields } } = props.renderingContext
-  console.log({ eventDetails: props.renderingContext })
+  const { item: { fields } } = props.renderingContext
 
   React.useEffect(() => {
-    const storageData = JSON.parse(localStorage.getItem(pageTitle))
-
-    if (!storageData) {
+    const redirectFunc = () => {
       if (fields["fallback url"]) {
         window.location.href = fields["fallback url"]
       } else {
@@ -36,31 +33,42 @@ const ThankYou = (props) => {
         paths.pop()
         window.location.replace(`${window.location.origin}/${paths.join("/")}/`)
       }
-    } else {
-      setUser({
-        firstname: storageData[FormStorageNames.Firstname],
-        lastname: storageData[FormStorageNames.Lastname],
-        email: storageData[FormStorageNames.Email],
-        reference: storageData[FormStorageNames.PaymentReference]
-      })
-
-      setEvent({
-        title: fields["calendar title"],
-        description: "",
-        location: eventDetails["location"],
-        date: format(new Date(eventDetails["date"]), "dd/MM/yyyy"),
-        time: format(new Date(eventDetails["date"]), "h:mmaaaaa'm'").toUpperCase()
-      })
     }
+
+    if (fields["event page"]) {
+      const storageData = JSON.parse(localStorage.getItem(fields["event page"]["title"]))
+      if (!storageData) {
+        redirectFunc()
+      } else {
+        setUser({
+          firstname: storageData[FormStorageNames.Firstname],
+          lastname: storageData[FormStorageNames.Lastname],
+          email: storageData[FormStorageNames.Email],
+          reference: storageData[FormStorageNames.PaymentReference]
+        })
+
+        const parsedDate = parse(fields["event page"]["event date"], "MM/dd/yyyy h:mm:ss a", new Date())
+        setEvent({
+          title: fields["calendar title"],
+          description: "",
+          location: fields["event page"]["location"],
+          date: format(parsedDate, "dd/MM/yyyy"),
+          time: format(parsedDate, "h:mmaaaaa'm'").toUpperCase()
+        })
+      }
+    } else {
+      redirectFunc()
+    }
+
 
   }, [])
 
-  if (!eventDetails || !fields || !fields.event) {
+  if (!fields || !fields["event page"]) {
     console.log("No event data supplied")
     return null
   }
 
-  if (!user) {
+  if (!user || !event) {
     return (<p>Loading</p>)
   }
 
@@ -69,7 +77,7 @@ const ThankYou = (props) => {
       <p>{fields["confirmation text"]}</p>
       <h2>{fields["title"]}</h2>
 
-      <SummaryText dangerouslySetInnerHTML={{ __html: fields["share summary"].replace("#EMAIL#", user.email) }} />
+      <SummaryText dangerouslySetInnerHTML={{ __html: fields["summary"].replace("#EMAIL#", user.email) }} />
 
       <div>
         <ListText>Name: {user.firstname} {user.lastname}</ListText>
@@ -86,8 +94,8 @@ const ThankYou = (props) => {
           event={{
             title: event.title,
             location: event.location,
-            startTime: eventDetails["date"],
-            endTime: eventDetails["date"]
+            startTime: event.date,
+            endTime: event.date,
           }}
           buttonTemplate={{ textOnly: 'none' }}
           buttonLabel="Add to my calendar"
