@@ -81,7 +81,8 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
 
   let fieldProps = {
     ...rest,
-    className: className,
+    helptext,
+    className,
     required: validation.required,
     value: formProps.values[rest.name],
     onBlur: formProps.handleBlur,
@@ -184,10 +185,17 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
 }
 
 const FormComponent = (props) => {
-  const { item: { fields: { FormData, PaymentOptions }}} = props.renderingContext
+  const {
+    page: { fields: { title: pageTitle, capacity, eventDetails } },
+    item: { fields: { FormData, PaymentOptions }}
+  } = props.renderingContext
 
-  if (!FormData) {
-    console.error('No FormData detected')
+  if (!FormData || !FormData.Fields || !eventDetails) {
+    console.error('No FormData/eventDetails detected')
+    return null
+  }
+
+  if (capacity && ["cancel", "full"].includes(capacity["title"])) {
     return null
   }
 
@@ -210,8 +218,7 @@ const FormComponent = (props) => {
   const [formSubmissionError, setFormSubmissionError] = React.useState<string | null>(null)
   const [formattedFields, setFormattedFields] = React.useState(extractFields(formDataFields.filter(field => field.Name !== 'meta')))
   const [allFormValues, setAllFormValues] = React.useState(flattenFormValues(formattedFields))
-  // @TODO get data from api
-  const capacityFull = false
+  const capacityFull = capacity ? capacity["title"] === 'own_place' : false
   const ownPlaceField = allFormValues.find(formValue => formValue.alias && formValue.alias.toLowerCase() === 'own_place')
 
   const initialValues = allFormValues.reduce((sum, item) => {
@@ -408,9 +415,9 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
 
-    localStorage.removeItem("test");
     // @TODO add event name to match it in thank you page
-    localStorage.setItem("test", JSON.stringify({
+    localStorage.removeItem(pageTitle);
+    localStorage.setItem(pageTitle, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],

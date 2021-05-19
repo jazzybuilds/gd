@@ -99,15 +99,16 @@ interface InputProps  extends FieldProps {}
 export const Input = ({ required, helptext, type, error, label, ...props }: InputProps) => (
   <React.Fragment>
     <Label disabled={props.disabled} name={props.name} label={label} required={required} />
-    <span>{helptext}</span>
     {(type === 'textarea')
       ? <StyledTextArea {...props} error={error} />
       : <StyledInput
+        removeGutter={Boolean(helptext)}
         type={type}
         error={error}
         {...props}
       />
     }
+    <span>{helptext}</span>
   </React.Fragment>
 )
 

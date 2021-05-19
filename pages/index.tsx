@@ -75,6 +75,9 @@ const EventDetailsComponent =  loadable(() => import('../components/Events/Detai
   fallback: LoaderComponent
 })
 
+const CapacityBannerComponent =  loadable(() => import('../components/CapacityBanner'), {
+  fallback: LoaderComponent
+})
 
 // Components Index
 const componentsIndex: any = {};
@@ -100,13 +103,12 @@ componentsIndex["RichText"] = ContentComponent
 componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
-
+componentsIndex["CapacityBanner"] = CapacityBannerComponent;
 
 componentsIndex["EventThankyouhero"] = DynamicHeroComponent
 componentsIndex["EventsSection"] = EventDetailsComponent
 componentsIndex["EventGuide"] = () => <div />
 componentsIndex["EventGuideItem"] = () => <div />
-
 componentsIndex["EventsThankyou"] = ThankYouComponent
 
 class Placeholder extends BasePlaceholder {

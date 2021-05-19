@@ -90,7 +90,7 @@ const StyledInputDisabledMixin = css`
   }
 `
 
-const StyledInputMixin = css`
+const StyledInputMixin = css<{removeGutter?: boolean}>`
   border: 2px solid ${props => props.error ? props.theme.colors.error : props.theme.colors.primary}!important;
   background-color: ${props => props.error ? props.theme.colors.greyLight : props.theme.colors.offWhite}!important;
   margin: ${props => props.error ? '0 0 .5rem': '0 0 1.5rem'}!important;
@@ -102,6 +102,8 @@ const StyledInputMixin = css`
     background-color: ${props => props.theme.colors.white}!important;
   }
   ${props => props.disabled && StyledInputDisabledMixin}
+  ${props => props.removeGutter ? "margin-bottom: 0!important;": ""}
+  
 `
 
 export const StyledDatePicker = styled.input`

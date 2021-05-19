@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
-import { BannerType } from '.'
-import { typography } from '../../../theme'
+import { typography } from '../../theme'
+
+type BannerType = "cancel" | "full" | "own_place"
 
 export const Root = styled.div`
   margin-bottom: 26px;
@@ -10,12 +11,12 @@ export const Root = styled.div`
   align-items: center;
   justify-content: space-between;
   border-radius: 6px;
-
 `
 
 export const Text = styled.p`
   ${typography.h3}
   margin: 0;
+  max-width: 70%;
 `
 
 const ButtonArrowMixin = css`
@@ -35,5 +36,5 @@ export const Button = styled.a<{type: BannerType}>`
   &:hover {
     color: ${props => props.theme.colors.white};
   }
-  ${props => props.type === 'cancel' && ButtonArrowMixin}
+  ${props => ["full", "cancel"].includes(props.type) && ButtonArrowMixin}
 `

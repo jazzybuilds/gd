@@ -22,14 +22,11 @@ interface EventProps {
 const ThankYou = (props) => {
   const [user, setUser] = React.useState<UserProps | null>(null)
   const [event, setEvent] = React.useState<EventProps | null>(null)
-  const { item: { fields } } = props.renderingContext
-  if (!fields || !fields.event) {
-    console.log("No event data supplied")
-    return null
-  }
+  const { page: { fields: { title: pageTitle, eventDetails } }, item: { fields } } = props.renderingContext
+  console.log({ eventDetails: props.renderingContext })
 
   React.useEffect(() => {
-    const storageData = JSON.parse(localStorage.getItem("test"))
+    const storageData = JSON.parse(localStorage.getItem(pageTitle))
 
     if (!storageData) {
       if (fields["fallback url"]) {
@@ -39,23 +36,29 @@ const ThankYou = (props) => {
         paths.pop()
         window.location.replace(`${window.location.origin}/${paths.join("/")}/`)
       }
+    } else {
+      setUser({
+        firstname: storageData[FormStorageNames.Firstname],
+        lastname: storageData[FormStorageNames.Lastname],
+        email: storageData[FormStorageNames.Email],
+        reference: storageData[FormStorageNames.PaymentReference]
+      })
+
+      setEvent({
+        title: fields["calendar title"],
+        description: "",
+        location: eventDetails["location"],
+        date: format(new Date(eventDetails["date"]), "dd/MM/yyyy"),
+        time: format(new Date(eventDetails["date"]), "h:mmaaaaa'm'").toUpperCase()
+      })
     }
 
-    setUser({
-      firstname: storageData[FormStorageNames.Firstname],
-      lastname: storageData[FormStorageNames.Lastname],
-      email: storageData[FormStorageNames.Email],
-      reference: storageData[FormStorageNames.PaymentReference]
-    })
-
-    setEvent({
-      title: fields["calendar title"],
-      description: "",
-      location: fields["event"]["location"],
-      date: format(new Date(fields["event"]["date"]), "dd/MM/yyyy"),
-      time: format(new Date(fields["event"]["date"]), "h:mmaaaaa'm'").toUpperCase()
-    })
   }, [])
+
+  if (!eventDetails || !fields || !fields.event) {
+    console.log("No event data supplied")
+    return null
+  }
 
   if (!user) {
     return (<p>Loading</p>)
@@ -83,8 +86,8 @@ const ThankYou = (props) => {
           event={{
             title: event.title,
             location: event.location,
-            startTime: fields["event"]["date"],
-            endTime: fields["event"]["date"]
+            startTime: eventDetails["date"],
+            endTime: eventDetails["date"]
           }}
           buttonTemplate={{ textOnly: 'none' }}
           buttonLabel="Add to my calendar"
