@@ -16,7 +16,7 @@
     "test:update": "jest --updateSnapshot",
     "postinstall": "ncp lib node_modules",
     "build": "next build",
-    "build:functions": "yarn copy-forms-util && netlify-lambda build ./functions_src",
+    "build:functions": "netlify-lambda build ./functions_src && yarn copy-forms-util",
     "build:storybook": "build-storybook",
     "dev": "node ./server.js",
     "dev:netlify": "netlify dev --functions=functions --command='node ./server.js'",

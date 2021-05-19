@@ -104,13 +104,13 @@ exports.handler = async function (event, context) {
     FormFields: dataFormFields
   }
 
-
   try {
     const response = await axios.post(`${process.env.SITECORE_ORIGIN}/api/forms/saveformdata`, data, {
       headers: {
         'Authorization': `Basic ${process.env.SITECORE_PROXY_BASIC_AUTH}`
       }
     })
+
     return {
       statusCode: 200,
       body: JSON.stringify(response.data)

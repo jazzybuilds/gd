@@ -65,8 +65,6 @@ const FormComponent =  loadable(() => import('../components/Form'), {
   fallback: LoaderComponent
 })
 
-
-
 const ThankYouComponent =  loadable(() => import('../components/ThankYou/Event'), {
   fallback: LoaderComponent
 })

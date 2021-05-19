@@ -450,18 +450,24 @@ const FormComponent = (props) => {
             ...matchFieldByName(key, values.address[key])
           }
         },{})
-        
-        const paymentReferenceField = matchFieldByName("payment reference", values.paymentId)
-        const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
+
         const ownPlaceValue = capacityFull && ownPlaceField ? { [ownPlaceField.id]: "OWN"} : undefined
 
-        const payload = {
+        let payload = {
           formId: props.renderingContext.item.id,
           ...values,
           ...addressFields,
-          ...paymentReferenceField,
-          ...finalAmountField,
           ...ownPlaceValue
+        }
+
+        if (values.paymentId) {
+          const paymentReferenceField = matchFieldByName("payment reference", values.paymentId)
+          const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
+          payload = {
+            ...payload,
+            ...paymentReferenceField,
+            ...finalAmountField,
+          }
         }
 
         delete payload.address
