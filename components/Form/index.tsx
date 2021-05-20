@@ -186,7 +186,7 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
 
 const FormComponent = (props) => {
   const {
-    page: { fields: { title: pageTitle, capacity, eventDetails } },
+    page: { id: pageId, fields: { capacity, eventDetails } },
     item: { fields: { FormData, PaymentOptions } }
   } = props.renderingContext
 
@@ -263,7 +263,7 @@ const FormComponent = (props) => {
       if (field.id === fieldId) {
         if (key.includes('.')) {
           const keys = key.split(".")
-          const fielItem = keys.reduce((sum, keySplit, index) => {
+          keys.reduce((sum, keySplit, index) => {
             if (sum[keySplit] === undefined) {
               return sum
             }
@@ -416,8 +416,8 @@ const FormComponent = (props) => {
     const email = aliasFields.find(value => value.alias === "email")
 
     // @TODO add event name to match it in thank you page
-    localStorage.removeItem(pageTitle);
-    localStorage.setItem(pageTitle, JSON.stringify({
+    localStorage.removeItem(pageId);
+    localStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
@@ -460,14 +460,21 @@ const FormComponent = (props) => {
         }
 
         const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
+        const paymentReferenceField = matchFieldByName("payment reference", "")
+        const discountField = matchFieldByName("discounts", "")
+        
         if (finalAmountField) {
           if (!requiresPayment) {
             payload = {
               ...payload,
               ...finalAmountField,
+              ...paymentReferenceField,
+              ...discountField
             }
           } else {
             delete payload[Object.keys(finalAmountField)[0]]
+            delete payload[Object.keys(paymentReferenceField)[0]]
+            delete payload[Object.keys(discountField)[0]]
           }
         }
 
