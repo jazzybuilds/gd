@@ -2,7 +2,6 @@ import React from 'react'
 
 const JustGiving = (props) => {
   const { item: { fields } } = props.renderingContext
-  
   if (!fields) {
     return null
   }

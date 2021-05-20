@@ -35,13 +35,15 @@ exports.handler = async function (event) {
     "Name": finalAmountField.itemName
   }]
 
-  const discountField = form.fields.find(field => field.itemName && field.itemName.toLowerCase() === 'discounts')
-  if (discountField) {
-    formFieldsData.push({
-      "Value": payload.discountCode,
-      "Id": discountField.itemID,
-      "Name": discountField.itemName
-    })
+  if (payload.discountCode) {
+    const discountField = form.fields.find(field => field.itemName && field.itemName.toLowerCase() === 'discounts')
+    if (discountField) {
+      formFieldsData.push({
+        "Value": payload.discountCode,
+        "Id": discountField.itemID,
+        "Name": discountField.itemName
+      })
+    }
   }
 
   try {

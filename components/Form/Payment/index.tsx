@@ -89,6 +89,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
       reference: newReference.WebsiteReferenceID
     })
   }
+
   const payload = await stripe.confirmCardPayment(response.data, {
     payment_method: paymentMethod,
     return_url: window.location.href
@@ -648,6 +649,7 @@ const PaymentOptions = (props: PaymentProps) => {
 
 
 const Payment = (props: PaymentProps) => {
+  console.log('pay', { props })
   let googleAPI = "loading"
   if (props.paymentOptions.find(option => option.type === "googlepay") && window.PaymentRequest) {
     googleAPI = useScript(
