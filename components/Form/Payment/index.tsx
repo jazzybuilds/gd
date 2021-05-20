@@ -64,47 +64,13 @@ const updateFormSubmission = async (props: UpdateReferenceProps) => {
 }
 
 const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<makeStripePaymentResponse> => {
+  let response
   try {
-    const response = await axios.post("/api-fe/stripe", { ...rest })
+    response = await axios.post("/api-fe/stripe", { ...rest })
     if (!response.data) {
       return Promise.reject({
         message: "Something went wrong, please try again",
         reference: rest.reference,
-      })
-    }
-
-    const payload = await stripe.confirmCardPayment(response.data, {
-      payment_method: paymentMethod,
-      return_url: window.location.href
-    }, { handleActions: false });
-
-    if (payload.error) {
-      const newReference = await updateFormSubmission({
-        formId: rest.formId,
-        sessionId: rest.sessionId,
-        referenceId: rest.referenceNumber,
-        amount: rest.amount,
-        discountCode: rest.discountCode,
-        type: "Stripe",
-        status: payload.error.code
-      })
-      return Promise.reject({
-        message: payload.error.message ?? "Unable to take payment",
-        reference: newReference.WebsiteReferenceID,
-      })
-    } else {
-      const newReference = await updateFormSubmission({
-        formId: rest.formId,
-        sessionId: rest.sessionId,
-        referenceId: rest.referenceNumber,
-        amount: rest.amount,
-        discountCode: rest.discountCode,
-        type: "Stripe",
-        status: "200"
-      })
-      return Promise.resolve({
-        reference: newReference.WebsiteReferenceID,
-        intent: payload.paymentIntent,
       })
     }
   } catch (error) {
@@ -123,6 +89,41 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
       reference: newReference.WebsiteReferenceID
     })
   }
+  const payload = await stripe.confirmCardPayment(response.data, {
+    payment_method: paymentMethod,
+    return_url: window.location.href
+  }, { handleActions: false });
+
+  if (payload.error) {
+    const newReference = await updateFormSubmission({
+      formId: rest.formId,
+      sessionId: rest.sessionId,
+      referenceId: rest.referenceNumber,
+      amount: rest.amount,
+      discountCode: rest.discountCode,
+      type: "Stripe",
+      status: payload.error.code
+    })
+    return Promise.reject({
+      message: payload.error.message ?? "Unable to take payment",
+      reference: newReference.WebsiteReferenceID,
+    })
+  } else {
+    const newReference = await updateFormSubmission({
+      formId: rest.formId,
+      sessionId: rest.sessionId,
+      referenceId: rest.referenceNumber,
+      amount: rest.amount,
+      discountCode: rest.discountCode,
+      type: "Stripe",
+      status: "200"
+    })
+    return Promise.resolve({
+      reference: newReference.WebsiteReferenceID,
+      intent: payload.paymentIntent,
+    })
+  }
+
 }
 
 function getGooglePayRequest(amount: number): google.payments.api.PaymentDataRequest {
@@ -253,7 +254,7 @@ const ApplePay = (props: StripeComponentProps) => {
 }
 
 const GooglePay = (props: StripeComponentProps & { googleClient: google.payments.api.PaymentsClient }) => {
-  const [error, setError] =React.useState(null)
+  const [error, setError] = React.useState(null)
   const processPayment = () => {
     props.googleClient
       .loadPaymentData(getGooglePayRequest(props.amount))
@@ -288,7 +289,7 @@ const GooglePay = (props: StripeComponentProps & { googleClient: google.payments
           />
         </React.Fragment>
       }
-      {props.error  || error && <span className="field-validation-error">{props.error ?? error}</span>}
+      {props.error || error && <span className="field-validation-error">{props.error ?? error}</span>}
     </React.Fragment>
   )
 }
@@ -367,8 +368,8 @@ const PayPal = (props: PaymentOptionProps) => {
               })
               props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
             } catch (error) {
-            setError(error)
-              
+              setError(error)
+
             }
           }}
         />

@@ -12,7 +12,7 @@ const JustGiving = (props) => {
       <h2>{fields["title"]}</h2>
       <p>{fields["summary"]}</p>
 
-      <a href={fields["link"]} target="_blank">
+      <a href={fields["link"]} target={fields["link"]["target"]}>
         <img src={fields["image"]["url"]} alt={fields["image"]["alt"]} />
       </a> 
 
