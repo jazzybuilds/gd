@@ -36,7 +36,7 @@ const ThankYou = (props) => {
     }
 
     if (fields["event page"]) {
-      const storageData = JSON.parse(localStorage.getItem(fields["event page"]["title"]))
+      const storageData = JSON.parse(localStorage.getItem(fields["event page"]["id"]))
       if (!storageData) {
         redirectFunc()
       } else {

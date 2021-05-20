@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormStorageNames } from '../../utils/constants'
 import HeroSecondary from '../HeroSecondary'
 
 const HeroDynamic = (props) => {
@@ -6,8 +7,11 @@ const HeroDynamic = (props) => {
   const { item: { fields } } = props.renderingContext
 
   React.useEffect(() => {
-    if (localStorage.getItem('form-user-firstname')) {
-      setName(localStorage.getItem('form-user-firstname'))
+    if (fields["event page"]) {
+      const storageData = JSON.parse(localStorage.getItem(fields["event page"]["id"]))
+      if (storageData) {
+        setName(storageData[FormStorageNames.Firstname])
+      }
     }
   }, [])
 
