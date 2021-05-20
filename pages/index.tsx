@@ -115,7 +115,7 @@ componentsIndex["EventsSection"] = EventDetailsComponent
 componentsIndex["EventGuide"] = () => <div />
 componentsIndex["EventGuideItem"] = () => <div />
 componentsIndex["EventsThankyou"] = ThankYouComponent
-componentsIndex["JustGiving"] = () => <div />
+componentsIndex["JustGiving"] = JustGivingComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {
