@@ -459,17 +459,15 @@ const FormComponent = (props) => {
           ...ownPlaceValue
         }
 
-        if (!requiresPayment) {
-          const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
-          payload = {
-            ...payload,
-            ...finalAmountField,
-          }
-        } else {
-          const finalAmountField = matchFieldByName("finalamount", "")
-          payload = {
-            ...payload,
-            ...finalAmountField,
+        const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
+        if (finalAmountField) {
+          if (!requiresPayment) {
+            payload = {
+              ...payload,
+              ...finalAmountField,
+            }
+          } else {
+            delete payload[Object.keys(finalAmountField)[0]]
           }
         }
 
