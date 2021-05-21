@@ -12,6 +12,8 @@ const MVCLayout = (props) => {
   const metaTitle = pageFields?.title;
 
   React.useEffect(() => {
+    window.top.postMessage('3DS-authentication-complete', "*");
+
     checkRowBgs();
     objectFitImages();
     initMobileNav()

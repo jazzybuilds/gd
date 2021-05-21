@@ -29,7 +29,6 @@ import ContentComponent from '../components/Content'
 import CampaignSearchComponent from '../components/CampaignSearch'
 import BlockQuoteComponent from '../components/BlockQuote'
 
-
 const LoaderComponent = () => <div />
 const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
 
@@ -39,46 +38,23 @@ const HeroComponent =  loadable(() => import('../components/Hero'), {
 const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'), {
   fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
 })
+const DynamicHeroComponent =  loadable(() => import('../components/HeroDynamic'), {
+  fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
+})
 
-// const CardComponent =  loadable(() => import('../components/Card'), {
-//   fallback: LoaderComponent
-// })
-// const TextBannerComponent =  loadable(() => import('../components/TextBanner'), {
-//   fallback: <div style={{height: 140}} />,
-// })
-// const CardBannerComponent =  loadable(() => import('../components/CardBanner'), {
-//   fallback: LoaderComponent
-// })
-// const ContactDetailsComponent =  loadable(() => import('../components/ContactDetails'), {
-//   fallback: <div style={{height: 200}} />,
-// })
+
 const ButtonComponent =  loadable(() => import('../components/Button'), {
   fallback: <div style={{height: 56}} />,
 })
-// const BlockTextComponent =  loadable(() => import('../components/BlockText'), {
-//   fallback: LoaderComponent
-// })
-// const BlockQuoteComponent =  loadable(() => import('../components/BlockQuote'), {
-//   fallback: LoaderComponent
-// })
 const ImageComponent =  loadable(() => import('../components/Image'), {
   fallback: <div style={{height: 441}} />,
 })
-// const CardArticleComponent =  loadable(() => import('../components/CardArticle'), {
-//   fallback: LoaderComponent
-// })
 const VideoComponent =  loadable(() => import('../components/Video'), {
   fallback: LoaderComponent
 })
 const CookiePreferencesComponent =  loadable(() => import('../components/CookiePreferences'), {
   fallback: LoaderComponent
 })
-// const CampaignSearchComponent =  loadable(() => import('../components/CampaignSearch'), {
-//   fallback: LoaderComponent
-// })
-// const ContentComponent =  loadable(() => import('../components/Content'), {
-//   fallback: LoaderComponent
-// })
 const DividerComponent =  loadable(() => import('../components/Divider'), {
   fallback: LoaderComponent
 })
@@ -88,6 +64,23 @@ const MetadataLayout =  loadable(() => import('../components/MetadataLayout'), {
 const FormComponent =  loadable(() => import('../components/Form'), {
   fallback: LoaderComponent
 })
+
+const ThankYouComponent =  loadable(() => import('../components/ThankYou/Event'), {
+  fallback: LoaderComponent
+})
+
+const EventDetailsComponent =  loadable(() => import('../components/Events/Details'), {
+  fallback: LoaderComponent
+})
+
+const CapacityBannerComponent =  loadable(() => import('../components/CapacityBanner'), {
+  fallback: LoaderComponent
+})
+
+const JustGivingComponent =  loadable(() => import('../components/JustGiving'), {
+  fallback: LoaderComponent
+})
+
 
 // Components Index
 const componentsIndex: any = {};
@@ -113,11 +106,16 @@ componentsIndex["RichText"] = ContentComponent
 componentsIndex["ReusableRichText"] = ContentComponent
 componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
+componentsIndex["CapacityBanner"] = CapacityBannerComponent;
 
-componentsIndex["EventsSection"] = () => <div />
+
+
+componentsIndex["EventThankyouhero"] = DynamicHeroComponent
+componentsIndex["EventsSection"] = EventDetailsComponent
 componentsIndex["EventGuide"] = () => <div />
 componentsIndex["EventGuideItem"] = () => <div />
-componentsIndex["EventsThankyou"] = () => <div />
+componentsIndex["EventsThankyou"] = ThankYouComponent
+componentsIndex["JustGiving"] = JustGivingComponent
 
 class Placeholder extends BasePlaceholder {
   constructor(props) {

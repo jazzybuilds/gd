@@ -2,6 +2,7 @@
 
 _redirects
 /functions_src/*.json
+/functions_src/formUtils.js
 /functions/
 
 # dependencies
@@ -47,3 +48,5 @@ public/_redirects
 .debug.log
 
 storybook-static
+generate-form-data.js
+utils/*.js
