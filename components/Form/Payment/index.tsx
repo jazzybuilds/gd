@@ -649,7 +649,6 @@ const PaymentOptions = (props: PaymentProps) => {
 
 
 const Payment = (props: PaymentProps) => {
-  console.log('pay', { props })
   let googleAPI = "loading"
   if (props.paymentOptions.find(option => option.type === "googlepay") && window.PaymentRequest) {
     googleAPI = useScript(
