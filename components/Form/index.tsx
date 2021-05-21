@@ -10,15 +10,17 @@ import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
 import { FormStorageNames } from '../../utils/constants';
 
-const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
+const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState }) => {
   const errRef = React.useRef(null)
   const fieldType = fieldValues.type
 
   const hasError = getIn(formProps.errors, fieldValues.name) && getIn(formProps.touched, fieldValues.name)
 
-  if (hasError && errRef && errRef.current) {
-    errRef.current.scrollIntoView({ behavior: 'smooth' })
-  }
+  React.useEffect(() => {
+    if (hasError && errRef && errRef.current) {
+      errRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [isValidating, hasError, errRef])
 
   if (fieldValues.name === 'address') {
     return (
@@ -44,6 +46,7 @@ const RenderField = ({ formProps, fieldValues, rules, setDisabledState }) => {
           {fieldValues.items.map((sectionField, index) => (
             <React.Fragment key={`${index}-${sectionField.Id}`}>
               <RenderField
+                isValidating={isValidating}
                 formProps={formProps}
                 fieldValues={sectionField}
                 rules={rules}
@@ -207,7 +210,8 @@ const FormComponent = (props) => {
   const formDataFields = FormData.Fields
   const sectionRef = React.useRef(null)
   const [currentStep, setCurrentStep] = React.useState(1)
-  const [hasMounted, setHasMounted] = React.useState(false)
+  const [hasMounted, setHasMounted] = React.useState<boolean>(false)
+  const [isValidating, setIsValidating] = React.useState<boolean>(false)
   const [renderPaymentStep, setRenderPaymentStep] = React.useState<boolean>(false)
   const [hasPaymentSection, setHasPaymentSection] = React.useState<boolean>(false)
   const [requiresPayment, setRequiresPayment] = React.useState<number | null>(null)
@@ -550,6 +554,7 @@ const FormComponent = (props) => {
                         }}
                       />
                       : <RenderField
+                        isValidating={isValidating}
                         rules={conditions}
                         formProps={formProps}
                         fieldValues={paymentField}
@@ -573,6 +578,7 @@ const FormComponent = (props) => {
                       return (
                         <FormSectionWrapper key={`${field.FieldKey}-${index}`}>
                           <RenderField
+                            isValidating={isValidating}
                             rules={conditions}
                             formProps={formProps}
                             fieldValues={field}
@@ -587,6 +593,7 @@ const FormComponent = (props) => {
                         type="button"
                         disabled={formProps.isSubmitting}
                         onClick={async () => {
+                          setIsValidating(true)
                           if (["submit", "payment"].includes(buttonData.action)) {
                             await formProps.submitForm()
                           } else {
@@ -597,6 +604,8 @@ const FormComponent = (props) => {
                               setCurrentStep(currentStep + 1)
                             }
                           }
+                          setIsValidating(false)
+
                         }}
                       >
                         {buttonData.label}
