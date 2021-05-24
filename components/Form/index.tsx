@@ -439,7 +439,6 @@ const FormComponent = (props) => {
   return (
     <Formik
       initialValues={initialValues}
-      validateOnBlur={false}
       validate={validatePage}
       onSubmit={async (values, formProps) => {
         formProps.setSubmitting(true)
