@@ -166,12 +166,18 @@ export const StyledLabel = styled.label<{gutter?: boolean}>`
   margin-bottom: ${props => props.gutter ? "32px" :""};
 `
 
+const CheckRadioDisabledMixin = css`
+  cursor: not-allowed;
+  opacity: .5;
+`
+
 const CheckRadioMixin = css`
   display: flex;
   align-items: end;
   position: relative;
   cursor: pointer;
-  
+  ${props => props.disabled && CheckRadioDisabledMixin}
+
   input:focus {
     & + span {
       outline: 2px dotted ${props => props.theme.colors.secondary} !important;
@@ -180,7 +186,7 @@ const CheckRadioMixin = css`
 
   input,
   input:focus {
-    opacity:0; 
+    opacity:0!important; 
     position:absolute;
     top:0;
     z-index: 100;
@@ -214,7 +220,7 @@ const CheckRadioMixin = css`
   }
 `
 
-export const StyledRadio = styled.label`
+export const StyledRadio = styled.label<{disabled?: boolean}>`
   ${CheckRadioMixin}
   span {
     align-items: center;
@@ -224,9 +230,8 @@ export const StyledRadio = styled.label`
   }
 `
 
-export const StyledCheckbox = styled.label`
+export const StyledCheckbox = styled.label<{disabled?: boolean}>`
   ${CheckRadioMixin}
- 
   span {
     &:before {
       border-radius: 6px;

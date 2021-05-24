@@ -24,7 +24,7 @@ export const Text = (props: {htmlElement: string}) => <div dangerouslySetInnerHT
 
 export const CheckBox = ({ label, ...props }) => {
   return (
-    <StyledCheckbox htmlFor={props.id}>
+    <StyledCheckbox htmlFor={props.id} disabled={props.disabled}>
       <input {...props}  type="checkbox" checked={props.selected} />
       <span>{label}</span>
     </StyledCheckbox>
@@ -33,7 +33,7 @@ export const CheckBox = ({ label, ...props }) => {
 
 export const Radio = ({ label, ...props }) => {
   return (
-    <StyledRadio htmlFor={props.id}>
+    <StyledRadio htmlFor={props.id} disabled={props.disabled}>
       <input {...props} type="radio"  checked={props.selected} />
       <span>{label}</span>
     </StyledRadio>
