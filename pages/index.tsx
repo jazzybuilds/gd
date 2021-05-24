@@ -108,9 +108,7 @@ componentsIndex["Divider"] = DividerComponent
 componentsIndex["JavaScriptForm"] = FormComponent
 componentsIndex["CapacityBanner"] = CapacityBannerComponent;
 
-
-
-componentsIndex["EventThankyouhero"] = DynamicHeroComponent
+componentsIndex["FormThankyouhero"] = DynamicHeroComponent
 componentsIndex["EventsSection"] = EventDetailsComponent
 componentsIndex["EventGuide"] = () => <div />
 componentsIndex["EventGuideItem"] = () => <div />

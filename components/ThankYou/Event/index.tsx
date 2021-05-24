@@ -47,13 +47,13 @@ const ThankYou = (props) => {
           reference: storageData[FormStorageNames.PaymentReference]
         })
 
-        const parsedDate = parse(fields["event page"]["event date"], "MM/dd/yyyy h:mm:ss a", new Date())
+        const parsedDate = fields["event page"]["event date"] ? parse(fields["event page"]["event date"], "MM/dd/yyyy h:mm:ss a", new Date()) : null
         setEvent({
           title: fields["calendar title"],
           description: "",
           location: fields["event page"]["location"],
-          date: format(parsedDate, "dd/MM/yyyy"),
-          time: format(parsedDate, "h:mmaaaaa'm'").toUpperCase()
+          date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
+          time: parsedDate ? format(parsedDate, "h:mmaaaaa'm'").toUpperCase() : ""
         })
       }
     } else {
@@ -81,31 +81,34 @@ const ThankYou = (props) => {
 
       <div>
         <ListText>Name: {user.firstname} {user.lastname}</ListText>
-        <ListText>Where: {event.location}</ListText>
-        <ListText>Date: {event.date}</ListText>
-        <ListText gutter={true}>Time: {event.time}</ListText>
+        {event.location && <ListText>Where: {event.location}</ListText>}
+        {event.date && <ListText>Date: {event.date}</ListText>}
+        {event.time && <ListText gutter={true}>Time: {event.time}</ListText>}
 
         {user.reference &&
           <ListText>Payment reference: {user.reference}</ListText>
         }
       </div>
-      <Calendar>
-        <AddToCalendar
-          event={{
-            title: event.title,
-            location: event.location,
-            startTime: event.date,
-            endTime: event.date,
-          }}
-          buttonTemplate={{ textOnly: 'none' }}
-          buttonLabel="Add to my calendar"
-          listItems={[
-            { outlook: 'Outlook' },
-            { apple: 'Apple Calendar' },
-            { google: 'Google' }
-          ]}
-        />
-      </Calendar>
+      {event.date && event.date &&
+        <Calendar>
+          <AddToCalendar
+            event={{
+              title: event.title,
+              location: event.location,
+              startTime: event.date,
+              endTime: event.date,
+            }}
+            buttonTemplate={{ textOnly: 'none' }}
+            buttonLabel="Add to my calendar"
+            listItems={[
+              { outlook: 'Outlook' },
+              { apple: 'Apple Calendar' },
+              { google: 'Google' }
+            ]}
+          />
+        </Calendar>
+      }
+
     </React.Fragment>
   )
 }
