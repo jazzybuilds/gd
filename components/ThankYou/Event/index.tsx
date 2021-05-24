@@ -53,7 +53,7 @@ const ThankYou = (props) => {
           description: "",
           location: fields["event page"]["location"],
           date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
-          time: parsedDate ? format(parsedDate, "h:mmaaaaa'm'").toUpperCase() : ""
+          time: parsedDate ? format(parsedDate, "h:mm a") : ""
         })
       }
     } else {
@@ -95,8 +95,8 @@ const ThankYou = (props) => {
             event={{
               title: event.title,
               location: event.location,
-              startTime: event.date,
-              endTime: event.date,
+              startTime: parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date()),
+              endTime: parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date()),
             }}
             buttonTemplate={{ textOnly: 'none' }}
             buttonLabel="Add to my calendar"
