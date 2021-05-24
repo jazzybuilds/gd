@@ -20,7 +20,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     if (hasError && errRef && errRef.current) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [isValidating, hasError, errRef])
+  }, [isValidating])
 
   if (fieldValues.name === 'address') {
     return (
@@ -439,7 +439,7 @@ const FormComponent = (props) => {
   return (
     <Formik
       initialValues={initialValues}
-      validateOnBlur={true}
+      validateOnBlur={false}
       validate={validatePage}
       onSubmit={async (values, formProps) => {
         formProps.setSubmitting(true)
@@ -605,7 +605,6 @@ const FormComponent = (props) => {
                             }
                           }
                           setIsValidating(false)
-
                         }}
                       >
                         {buttonData.label}

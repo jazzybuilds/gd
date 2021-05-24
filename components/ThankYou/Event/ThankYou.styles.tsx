@@ -61,8 +61,4 @@ export const Calendar = styled.div<{open: boolean}>`
       }
     }
   }
-  
-  
-  
-
 `
