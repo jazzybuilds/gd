@@ -1,6 +1,6 @@
 import { format, parse } from 'date-fns';
 import React from 'react'
-import AddToCalendar from 'react-add-to-calendar';
+import AddToCalendar from '@culturehq/add-to-calendar';
 import { FormStorageNames } from '../../../utils/constants';
 import { ListText, Calendar, SummaryText } from './ThankYou.styles';
 
@@ -53,7 +53,7 @@ const ThankYou = (props) => {
           description: "",
           location: fields["event page"]["location"],
           date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
-          time: parsedDate ? format(parsedDate, "h:mmaaaaa'm'").toUpperCase() : ""
+          time: parsedDate ? format(parsedDate, "h:mm a") : ""
         })
       }
     } else {
@@ -62,6 +62,7 @@ const ThankYou = (props) => {
 
 
   }, [])
+
 
   if (!fields || !fields["event page"]) {
     console.log("No event data supplied")
@@ -92,19 +93,14 @@ const ThankYou = (props) => {
       {event.date && event.date &&
         <Calendar>
           <AddToCalendar
+            children="Add to my calendar"
             event={{
-              title: event.title,
+              name: event.title,
+              details: "",
               location: event.location,
-              startTime: event.date,
-              endTime: event.date,
+              startsAt: String(parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())),
+              endsAt: String(parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())),
             }}
-            buttonTemplate={{ textOnly: 'none' }}
-            buttonLabel="Add to my calendar"
-            listItems={[
-              { outlook: 'Outlook' },
-              { apple: 'Apple Calendar' },
-              { google: 'Google' }
-            ]}
           />
         </Calendar>
       }

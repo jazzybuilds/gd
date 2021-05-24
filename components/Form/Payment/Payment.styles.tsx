@@ -32,7 +32,7 @@ export const AppliedDiscount = styled.div`
   ${typography.link}
   background: ${props => props.theme.colors.primaryLight};
   color: ${props => props.theme.colors.primary};
-  width: 477px;
+  max-width: 477px;
   padding: 15px 24px;
   display: flex;
   justify-content: space-between;

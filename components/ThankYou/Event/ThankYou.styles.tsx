@@ -12,7 +12,12 @@ export const SummaryText = styled.div`
 
 export const Calendar = styled.div<{open: boolean}>`
   margin: 2rem 0;
-  .react-add-to-calendar__button {
+
+  svg {
+    display: none;
+  }
+
+  .chq-atc--button {
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.white};
     font-size: 18px;
@@ -22,41 +27,42 @@ export const Calendar = styled.div<{open: boolean}>`
     text-decoration: none;
     text-align: center;
     width: 100%;
+    position: relative;
     
     ${props => props.theme.breakpoints.sm} {
       width: auto;
     }
-  }
-  
-  ul {
-    list-style: none;
-  }
 
-  .react-add-to-calendar__button,
-  .react-add-to-calendar__button--light{
-    position: relative;
-    overflow: hidden
+    &::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 15px;
+      top: 20px;
+      right: 20px;
+      background-size: 16px;
+      background-repeat: no-repeat;
+      background-image: url(/images/arrow-down-white.svg);
+    }
+
     
   }
-
-  .react-add-to-calendar__button::before,
-  .react-add-to-calendar__button--light::before {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 15px;
-    top: 20px;
-    right: 20px;
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-image: url(/images/arrow-down-white.svg);
-    // transform: rotate(30deg);
+  
+  .chq-atc--dropdown {
+    a {
+      display: block;
+      margin: 8px 0;
+      text-decoration: none;
+      
+      &:hover {
+        
+        text-decoration: none;
+        color: inherit
+      }
+    }
   }
-
-
-  .react-add-to-calendar__button--light::before { {
-    transform: rotate(180deg);
-    top: 15px;
-  }
+  
+  
+  
 
 `
