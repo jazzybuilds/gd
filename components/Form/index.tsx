@@ -499,7 +499,7 @@ const FormComponent = (props) => {
           }
         } catch (error) {
           console.error(error)
-          if (error.response?.data && error.response.status > 500) {
+          if (error.response?.data && error.response.status < 500) {
             formProps.setErrors(error.response.data)
           } else {
             setFormSubmissionError("Something went wrong")

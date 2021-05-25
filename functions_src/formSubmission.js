@@ -9,7 +9,6 @@ const {
 
 exports.handler = async function (event, context) {
   const payload = JSON.parse(event.body)
-
   if (!payload.formId) {
     return {
       statusCode: 400,
@@ -19,6 +18,7 @@ exports.handler = async function (event, context) {
 
   const form = forms.find(form => form.id === payload.formId)
   if (!form) {
+    console.log("Form not found with id of ", payload.formId)
     return {
       statusCode: 404,
       body: "Unrecognized form submitted"
@@ -56,6 +56,8 @@ exports.handler = async function (event, context) {
   const validation = await validate({ schema, values: payload, fields: formFields })
 
   if (!validation || Object.keys(validation).length > 0) {
+    console.log("Validation failed")
+
     return {
       statusCode: 422,
       body: JSON.stringify(validation)
@@ -116,6 +118,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify(response.data)
     };
   } catch (error) {
+    console.log(error)
     return {
       statusCode: 502,
       body: "Unable to save form"
