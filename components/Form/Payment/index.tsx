@@ -26,6 +26,7 @@ interface PaymentOptionProps {
   paymentRequest: any
   referenceNumber: string
   sessionId: string
+  statement: string
   type: string
   summary: string
   discountCode: string
@@ -453,6 +454,7 @@ const StripePayments = (props: StripePaymentsProps) => {
           stripe,
           formId: props.formId,
           amount: props.amount,
+          statement: props.statement,
           discountCode: props.discountCode,
           type: props.type,
           sessionId: props.sessionId,
@@ -479,6 +481,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         stripe,
         formId: props.formId,
         amount: props.amount,
+        statement: props.statement,
         type: props.type,
         sessionId: props.sessionId,
         discountCode: props.discountCode,
@@ -540,6 +543,7 @@ const PaymentOptions = (props: PaymentProps) => {
     formId: props.formId,
     amount: props.amount,
     type: props.type,
+    statement: props.statement,
     sessionId: props.sessionId,
     discountCode: props.discountCode,
     referenceNumber: props.referenceNumber,
