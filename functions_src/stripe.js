@@ -13,6 +13,7 @@ exports.handler = async function (event, context) {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: payload.amount,
     currency: "gbp",
+    statement_descriptor_suffix: payload.statement,
     description: payload.referenceNumber,
     metadata: {
       "Product type": payload.type,

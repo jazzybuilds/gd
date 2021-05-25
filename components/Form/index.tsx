@@ -518,7 +518,8 @@ const FormComponent = (props) => {
         if (showPaymentStep) {
           const paymentFields = availableFields[currentStep - 1]
           const discountField = allFormValues.find(field => field.name === "discounts")
-          const productType = allFormValues.find(field => field.itemName === "PaymentType")
+          const productType = allFormValues.find(field => field.itemName === "ProductType")
+          const statementDescription = allFormValues.find(field => field.itemName === "StatementDescriptorSuffix")
           return (
             <React.Fragment>
               <BackButton type="button" onClick={() => setCurrentStep(currentStep - 1)}>
@@ -540,6 +541,7 @@ const FormComponent = (props) => {
                           paymentOptions: paymentSettings,
                           referenceNumber: paymentReference.WebsiteReferenceID,
                           sessionId: paymentReference.SitecoreFormSessionId,
+                          statement: statementDescription?.defaultValue ?? "",
                           type: productType?.defaultValue ?? "",
                           formId: props.renderingContext.item.id,
                           amount: formProps.values.payment,
