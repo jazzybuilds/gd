@@ -16,13 +16,14 @@ const CapacityBanner = (props) => {
   }
 
   return (
-    <Root>
-      <Text>{capacity["summary"]}</Text>
-      {url &&
-        <Button type={capacity["title"]} href={url} target={capacity["link"]["target"]}>{capacity["link"]["text"]}</Button>
-      }
-    </Root>
-
+    <div className="component small-12 columns">
+      <Root>
+        <Text>{capacity["summary"]}</Text>
+        {url &&
+          <Button type={capacity["title"]} href={url} target={capacity["link"]["target"]}>{capacity["link"]["text"]}</Button>
+        }
+      </Root>
+    </div>
   )
 }
 
