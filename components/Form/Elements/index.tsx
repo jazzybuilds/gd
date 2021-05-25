@@ -26,7 +26,7 @@ export const CheckBox = ({ label, ...props }) => {
   return (
     <StyledCheckbox htmlFor={props.id} disabled={props.disabled}>
       <input {...props}  type="checkbox" checked={props.selected} />
-      <span>{label}</span>
+      <span>{label}{props.required? "*" : ""}</span>
     </StyledCheckbox>
   )
 }
@@ -35,7 +35,7 @@ export const Radio = ({ label, ...props }) => {
   return (
     <StyledRadio htmlFor={props.id} disabled={props.disabled}>
       <input {...props} type="radio"  checked={props.selected} />
-      <span>{label}</span>
+      <span>{label}{props.required? "*" : ""}</span>
     </StyledRadio>
   )
 }
