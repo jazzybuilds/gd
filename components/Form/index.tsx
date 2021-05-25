@@ -116,6 +116,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
             <CheckBox
               key={`${fieldProps.id}-${option.value}`}
               {...fieldProps}
+              required={false}
               id={`${fieldProps.id}-${option.value}`}
               name={`${fieldProps.id}-${option.value}`}
               value={option.value}
@@ -144,6 +145,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
             <Radio
               key={`${fieldProps.id}-${option.value}`}
               {...fieldProps}
+              required={false}
               name={`${fieldProps.id}-${option.value}`}
               id={`${fieldProps.id}-${option.value}`}
               value={option.value} label={option.label}
