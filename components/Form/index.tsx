@@ -157,21 +157,23 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       return (
         <React.Fragment>
           <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} tabIndex={0} />
-          {options.map(option => (
-            <Radio
-              key={`${fieldProps.id}-${option.value}`}
-              {...fieldProps}
-              required={false}
-              name={fieldProps.name}
-              id={`${fieldProps.id}-${option.value}`}
-              value={option.value} label={option.label}
-              selected={fieldProps.value === option.value}
-              onChange={(e) => {
-                formProps.setFieldValue(fieldProps.id, e.target.value)
-                handleRules(e)
-              }}
-            />
-          ))}
+          <fieldset>
+            {options.map(option => (
+              <Radio
+                key={`${fieldProps.id}-${option.value}`}
+                {...fieldProps}
+                required={false}
+                name={fieldProps.name}
+                id={`${fieldProps.id}-${option.value}`}
+                value={option.value} label={option.label}
+                selected={fieldProps.value === option.value}
+                onChange={(e) => {
+                  formProps.setFieldValue(fieldProps.id, e.target.value)
+                  handleRules(e)
+                }}
+              />
+            ))}
+          </fieldset>
         </React.Fragment>
       )
     }
