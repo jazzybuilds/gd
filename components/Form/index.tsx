@@ -421,7 +421,6 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
 
-    // @TODO add event name to match it in thank you page
     localStorage.removeItem(pageId);
     localStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
@@ -464,23 +463,21 @@ const FormComponent = (props) => {
           ...ownPlaceValue
         }
 
-        const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
+        const finalAmountField = matchFieldByName("finalamount", "")
         const paymentReferenceField = matchFieldByName("payment reference", "")
         const discountField = matchFieldByName("discounts", "")
-        
-        if (finalAmountField) {
-          if (!requiresPayment) {
-            payload = {
-              ...payload,
-              ...finalAmountField,
-              ...paymentReferenceField,
-              ...discountField
-            }
-          } else {
-            delete payload[Object.keys(finalAmountField)[0]]
-            delete payload[Object.keys(paymentReferenceField)[0]]
-            delete payload[Object.keys(discountField)[0]]
+
+        if (!requiresPayment) {
+          payload = {
+            ...payload,
+            ...finalAmountField,
+            ...paymentReferenceField,
+            ...discountField
           }
+        } else {
+          delete payload[Object.keys(finalAmountField)[0]]
+          delete payload[Object.keys(paymentReferenceField)[0]]
+          delete payload[Object.keys(discountField)[0]]
         }
 
         delete payload.address
