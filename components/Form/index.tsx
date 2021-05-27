@@ -1,16 +1,25 @@
 
 import React from 'react'
 import axios from 'axios';
-import { Formik, Form, getIn, ErrorMessage } from 'formik';
-import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule } from '../../utils/formUtils';
+import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
+import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
 import Postcode from "./Postcode"
 import { Radio, CheckBox, DropDown, Text, Label, Input, DatePicker, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
-import { FormStorageNames } from '../../utils/constants';
+import { FormStorageNames, OwnPlaceAlias } from '../../utils/constants';
 
-const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState, firstErrorKey }) => {
+interface RenderFieldProps {
+  isValidating: boolean
+  formProps: FormikProps<FormikValues>
+  fieldValues: FormValuesProps
+  rules: ConditionProps[];
+  setDisabledState: (fieldId: string, state: boolean) => void
+  firstErrorKey: string | null
+}
+
+const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState, firstErrorKey }: RenderFieldProps) => {
   const errRef = React.useRef(null)
   const hasError = getIn(formProps.errors, fieldValues.name) && getIn(formProps.touched, fieldValues.name)
 
@@ -59,7 +68,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       )
     }
 
-    return <Text {...fieldValues} />
+    return <Text htmlElement={fieldValues.htmlElement} />
   }
 
   const { options, validation, defaultValue, helptext, conditions, className, ...rest } = fieldValues
@@ -83,7 +92,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
   }
 
-  let fieldProps = {
+  let fieldProps: any = {
     ...rest,
     helptext,
     className,
@@ -190,8 +199,8 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   return (
     <React.Fragment>
       <div ref={errRef}>
-      {getField()}
-      <ErrorMessage name={fieldValues.name} render={msg => <InputError id={`${fieldValues.name}-error`} message={msg} />} />
+        {getField()}
+        <ErrorMessage name={fieldValues.name} render={msg => <InputError id={`${fieldValues.name}-error`} message={msg} />} />
       </div>
     </React.Fragment>
   )
@@ -219,7 +228,7 @@ const FormComponent = (props) => {
 
   const formDataFields = FormData.Fields
   const sectionRef = React.useRef(null)
-   
+
   const [firstErrorKey, setFirstErrorKey] = React.useState<string | null>(null)
 
   const [currentStep, setCurrentStep] = React.useState(1)
@@ -235,7 +244,7 @@ const FormComponent = (props) => {
   const [formSubmissionError, setFormSubmissionError] = React.useState<string | null>(null)
   const [formattedFields, setFormattedFields] = React.useState(extractFields(formDataFields.filter(field => field.Name !== 'meta')))
   const [allFormValues, setAllFormValues] = React.useState(flattenFormValues(formattedFields))
-  const capacityFull = capacity ? capacity["title"] === 'own_place' : false
+  const capacityFull = capacity ? capacity["title"] === OwnPlaceAlias : false
   const ownPlaceField = allFormValues.find(formValue => formValue.alias && formValue.alias.toLowerCase() === 'own_place')
 
   const initialValues = allFormValues.reduce((sum, item) => {
@@ -394,7 +403,7 @@ const FormComponent = (props) => {
     }
   }
 
-  const setDisabled = (fieldId, state) => {
+  const setDisabled = (fieldId: string, state: boolean) => {
     const fields = updateFormattedField(formattedFields, fieldId, "disabled", state)
     setFormattedFields(fields)
   }
@@ -447,7 +456,7 @@ const FormComponent = (props) => {
       window.location.href = window.location.href + "thank-you"
     }
   }
-  
+
 
   return (
     <Formik
@@ -587,9 +596,9 @@ const FormComponent = (props) => {
                 <React.Fragment>
                   {index > 0 && <DashedDivider />}
                   <Section ref={sectionRef} key={`section-${index}`}>
-                    {availableField.items.map((field, index) => {
+                    {availableField.items.map((field: FormValuesProps, index) => {
                       return (
-                        <FormSectionWrapper key={`${field.FieldKey}-${index}`}>
+                        <FormSectionWrapper key={`${field.id}-${index}`}>
                           <RenderField
                             firstErrorKey={firstErrorKey}
                             isValidating={isValidating}
