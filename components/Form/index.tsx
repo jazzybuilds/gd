@@ -1,26 +1,35 @@
 
 import React from 'react'
 import axios from 'axios';
-import { Formik, Form, getIn, ErrorMessage } from 'formik';
-import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule } from '../../utils/formUtils';
+import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
+import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
 import Postcode from "./Postcode"
 import { Radio, CheckBox, DropDown, Text, Label, Input, DatePicker, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
-import { FormStorageNames } from '../../utils/constants';
+import { FormStorageNames, OwnPlaceAlias } from '../../utils/constants';
 
-const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState }) => {
+interface RenderFieldProps {
+  isValidating: boolean
+  formProps: FormikProps<FormikValues>
+  fieldValues: FormValuesProps
+  rules: ConditionProps[];
+  setDisabledState: (fieldId: string, state: boolean) => void
+  firstErrorKey: string | null
+}
+
+const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState, firstErrorKey }: RenderFieldProps) => {
   const errRef = React.useRef(null)
-  const fieldType = fieldValues.type
-
   const hasError = getIn(formProps.errors, fieldValues.name) && getIn(formProps.touched, fieldValues.name)
 
+  const fieldType = fieldValues.type
+
   React.useEffect(() => {
-    if (hasError && errRef && errRef.current) {
+    if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [isValidating])
+  }, [isValidating, firstErrorKey])
 
   if (fieldValues.name === 'address') {
     return (
@@ -46,6 +55,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
           {fieldValues.items.map((sectionField, index) => (
             <React.Fragment key={`${index}-${sectionField.Id}`}>
               <RenderField
+                firstErrorKey={firstErrorKey}
                 isValidating={isValidating}
                 formProps={formProps}
                 fieldValues={sectionField}
@@ -58,7 +68,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       )
     }
 
-    return <Text {...fieldValues} />
+    return <Text htmlElement={fieldValues.htmlElement} />
   }
 
   const { options, validation, defaultValue, helptext, conditions, className, ...rest } = fieldValues
@@ -82,10 +92,12 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
   }
 
-  let fieldProps = {
+  let fieldProps: any = {
     ...rest,
     helptext,
     className,
+    'aria-describedby': `${rest.name}-error`,
+    'aria-required': validation.required,
     required: validation.required,
     value: formProps.values[rest.name],
     onBlur: formProps.handleBlur,
@@ -93,6 +105,10 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       formProps.handleChange(e)
       handleRules(e)
     },
+  }
+
+  if (hasError) {
+    fieldProps["aria-invalid"] = "true"
   }
 
   if (fieldProps.type === 'date') {
@@ -146,7 +162,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
               key={`${fieldProps.id}-${option.value}`}
               {...fieldProps}
               required={false}
-              name={`${fieldProps.id}-${option.value}`}
+              name={fieldProps.name}
               id={`${fieldProps.id}-${option.value}`}
               value={option.value} label={option.label}
               selected={fieldProps.value === option.value}
@@ -176,15 +192,16 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     return (
-      <Input {...fieldProps} type={fieldType} error={hasError} />
+      <Input  {...fieldProps} type={fieldType} error={hasError} />
     )
   }
 
   return (
     <React.Fragment>
-      <div ref={errRef} />
-      {getField()}
-      <ErrorMessage name={fieldValues.name} render={msg => <InputError message={msg} />} />
+      <div ref={errRef}>
+        {getField()}
+        <ErrorMessage name={fieldValues.name} render={msg => <InputError id={`${fieldValues.name}-error`} message={msg} />} />
+      </div>
     </React.Fragment>
   )
 }
@@ -211,6 +228,9 @@ const FormComponent = (props) => {
 
   const formDataFields = FormData.Fields
   const sectionRef = React.useRef(null)
+
+  const [firstErrorKey, setFirstErrorKey] = React.useState<string | null>(null)
+
   const [currentStep, setCurrentStep] = React.useState(1)
   const [hasMounted, setHasMounted] = React.useState<boolean>(false)
   const [isValidating, setIsValidating] = React.useState<boolean>(false)
@@ -224,7 +244,7 @@ const FormComponent = (props) => {
   const [formSubmissionError, setFormSubmissionError] = React.useState<string | null>(null)
   const [formattedFields, setFormattedFields] = React.useState(extractFields(formDataFields.filter(field => field.Name !== 'meta')))
   const [allFormValues, setAllFormValues] = React.useState(flattenFormValues(formattedFields))
-  const capacityFull = capacity ? capacity["title"] === 'own_place' : false
+  const capacityFull = capacity ? capacity["title"] === OwnPlaceAlias : false
   const ownPlaceField = allFormValues.find(formValue => formValue.alias && formValue.alias.toLowerCase() === 'own_place')
 
   const initialValues = allFormValues.reduce((sum, item) => {
@@ -383,7 +403,7 @@ const FormComponent = (props) => {
     }
   }
 
-  const setDisabled = (fieldId, state) => {
+  const setDisabled = (fieldId: string, state: boolean) => {
     const fields = updateFormattedField(formattedFields, fieldId, "disabled", state)
     setFormattedFields(fields)
   }
@@ -421,7 +441,6 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
 
-    // @TODO add event name to match it in thank you page
     localStorage.removeItem(pageId);
     localStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
@@ -437,6 +456,7 @@ const FormComponent = (props) => {
       window.location.href = window.location.href + "thank-you"
     }
   }
+
 
   return (
     <Formik
@@ -464,23 +484,21 @@ const FormComponent = (props) => {
           ...ownPlaceValue
         }
 
-        const finalAmountField = matchFieldByName("finalamount", String(values.payment / 100))
+        const finalAmountField = matchFieldByName("finalamount", "")
         const paymentReferenceField = matchFieldByName("payment reference", "")
         const discountField = matchFieldByName("discounts", "")
-        
-        if (finalAmountField) {
-          if (!requiresPayment) {
-            payload = {
-              ...payload,
-              ...finalAmountField,
-              ...paymentReferenceField,
-              ...discountField
-            }
-          } else {
-            delete payload[Object.keys(finalAmountField)[0]]
-            delete payload[Object.keys(paymentReferenceField)[0]]
-            delete payload[Object.keys(discountField)[0]]
+
+        if (!requiresPayment) {
+          payload = {
+            ...payload,
+            ...finalAmountField,
+            ...paymentReferenceField,
+            ...discountField
           }
+        } else {
+          delete payload[Object.keys(finalAmountField)[0]]
+          delete payload[Object.keys(paymentReferenceField)[0]]
+          delete payload[Object.keys(discountField)[0]]
         }
 
         delete payload.address
@@ -557,6 +575,7 @@ const FormComponent = (props) => {
                         }}
                       />
                       : <RenderField
+                        firstErrorKey={firstErrorKey}
                         isValidating={isValidating}
                         rules={conditions}
                         formProps={formProps}
@@ -577,10 +596,11 @@ const FormComponent = (props) => {
                 <React.Fragment>
                   {index > 0 && <DashedDivider />}
                   <Section ref={sectionRef} key={`section-${index}`}>
-                    {availableField.items.map((field, index) => {
+                    {availableField.items.map((field: FormValuesProps, index) => {
                       return (
-                        <FormSectionWrapper key={`${field.FieldKey}-${index}`}>
+                        <FormSectionWrapper key={`${field.id}-${index}`}>
                           <RenderField
+                            firstErrorKey={firstErrorKey}
                             isValidating={isValidating}
                             rules={conditions}
                             formProps={formProps}
@@ -603,6 +623,8 @@ const FormComponent = (props) => {
                             const formErrors = await formProps.validateForm()
                             if (Object.keys(formErrors).length > 0) {
                               Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
+
+                              setFirstErrorKey(Object.keys(formErrors)[0])
                             } else {
                               setCurrentStep(currentStep + 1)
                             }

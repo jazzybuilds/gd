@@ -51,6 +51,7 @@ export const DatePicker = ({label, required, ...props }) => {
       <Label name={props.name} label={label} required={required} />
       <DatePickerComponent
         placeholderText="dd/mm/yyyy" 
+        id={props.name}
         isClearable={false}
         disabled={props.disabled}
         onBlur={props.onBlur}
@@ -96,20 +97,22 @@ export const DropDown = ({ label, options, addDefault, type, rows, required, err
 
 interface InputProps  extends FieldProps {}
 
-export const Input = ({ required, helptext, type, error, label, ...props }: InputProps) => (
-  <React.Fragment>
-    <Label disabled={props.disabled} name={props.name} label={label} required={required} />
-    {(type === 'textarea')
-      ? <StyledTextArea {...props} error={error} />
-      : <StyledInput
-        removeGutter={Boolean(helptext)}
-        type={type}
-        error={error}
-        {...props}
-      />
-    }
-    <span>{helptext}</span>
-  </React.Fragment>
-)
+export const Input = ({ required, helptext, type, error, label, ...props }: InputProps) => {
+  return (
+    <React.Fragment>
+      <Label disabled={props.disabled} name={props.name} label={label} required={required} />
+      {(type === 'textarea')
+        ? <StyledTextArea {...props} error={error} />
+        : <StyledInput
+          removeGutter={Boolean(helptext)}
+          type={type}
+          error={error}
+          {...props}
+        />
+      }
+      <span>{helptext}</span>
+    </React.Fragment>
+  )
+}
 
-export const InputError = ({message}: {message: string}) => <span className="field-validation-error">{message}</span>
+export const InputError = ({message, id }: {id: string, message: string}) => <span id={id} className="field-validation-error">{message}</span>
