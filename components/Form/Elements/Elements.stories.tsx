@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
+import { Meta } from '@storybook/react/types-6-0';
 import { actions } from '@storybook/addon-actions';
 
 import { Input, Radio, CheckBox, DatePicker, DropDown, InputError } from '.';
@@ -54,7 +54,7 @@ export const InputErrorElement = () => {
   return (
     <React.Fragment>
       <Input required={false} onChange={e => setValue(e.target.value)}  value={value} error={true} {...defaultProps} />
-      <InputError message={"Label is required"} />
+      <InputError id="test" message={"Label is required"} />
     </React.Fragment>
   )
 };
