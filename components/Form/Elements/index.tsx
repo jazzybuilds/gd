@@ -95,9 +95,7 @@ export const DropDown = ({ label, options, addDefault, type, rows, required, err
   </React.Fragment>
 )
 
-interface InputProps  extends FieldProps {}
-
-export const Input = ({ required, helptext, type, error, label, ...props }: InputProps) => {
+export const Input = ({ required, helptext, type, error, label, ...props }: FieldProps) => {
   return (
     <React.Fragment>
       <Label disabled={props.disabled} name={props.name} label={label} required={required} />

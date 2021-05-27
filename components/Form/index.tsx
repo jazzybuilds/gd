@@ -71,7 +71,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     return <Text htmlElement={fieldValues.htmlElement} />
   }
 
-  const { options, validation, defaultValue, helptext, conditions, className, ...rest } = fieldValues
+  const { options, validation, defaultValue, helptext, conditions, className, itemName, ...rest } = fieldValues
   const isCheckbox = fieldValues.type === 'checkbox'
 
   const handleRules = (event) => {
