@@ -16,6 +16,7 @@ import { StyledButton } from "../Form.styles";
 import { CardIcon, CardIconWrapper, Text } from "./Payment.styles";
 import { maxInputWidth } from "../../../theme";
 import { Modal } from "../../Modal";
+import { formatPrice } from "./PaymentWrapper";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
 const stripePromise = loadStripe(stripeKey);
@@ -50,7 +51,7 @@ interface makeStripePaymentResponse {
   intent?: any
 }
 
-const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${amount}`)}`
+const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${formatPrice(amount)}`)}`
 
 const updateFormSubmission = async (props: UpdateReferenceProps) => {
   try {
