@@ -21,34 +21,34 @@ import { formatPrice } from "./PaymentWrapper";
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
 const stripePromise = loadStripe(stripeKey);
 
-interface PaymentOptionProps {
-  amount: number
-  formId: string
-  paymentRequest: any
-  referenceNumber: string
-  sessionId: string
-  statement: string
-  type: string
-  summary: string
-  discountCode: string
-  onSubmit: (id: string) => void
-  onReferenceUpdate: (ref: string) => void
-}
-
 interface UpdateReferenceProps {
   formId: string
   sessionId: string
-  referenceId: string
+  referenceNumber: string
   type: 'Stripe' | 'PayPal'
   status: string
   amount: number
   discountCode?: string
 }
 
+interface PaymentOptionProps extends Omit<UpdateReferenceProps, "status"> {
+  paymentRequest: any
+  statement: string
+  summary: string
+  onSubmit: (id: string) => void
+  onReferenceUpdate: (ref: string) => void
+}
+
 interface makeStripePaymentResponse {
   reference: string
   message?: string
   intent?: any
+}
+
+interface makeStripePaymentProps extends Omit<UpdateReferenceProps, "type" | "status"> {
+  stripe: any
+  paymentMethod: any
+  statement: string
 }
 
 const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${formatPrice(amount)}`)}`
@@ -65,14 +65,14 @@ const updateFormSubmission = async (props: UpdateReferenceProps) => {
   }
 }
 
-const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<makeStripePaymentResponse> => {
+const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripePaymentProps): Promise<makeStripePaymentResponse> => {
   let response
   try {
     response = await axios.post("/api-fe/stripe", { ...rest })
     if (!response.data) {
       return Promise.reject({
         message: "Something went wrong, please try again",
-        reference: rest.reference,
+        reference: rest.referenceNumber,
       })
     }
   } catch (error) {
@@ -80,7 +80,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
-      referenceId: rest.referenceNumber,
+      referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
       type: "Stripe",
@@ -101,7 +101,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
-      referenceId: rest.referenceNumber,
+      referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
       type: "Stripe",
@@ -109,13 +109,13 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
     })
     return Promise.reject({
       message: payload.error.message ?? "Unable to take payment",
-      reference: newReference.WebsiteReferenceID,
+      reference: newReference.WebsiteReferenceID ?? rest.referenceNumber,
     })
   } else {
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
-      referenceId: rest.referenceNumber,
+      referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
       type: "Stripe",
@@ -126,7 +126,6 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }): Promise<ma
       intent: payload.paymentIntent,
     })
   }
-
 }
 
 function getGooglePayRequest(amount: number): google.payments.api.PaymentDataRequest {
@@ -363,7 +362,7 @@ const PayPal = (props: PaymentOptionProps) => {
               const updatedResponse = await updateFormSubmission({
                 formId: props.formId,
                 sessionId: props.sessionId,
-                referenceId: props.referenceNumber,
+                referenceNumber: props.referenceNumber,
                 amount: props.amount,
                 discountCode: props.discountCode,
                 type: "PayPal",
@@ -397,17 +396,18 @@ const StripePayments = (props: StripePaymentsProps) => {
   const [stripeClientId, setStripeClientId] = React.useState<string | null>(null)
   const stripe = useStripe();
 
-  const formSubmissionPayload: UpdateReferenceProps = {
-    formId: props.formId,
-    sessionId: props.sessionId,
-    referenceId: props.referenceNumber,
-    amount: props.amount,
-    discountCode: props.discountCode,
-    type: "Stripe",
-    status: "",
-  }
+
 
   React.useEffect(() => {
+    const formSubmissionPayload: UpdateReferenceProps = {
+      formId: props.formId,
+      sessionId: props.sessionId,
+      referenceNumber: props.referenceNumber,
+      amount: props.amount,
+      discountCode: props.discountCode,
+      type: "Stripe",
+      status: "",
+    }
     async function on3DSComplete() {
       setIframe(null)
       setError(null)
@@ -445,7 +445,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       }
     }, false);
 
-  }, [stripeClientId, formSubmissionPayload])
+  }, [stripeClientId])
 
   React.useEffect(() => {
     const handlePaymentMethodReceived = async (event) => {
@@ -457,7 +457,6 @@ const StripePayments = (props: StripePaymentsProps) => {
           amount: props.amount,
           statement: props.statement,
           discountCode: props.discountCode,
-          type: props.type,
           sessionId: props.sessionId,
           referenceNumber: props.referenceNumber,
           paymentMethod: event.paymentMethod.id
@@ -483,7 +482,6 @@ const StripePayments = (props: StripePaymentsProps) => {
         formId: props.formId,
         amount: props.amount,
         statement: props.statement,
-        type: props.type,
         sessionId: props.sessionId,
         discountCode: props.discountCode,
         referenceNumber: props.referenceNumber,
