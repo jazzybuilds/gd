@@ -325,6 +325,7 @@ const ManualAddress = (props: ManualAddressProps) => {
 }
 
 const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields}) => {
+  const postcodeRef = React.useRef(null)
   const [postcodeEntered, setPostcodeEntered] = React.useState("")
   const [showError, setShowError] = React.useState(false)
   const [isLookingUp, setIsLookingUp] = React.useState(false)
@@ -346,6 +347,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
       const response = await getAddress(postcodeEntered)
       setAddresses(response)
       setIsLookingUp(true)
+      postcodeRef && postcodeRef.current.focus()
     } else {
       setShowError(true)
     }
@@ -398,7 +400,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           </p>
 
           <label htmlFor="postcode">Select address *</label>
-          <StyledDropdown name="postcode" id="postcode" onChange={e => onAddressSelection(e.target.value)} error={showError}>
+          <StyledDropdown ref={postcodeRef} name="postcode" id="postcode" onChange={e => onAddressSelection(e.target.value)} error={showError}>
             <option value="">Please select an address</option>
             {addresses.map(address => <option value={address.id}>{address.label}</option>)}
           </StyledDropdown>
