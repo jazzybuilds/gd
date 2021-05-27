@@ -25,7 +25,7 @@ interface UpdateReferenceProps {
   formId: string
   sessionId: string
   referenceNumber: string
-  type: 'Stripe' | 'PayPal'
+  type: 'CC' | 'PP'
   status: string
   amount: number
   discountCode?: string
@@ -83,7 +83,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
-      type: "Stripe",
+      type: "CC",
       status: error.code
     })
     return Promise.reject({
@@ -104,7 +104,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
-      type: "Stripe",
+      type: "CC",
       status: payload.error.code
     })
     return Promise.reject({
@@ -118,7 +118,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
-      type: "Stripe",
+      type: "CC",
       status: "200"
     })
     return Promise.resolve({
@@ -365,7 +365,7 @@ const PayPal = (props: PaymentOptionProps) => {
                 referenceNumber: props.referenceNumber,
                 amount: props.amount,
                 discountCode: props.discountCode,
-                type: "PayPal",
+                type: "PP",
                 status: "paypal_error"
               })
               props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
@@ -396,8 +396,6 @@ const StripePayments = (props: StripePaymentsProps) => {
   const [stripeClientId, setStripeClientId] = React.useState<string | null>(null)
   const stripe = useStripe();
 
-
-
   React.useEffect(() => {
     const formSubmissionPayload: UpdateReferenceProps = {
       formId: props.formId,
@@ -405,7 +403,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       referenceNumber: props.referenceNumber,
       amount: props.amount,
       discountCode: props.discountCode,
-      type: "Stripe",
+      type: "CC",
       status: "",
     }
     async function on3DSComplete() {
