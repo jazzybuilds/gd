@@ -10,17 +10,17 @@ import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
 import { FormStorageNames } from '../../utils/constants';
 
-const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState }) => {
+const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledState, firstErrorKey }) => {
   const errRef = React.useRef(null)
-  const fieldType = fieldValues.type
-
   const hasError = getIn(formProps.errors, fieldValues.name) && getIn(formProps.touched, fieldValues.name)
 
+  const fieldType = fieldValues.type
+
   React.useEffect(() => {
-    if (hasError && errRef && errRef.current) {
+    if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [isValidating])
+  }, [isValidating, firstErrorKey])
 
   if (fieldValues.name === 'address') {
     return (
@@ -46,6 +46,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
           {fieldValues.items.map((sectionField, index) => (
             <React.Fragment key={`${index}-${sectionField.Id}`}>
               <RenderField
+                firstErrorKey={firstErrorKey}
                 isValidating={isValidating}
                 formProps={formProps}
                 fieldValues={sectionField}
@@ -86,6 +87,8 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     ...rest,
     helptext,
     className,
+    'aria-describedby': `${rest.name}-error`,
+    'aria-required': validation.required,
     required: validation.required,
     value: formProps.values[rest.name],
     onBlur: formProps.handleBlur,
@@ -93,6 +96,10 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       formProps.handleChange(e)
       handleRules(e)
     },
+  }
+
+  if (hasError) {
+    fieldProps["aria-invalid"] = "true"
   }
 
   if (fieldProps.type === 'date') {
@@ -176,15 +183,16 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     return (
-      <Input {...fieldProps} type={fieldType} error={hasError} />
+      <Input  {...fieldProps} type={fieldType} error={hasError} />
     )
   }
 
   return (
     <React.Fragment>
-      <div ref={errRef} />
+      <div ref={errRef}>
       {getField()}
-      <ErrorMessage name={fieldValues.name} render={msg => <InputError message={msg} />} />
+      <ErrorMessage name={fieldValues.name} render={msg => <InputError id={`${fieldValues.name}-error`} message={msg} />} />
+      </div>
     </React.Fragment>
   )
 }
@@ -211,6 +219,9 @@ const FormComponent = (props) => {
 
   const formDataFields = FormData.Fields
   const sectionRef = React.useRef(null)
+   
+  const [firstErrorKey, setFirstErrorKey] = React.useState<string | null>(null)
+
   const [currentStep, setCurrentStep] = React.useState(1)
   const [hasMounted, setHasMounted] = React.useState<boolean>(false)
   const [isValidating, setIsValidating] = React.useState<boolean>(false)
@@ -436,6 +447,7 @@ const FormComponent = (props) => {
       window.location.href = window.location.href + "thank-you"
     }
   }
+  
 
   return (
     <Formik
@@ -554,6 +566,7 @@ const FormComponent = (props) => {
                         }}
                       />
                       : <RenderField
+                        firstErrorKey={firstErrorKey}
                         isValidating={isValidating}
                         rules={conditions}
                         formProps={formProps}
@@ -578,6 +591,7 @@ const FormComponent = (props) => {
                       return (
                         <FormSectionWrapper key={`${field.FieldKey}-${index}`}>
                           <RenderField
+                            firstErrorKey={firstErrorKey}
                             isValidating={isValidating}
                             rules={conditions}
                             formProps={formProps}
@@ -600,6 +614,8 @@ const FormComponent = (props) => {
                             const formErrors = await formProps.validateForm()
                             if (Object.keys(formErrors).length > 0) {
                               Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
+
+                              setFirstErrorKey(Object.keys(formErrors)[0])
                             } else {
                               setCurrentStep(currentStep + 1)
                             }

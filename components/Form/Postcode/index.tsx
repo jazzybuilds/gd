@@ -389,7 +389,8 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           <label>Postcode *</label>
           <p>
             <span id="EnteredPostcode">{postcodeEntered}</span>
-            <a onClick={() => {
+            <a href="#" onClick={(e) => {
+              e.preventDefault()
               onSubmit({})
               setManualEntry(false)
               setIsLookingUp(false)
@@ -404,7 +405,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
         </div>
       }
 
-      {!manualEntery && <p>or <a id="EnterManually" onClick={() => setManualEntry(true)}>Enter address manually</a></p>}
+      {!manualEntery && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>Enter address manually</a></p>}
       {manualEntery && 
         <ManualAddress
           touched={touchedFields}
