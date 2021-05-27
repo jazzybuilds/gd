@@ -153,7 +153,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
               key={`${fieldProps.id}-${option.value}`}
               {...fieldProps}
               required={false}
-              name={`${fieldProps.id}-${option.value}`}
+              name={fieldProps.name}
               id={`${fieldProps.id}-${option.value}`}
               value={option.value} label={option.label}
               selected={fieldProps.value === option.value}

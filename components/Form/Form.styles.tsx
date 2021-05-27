@@ -186,6 +186,7 @@ const CheckRadioMixin = css`
 
   input,
   input:focus {
+    width: 100%;
     opacity:0!important; 
     position:absolute;
     top:0;
