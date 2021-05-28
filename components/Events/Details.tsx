@@ -1,6 +1,6 @@
 import React from 'react'
 import { format } from 'date-fns'
-import { Info, Price, Summary, Heading} from './Details.styles'
+import { Info, Price, Summary, Heading, Root} from './Details.styles'
 
 const EventDetails = (props) => {
   const { page: { fields: { capacity, eventDetails } }, item: { fields } } = props.renderingContext
@@ -13,7 +13,7 @@ const EventDetails = (props) => {
   const fee = Number(eventDetails["registration fee"])
 
   return (
-    <React.Fragment>
+    <Root className="component">
       {!capacity && <Summary dangerouslySetInnerHTML={{__html: fields.summary }} />}
       <Heading>{fields.heading}</Heading>
       <Info>
@@ -23,7 +23,7 @@ const EventDetails = (props) => {
       <Info withoutGutter={true}>{eventDetails["registration fee label"] ?? "Registration fee:"}</Info>
       <Price>{!fee ? 'FREE' : `£${fee}`}</Price>
       <Summary dangerouslySetInnerHTML={{__html: eventDetails["registration info"] }} />
-    </React.Fragment>
+    </Root>
   )
 }
 

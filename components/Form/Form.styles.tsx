@@ -106,17 +106,16 @@ const StyledInputMixin = css<{removeGutter?: boolean}>`
   
 `
 
+export const DatePickerRoot = styled.div`
+  position: relative;
+  max-width: ${maxInputWidth}px;
+`
 export const StyledDatePicker = styled.input`
   ${StyledInputMixin}
   border-radius: .5rem;
   padding: 0.875rem 1.125rem;
   width: 100%;
   font-size: 1rem;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-position: center right 24px;
-  background-image: url(/images/calendar-blue.svg);
-
   ::-webkit-input-placeholder {
     color: ${props => props.theme.colors.primary}!important;
   }
@@ -132,6 +131,15 @@ export const StyledDatePicker = styled.input`
   ::placeholder {
       color: ${props => props.theme.colors.primary}!important;
   }
+`
+
+export const DatePickerImage = styled.img`
+  width: 20px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
 `
 
 export const StyledInput = styled.input`
@@ -186,6 +194,7 @@ const CheckRadioMixin = css`
 
   input,
   input:focus {
+    width: 100%;
     opacity:0!important; 
     position:absolute;
     top:0;

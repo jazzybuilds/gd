@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { typography } from '../../theme'
 
+export const Root = styled.div`
+  margin: 1.5rem auto;
+`
+
 export const Heading = styled.h2`
   ${typography.h2}
   margin: 57px 0 48px;

@@ -4,3 +4,5 @@ export enum FormStorageNames {
   Email = 'email',
   PaymentReference = 'payment-reference'
 }
+
+export const OwnPlaceAlias = "own_place"

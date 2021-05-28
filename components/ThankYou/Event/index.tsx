@@ -2,7 +2,7 @@ import { format, parse } from 'date-fns';
 import React from 'react'
 import AddToCalendar from '@culturehq/add-to-calendar';
 import { FormStorageNames } from '../../../utils/constants';
-import { ListText, Calendar, SummaryText } from './ThankYou.styles';
+import { ListText, Calendar, SummaryText, Root } from './ThankYou.styles';
 
 interface UserProps {
   firstname: string
@@ -74,7 +74,7 @@ const ThankYou = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <Root className="component">
       <p>{fields["confirmation text"]}</p>
       <h2>{fields["title"]}</h2>
 
@@ -105,7 +105,7 @@ const ThankYou = (props) => {
         </Calendar>
       }
 
-    </React.Fragment>
+    </Root>
   )
 }
 

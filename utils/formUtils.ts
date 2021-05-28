@@ -1,7 +1,21 @@
 import * as Yup from 'yup'
 import { format } from 'date-fns'
 
-interface FormValues {
+export interface ConditionProps {
+  MatchType: "any" | "all"
+  Actions: Array<{
+    FieldKey: string,
+    Action: "disable" | "enable",
+    Value: string | null
+  }>
+  Conditions: Array<{
+    FieldKey: string,
+    Operator: string,
+    Value: string
+  }>
+}
+
+export interface FormValuesProps {
   name: string;
   itemID?: string;
   itemName?: string;
@@ -22,7 +36,7 @@ interface FormValues {
   redirectURL?: string
   options?: any[];
   disabled?: boolean;
-  conditions?: any[];
+  conditions?: ConditionProps[];
   validation?: {
     regex: any[],
     min: number,
@@ -31,7 +45,7 @@ interface FormValues {
   };
 }
 
-function formatFieldProps(item: any): FormValues {
+function formatFieldProps(item: any): FormValuesProps {
   if (item.Name.toLowerCase() === "amount") {
     const amountFields: any = ["payment", item.FieldKey].map((amountField: string) => {
       return {
@@ -281,8 +295,8 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
               type: "matches",
               params: [reg.params.regularExpression, reg.message]
             })
-          } 
-          
+          }
+
           if (reg.type === "TimeSpanValidation") {
             const currentDate = new Date()
             if (reg.params.unit === "years") {
@@ -341,7 +355,7 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
       })
       item.validations.push({
         type: "transform",
-        params: [value => value === "" ? undefined : value ]
+        params: [value => value === "" ? undefined : value]
       })
     }
 
@@ -363,19 +377,19 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
   return Yup.object().shape(schema.reduce(createYupSchema, defaultValidation))
 }
 
-export const validate = async ({schema, values, fields}) => {
+export const validate = async ({ schema, values, fields }) => {
   const validation = await schema.validate(values, { abortEarly: false })
-  .then(() => (true))
-  .catch((schemaError) => {
-    return schemaError.inner.reduce((memo, { path, message }) => {
-      const relatedField = fields.find(field => field.name === path)
-      const errorMessage = message.replace("{0}", relatedField?.label ?? "")
-      return {
-        ...memo,
-        [path]: errorMessage //[errorMessage].concat(memo[path] ?? [])
-      }
-    }, {})
-  })
+    .then(() => (true))
+    .catch((schemaError) => {
+      return schemaError.inner.reduce((memo, { path, message }) => {
+        const relatedField = fields.find(field => field.name === path)
+        const errorMessage = message.replace("{0}", relatedField?.label ?? "")
+        return {
+          ...memo,
+          [path]: errorMessage //[errorMessage].concat(memo[path] ?? [])
+        }
+      }, {})
+    })
 
   return validation
 }
@@ -402,8 +416,8 @@ export const updateFieldDisabledState = (fields, fieldId, state) => {
   return updatedFields
 }
 
-export const computeConditionRule = ({operator, match, value}) => {
-  if (typeof value === "boolean"){
+export const computeConditionRule = ({ operator, match, value }) => {
+  if (typeof value === "boolean") {
     value = String(value)
   }
 

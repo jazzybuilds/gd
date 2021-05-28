@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { typography } from '../../../theme'
 
+export const Root = styled.div`
+  margin: 1.5rem auto;
+`
+
 export const ListText = styled.h4<{gutter: boolean}>`
   ${typography.h4}
   margin: ${props => props.gutter? '0 0 30px': 0};

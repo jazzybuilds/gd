@@ -4,10 +4,13 @@ const axios = require("axios")
 exports.handler = async function (event) {
   const payload = JSON.parse(event.body)
 
-  if (!payload.formId || !payload.sessionId || !payload.referenceId || !payload.type || !payload.status || !payload.amount) {
+  if (!payload.formId || !payload.sessionId || !payload.referenceNumber || !payload.PaymentMethod || !payload.status || !payload.amount) {
     return {
       statusCode: 422,
-      body: "Invalid form payload"
+      body: JSON.stringify({
+        message: "Invalid form payload",
+        WebsiteReferenceID: payload.referenceNumber
+      })
     }
   }
 
@@ -16,7 +19,10 @@ exports.handler = async function (event) {
     console.log("Cant form form with id", payload.formId)
     return {
       statusCode: 404,
-      body: "Unrecognized form submitted"
+      body: JSON.stringify({
+        message: "Unrecognized form submitted",
+        WebsiteReferenceID: payload.referenceNumber
+      })
     }
   }
 
@@ -25,7 +31,10 @@ exports.handler = async function (event) {
     console.log("cant find final amount field")
     return {
       statusCode: 422,
-      body: "Unable to find relevant data"
+      body: JSON.stringify({
+        message: "Unable to find relevant data",
+        WebsiteReferenceID: payload.referenceNumber
+      })
     };
   }
 
@@ -51,8 +60,8 @@ exports.handler = async function (event) {
       "FormId": payload.formId,
       "SitecoreFormSessionId": payload.sessionId,
       "Status": payload.status,
-      "PaymentMethod": payload.type,
-      "WebsiteReferenceID": payload.referenceId,
+      "PaymentMethod": payload.PaymentMethod,
+      "WebsiteReferenceID": payload.referenceNumber,
       "FormFields": formFieldsData
     }, {
       headers: {
@@ -67,7 +76,10 @@ exports.handler = async function (event) {
     console.error(error)
     return {
       statusCode: 502,
-      body: "Unable to update form"
+      body: JSON.stringify({
+        message: "Unable to update form",
+        WebsiteReferenceID: payload.referenceNumber
+      })
     };
   }
 };

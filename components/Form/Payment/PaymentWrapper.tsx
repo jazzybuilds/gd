@@ -13,6 +13,8 @@ export interface DiscountDataProps {
   end: string
 }
 
+export const formatPrice = (amount: number) => amount.toFixed(2).replace(/[.,]00$/, "")
+
 interface PaymentWrapperProps {
   onDiscountSubmit?: (code: string, value: number) => void
   amount: number
@@ -78,7 +80,11 @@ const Discount = (props: { formId: string, currentAmount: number, onSubmit: (val
         <label>Discount applied</label>
         <AppliedDiscount>
           <span>{discountInput}</span>
-          <AppliedDiscountButton onClick={() => setDiscountApplied(false)}/>
+          <AppliedDiscountButton onClick={() => {
+             setDiscountInput("")
+            setDiscountApplied(false)
+            props.onSubmit({ code: "", value: props.currentAmount })
+          }}/>
         </AppliedDiscount>
       </DiscountWrapper>
     )
@@ -105,7 +111,7 @@ const Discount = (props: { formId: string, currentAmount: number, onSubmit: (val
   )
 }
 
-const Price = (props: { amount: number }) => <PriceText>£{props.amount / 100}</PriceText>
+const Price = (props: { amount: number }) => <PriceText>£{formatPrice(props.amount / 100)}</PriceText>
 
 export const PaymentWrapper = (props: PaymentWrapperProps) => {
   return (
