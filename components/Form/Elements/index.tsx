@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePickerImage, DatePickerRoot, StyledCheckbox, StyledDatePicker, StyledDropdown, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
+import { DatePickerImage, DatePickerRoot, StyledCheckbox, StyledDatePicker, StyledDropdown, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
 import DatePickerComponent from "react-datepicker";
 
 interface FieldProps {
@@ -121,4 +121,4 @@ export const Input = ({ required, helptext, type, error, label, ...props }: Fiel
   )
 }
 
-export const InputError = ({message, id }: {id: string, message: string}) => <span id={id} className="field-validation-error">{message}</span>
+export const InputError = ({message, id }: {id: string, message: string}) => <StyledError id={id} className="field-validation-error">{message}</StyledError>
