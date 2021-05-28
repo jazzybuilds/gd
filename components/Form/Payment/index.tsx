@@ -169,7 +169,7 @@ const PaymentSummary = (props: { amount: number, summary: string }) => {
   return (
     <div>
       <Text>Payment summary:</Text>
-      <p>{formatSummaryText(props.amount / 100, props.summary)}</p>
+      <p tabIndex={0}>{formatSummaryText(props.amount / 100, props.summary)}</p>
     </div>
   )
 }
