@@ -16,8 +16,8 @@ interface FieldProps {
   onBlur: (e: any) => void
 }
 
-export const Label = (props: {gutter?: boolean, required?: boolean, name: string, label: string, disabled?:boolean, tabIndex?: number}) => (
-  <StyledLabel gutter={props.gutter} tabIndex={props.tabIndex} disabled={props.disabled} htmlFor={props.name}>{props.label}{props.required ? "*" : ""}</StyledLabel>
+export const Label = (props: {gutter?: boolean, required?: boolean, name: string, label: string, disabled?:boolean }) => (
+  <StyledLabel gutter={props.gutter} disabled={props.disabled} htmlFor={props.name}>{props.label}{props.required ? "*" : ""}</StyledLabel>
 )
 
 export const Text = (props: {htmlElement: string}) => <div dangerouslySetInnerHTML={{ __html: props.htmlElement }} />

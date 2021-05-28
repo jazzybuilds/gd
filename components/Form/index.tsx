@@ -127,7 +127,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     if (fieldType === 'checkbox list') {
       return (
         <React.Fragment>
-          <Label gutter={true} name={fieldProps.name} label={fieldProps.label} required={validation.required} tabIndex={0} />
+          <Label gutter={true} name={fieldProps.name} label={fieldProps.label} required={validation.required} />
           {options.map(option =>
             <CheckBox
               key={`${fieldProps.id}-${option.value}`}
@@ -156,7 +156,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     if (fieldType === 'radio list') {
       return (
         <React.Fragment>
-          <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} tabIndex={0} />
+          <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} />
           <fieldset>
             {options.map(option => (
               <Radio
