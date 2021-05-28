@@ -139,6 +139,7 @@ export const DatePickerImage = styled.img`
   top: 20px;
   right: 20px;
   cursor: pointer;
+  z-index: 1000;
 `
 
 export const StyledInput = styled.input`

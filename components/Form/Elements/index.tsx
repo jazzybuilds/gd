@@ -60,7 +60,7 @@ export const DatePicker = ({label, required, ...props }) => {
           showYearDropdown={true}
           showMonthDropdown={true}
           scrollableYearDropdown={true}
-          yearDropdownItemNumber={50}
+          yearDropdownItemNumber={4}
           onClickOutside={() => setIsOpen(false)}
           open={isOpen}
           customInput={<StyledDatePicker error={props.error}  onBlur={props.onBlur} />}
