@@ -67,7 +67,9 @@ export const DatePicker = ({label, required, ...props }) => {
           dateFormat="dd/MM/yyyy"
           selected={value}
           onChange={date => { 
+            setIsOpen(false)
             if (!date || isNaN(date.getTime())) {
+
               return props.onChange(date)
             }
             const year = date.getFullYear()
