@@ -116,11 +116,6 @@ export const StyledDatePicker = styled.input`
   padding: 0.875rem 1.125rem;
   width: 100%;
   font-size: 1rem;
-  // background-size: 20px;
-  // background-repeat: no-repeat;
-  // background-position: center right 24px;
-  // background-image: url(/images/calendar-blue.svg);
-
   ::-webkit-input-placeholder {
     color: ${props => props.theme.colors.primary}!important;
   }

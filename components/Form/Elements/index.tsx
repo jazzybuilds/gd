@@ -61,6 +61,7 @@ export const DatePicker = ({label, required, ...props }) => {
           showMonthDropdown={true}
           scrollableYearDropdown={true}
           yearDropdownItemNumber={50}
+          onClickOutside={() => setIsOpen(false)}
           open={isOpen}
           customInput={<StyledDatePicker error={props.error}  onBlur={props.onBlur} />}
           dateFormat="dd/MM/yyyy"
