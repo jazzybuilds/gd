@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledCheckbox, StyledDatePicker, StyledDropdown, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
+import { DatePickerImage, DatePickerRoot, StyledCheckbox, StyledDatePicker, StyledDropdown, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
 import DatePickerComponent from "react-datepicker";
 
 interface FieldProps {
@@ -41,6 +41,7 @@ export const Radio = ({ label, ...props }) => {
 }
 
 export const DatePicker = ({label, required, ...props }) => {
+  const [isOpen, setIsOpen] = React.useState(false)
   let value: string | Date = new Date(props.value || '')
   if (isNaN(value.getTime())) {
     value = null
@@ -49,30 +50,34 @@ export const DatePicker = ({label, required, ...props }) => {
   return (
     <React.Fragment>
       <Label name={props.name} label={label} required={required} />
-      <DatePickerComponent
-        placeholderText="dd/mm/yyyy" 
-        id={props.name}
-        isClearable={false}
-        disabled={props.disabled}
-        onBlur={props.onBlur}
-        showYearDropdown={true}
-        showMonthDropdown={true}
-        scrollableYearDropdown={true}
-        yearDropdownItemNumber={50}
-        customInput={<StyledDatePicker error={props.error}  onBlur={props.onBlur} />}
-        dateFormat="dd/MM/yyyy"
-        selected={value}
-        onChange={date => { 
-          if (!date || isNaN(date.getTime())) {
-            return props.onChange(date)
-          }
-          const year = date.getFullYear()
-          const month = date.getMonth() + 1
-          const day = date.getDate()
-          const updatedValue = `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`
-          props.onChange(updatedValue)
-        }}
-      />
+      <DatePickerRoot>
+        <DatePickerComponent
+          placeholderText="dd/mm/yyyy" 
+          id={props.name}
+          isClearable={false}
+          disabled={props.disabled}
+          onBlur={props.onBlur}
+          showYearDropdown={true}
+          showMonthDropdown={true}
+          scrollableYearDropdown={true}
+          yearDropdownItemNumber={50}
+          open={isOpen}
+          customInput={<StyledDatePicker error={props.error}  onBlur={props.onBlur} />}
+          dateFormat="dd/MM/yyyy"
+          selected={value}
+          onChange={date => { 
+            if (!date || isNaN(date.getTime())) {
+              return props.onChange(date)
+            }
+            const year = date.getFullYear()
+            const month = date.getMonth() + 1
+            const day = date.getDate()
+            const updatedValue = `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`
+            props.onChange(updatedValue)
+          }}
+        />
+        <DatePickerImage src="/images/calendar-blue.svg" alt="calendar icon" onClick={() => setIsOpen(!isOpen)} />
+      </DatePickerRoot>
     </React.Fragment>
   )
 }
