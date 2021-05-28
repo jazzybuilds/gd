@@ -4,7 +4,7 @@ const axios = require("axios")
 exports.handler = async function (event) {
   const payload = JSON.parse(event.body)
 
-  if (!payload.formId || !payload.sessionId || !payload.referenceNumber || !payload.type || !payload.status || !payload.amount) {
+  if (!payload.formId || !payload.sessionId || !payload.referenceNumber || !payload.PaymentMethod || !payload.status || !payload.amount) {
     return {
       statusCode: 422,
       body: JSON.stringify({
@@ -60,7 +60,7 @@ exports.handler = async function (event) {
       "FormId": payload.formId,
       "SitecoreFormSessionId": payload.sessionId,
       "Status": payload.status,
-      "PaymentMethod": payload.type,
+      "PaymentMethod": payload.PaymentMethod,
       "WebsiteReferenceID": payload.referenceNumber,
       "FormFields": formFieldsData
     }, {

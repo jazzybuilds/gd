@@ -562,7 +562,7 @@ const FormComponent = (props) => {
                           referenceNumber: paymentReference.WebsiteReferenceID,
                           sessionId: paymentReference.SitecoreFormSessionId,
                           statement: statementDescription?.defaultValue ?? "",
-                          type: productType?.defaultValue ?? "",
+                          productType: productType?.defaultValue ?? "",
                           formId: props.renderingContext.item.id,
                           amount: formProps.values.payment,
                           onReferenceUpdate: (ref: string) => setPaymentReference({

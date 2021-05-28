@@ -25,15 +25,16 @@ interface UpdateReferenceProps {
   formId: string
   sessionId: string
   referenceNumber: string
-  type: 'CC' | 'PP'
+  PaymentMethod: 'CC' | 'PP'
   status: string
   amount: number
   discountCode?: string
 }
 
-interface PaymentOptionProps extends Omit<UpdateReferenceProps, "status"> {
+interface PaymentOptionProps extends Omit<UpdateReferenceProps, "PaymentMethod" | "status"> {
   paymentRequest: any
   statement: string
+  productType: string
   summary: string
   onSubmit: (id: string) => void
   onReferenceUpdate: (ref: string) => void
@@ -45,8 +46,9 @@ interface makeStripePaymentResponse {
   intent?: any
 }
 
-interface makeStripePaymentProps extends Omit<UpdateReferenceProps, "type" | "status"> {
+interface makeStripePaymentProps extends Omit<UpdateReferenceProps, "PaymentMethod" | "status"> {
   stripe: any
+  productType: string
   paymentMethod: any
   statement: string
 }
@@ -83,7 +85,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
-      type: "CC",
+      PaymentMethod: "CC",
       status: error.code
     })
     return Promise.reject({
@@ -104,7 +106,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
-      type: "CC",
+      PaymentMethod: "CC",
       status: payload.error.code
     })
     return Promise.reject({
@@ -118,7 +120,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       referenceNumber: rest.referenceNumber,
       amount: rest.amount,
       discountCode: rest.discountCode,
-      type: "CC",
+      PaymentMethod: "CC",
       status: "200"
     })
     return Promise.resolve({
@@ -313,7 +315,7 @@ const PayPal = (props: PaymentOptionProps) => {
         purchase_units: [
           {
             description: props.referenceNumber,
-            custom_id: props.type,
+            custom_id: props.productType,
             amount: {
               value: String(props.amount / 100),
             },
@@ -365,7 +367,7 @@ const PayPal = (props: PaymentOptionProps) => {
                 referenceNumber: props.referenceNumber,
                 amount: props.amount,
                 discountCode: props.discountCode,
-                type: "PP",
+                PaymentMethod: "PP",
                 status: "paypal_error"
               })
               props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
@@ -403,7 +405,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       referenceNumber: props.referenceNumber,
       amount: props.amount,
       discountCode: props.discountCode,
-      type: "CC",
+      PaymentMethod: "CC",
       status: "",
     }
     async function on3DSComplete() {
@@ -456,6 +458,7 @@ const StripePayments = (props: StripePaymentsProps) => {
           statement: props.statement,
           discountCode: props.discountCode,
           sessionId: props.sessionId,
+          productType: props.productType,
           referenceNumber: props.referenceNumber,
           paymentMethod: event.paymentMethod.id
         })
@@ -480,6 +483,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         formId: props.formId,
         amount: props.amount,
         statement: props.statement,
+        productType: props.productType,
         sessionId: props.sessionId,
         discountCode: props.discountCode,
         referenceNumber: props.referenceNumber,
@@ -539,7 +543,7 @@ const PaymentOptions = (props: PaymentProps) => {
     paymentRequest: paymentRequest,
     formId: props.formId,
     amount: props.amount,
-    type: props.type,
+    productType: props.productType,
     statement: props.statement,
     sessionId: props.sessionId,
     discountCode: props.discountCode,

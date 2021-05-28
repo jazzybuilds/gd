@@ -16,7 +16,7 @@ exports.handler = async function (event, context) {
     statement_descriptor_suffix: payload.statement,
     description: payload.referenceNumber,
     metadata: {
-      "Product type": payload.type,
+      "Product type": payload.productType,
       "Website reference ID": payload.referenceNumber,
       "Sitecore form ID": payload.formId ?? "unknown",
       "Sitecore form session ID": payload.sessionId
