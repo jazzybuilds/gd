@@ -176,11 +176,13 @@ const PaymentSummary = (props: { amount: number, summary: string }) => {
 
 type StripeComponentProps = PaymentOptionProps & {
   error: string | null, submitting: boolean
-  onSubmit: (paymentMethod: any) => Promise<void>
+  onSubmit: (paymentMethod: any) => Promise<void> //WHAT ABOUT THE PAYPAL ?
 }
 
 const Card = (props: StripeComponentProps) => {
   const elements = useElements();
+
+  console.log('Card props', props)
 
   const options = {
     style: {
@@ -302,6 +304,8 @@ const PayPal = (props: PaymentOptionProps) => {
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
+  console.log('PayPal props', props)
+
   const onApprove = async (actions) => {
     await actions.order.capture()
     return props.onSubmit(props.referenceNumber);
@@ -354,6 +358,7 @@ const PayPal = (props: PaymentOptionProps) => {
             setIsSubmitting(false)
           }}
           onApprove={(data, actions) => {
+            console.log('onApprove ||||||||||', 'actions', actions, 'data', data)
             setIsSubmitting(true)
             return onApprove(actions)
           }}
@@ -373,7 +378,6 @@ const PayPal = (props: PaymentOptionProps) => {
               props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
             } catch (error) {
               setError(error)
-
             }
           }}
         />
@@ -398,6 +402,21 @@ const StripePayments = (props: StripePaymentsProps) => {
   const [stripeClientId, setStripeClientId] = React.useState<string | null>(null)
   const stripe = useStripe();
 
+
+
+
+
+  console.log('paymentMethod________', paymentMethod,)
+  console.log('paymentOptions ||||||', paymentOptions,)
+  console.log('props.paymentRequest', props.paymentRequest)
+  console.log('PROPS', props)
+
+
+
+
+
+
+
   React.useEffect(() => {
     const formSubmissionPayload: UpdateReferenceProps = {
       formId: props.formId,
@@ -405,7 +424,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       referenceNumber: props.referenceNumber,
       amount: props.amount,
       discountCode: props.discountCode,
-      PaymentMethod: "CC",
+      PaymentMethod: "CC", // WHY HARDCODED?
       status: "",
     }
     async function on3DSComplete() {
@@ -462,6 +481,7 @@ const StripePayments = (props: StripePaymentsProps) => {
           referenceNumber: props.referenceNumber,
           paymentMethod: event.paymentMethod.id
         })
+        console.log('handlePaymentMethodReceived response', response)
         event.complete("success")
         setError(null)
         props.onSubmit(response.reference)
@@ -489,6 +509,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         referenceNumber: props.referenceNumber,
         paymentMethod: paymentMethod
       })
+      console.log('handleSubmit response', response)
       setError(null)
       setStripeClientId(response.intent.client_secret)
       if (response.intent.next_action) {
@@ -551,26 +572,53 @@ const PaymentOptions = (props: PaymentProps) => {
     onSubmit: props.onSubmit,
     onReferenceUpdate: props.onReferenceUpdate
   }
+  console.log('stripe initial', stripe)
 
   // @NOTE sets apple pay availability
   React.useEffect(() => {
+    console.log('stripe in cycle', stripe)
     if (stripe) {
-      const pr = stripe.paymentRequest({
-        country: "GB",
-        currency: "gbp",
-        total: {
-          label: "total",
-          amount: props.amount,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
-      pr.canMakePayment().then((result) => {
-        if (result) {
-          setApplePayAvailable(result.applePay)
-          setPaymentRequest(pr);
-        }
-      });
+      let pr = null
+
+
+      try {
+         pr = stripe.paymentRequest({
+          country: "GB",
+          currency: "gbp",
+          total: {
+            label: "total",
+            amount: props.amount,
+          },
+          requestPayerName: true,
+          requestPayerEmail: true,
+        });  
+  
+
+      } catch (error) {
+        
+        console.error('paymentRequest error|||||', error)
+
+
+      }
+
+      if (pr) {
+
+        pr.canMakePayment().then((result) => {
+          console.log('canMakePayment', result)
+          try {
+            setApplePayAvailable(result.applePay)
+            setPaymentRequest(pr);
+          } catch (error) {
+            console.error('inner promise', error)
+          }
+          // if (result) {
+          // }
+        }).catch(error => console.error('faild promsie', error));
+  
+      }
+
+
+      
     }
   }, [stripe]);
 
@@ -615,6 +663,12 @@ const PaymentOptions = (props: PaymentProps) => {
       summaryText = paypalOption.summary
       break;
   }
+
+  console.log('PaymentOptions £3£££££££££££££££££££££££££££££', componentProps)
+  console.log('appleOption && applePayAvailable &&', appleOption && applePayAvailable )
+  console.log('applePayAvailable',  applePayAvailable )
+  console.log('appleOption ', appleOption)
+
   return (
     <React.Fragment>
       <div className="payment-types__options">
