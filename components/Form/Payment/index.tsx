@@ -304,6 +304,15 @@ const PayPal = (props: PaymentOptionProps) => {
 
   const onApprove = async (actions) => {
     await actions.order.capture()
+    await updateFormSubmission({
+      formId: props.formId,
+      sessionId: props.sessionId,
+      referenceNumber: props.referenceNumber,
+      amount: props.amount,
+      discountCode: props.discountCode,
+      PaymentMethod: "PP",
+      status: "200"
+    })
     return props.onSubmit(props.referenceNumber);
   }
 
