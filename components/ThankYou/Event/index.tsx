@@ -75,6 +75,8 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
+
+
   return (
     <Root className="component">
       <p>{fields["confirmation text"]}</p>
@@ -84,8 +86,10 @@ const ThankYou = (props) => {
 
       <div>
         <ListText>Name: {user.firstname} {user.lastname}</ListText>
-        {event.location && <ListText>Where: {event.location}</ListText>}
+        
         {event.challenge && <ListText>Challenge: {event.challenge}</ListText>}
+        {event.location && !event.challenge && <ListText>Where: {event.location}</ListText>}
+        
         {event.date && <ListText>Date: {event.date}</ListText>}
         {event.time && <ListText gutter={true}>Time: {event.time}</ListText>}
 
