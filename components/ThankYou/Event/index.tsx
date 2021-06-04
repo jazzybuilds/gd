@@ -74,9 +74,7 @@ const ThankYou = (props) => {
   if (!user || !event) {
     return (<p>Loading</p>)
   }
-
-
-
+  
   return (
     <Root className="component">
       <p>{fields["confirmation text"]}</p>
