@@ -19,7 +19,13 @@ import { Modal } from "../../Modal";
 import { formatPrice } from "./PaymentWrapper";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
+const stripeSecret = process.env.STRIPE_SECRET
 const stripePromise = loadStripe(stripeKey);
+
+const stripeInstance = require("stripe")(stripeSecret);
+stripeInstance.applePayDomains.create({
+  domain_name: 'gd-dev.guidedogs.org.uk'
+});
 
 interface UpdateReferenceProps {
   formId: string
@@ -468,9 +474,18 @@ const StripePayments = (props: StripePaymentsProps) => {
   }, [stripeClientId])
 
   React.useEffect(() => {
+
+
+
+
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
+
+
       try {
+
+
+
         const response = await makeStripePayment({
           stripe,
           formId: props.formId,
@@ -486,6 +501,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         event.complete("success")
         setError(null)
         props.onSubmit(response.reference)
+
       } catch (error) {
         event.complete("fail")
         props.onReferenceUpdate(error.reference)
