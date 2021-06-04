@@ -15,7 +15,7 @@ const JustGiving = (props) => {
       <a href={fields["link"]["url"]} target={fields["link"]["target"]}>
         <img src={fields["image"]["url"]} alt={fields["image"]["alt"]} />
       </a> 
-
+      <h1>Hello world</h1>
     </React.Fragment>
   )
 }
