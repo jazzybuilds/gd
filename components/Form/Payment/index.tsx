@@ -250,6 +250,7 @@ const ApplePay = (props: StripeComponentProps) => {
     return <p>Processing payment...</p>
   }
 
+  console.log('props.paymentRequest inside ApplePay component ApplePay', props.paymentRequest)
   return (
     <React.Fragment>
       <PaymentSummary amount={props.amount} summary={props.summary} />
@@ -582,6 +583,8 @@ const PaymentOptions = (props: PaymentProps) => {
     onReferenceUpdate: props.onReferenceUpdate
   }
   console.log('stripe initial', stripe)
+  console.log('paymentRequest outside  - setting apple pay availability',  paymentRequest)
+
 
   // @NOTE sets apple pay availability
   React.useEffect(() => {
@@ -611,7 +614,7 @@ const PaymentOptions = (props: PaymentProps) => {
       }
 
       if (pr) {
-
+        console.log('paymentRequest inside  - setting apple pay availability',  paymentRequest)
         pr.canMakePayment().then((result) => {
           console.log('canMakePayment', result)
           try {
