@@ -107,6 +107,9 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     return_url: window.location.href
   }, { handleActions: false });
 
+
+  console.log('makeStripePayment payload', payload)
+
   if (payload.error) {
     const newReference = await updateFormSubmission({
       formId: rest.formId,
