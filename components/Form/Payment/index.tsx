@@ -75,8 +75,10 @@ const updateFormSubmission = async (props: UpdateReferenceProps) => {
 
 const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripePaymentProps): Promise<makeStripePaymentResponse> => {
   let response
+  console.log('makeStripePayment rest', rest)
   try {
     response = await axios.post("/api-fe/stripe", { ...rest })
+    console.log('makeStripePayment respomse', response)
     if (!response.data) {
       return Promise.reject({
         message: "Something went wrong, please try again",
@@ -474,18 +476,10 @@ const StripePayments = (props: StripePaymentsProps) => {
   }, [stripeClientId])
 
   React.useEffect(() => {
-
-
-
-
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
 
-
       try {
-
-
-
         const response = await makeStripePayment({
           stripe,
           formId: props.formId,
@@ -501,7 +495,6 @@ const StripePayments = (props: StripePaymentsProps) => {
         event.complete("success")
         setError(null)
         props.onSubmit(response.reference)
-
       } catch (error) {
         event.complete("fail")
         props.onReferenceUpdate(error.reference)
