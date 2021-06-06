@@ -22,10 +22,10 @@ const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
 const stripeSecret = process.env.STRIPE_SECRET
 const stripePromise = loadStripe(stripeKey);
 
-const stripeInstance = require("stripe")(stripeSecret);
-stripeInstance.applePayDomains.create({
-  domain_name: 'gd-dev.guidedogs.org.uk'
-});
+// const stripeInstance = require("stripe")(stripeSecret);
+// stripeInstance.applePayDomains.create({
+//   domain_name: 'gd-dev.guidedogs.org.uk'
+// });
 
 interface UpdateReferenceProps {
   formId: string
@@ -75,8 +75,10 @@ const updateFormSubmission = async (props: UpdateReferenceProps) => {
 
 const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripePaymentProps): Promise<makeStripePaymentResponse> => {
   let response
+  console.log('makeStripePayment rest', rest)
   try {
     response = await axios.post("/api-fe/stripe", { ...rest })
+    console.log('makeStripePayment respomse', response)
     if (!response.data) {
       return Promise.reject({
         message: "Something went wrong, please try again",
@@ -104,6 +106,9 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     payment_method: paymentMethod,
     return_url: window.location.href
   }, { handleActions: false });
+
+
+  console.log('makeStripePayment payload', payload)
 
   if (payload.error) {
     const newReference = await updateFormSubmission({
@@ -483,18 +488,10 @@ const StripePayments = (props: StripePaymentsProps) => {
   }, [stripeClientId])
 
   React.useEffect(() => {
-
-
-
-
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
 
-
       try {
-
-
-
         const response = await makeStripePayment({
           stripe,
           formId: props.formId,
@@ -510,7 +507,6 @@ const StripePayments = (props: StripePaymentsProps) => {
         event.complete("success")
         setError(null)
         props.onSubmit(response.reference)
-
       } catch (error) {
         event.complete("fail")
         props.onReferenceUpdate(error.reference)
