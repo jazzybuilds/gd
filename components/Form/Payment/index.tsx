@@ -262,6 +262,7 @@ const ApplePay = (props: StripeComponentProps) => {
   }
 
   console.log('props.paymentRequest inside ApplePay component ApplePay', props.paymentRequest)
+  console.log('all props inside ApplePay component ApplePay', props)
   return (
     <React.Fragment>
       <PaymentSummary amount={props.amount} summary={props.summary} />
