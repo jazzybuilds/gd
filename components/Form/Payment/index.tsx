@@ -22,10 +22,10 @@ const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
 const stripeSecret = process.env.STRIPE_SECRET
 const stripePromise = loadStripe(stripeKey);
 
-const stripeInstance = require("stripe")(stripeSecret);
-stripeInstance.applePayDomains.create({
-  domain_name: 'gd-dev.guidedogs.org.uk'
-});
+// const stripeInstance = require("stripe")(stripeSecret);
+// stripeInstance.applePayDomains.create({
+//   domain_name: 'gd-dev.guidedogs.org.uk'
+// });
 
 interface UpdateReferenceProps {
   formId: string
