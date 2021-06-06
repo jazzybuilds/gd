@@ -489,6 +489,9 @@ const StripePayments = (props: StripePaymentsProps) => {
 
   React.useEffect(() => {
     const handlePaymentMethodReceived = async (event) => {
+      console.log('handlePaymentMethodReceived is called ||||||||||')
+      console.log('handlePaymentMethodReceived with event', event)
+
       setSubmitting(true)
 
       try {
