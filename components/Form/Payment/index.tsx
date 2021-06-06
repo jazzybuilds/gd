@@ -480,7 +480,10 @@ const StripePayments = (props: StripePaymentsProps) => {
   }, [stripeClientId])
 
   React.useEffect(() => {
+    console.log('React.useEffect triggered')
+    console.log('React.useEffect triggered with props', props)
     const handlePaymentMethodReceived = async (event) => {
+      console.log('handlePaymentMethodReceived is called ||||||||||')
       console.log('handlePaymentMethodReceived is called ||||||||||')
       console.log('handlePaymentMethodReceived with event', event)
 
@@ -509,6 +512,9 @@ const StripePayments = (props: StripePaymentsProps) => {
         setSubmitting(false)
       }
     }
+    console.log('React.useEffect triggered with props', props)
+    console.log('React.useEffect triggered with boolean', props.paymentRequest)
+
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
   }, [])
 
