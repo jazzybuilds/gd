@@ -515,8 +515,16 @@ const StripePayments = (props: StripePaymentsProps) => {
     console.log('React.useEffect triggered with props', props)
     console.log('React.useEffect triggered with boolean', props.paymentRequest)
 
+
+
+
+
+
+
+    //THIS SHOULD BE TRIGGERED!!!!!!!
+
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
-  }, [stripeClientId])
+  }, [paymentMethod])
 
   const handleSubmit = async (paymentMethod) => {
     setSubmitting(true)
