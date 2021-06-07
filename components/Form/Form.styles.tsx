@@ -109,6 +109,14 @@ const StyledInputMixin = css<{removeGutter?: boolean}>`
 export const DatePickerRoot = styled.div`
   position: relative;
   max-width: ${maxInputWidth}px;
+  button {
+      &:focus {
+          outline: 2px dotted ${props => props.theme.colors.secondary} !important;
+          outline-offset: 2px;
+          z-index: 2;
+          position: absolute;
+      }
+  }
 `
 export const StyledDatePicker = styled.input`
   ${StyledInputMixin}

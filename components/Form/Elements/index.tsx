@@ -59,7 +59,8 @@ export const DatePicker = ({label, required, ...props }) => {
           onBlur={props.onBlur}
           showYearDropdown={true}
           showMonthDropdown={true}
-          scrollableYearDropdown={true}
+          // scrollableYearDropdown={true}
+          dropdownMode="select"
           yearDropdownItemNumber={4}
           onClickOutside={() => setIsOpen(false)}
           open={isOpen}
