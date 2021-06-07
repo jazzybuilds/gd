@@ -7,7 +7,6 @@ const {
   computeConditionRule
 } = require('./formUtils');
 
-//were is this module being called?
 exports.handler = async function (event, context) {
   const payload = JSON.parse(event.body)
   if (!payload.formId) {

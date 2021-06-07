@@ -187,13 +187,11 @@ const PaymentSummary = (props: { amount: number, summary: string }) => {
 
 type StripeComponentProps = PaymentOptionProps & {
   error: string | null, submitting: boolean
-  onSubmit: (paymentMethod: any) => Promise<void> //WHAT ABOUT THE PAYPAL ?
+  onSubmit: (paymentMethod: any) => Promise<void>
 }
 
 const Card = (props: StripeComponentProps) => {
   const elements = useElements();
-
-  console.log('Card props', props)
 
   const options = {
     style: {
