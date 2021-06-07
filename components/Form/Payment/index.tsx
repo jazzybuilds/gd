@@ -19,13 +19,7 @@ import { Modal } from "../../Modal";
 import { formatPrice } from "./PaymentWrapper";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
-const stripeSecret = process.env.STRIPE_SECRET
 const stripePromise = loadStripe(stripeKey);
-
-// const stripeInstance = require("stripe")(stripeSecret);
-// stripeInstance.applePayDomains.create({
-//   domain_name: 'gd-dev.guidedogs.org.uk'
-// });
 
 interface UpdateReferenceProps {
   formId: string
@@ -75,10 +69,8 @@ const updateFormSubmission = async (props: UpdateReferenceProps) => {
 
 const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripePaymentProps): Promise<makeStripePaymentResponse> => {
   let response
-  console.log('makeStripePayment rest', rest)
   try {
     response = await axios.post("/api-fe/stripe", { ...rest })
-    console.log('makeStripePayment respomse', response)
     if (!response.data) {
       return Promise.reject({
         message: "Something went wrong, please try again",
@@ -106,9 +98,6 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     payment_method: paymentMethod,
     return_url: window.location.href
   }, { handleActions: false });
-
-
-  console.log('makeStripePayment payload', payload)
 
   if (payload.error) {
     const newReference = await updateFormSubmission({
@@ -259,8 +248,6 @@ const ApplePay = (props: StripeComponentProps) => {
     return <p>Processing payment...</p>
   }
 
-  console.log('props.paymentRequest inside ApplePay component ApplePay', props.paymentRequest)
-  console.log('all props inside ApplePay component ApplePay', props)
   return (
     <React.Fragment>
       <PaymentSummary amount={props.amount} summary={props.summary} />
@@ -315,8 +302,6 @@ const PayPal = (props: PaymentOptionProps) => {
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
-  console.log('PayPal props', props)
-
   const onApprove = async (actions) => {
     await actions.order.capture()
     return props.onSubmit(props.referenceNumber);
@@ -369,7 +354,6 @@ const PayPal = (props: PaymentOptionProps) => {
             setIsSubmitting(false)
           }}
           onApprove={(data, actions) => {
-            console.log('onApprove ||||||||||', 'actions', actions, 'data', data)
             setIsSubmitting(true)
             return onApprove(actions)
           }}
@@ -413,21 +397,6 @@ const StripePayments = (props: StripePaymentsProps) => {
   const [stripeClientId, setStripeClientId] = React.useState<string | null>(null)
   const stripe = useStripe();
 
-
-
-
-
-  console.log('paymentMethod________', paymentMethod,)
-  console.log('paymentOptions ||||||', paymentOptions,)
-  console.log('props.paymentRequest', props.paymentRequest)
-  console.log('PROPS', props)
-
-
-
-
-
-
-
   React.useEffect(() => {
     const formSubmissionPayload: UpdateReferenceProps = {
       formId: props.formId,
@@ -435,7 +404,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       referenceNumber: props.referenceNumber,
       amount: props.amount,
       discountCode: props.discountCode,
-      PaymentMethod: "CC", // WHY HARDCODED?
+      PaymentMethod: "CC",
       status: "",
     }
     async function on3DSComplete() {
@@ -478,13 +447,7 @@ const StripePayments = (props: StripePaymentsProps) => {
   }, [stripeClientId])
 
   React.useEffect(() => {
-    console.log('React.useEffect triggered')
-    console.log('React.useEffect triggered with props', props)
     const handlePaymentMethodReceived = async (event) => {
-      console.log('handlePaymentMethodReceived is called ||||||||||')
-      console.log('handlePaymentMethodReceived is called ||||||||||')
-      console.log('handlePaymentMethodReceived with event', event)
-
       setSubmitting(true)
 
       try {
@@ -499,7 +462,6 @@ const StripePayments = (props: StripePaymentsProps) => {
           referenceNumber: props.referenceNumber,
           paymentMethod: event.paymentMethod.id
         })
-        console.log('handlePaymentMethodReceived response', response)
         event.complete("success")
         setError(null)
         props.onSubmit(response.reference)
@@ -510,16 +472,6 @@ const StripePayments = (props: StripePaymentsProps) => {
         setSubmitting(false)
       }
     }
-    console.log('React.useEffect triggered with props', props)
-    console.log('React.useEffect triggered with boolean', props.paymentRequest)
-
-
-
-
-
-
-
-    //THIS SHOULD BE TRIGGERED!!!!!!!
 
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
   }, [paymentMethod])
@@ -538,7 +490,6 @@ const StripePayments = (props: StripePaymentsProps) => {
         referenceNumber: props.referenceNumber,
         paymentMethod: paymentMethod
       })
-      console.log('handleSubmit response', response)
       setError(null)
       setStripeClientId(response.intent.client_secret)
       if (response.intent.next_action) {
@@ -601,55 +552,26 @@ const PaymentOptions = (props: PaymentProps) => {
     onSubmit: props.onSubmit,
     onReferenceUpdate: props.onReferenceUpdate
   }
-  console.log('stripe initial', stripe)
-  console.log('paymentRequest outside  - setting apple pay availability',  paymentRequest)
-
 
   // @NOTE sets apple pay availability
   React.useEffect(() => {
-    console.log('stripe in cycle', stripe)
     if (stripe) {
-      let pr = null
-
-
-      try {
-         pr = stripe.paymentRequest({
-          country: "GB",
-          currency: "gbp",
-          total: {
-            label: "total",
-            amount: props.amount,
-          },
-          requestPayerName: true,
-          requestPayerEmail: true,
-        });  
-  
-
-      } catch (error) {
-        
-        console.error('paymentRequest error|||||', error)
-
-
-      }
-
-      if (pr) {
-        console.log('paymentRequest inside  - setting apple pay availability',  paymentRequest)
-        pr.canMakePayment().then((result) => {
-          console.log('canMakePayment', result)
-          try {
-            setApplePayAvailable(result.applePay)
-            setPaymentRequest(pr);
-          } catch (error) {
-            console.error('inner promise', error)
-          }
-          // if (result) {
-          // }
-        }).catch(error => console.error('faild promsie', error));
-  
-      }
-
-
-      
+      const pr = stripe.paymentRequest({
+        country: "GB",
+        currency: "gbp",
+        total: {
+          label: "total",
+          amount: props.amount,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+      });
+      pr.canMakePayment().then((result) => {
+        if (result) {
+          setApplePayAvailable(result.applePay)
+          setPaymentRequest(pr);
+        }
+      });
     }
   }, [stripe]);
 
@@ -695,11 +617,6 @@ const PaymentOptions = (props: PaymentProps) => {
       break;
   }
 
-  console.log('PaymentOptions £3£££££££££££££££££££££££££££££', componentProps)
-  console.log('appleOption && applePayAvailable &&', appleOption && applePayAvailable )
-  console.log('applePayAvailable',  applePayAvailable )
-  console.log('appleOption ', appleOption)
-
   return (
     <React.Fragment>
       <div className="payment-types__options">
@@ -736,7 +653,6 @@ const PaymentOptions = (props: PaymentProps) => {
     </React.Fragment>
   )
 }
-
 
 const Payment = (props: PaymentProps) => {
   let googleAPI = "loading"
