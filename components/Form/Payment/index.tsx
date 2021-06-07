@@ -304,6 +304,15 @@ const PayPal = (props: PaymentOptionProps) => {
 
   const onApprove = async (actions) => {
     await actions.order.capture()
+    await updateFormSubmission({
+      formId: props.formId,
+      sessionId: props.sessionId,
+      referenceNumber: props.referenceNumber,
+      amount: props.amount,
+      discountCode: props.discountCode,
+      PaymentMethod: "PP",
+      status: "200"
+    })
     return props.onSubmit(props.referenceNumber);
   }
 
@@ -373,7 +382,6 @@ const PayPal = (props: PaymentOptionProps) => {
               props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
             } catch (error) {
               setError(error)
-
             }
           }}
         />
@@ -450,6 +458,7 @@ const StripePayments = (props: StripePaymentsProps) => {
   React.useEffect(() => {
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
+
       try {
         const response = await makeStripePayment({
           stripe,
@@ -472,8 +481,9 @@ const StripePayments = (props: StripePaymentsProps) => {
         setSubmitting(false)
       }
     }
+
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
-  }, [])
+  }, [paymentMethod])
 
   const handleSubmit = async (paymentMethod) => {
     setSubmitting(true)
@@ -615,6 +625,7 @@ const PaymentOptions = (props: PaymentProps) => {
       summaryText = paypalOption.summary
       break;
   }
+
   return (
     <React.Fragment>
       <div className="payment-types__options">
@@ -651,7 +662,6 @@ const PaymentOptions = (props: PaymentProps) => {
     </React.Fragment>
   )
 }
-
 
 const Payment = (props: PaymentProps) => {
   let googleAPI = "loading"
