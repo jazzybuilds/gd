@@ -247,3 +247,7 @@ export const StyledCheckbox = styled.label<{disabled?: boolean}>`
      }
   }
 `
+
+export const StyledError = styled.span`
+  font-size: 16px;
+`

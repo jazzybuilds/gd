@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePickerImage, DatePickerRoot, StyledCheckbox, StyledDatePicker, StyledDropdown, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
+import { DatePickerImage, DatePickerRoot, StyledCheckbox, StyledDatePicker, StyledDropdown, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
 import DatePickerComponent from "react-datepicker";
 
 interface FieldProps {
@@ -91,7 +91,7 @@ interface DropDownProps extends FieldProps{
   addDefault?: boolean
 }
 
-export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => (
+export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => !props.disabled && (
   <React.Fragment>
     <Label name={props.name} label={label} required={required} />
     <StyledDropdown error={error} className={props.className} id={props.name} name={props.name} {...props} size={rows}>
@@ -104,7 +104,7 @@ export const DropDown = ({ label, options, addDefault, type, rows, required, err
 )
 
 export const Input = ({ required, helptext, type, error, label, ...props }: FieldProps) => {
-  return (
+  return !props.disabled && (
     <React.Fragment>
       <Label disabled={props.disabled} name={props.name} label={label} required={required} />
       {(type === 'textarea')
@@ -121,4 +121,4 @@ export const Input = ({ required, helptext, type, error, label, ...props }: Fiel
   )
 }
 
-export const InputError = ({message, id }: {id: string, message: string}) => <span id={id} className="field-validation-error">{message}</span>
+export const InputError = ({message, id }: {id: string, message: string}) => <StyledError id={id} className="field-validation-error">{message}</StyledError>
