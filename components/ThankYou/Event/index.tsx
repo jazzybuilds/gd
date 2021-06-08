@@ -15,6 +15,7 @@ interface EventProps {
   title: string
   description: string
   location: string
+  challenge: string
   date: string
   time: string
 }
@@ -52,6 +53,7 @@ const ThankYou = (props) => {
           title: fields["calendar title"],
           description: "",
           location: fields["event page"]["location"],
+          challenge: storageData[FormStorageNames.Challenge],
           date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
           time: parsedDate ? format(parsedDate, "h:mm a") : ""
         })
@@ -72,7 +74,7 @@ const ThankYou = (props) => {
   if (!user || !event) {
     return (<p>Loading</p>)
   }
-
+  
   return (
     <Root className="component">
       <p>{fields["confirmation text"]}</p>
@@ -82,7 +84,10 @@ const ThankYou = (props) => {
 
       <div>
         <ListText>Name: {user.firstname} {user.lastname}</ListText>
-        {event.location && <ListText>Where: {event.location}</ListText>}
+        
+        {event.challenge && <ListText>Challenge: {event.challenge}</ListText>}
+        {event.location && !event.challenge && <ListText>Where: {event.location}</ListText>}
+        
         {event.date && <ListText>Date: {event.date}</ListText>}
         {event.time && <ListText gutter={true}>Time: {event.time}</ListText>}
 

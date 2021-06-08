@@ -441,12 +441,14 @@ const FormComponent = (props) => {
     const firstname = aliasFields.find(value => value.alias === "firstname")
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
+    const challenge = aliasFields.find(value => value.alias === "challenge")
 
     localStorage.removeItem(pageId);
     localStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
+      [FormStorageNames.Challenge]: values[challenge.id],
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 
