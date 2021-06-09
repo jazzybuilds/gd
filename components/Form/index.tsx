@@ -448,7 +448,7 @@ const FormComponent = (props) => {
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
-      [FormStorageNames.Challenge]: values[challenge.id],
+      [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 
