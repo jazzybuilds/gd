@@ -248,6 +248,7 @@ const ApplePay = (props: StripeComponentProps) => {
     return <p>Processing payment...</p>
   }
 
+  console.log('ApplePay ptops', props)
   return (
     <React.Fragment>
       <PaymentSummary amount={props.amount} summary={props.summary} />
@@ -456,8 +457,11 @@ const StripePayments = (props: StripePaymentsProps) => {
   }, [stripeClientId])
 
   React.useEffect(() => {
+    console.log('props in React.useEffect ', props)
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
+      console.log('handlePaymentMethodReceived event', event)
+      console.log('handlePaymentMethodReceived props', props)
 
       try {
         const response = await makeStripePayment({
@@ -475,6 +479,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         setError(null)
         props.onSubmit(response.reference)
       } catch (error) {
+        console.log('catch (error) {', error)
         event.complete("fail")
         props.onReferenceUpdate(error.reference)
         setError(error.message)
@@ -523,6 +528,8 @@ const StripePayments = (props: StripePaymentsProps) => {
     error: error,
     submitting: submitting
   }
+
+  console.log('StripePayments = (props', props)
 
   return (
     <React.Fragment>
@@ -626,6 +633,7 @@ const PaymentOptions = (props: PaymentProps) => {
       break;
   }
 
+  console.log('PaymentOptions = (props', props)
   return (
     <React.Fragment>
       <div className="payment-types__options">
@@ -673,6 +681,7 @@ const Payment = (props: PaymentProps) => {
     googleAPI = "ready"
   }
 
+  console.log('Payment props', props)
   return (
     <React.Fragment>
       {googleAPI === "ready" &&
