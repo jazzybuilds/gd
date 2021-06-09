@@ -488,7 +488,7 @@ const StripePayments = (props: StripePaymentsProps) => {
     }
 
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
-  }, [paymentMethod])
+  }, [paymentMethod, props.amount])
 
   const handleSubmit = async (paymentMethod) => {
     setSubmitting(true)
