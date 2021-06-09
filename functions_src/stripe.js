@@ -23,6 +23,7 @@ exports.handler = async function (event, context) {
     },
   });
 
+  console.log('stripe lambda ||||||| paymentIntent =', paymentIntent)
   return {
     statusCode: 200,
     body: paymentIntent.client_secret
