@@ -556,6 +556,7 @@ const PaymentOptions = (props: PaymentProps) => {
   const [applePayAvailable, setApplePayAvailable] = React.useState(false);
   const [googlePayAvailable, setGooglePayAvailable] = React.useState<google.payments.api.PaymentsClient | null>(null);
 
+  console.log('PaymentOptions props', props)
   const componentProps = {
     paymentRequest: paymentRequest,
     formId: props.formId,
@@ -571,7 +572,11 @@ const PaymentOptions = (props: PaymentProps) => {
 
   // @NOTE sets apple pay availability
   React.useEffect(() => {
+    console.log('PaymentOptions React.useEffect(')
+
     if (stripe) {
+      console.log('if (stripe)', props)
+
       const pr = stripe.paymentRequest({
         country: "GB",
         currency: "gbp",
@@ -583,13 +588,14 @@ const PaymentOptions = (props: PaymentProps) => {
         requestPayerEmail: true,
       });
       pr.canMakePayment().then((result) => {
-        if (result) {
+        console.log('pr.canMakePayment result ', result)
+        if (result) { 
           setApplePayAvailable(result.applePay)
           setPaymentRequest(pr);
         }
       });
     }
-  }, [stripe]);
+  }, [stripe, props.amount]);
 
   // @NOTE sets google pay availability
   React.useEffect(() => {
