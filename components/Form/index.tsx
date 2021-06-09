@@ -213,7 +213,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       // if it does, run the code inside the if() {} block
       if(test.type === 'date') {
         return (
-          <Input  {...fieldProps} type='date' min={min} max={max} error={hasError} />
+          <Input {...fieldProps} type='date' min={min} max={max} error={hasError} />
         )
       }
       return (

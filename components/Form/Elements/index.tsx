@@ -116,6 +116,7 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     props.onChange(dateString)
   }, [selectedDay, selectedMonth, selectedYear])
 
+  // TODO move inline styles to scss file
   return (
     <React.Fragment>
         <div>
