@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
 import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
 import Postcode from "./Postcode"
-import { Radio, CheckBox, DropDown, Text, Label, Input, DatePicker, InputError } from './Elements';
+import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerFallback, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
@@ -183,13 +183,49 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     if (fieldType === "date") {
+
+      let minDate: Date = fieldProps.min ? new Date(fieldProps.min) : new Date();
+      let selectedDate: Date = fieldProps.value ? new Date(fieldProps.value) : new Date();
+      let maxDate: Date = fieldProps.max ? new Date(fieldProps.max) :new Date();
+
+      if (fieldProps.alias.toLowerCase() == 'dob' || fieldProps.alias.toLowerCase() == 'past' ) {
+        minDate = new Date();
+        minDate.setFullYear(minDate.getFullYear() - 120)
+        maxDate = new Date();
+      } else if (fieldProps.alias.toLowerCase() == 'future') {
+        minDate = new Date();
+        maxDate = new Date();
+        maxDate.setFullYear(maxDate.getFullYear() + 51)
+      }
+
+      let min = `${minDate.getFullYear()}-${String(minDate.getMonth()+1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`
+      let selectedValue = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
+      let max = `${maxDate.getFullYear()}-${String(maxDate.getMonth()+1).padStart(2, '0')}-${String(maxDate.getDate()).padStart(2, '0')}`
+      
+      // test whether a new date input falls back to a text input or not
+      const test = document.createElement('input');
+
+      try {
+        test.type = 'date';
+      } catch (e) {
+        console.log(e.description);
+      }
+      // if it does, run the code inside the if() {} block
+      if(test.type === 'date') {
+        return (
+          <Input  {...fieldProps} type='date' min={min} max={max} error={hasError} />
+        )
+      }
       return (
-        <DatePicker
+        <DatePickerFallback 
           {...fieldProps}
-          value={fieldProps.value}
+          min={min}
+          max={max}
+          value={selectedValue}
           error={hasError}
-          onBlur={() => formProps.setFieldTouched(fieldValues.name)}
-          onChange={value => formProps.setFieldValue(fieldProps.name, value)} />
+          onChange={value => formProps.setFieldValue(fieldProps.name, value)}
+        />
+          
       )
     }
 

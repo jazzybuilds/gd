@@ -1,8 +1,0 @@
-@import "abstracts/vars";
-@import "abstracts/mixins";
-
-.react-datepicker__day:focus {
-	outline: 2px dotted $secondary !important;
-	outline-offset: 2px;
-	z-index: 2;
-}
