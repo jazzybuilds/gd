@@ -2,7 +2,6 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components';
 import { theme } from "../theme"
 import "../styles/core.scss"
-import "react-datepicker/dist/react-datepicker.css";
 
 
 export const decorators = [
