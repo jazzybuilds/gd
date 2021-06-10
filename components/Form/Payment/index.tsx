@@ -94,8 +94,6 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       reference: newReference.WebsiteReferenceID
     })
   }
-
-  console.log('api-fe/stripe response', response)
   
   const payload = await stripe.confirmCardPayment(response.data, {
     payment_method: paymentMethod,
@@ -117,11 +115,6 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       reference: newReference.WebsiteReferenceID ?? rest.referenceNumber,
     })
   } else {
-    console.log('makeStripePayment |?|?|?|?|?', rest)
-    console.log('makeStripePayment payload ||||||||||||||||||||||||||||||||', payload)    
-
-    // status: "requires_action" ___________
-    
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
@@ -129,8 +122,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       amount: rest.amount,
       discountCode: rest.discountCode,
       PaymentMethod: "CC",
-      // status: '200'
-      status: 'payload.status'
+      status: payload.paymentIntent.status === 'succeeded' ? '200' : 'payload.paymentIntent.status' //needs attention
     })
     return Promise.resolve({
       reference: newReference.WebsiteReferenceID,
@@ -413,10 +405,10 @@ const StripePayments = (props: StripePaymentsProps) => {
   const [submitting, setSubmitting] = React.useState<boolean>(false)
   const [iframe, setIframe] = React.useState<string | null>(null)
   const [stripeClientId, setStripeClientId] = React.useState<string | null>(null)
+  const [retryPaymentReference, setRetryPaymentReference ] = React.useState<string | null>(null)
   const stripe = useStripe();
 
   React.useEffect(() => {
-    console.log('on3DSComplete in cycle stripe =', stripe)
 
     const formSubmissionPayload: UpdateReferenceProps = {
       formId: props.formId,
@@ -431,17 +423,11 @@ const StripePayments = (props: StripePaymentsProps) => {
       setIframe(null)
       setError(null)
       if (stripeClientId) {
-        console.log('on3DSComplete stripeClientId', stripeClientId)
 
         try {
           const result = await stripe.retrievePaymentIntent(stripeClientId)
 
-          console.log('on3DSComplete result', result)
-          console.log('on3DSComplete props', props)
-          // debugger
-
           if (result.paymentIntent.status === "succeeded") {
-            console.log('on3DSComplete result.paymentIntent.status succeeded', result.paymentIntent.status)
             props.onSubmit(props.referenceNumber)
 
             const newReference = await updateFormSubmission({
@@ -458,11 +444,9 @@ const StripePayments = (props: StripePaymentsProps) => {
               intent: result.paymentIntent,
             })
           } else if (result.paymentIntent.status === "requires_payment_method") {
-            console.log('on3DSComplete result.paymentIntent.status requires_payment_metho', result.paymentIntent.status)
-            console.log('on3DSComplete ormSubmissionPayload', formSubmissionPayload)
-
+            const reFormSubmissionPayload = {...formSubmissionPayload, referenceNumber: retryPaymentReference}
             const updatedResponse = await updateFormSubmission({
-              ...formSubmissionPayload,
+              ...reFormSubmissionPayload,
               status: result.paymentIntent.status
             })
             props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
@@ -523,7 +507,6 @@ const StripePayments = (props: StripePaymentsProps) => {
 
   const handleSubmit = async (paymentMethod) => {
     setSubmitting(true)
-    console.log('handleSubmit', paymentMethod)
     try {
       const response = await makeStripePayment({
         stripe,
@@ -537,9 +520,12 @@ const StripePayments = (props: StripePaymentsProps) => {
         paymentMethod: paymentMethod
       })
 
-      console.log('handleSubmit response', response)
       setError(null)
       setStripeClientId(response.intent.client_secret)
+
+      if (response.intent.status === 'requires_action') {
+        setRetryPaymentReference(response.reference)
+      }
       if (response.intent.next_action) {
         setIframe(response.intent.next_action.redirect_to_url.url)
       } else {
