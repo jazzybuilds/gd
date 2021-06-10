@@ -1,6 +1,7 @@
 import React from 'react'
-import { DatePickerImage, DatePickerRoot, StyledCheckbox, StyledDatePicker, StyledDropdown, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
-import DatePickerComponent from "react-datepicker";
+import { StyledCheckbox, StyledDropdown, StyledDropdownGroup, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
+
+import range from 'ramda/src/range'
 
 interface FieldProps {
   required?: boolean
@@ -12,6 +13,8 @@ interface FieldProps {
   name: string
   error?: boolean
   label: string
+  'aria-label'?:string
+  'aria-describedby'?:string
   onChange: (e: any) => void
   onBlur: (e: any) => void
 }
@@ -40,47 +43,95 @@ export const Radio = ({ label, ...props }) => {
   )
 }
 
-export const DatePicker = ({label, required, ...props }) => {
-  const [isOpen, setIsOpen] = React.useState(false)
-  let value: string | Date = new Date(props.value || '')
-  if (isNaN(value.getTime())) {
-    value = null
+export const DatePickerFallback = ({ label, required, ...props }) => {
+
+  const now = new Date()
+  let value: Date = props.value ? new Date(props.value) : now
+
+  const defaultMinDate = new Date();
+  defaultMinDate.setFullYear(defaultMinDate.getFullYear() - 120)
+
+  const defaultMaxDate = new Date();
+  defaultMaxDate.setFullYear(defaultMaxDate.getFullYear() + 51)
+
+  let minDate: Date = props.min ? new Date(props.min) : defaultMinDate;
+  let maxDate: Date = props.max ? new Date(props.max) : now;
+
+  const populateDays = (monthIndex) => {
+    // Create variable to hold new number of days to inject
+    let days;
+    // 31 or 30 days?
+    if(months[monthIndex] === 'January' || months[monthIndex] === 'March' || months[monthIndex] === 'May' || months[monthIndex] === 'July' || months[monthIndex] === 'August' || months[monthIndex] === 'October' || months[monthIndex] === 'December') {
+      days = 31;
+    } else if(months[monthIndex] === 'April' || months[monthIndex] === 'June' || months[monthIndex] === 'September' || months[monthIndex] === 'November') {
+      days = 30;
+    } else {
+    // If month is February, calculate whether it is a leap year or not
+    const isLeap = new Date(selectedYear, 1, 29).getMonth() === 1;
+    isLeap ? days = 29 : days = 28;
+    }
+    return range(1, days + 1).map( d => ({value:d, label:d}));
   }
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+  const monthOptions = months.map((m, i) => ({value:i, label:m}));
+  const yearOptions = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
+
+  const day = value.getDate()
+  const month = value.getMonth()
+  const year = value.getFullYear()
+
+  const [selectedDay, setSelectedDay] = React.useState<number>(day)
+  const [selectedMonth, setSelectedMonth] = React.useState<number>(month)
+  const [selectedYear, setSelectedYear] = React.useState<number>(year)
+  const [dayOptions, setDayOptions] = React.useState(populateDays(month))
+
+  React.useEffect(() => {
+    const dayOptions = populateDays(selectedMonth)
+    setDayOptions(dayOptions)
+    // check is selectedDay is outside max day range of selectedMonth
+    // if so, adjust down to nearest valid date
+    const numOfDays = dayOptions.length;
+    if(selectedDay && selectedDay > numOfDays) {
+      setSelectedDay(numOfDays)
+    }
+  }, [selectedMonth, selectedYear])
+
+  React.useEffect(() => {
+    const monthIndex:number = selectedMonth+1
+    const dateString = `${selectedYear}-${String(monthIndex).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`;
+    props.onChange(dateString)
+  }, [selectedDay, selectedMonth, selectedYear])
 
   return (
     <React.Fragment>
-      <Label name={props.name} label={label} required={required} />
-      <DatePickerRoot>
-        <DatePickerComponent
-          placeholderText="dd/mm/yyyy" 
-          id={props.name}
-          isClearable={false}
-          disabled={props.disabled}
-          onBlur={props.onBlur}
-          showYearDropdown={true}
-          showMonthDropdown={true}
-          scrollableYearDropdown={true}
-          yearDropdownItemNumber={4}
-          onClickOutside={() => setIsOpen(false)}
-          open={isOpen}
-          customInput={<StyledDatePicker error={props.error}  onBlur={props.onBlur} />}
-          dateFormat="dd/MM/yyyy"
-          selected={value}
-          onChange={date => { 
-            setIsOpen(false)
-            if (!date || isNaN(date.getTime())) {
-
-              return props.onChange(date)
-            }
-            const year = date.getFullYear()
-            const month = date.getMonth() + 1
-            const day = date.getDate()
-            const updatedValue = `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`
-            props.onChange(updatedValue)
-          }}
-        />
-        <DatePickerImage src="/images/calendar-blue.svg" alt="calendar icon" onClick={() => setIsOpen(!isOpen)} />
-      </DatePickerRoot>
+        <div>
+          <Label name={props.name} label={label} required={required} />
+          <StyledDropdownGroup>
+            <span>
+              <DropDown options={dayOptions} label='Day' aria-label={`${label} Day`} value={selectedDay} onChange={e => {setSelectedDay(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
+            </span>
+            <span>
+              <DropDown options={monthOptions} label='Month' aria-label={`${label} Month`} value={selectedMonth} onChange={e => {setSelectedMonth(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
+            </span>
+            <span>
+              <DropDown options={yearOptions} label='Year' aria-label={`${label} Year`} value={selectedYear} onChange={e => {setSelectedYear(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
+            </span>
+          </StyledDropdownGroup>
+        </div>
     </React.Fragment>
   )
 }
@@ -94,7 +145,7 @@ interface DropDownProps extends FieldProps{
 export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => !props.disabled && (
   <React.Fragment>
     <Label name={props.name} label={label} required={required} />
-    <StyledDropdown error={error} className={props.className} id={props.name} name={props.name} {...props} size={rows}>
+    <StyledDropdown error={error} aria-label={props['aria-label']} className={props.className} id={props.name} name={props.name} {...props} size={rows}>
       {addDefault && <option value="" disabled={true}>Please select...</option>}
       {options.map(option => (
         <option key={option.value} value={option.value} >{option.label}</option>

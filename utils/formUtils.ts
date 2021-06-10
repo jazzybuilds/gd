@@ -320,14 +320,14 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
         })
       }
 
-      if (field.validation?.min) {
+      if (field.type !== "date" && field.validation?.min) {
         item.validations.push({
           type: "min",
           params: [field.validation.min, `${label} is too short`]
         })
       }
 
-      if (field.validation?.max) {
+      if (field.type !== "date" && field.validation?.max) {
         item.validations.push({
           type: "max",
           params: [field.validation.max, `${label} is too long`]
