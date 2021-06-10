@@ -483,7 +483,7 @@ const StripePayments = (props: StripePaymentsProps) => {
     }
 
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
-  }, [paymentMethod])
+  }, [paymentMethod, props.amount])
 
   const handleSubmit = async (paymentMethod) => {
     setSubmitting(true)
@@ -564,6 +564,7 @@ const PaymentOptions = (props: PaymentProps) => {
 
   // @NOTE sets apple pay availability
   React.useEffect(() => {
+
     if (stripe) {
       const pr = stripe.paymentRequest({
         country: "GB",
@@ -576,13 +577,13 @@ const PaymentOptions = (props: PaymentProps) => {
         requestPayerEmail: true,
       });
       pr.canMakePayment().then((result) => {
-        if (result) {
+        if (result) { 
           setApplePayAvailable(result.applePay)
           setPaymentRequest(pr);
         }
       });
     }
-  }, [stripe]);
+  }, [stripe, props.amount]);
 
   // @NOTE sets google pay availability
   React.useEffect(() => {
