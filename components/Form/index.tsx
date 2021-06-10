@@ -184,19 +184,22 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
 
     if (fieldType === "date") {
 
-      let minDate: Date = fieldProps.min ? new Date(fieldProps.min) : new Date();
+      const defaultMinDate = new Date();
+      defaultMinDate.setFullYear(defaultMinDate.getFullYear() - 120)
+      const defaultMaxDate = new Date();
+      defaultMaxDate.setFullYear(defaultMaxDate.getFullYear() + 51)
+
+      let minDate: Date = fieldProps.min ? new Date(fieldProps.min) : defaultMinDate;
       let selectedDate: Date = fieldProps.value ? new Date(fieldProps.value) : new Date();
-      let maxDate: Date = fieldProps.max ? new Date(fieldProps.max) :new Date();
+      let maxDate: Date = fieldProps.max ? new Date(fieldProps.max) :defaultMaxDate;
 
       if (fieldProps.alias.toLowerCase() == 'dob' || fieldProps.alias.toLowerCase() == 'past' ) {
-        minDate = new Date();
-        minDate.setFullYear(minDate.getFullYear() - 120)
+        minDate = defaultMinDate;
         maxDate = new Date();
       } else if (fieldProps.alias.toLowerCase() == 'future') {
         minDate = new Date();
-        maxDate = new Date();
-        maxDate.setFullYear(maxDate.getFullYear() + 51)
-      }
+        maxDate = defaultMaxDate;
+      } 
 
       let min = `${minDate.getFullYear()}-${String(minDate.getMonth()+1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`
       let selectedValue = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
@@ -212,9 +215,9 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       }
       // if it does, run the code inside the if() {} block
       if(test.type === 'date') {
-        return (
-          <Input {...fieldProps} type='date' min={min} max={max} error={hasError} />
-        )
+        // return (
+        //   <Input {...fieldProps} type='date' min={min} max={max} error={hasError} />
+        // )
       }
       return (
         <DatePickerFallback 
