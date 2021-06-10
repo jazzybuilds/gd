@@ -68,7 +68,7 @@ exports.handler = async function (event) {
         "Authorization": `Basic ${process.env.SITECORE_PROXY_BASIC_AUTH}`
       }
     })
-    console.log('formUpdate lambda => payload', payload)
+    
     return {
       statusCode: 200,
       body: JSON.stringify(response.data)
