@@ -118,6 +118,7 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
 
   React.useEffect(() => {
     if (selectedDay === -1 || selectedMonth === -1 || selectedYear === -1) {
+      props.onChange('')
       return
     }
     const monthIndex:number = selectedMonth+1
