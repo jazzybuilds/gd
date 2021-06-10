@@ -67,8 +67,7 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
       days = 30;
     } else {
     // If month is February, calculate whether it is a leap year or not
-    var year = selectedYear;
-    var isLeap = new Date(year, 1, 29).getMonth() == 1;
+    const isLeap = new Date(selectedYear, 1, 29).getMonth() === 1;
     isLeap ? days = 29 : days = 28;
     }
     return range(1, days + 1).map( d => ({value:d, label:d}));
@@ -88,7 +87,7 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     'November',
     'December'
   ];
-  const monthOptions = months.map( (m, i) => ({value:i, label:m}));
+  const monthOptions = months.map((m, i) => ({value:i, label:m}));
   const yearOptions = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
 
   const day = value.getDate()
@@ -98,12 +97,13 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
   const [selectedDay, setSelectedDay] = React.useState<number>(day)
   const [selectedMonth, setSelectedMonth] = React.useState<number>(month)
   const [selectedYear, setSelectedYear] = React.useState<number>(year)
-
   const [dayOptions, setDayOptions] = React.useState(populateDays(month))
 
   React.useEffect(() => {
     const dayOptions = populateDays(selectedMonth)
     setDayOptions(dayOptions)
+    // check is selectedDay is outside max day range of selectedMonth
+    // if so, adjust down to nearest valid date
     const numOfDays = dayOptions.length;
     if(selectedDay && selectedDay > numOfDays) {
       setSelectedDay(numOfDays)
@@ -116,7 +116,6 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     props.onChange(dateString)
   }, [selectedDay, selectedMonth, selectedYear])
 
-  // TODO move inline styles to scss file
   return (
     <React.Fragment>
         <div>
