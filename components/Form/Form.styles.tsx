@@ -162,6 +162,19 @@ export const StyledDropdown = styled.select`
   ${StyledInputMixin}
 `
 
+export const StyledDropdownGroup =  styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  gap: 0;
+
+  ${props => props.theme.breakpoints.sm} {
+    flex-direction: row;
+    max-width: ${maxInputWidth}px;
+    gap: 2rem;
+  }
+`
+
 export const InlineStyledInput = styled.input`
   ${StyledInputMixin}
   margin-bottom: .5rem!important;

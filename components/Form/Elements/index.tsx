@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledCheckbox, StyledDropdown, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
+import { StyledCheckbox, StyledDropdown, StyledDropdownGroup, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
 
 import range from 'ramda/src/range'
 
@@ -121,17 +121,17 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     <React.Fragment>
         <div>
           <Label name={props.name} label={label} required={required} />
-          <div style={{display: 'flex', width: '64%', gap: '2rem'}}>
-            <span style={{flexGrow: 1}}>
+          <StyledDropdownGroup>
+            <span>
               <DropDown options={dayOptions} label='Day' aria-label={`${label} Day`} value={selectedDay} onChange={e => {setSelectedDay(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
             </span>
-            <span style={{flexGrow: 1}}>
+            <span>
               <DropDown options={monthOptions} label='Month' aria-label={`${label} Month`} value={selectedMonth} onChange={e => {setSelectedMonth(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
             </span>
-            <span style={{flexGrow: 1}}>
+            <span>
               <DropDown options={yearOptions} label='Year' aria-label={`${label} Year`} value={selectedYear} onChange={e => {setSelectedYear(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
             </span>
-          </div>
+          </StyledDropdownGroup>
         </div>
     </React.Fragment>
   )
