@@ -151,7 +151,7 @@ interface DropDownProps extends FieldProps{
   addDefault?: boolean
 }
 
-export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => (
+export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => !props.disabled && (
   <React.Fragment>
     <Label name={props.name} label={label} required={required} />
     <StyledDropdown error={error} aria-label={props['aria-label']} className={props.className} id={props.name} name={props.name} {...props} size={rows}>
@@ -164,7 +164,7 @@ export const DropDown = ({ label, options, addDefault, type, rows, required, err
 )
 
 export const Input = ({ required, helptext, type, error, label, ...props }: FieldProps) => {
-  return (
+  return !props.disabled && (
     <React.Fragment>
       <Label disabled={props.disabled} name={props.name} label={label} required={required} />
       {(type === 'textarea')

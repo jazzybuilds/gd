@@ -154,7 +154,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     if (fieldType === 'radio list') {
-      return (
+      return !fieldProps.disabled && (
         <React.Fragment>
           <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} />
           <fieldset>
@@ -417,11 +417,10 @@ const FormComponent = (props) => {
         })
       })
 
-
       if (ownPlaceField && capacityFull) {
         updatedFields = updateFormattedField(updatedFields, ownPlaceField.id, 'type', 'hidden')
       }
-
+      
       setFormattedFields(updatedFields)
       setHasMounted(true)
     }
@@ -486,12 +485,14 @@ const FormComponent = (props) => {
     const firstname = aliasFields.find(value => value.alias === "firstname")
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
+    const challenge = aliasFields.find(value => value.alias === "challenge")
 
     localStorage.removeItem(pageId);
     localStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
+      [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 

@@ -304,6 +304,15 @@ const PayPal = (props: PaymentOptionProps) => {
 
   const onApprove = async (actions) => {
     await actions.order.capture()
+    await updateFormSubmission({
+      formId: props.formId,
+      sessionId: props.sessionId,
+      referenceNumber: props.referenceNumber,
+      amount: props.amount,
+      discountCode: props.discountCode,
+      PaymentMethod: "PP",
+      status: "200"
+    })
     return props.onSubmit(props.referenceNumber);
   }
 
@@ -373,7 +382,6 @@ const PayPal = (props: PaymentOptionProps) => {
               props.onReferenceUpdate(updatedResponse.WebsiteReferenceID)
             } catch (error) {
               setError(error)
-
             }
           }}
         />
@@ -450,6 +458,7 @@ const StripePayments = (props: StripePaymentsProps) => {
   React.useEffect(() => {
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
+
       try {
         const response = await makeStripePayment({
           stripe,
@@ -472,8 +481,9 @@ const StripePayments = (props: StripePaymentsProps) => {
         setSubmitting(false)
       }
     }
+
     props.paymentRequest && props.paymentRequest.on("paymentmethod", handlePaymentMethodReceived);
-  }, [])
+  }, [paymentMethod, props.amount])
 
   const handleSubmit = async (paymentMethod) => {
     setSubmitting(true)
@@ -554,6 +564,7 @@ const PaymentOptions = (props: PaymentProps) => {
 
   // @NOTE sets apple pay availability
   React.useEffect(() => {
+
     if (stripe) {
       const pr = stripe.paymentRequest({
         country: "GB",
@@ -566,13 +577,13 @@ const PaymentOptions = (props: PaymentProps) => {
         requestPayerEmail: true,
       });
       pr.canMakePayment().then((result) => {
-        if (result) {
+        if (result) { 
           setApplePayAvailable(result.applePay)
           setPaymentRequest(pr);
         }
       });
     }
-  }, [stripe]);
+  }, [stripe, props.amount]);
 
   // @NOTE sets google pay availability
   React.useEffect(() => {
@@ -615,6 +626,7 @@ const PaymentOptions = (props: PaymentProps) => {
       summaryText = paypalOption.summary
       break;
   }
+
   return (
     <React.Fragment>
       <div className="payment-types__options">
@@ -651,7 +663,6 @@ const PaymentOptions = (props: PaymentProps) => {
     </React.Fragment>
   )
 }
-
 
 const Payment = (props: PaymentProps) => {
   let googleAPI = "loading"
