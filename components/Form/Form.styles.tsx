@@ -102,52 +102,7 @@ const StyledInputMixin = css<{removeGutter?: boolean}>`
     background-color: ${props => props.theme.colors.white}!important;
   }
   ${props => props.disabled && StyledInputDisabledMixin}
-  ${props => props.removeGutter ? "margin-bottom: 0!important;": ""}
-  
-`
-
-export const DatePickerRoot = styled.div`
-  position: relative;
-  max-width: ${maxInputWidth}px;
-  button {
-      &:focus {
-          outline: 2px dotted ${props => props.theme.colors.secondary} !important;
-          outline-offset: 2px;
-          z-index: 2;
-          position: absolute;
-      }
-  }
-`
-export const StyledDatePicker = styled.input`
-  ${StyledInputMixin}
-  border-radius: .5rem;
-  padding: 0.875rem 1.125rem;
-  width: 100%;
-  font-size: 1rem;
-  ::-webkit-input-placeholder {
-    color: ${props => props.theme.colors.primary}!important;
-  }
-
-  ::-moz-placeholder {
-      color: ${props => props.theme.colors.primary}!important;
-  }
-
-  ::-ms-placeholder {
-      color: ${props => props.theme.colors.primary}!important;
-  }
-
-  ::placeholder {
-      color: ${props => props.theme.colors.primary}!important;
-  }
-`
-
-export const DatePickerImage = styled.img`
-  width: 20px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  z-index: 1000;
+  ${props => props.removeGutter ? "margin-bottom: 0!important;": ""}  
 `
 
 export const StyledInput = styled.input`
