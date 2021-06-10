@@ -61,7 +61,7 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
     // Create variable to hold new number of days to inject
     let days;
     // 31 or 30 days?
-    if(months[monthIndex] === 'January' || months[monthIndex] === 'March' || months[monthIndex] === 'May' || months[monthIndex] === 'July' || months[monthIndex] === 'August' || months[monthIndex] === 'October' || months[monthIndex] === 'December') {
+    if(monthIndex === -1 || months[monthIndex] === 'January' || months[monthIndex] === 'March' || months[monthIndex] === 'May' || months[monthIndex] === 'July' || months[monthIndex] === 'August' || months[monthIndex] === 'October' || months[monthIndex] === 'December') {
       days = 31;
     } else if(months[monthIndex] === 'April' || months[monthIndex] === 'June' || months[monthIndex] === 'September' || months[monthIndex] === 'November') {
       days = 30;
