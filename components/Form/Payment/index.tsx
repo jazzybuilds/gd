@@ -129,7 +129,8 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       amount: rest.amount,
       discountCode: rest.discountCode,
       PaymentMethod: "CC",
-      status: payload.status
+      // status: '200'
+      status: 'payload.status'
     })
     return Promise.resolve({
       reference: newReference.WebsiteReferenceID,
@@ -437,7 +438,7 @@ const StripePayments = (props: StripePaymentsProps) => {
 
           console.log('on3DSComplete result', result)
           console.log('on3DSComplete props', props)
-          debugger
+          // debugger
 
           if (result.paymentIntent.status === "succeeded") {
             console.log('on3DSComplete result.paymentIntent.status succeeded', result.paymentIntent.status)
