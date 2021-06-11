@@ -28,8 +28,12 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
+      // TODO use a recursive function to search through child elements of errRef,
+      // giving focus to the 1st 'focusable' element found (e.g. <input>, <select>....)
       if (fieldType === 'date') {
         errRef.current.children[0].children[1].children[0].children[1].focus()
+      } else if (fieldType === 'radio list') {
+        errRef.current.children[1].children[0].children[0].focus()
       } else {
         errRef.current.children[1].focus()
       }
