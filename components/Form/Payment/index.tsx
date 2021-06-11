@@ -114,7 +114,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       message: payload.error.message ?? "Unable to take payment",
       reference: newReference.WebsiteReferenceID ?? rest.referenceNumber,
     })
-  } else {
+  } else {    
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
@@ -122,7 +122,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       amount: rest.amount,
       discountCode: rest.discountCode,
       PaymentMethod: "CC",
-      status: payload.paymentIntent.status === 'succeeded' ? '200' : 'payload.paymentIntent.status' //needs attention
+      status: payload.paymentIntent.status === 'succeeded' ? '200' : payload.paymentIntent.status
     })
     return Promise.resolve({
       reference: newReference.WebsiteReferenceID,
