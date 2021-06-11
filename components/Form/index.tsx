@@ -193,10 +193,10 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       let initDate: Date | null = fieldProps.value ? new Date(fieldProps.value) : null;
       let maxDate: Date = fieldProps.max ? new Date(fieldProps.max) :defaultMaxDate;
 
-      if (fieldProps.alias.toLowerCase() == 'dob' || fieldProps.alias.toLowerCase() == 'past' ) {
+      if (fieldProps.alias.toLowerCase() === 'past') {
         minDate = defaultMinDate;
         maxDate = new Date();
-      } else if (fieldProps.alias.toLowerCase() == 'future') {
+      } else if (fieldProps.alias.toLowerCase() === 'future') {
         minDate = new Date();
         maxDate = defaultMaxDate;
       } 
