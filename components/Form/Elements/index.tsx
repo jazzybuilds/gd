@@ -43,10 +43,10 @@ export const Radio = ({ label, ...props }) => {
   )
 }
 
-export const DatePickerFallback = ({ label, required, ...props }) => {
+export const DatePickerDropdowns = ({ label, required, ...props }) => {
 
   const now = new Date()
-  let value: Date = props.value ? new Date(props.value) : now
+  let initValue: Date = props.initValue ? new Date(props.initValue) : null;
 
   const defaultMinDate = new Date();
   defaultMinDate.setFullYear(defaultMinDate.getFullYear() - 120)
@@ -61,7 +61,7 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     // Create variable to hold new number of days to inject
     let days;
     // 31 or 30 days?
-    if(months[monthIndex] === 'January' || months[monthIndex] === 'March' || months[monthIndex] === 'May' || months[monthIndex] === 'July' || months[monthIndex] === 'August' || months[monthIndex] === 'October' || months[monthIndex] === 'December') {
+    if(monthIndex === -1 || months[monthIndex] === 'January' || months[monthIndex] === 'March' || months[monthIndex] === 'May' || months[monthIndex] === 'July' || months[monthIndex] === 'August' || months[monthIndex] === 'October' || months[monthIndex] === 'December') {
       days = 31;
     } else if(months[monthIndex] === 'April' || months[monthIndex] === 'June' || months[monthIndex] === 'September' || months[monthIndex] === 'November') {
       days = 30;
@@ -70,7 +70,10 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     const isLeap = new Date(selectedYear, 1, 29).getMonth() === 1;
     isLeap ? days = 29 : days = 28;
     }
-    return range(1, days + 1).map( d => ({value:d, label:d}));
+    
+    const daysOptions = range(1, days + 1).map( d => ({value:d, label:d}));
+    daysOptions.unshift({label:'Select', value:-1});
+    return daysOptions;
   }
 
   const months = [
@@ -88,11 +91,14 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     'December'
   ];
   const monthOptions = months.map((m, i) => ({value:i, label:m}));
-  const yearOptions = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
+  monthOptions.unshift({label:'Select', value:-1});
 
-  const day = value.getDate()
-  const month = value.getMonth()
-  const year = value.getFullYear()
+  const yearOptions = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
+  yearOptions.unshift({label:'Select', value:-1});
+
+  const day = initValue ? initValue.getDate() : -1;
+  const month = initValue ? initValue.getMonth() : -1;
+  const year = initValue ? initValue.getFullYear() : -1;
 
   const [selectedDay, setSelectedDay] = React.useState<number>(day)
   const [selectedMonth, setSelectedMonth] = React.useState<number>(month)
@@ -104,13 +110,17 @@ export const DatePickerFallback = ({ label, required, ...props }) => {
     setDayOptions(dayOptions)
     // check is selectedDay is outside max day range of selectedMonth
     // if so, adjust down to nearest valid date
-    const numOfDays = dayOptions.length;
+    const numOfDays = dayOptions.length - 1;
     if(selectedDay && selectedDay > numOfDays) {
       setSelectedDay(numOfDays)
     }
   }, [selectedMonth, selectedYear])
 
   React.useEffect(() => {
+    if (selectedDay === -1 || selectedMonth === -1 || selectedYear === -1) {
+      props.onChange('')
+      return
+    }
     const monthIndex:number = selectedMonth+1
     const dateString = `${selectedYear}-${String(monthIndex).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`;
     props.onChange(dateString)

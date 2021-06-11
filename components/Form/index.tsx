@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
 import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
 import Postcode from "./Postcode"
-import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerFallback, InputError } from './Elements';
+import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerDropdowns, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
@@ -190,7 +190,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       defaultMaxDate.setFullYear(defaultMaxDate.getFullYear() + 51)
 
       let minDate: Date = fieldProps.min ? new Date(fieldProps.min) : defaultMinDate;
-      let selectedDate: Date = fieldProps.value ? new Date(fieldProps.value) : new Date();
+      let initDate: Date | null = fieldProps.value ? new Date(fieldProps.value) : null;
       let maxDate: Date = fieldProps.max ? new Date(fieldProps.max) :defaultMaxDate;
 
       if (fieldProps.alias.toLowerCase() == 'dob' || fieldProps.alias.toLowerCase() == 'past' ) {
@@ -201,10 +201,14 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
         maxDate = defaultMaxDate;
       } 
 
-      let min = `${minDate.getFullYear()}-${String(minDate.getMonth()+1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`
-      let selectedValue = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
-      let max = `${maxDate.getFullYear()}-${String(maxDate.getMonth()+1).padStart(2, '0')}-${String(maxDate.getDate()).padStart(2, '0')}`
+      let min = `${minDate.getFullYear()}-${String(minDate.getMonth()+1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`;
+      let initValue = initDate ? `${initDate.getFullYear()}-${String(initDate.getMonth()+1).padStart(2, '0')}-${String(initDate.getDate()).padStart(2, '0')}` : null;
+      let max = `${maxDate.getFullYear()}-${String(maxDate.getMonth()+1).padStart(2, '0')}-${String(maxDate.getDate()).padStart(2, '0')}`;
       
+      /**
+      * @see https://guidedogs.atlassian.net/browse/GDID-4569
+      * Leaving code in should we ever revisit using the built-in Date Input
+      * 
       // test whether a new date input falls back to a text input or not
       const test = document.createElement('input');
 
@@ -219,12 +223,13 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
           <Input {...fieldProps} type='date' min={min} max={max} error={hasError} />
         )
       }
+      */
       return (
-        <DatePickerFallback 
+        <DatePickerDropdowns 
           {...fieldProps}
           min={min}
           max={max}
-          value={selectedValue}
+          initValue={initValue}
           error={hasError}
           onChange={value => formProps.setFieldValue(fieldProps.name, value)}
         />
