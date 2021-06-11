@@ -28,6 +28,12 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
+      if (fieldType === 'date') {
+        errRef.current.children[0].children[1].children[0].children[1].focus()
+      } else {
+        errRef.current.children[1].focus()
+      }
+      //TODO HANDLE Postcode focus withing <Postcode> comp, (making sure it's the firstErrorKey)
     }
   }, [isValidating, firstErrorKey])
 
