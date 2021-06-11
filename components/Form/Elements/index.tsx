@@ -95,7 +95,7 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
 
     // Flip years range around for past date selection
   const yearRange = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
-  const yearOptions =  (props.alias.toLowerCase() == 'dob' || props.alias.toLowerCase() == 'past' ) ?
+  const yearOptions =  (props.alias.toLowerCase() === 'past') ?
   yearRange.reverse() : yearRange
   yearOptions.unshift({label:'Select', value:-1});
 
