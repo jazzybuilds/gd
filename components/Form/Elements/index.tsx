@@ -135,13 +135,43 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
           <Label name={props.name} label={label} required={required} />
           <StyledDropdownGroup>
             <span>
-              <DropDown options={dayOptions} label='Day' aria-label={`${label} Day`} value={selectedDay} onChange={e => {setSelectedDay(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
+              <DropDown
+                options={dayOptions}
+                label='Day'
+                type='select-group'
+                error={props.error}
+                aria-label={`${label} Day`}
+                value={selectedDay}
+                required={required}
+                onChange={e => {setSelectedDay(parseInt( e.target.value, 10 ))}}
+                {...props.fieldProps}
+              />
             </span>
             <span>
-              <DropDown options={monthOptions} label='Month' aria-label={`${label} Month`} value={selectedMonth} onChange={e => {setSelectedMonth(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
+              <DropDown
+                options={monthOptions}
+                label='Month'
+                type='select-group'
+                error={props.error}
+                aria-label={`${label} Month`}
+                value={selectedMonth}
+                required={required}
+                onChange={e => {setSelectedMonth(parseInt( e.target.value, 10 ))}}
+                {...props.fieldProps}
+              />
             </span>
             <span>
-              <DropDown options={yearOptions} label='Year' aria-label={`${label} Year`} value={selectedYear} onChange={e => {setSelectedYear(parseInt( e.target.value, 10 ))}} {...props.fieldProps} />
+              <DropDown
+                options={yearOptions}
+                label='Year'
+                type='select-group'
+                error={props.error}
+                aria-label={`${label} Year`}
+                value={selectedYear}
+                required={required}
+                onChange={e => {setSelectedYear(parseInt( e.target.value, 10 ))}}
+                {...props.fieldProps}
+              />
             </span>
           </StyledDropdownGroup>
         </div>
@@ -158,7 +188,16 @@ interface DropDownProps extends FieldProps{
 export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => !props.disabled && (
   <React.Fragment>
     <Label name={props.name} label={label} required={required} />
-    <StyledDropdown error={error} aria-label={props['aria-label']} className={props.className} id={props.name} name={props.name} {...props} size={rows}>
+    <StyledDropdown 
+      error={error}
+      aria-label={props['aria-label']}
+      removeGutter={Boolean(type === 'select-group' && !error)}
+      className={props.className}
+      id={props.name}
+      name={props.name}
+      {...props}
+      size={rows}
+    >
       {addDefault && <option value="" disabled={true}>Please select...</option>}
       {options.map(option => (
         <option key={option.value} value={option.value} >{option.label}</option>
