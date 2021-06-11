@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import { actions } from '@storybook/addon-actions';
 
-import { Input, Radio, CheckBox, DatePickerFallback, DropDown, InputError } from '.';
+import { Input, Radio, CheckBox, DatePickerDropdowns, DropDown, InputError } from '.';
 
 export default {
   title: 'Form Elements',
@@ -32,10 +32,10 @@ export const DateInputElement = () => {
   )
 };
 
-export const DatePickerFallbackElement = () => {
+export const DatePickerDropdownsElement = () => {
   const [value, setValue] = React.useState()
   return (
-    <DatePickerFallback required={false} onChange={e => setValue(e)} value={value} {...defaultProps} />
+    <DatePickerDropdowns required={false} onChange={e => setValue(e)} value={value} {...defaultProps} />
   )
 };
 
