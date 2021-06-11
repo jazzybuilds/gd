@@ -93,7 +93,10 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
   const monthOptions = months.map((m, i) => ({value:i, label:m}));
   monthOptions.unshift({label:'Select', value:-1});
 
-  const yearOptions = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
+    // Flip years range around for past date selection
+  const yearRange = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
+  const yearOptions =  (props.alias.toLowerCase() == 'dob' || props.alias.toLowerCase() == 'past' ) ?
+  yearRange.reverse() : yearRange
   yearOptions.unshift({label:'Select', value:-1});
 
   const day = initValue ? initValue.getDate() : -1;
