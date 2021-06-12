@@ -394,6 +394,7 @@ const FormComponent = (props) => {
   React.useEffect(() => {
     if (sectionRef && sectionRef.current && hasMounted) {
       sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(sectionRef.current)
     }
   }, [currentStep, renderPaymentStep])
 
