@@ -288,27 +288,73 @@ interface ManualAddressProps {
 }
 
 const ManualAddress = (props: ManualAddressProps) => {
+  const errorAddress1 = props.touched?.address?.addressline1 ? props.errors['address.addressline1'] : false
+  const errorTown = props.touched?.address?.town ? props.errors['address.town'] : false
+  const errorCountry = props.touched?.address?.country ? props.errors['address.country'] : false
+  const errorPostcode = props.touched?.address?.postcode ? props.errors['address.postcode'] : false
   return (
     <div className="postcode-lookup-step-3">
-      <label htmlFor="address.addressline1">Address line 1 *</label>
-      <StyledInput name="address.addressline1" id="address.addressline1" type="text" value={props.values.addressline1} onBlur={props.onBlur} onChange={props.onChange}/>
+      <label htmlFor="address.addressline1" aria-required={true}>Address line 1 *</label>
+      <StyledInput 
+        name="address.addressline1"
+        id="address.addressline1"
+        type="text"
+        error={errorAddress1}
+        value={props.values.addressline1}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
       {props.touched?.address?.addressline1 && <span className="field-validation-error">{props.errors['address.addressline1']}</span>}
 
       <label htmlFor="address.addressline2">Address line 2</label>
-      <StyledInput name="address.addressline2" id="address.addressline2" type="text" value={props.values.addressline2} onBlur={props.onBlur} onChange={props.onChange}/>
+      <StyledInput 
+        name="address.addressline2"
+        id="address.addressline2"
+        type="text"
+        value={props.values.addressline2}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
 
       <label htmlFor="address.addressline3">Address line 3</label>
-      <StyledInput name="address.addressline3" id="address.addressline3" type="text" value={props.values.addressline3} onBlur={props.onBlur} onChange={props.onChange}/>
+      <StyledInput 
+        name="address.addressline3"
+        id="address.addressline3"
+        type="text"
+        value={props.values.addressline3}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
 
-      <label htmlFor="address.city">Town/City *</label>
-      <StyledInput name="address.town" id="address.town" type="text" value={props.values.town} onBlur={props.onBlur} onChange={props.onChange}/>
+      <label htmlFor="address.city" aria-required={true}>Town/City *</label>
+      <StyledInput
+        name="address.town"
+        id="address.town"
+        type="text"
+        error={errorTown}
+        value={props.values.town}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
       {props.touched?.address?.town &&<span className="field-validation-error">{props.errors['address.town']}</span>}
 
       <label htmlFor="address.county">County</label>
-      <StyledInput name="address.county" id="address.county" type="text" value={props.values.county} onBlur={props.onBlur} onChange={props.onChange}/>
+      <StyledInput
+        name="address.county"
+        id="address.county"
+        type="text"
+        value={props.values.county}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
 
-      <label htmlFor="address.country">Country *</label>
-      <StyledDropdown name="address.country" id="address.country" value={props.values.country}>
+      <label htmlFor="address.country" aria-required={true}>Country *</label>
+      <StyledDropdown
+        name="address.country"
+        id="address.country"
+        error={errorCountry}
+        value={props.values.country}
+      >
         <option label="Please select..." value="">Please select...</option>
         {countries.map(country => (
           <option value={country.value}>{country.label}</option>
@@ -316,8 +362,16 @@ const ManualAddress = (props: ManualAddressProps) => {
       </StyledDropdown>
       {props.touched?.address?.country &&<span className="field-validation-error">{props.errors['address.country']}</span>}
 
-      <label htmlFor="address.postcode">Postcode *</label>
-      <StyledInput name="address.postcode" id="address.postcode" type="text" value={props.values.postcode} onBlur={props.onBlur} onChange={props.onChange}/>
+      <label htmlFor="address.postcode" aria-required={true}>Postcode *</label>
+      <StyledInput
+        name="address.postcode"
+        id="address.postcode"
+        type="text"
+        error={errorPostcode}
+        value={props.values.postcode}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
       {props.touched?.address?.postcode &&<span className="field-validation-error">{props.errors['address.postcode']}</span>}
 
     </div>
