@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { focusFormField } from '../../../utils/formUtils';
 import { StyledDropdown, StyledInput, InlineStyledInput, InlineWrapper } from '../Form.styles';
 import { InlineStyledButton } from '../Form.styles';
 
@@ -284,14 +285,20 @@ interface ManualAddressProps {
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void,
   errors: any;
   touched: any;
-  values: AddressProps | null 
+  values: AddressProps | null
+  address1Ref: React.RefObject<HTMLElement>
+  townRef: React.RefObject<HTMLElement>
+  countryRef: React.RefObject<HTMLElement>
+  postcodeManualRef: React.RefObject<HTMLElement>
 }
 
 const ManualAddress = (props: ManualAddressProps) => {
+  
   const errorAddress1 = props.touched?.address?.addressline1 ? props.errors['address.addressline1'] : false
   const errorTown = props.touched?.address?.town ? props.errors['address.town'] : false
   const errorCountry = props.touched?.address?.country ? props.errors['address.country'] : false
   const errorPostcode = props.touched?.address?.postcode ? props.errors['address.postcode'] : false
+
   return (
     <div className="postcode-lookup-step-3">
       <label htmlFor="address.addressline1" aria-required={true}>Address line 1 *</label>
@@ -300,7 +307,9 @@ const ManualAddress = (props: ManualAddressProps) => {
         id="address.addressline1"
         type="text"
         error={errorAddress1}
+        ref={props.address1Ref}
         value={props.values.addressline1}
+        autoComplete="address-line1"
         onBlur={props.onBlur}
         onChange={props.onChange}
       />
@@ -332,7 +341,9 @@ const ManualAddress = (props: ManualAddressProps) => {
         id="address.town"
         type="text"
         error={errorTown}
+        ref={props.townRef}
         value={props.values.town}
+        autoComplete="address-level1"
         onBlur={props.onBlur}
         onChange={props.onChange}
       />
@@ -353,7 +364,9 @@ const ManualAddress = (props: ManualAddressProps) => {
         name="address.country"
         id="address.country"
         error={errorCountry}
+        ref={props.countryRef}
         value={props.values.country}
+        autoComplete="country-name"
       >
         <option label="Please select..." value="">Please select...</option>
         {countries.map(country => (
@@ -368,7 +381,9 @@ const ManualAddress = (props: ManualAddressProps) => {
         id="address.postcode"
         type="text"
         error={errorPostcode}
+        ref={props.postcodeManualRef}
         value={props.values.postcode}
+        autoComplete="postal-code"
         onBlur={props.onBlur}
         onChange={props.onChange}
       />
@@ -380,11 +395,16 @@ const ManualAddress = (props: ManualAddressProps) => {
 
 const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields}) => {
   const postcodeRef = React.useRef(null)
+  const address1Ref = React.useRef(null)
+  const townRef = React.useRef(null)
+  const countryRef = React.useRef(null)
+  const postcodeManualRef = React.useRef(null)
+
   const [postcodeEntered, setPostcodeEntered] = React.useState("")
   const [showError, setShowError] = React.useState(false)
   const [isLookingUp, setIsLookingUp] = React.useState(false)
   const [addresses, setAddresses] = React.useState<AddressProps[]>([])
-  const [manualEntery, setManualEntry] = React.useState(false)
+  const [manualEntry, setManualEntry] = React.useState(false)
   const postcodeRegex = /^([A-Za-z][A-Ha-hJ-Yj-y]?[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|[Gg][Ii][Rr] ?0[Aa]{2})$/i; // UK Postcode regex
 
   React.useEffect(() => {
@@ -394,6 +414,36 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
     } else {
       setShowError(false)
     }
+
+    let erroringFieldRef:any  = null;
+    if (!manualEntry && showError) {
+      erroringFieldRef = postcodeRef
+    } else if (manualEntry && showError) {
+        console.log(addressError)
+        switch(addressError) {
+          case "address.addressline1":
+            erroringFieldRef = address1Ref
+            break;
+          case "address.town":
+            erroringFieldRef = townRef
+            break;
+          case "address.country":
+            erroringFieldRef = countryRef
+            break;
+          case "address.postcode":
+            erroringFieldRef = postcodeManualRef
+            break; 
+          default:
+            // code block
+        } 
+    }
+
+    if (erroringFieldRef && erroringFieldRef.current != null) {
+      console.log(erroringFieldRef);
+      erroringFieldRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(erroringFieldRef.current, erroringFieldRef === postcodeRef ? 'input' : null)
+    }
+
   }, [formErrors, touchedFields])
 
   const onLookup = async () => {
@@ -423,11 +473,12 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           <InlineStyledInput
             type="text"
             name="address"
-            error={showError}
+            error={(postcodeEntered && postcodeRegex.test(postcodeEntered)) ? false : showError}
             onBlur={onBlur}
             className={`${showError ? 'input-validation-error' : ''}`}
             aria-label="Postcode"
             value={postcodeEntered}
+            autoComplete="nope"
             onChange={e => setPostcodeEntered(e.target.value)}
           />
 
@@ -461,14 +512,18 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
         </div>
       }
 
-      {!manualEntery && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>Enter address manually</a></p>}
-      {manualEntery && 
+      {!manualEntry && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>Enter address manually</a></p>}
+      {manualEntry && 
         <ManualAddress
           touched={touchedFields}
           errors={formErrors}
           values={values}
           onBlur={onBlur}
           onChange={onChange}
+          address1Ref = {address1Ref}
+          townRef = {townRef}
+          countryRef = {countryRef}
+          postcodeManualRef = {postcodeManualRef}
         />
       }
     </div>

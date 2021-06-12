@@ -2,7 +2,16 @@
 import React from 'react'
 import axios from 'axios';
 import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
-import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
+import { 
+  createValidationSchema,
+  flattenFormValues,
+  extractFields,
+  validate,
+  computeConditionRule,
+  FormValuesProps,
+  ConditionProps,
+  focusFormField
+} from '../../utils/formUtils';
 import Postcode from "./Postcode"
 import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerDropdowns, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
@@ -28,24 +37,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
-      // search through child elements of errRef,
-      // giving focus to the 1st 'focusable' element found (e.g. <input>, <select>....)
-      let focusableElements = errRef.current.getElementsByTagName('input');
-      if (focusableElements.length < 1) {
-        focusableElements = errRef.current.getElementsByTagName('select');
-      }
-      if (focusableElements.length < 1) {
-        focusableElements = errRef.current.getElementsByTagName('button');
-      }
-
-      if (focusableElements.length < 1) {
-        console.log('-------- No Focusable element found for ---------')
-        console.log(errRef.current)
-        console.log('-------- firstErrorKey ---------')
-        console.log(firstErrorKey)
-      } else {
-        focusableElements[0].focus();
-      }
+      focusFormField(errRef.current)
       //@see Postcode which has responsibility for handling it's own error messages
     }
   }, [isValidating, firstErrorKey])
