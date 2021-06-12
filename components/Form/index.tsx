@@ -34,6 +34,9 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       if (focusableElements.length < 1) {
         focusableElements = errRef.current.getElementsByTagName('select');
       }
+      if (focusableElements.length < 1) {
+        focusableElements = errRef.current.getElementsByTagName('button');
+      }
 
       if (focusableElements.length < 1) {
         console.log('-------- No Focusable element found for ---------')
