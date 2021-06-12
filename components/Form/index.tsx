@@ -28,16 +28,22 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
-      // TODO use a recursive function to search through child elements of errRef,
+      // search through child elements of errRef,
       // giving focus to the 1st 'focusable' element found (e.g. <input>, <select>....)
-      if (fieldType === 'date') {
-        errRef.current.children[0].children[1].children[0].children[1].focus()
-      } else if (fieldType === 'radio list') {
-        errRef.current.children[1].children[0].children[0].focus()
-      } else {
-        errRef.current.children[1].focus()
+      let focusableElements = errRef.current.getElementsByTagName('input');
+      if (focusableElements.length < 1) {
+        focusableElements = errRef.current.getElementsByTagName('select');
       }
-      //TODO HANDLE Postcode focus withing <Postcode> comp, (making sure it's the firstErrorKey)
+
+      if (focusableElements.length < 1) {
+        console.log('-------- No Focusable element found for ---------')
+        console.log(errRef.current)
+        console.log('-------- firstErrorKey ---------')
+        console.log(firstErrorKey)
+      } else {
+        focusableElements[0].focus();
+      }
+      //@see Postcode which has responsibility for handling it's own error messages
     }
   }, [isValidating, firstErrorKey])
 
