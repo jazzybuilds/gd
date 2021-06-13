@@ -394,7 +394,10 @@ const ManualAddress = (props: ManualAddressProps) => {
 }
 
 const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields, firstErrorKey}) => {
-  const postcodeRef = React.useRef(null)
+  
+  const postcodeLookupInputRef = React.useRef(null)
+  const postcodeLookupDropdownRef = React.useRef(null)
+
   const address1Ref = React.useRef(null)
   const townRef = React.useRef(null)
   const countryRef = React.useRef(null)
@@ -415,9 +418,20 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
       setShowError(false)
     }
 
+    console.log('------ formErrors ------')
+    console.log(formErrors)
+    console.log('------ firstErrorKey -------')
+    console.log(firstErrorKey)
+    console.log('------ showError --------')
+    console.log(showError)
+    console.log('------ manualEntry -------')
+    console.log(manualEntry)
+
     let erroringFieldRef:any  = null;
     if (!manualEntry && showError) {
-      if (firstErrorKey === 'address.postcode') erroringFieldRef = postcodeRef
+      if (firstErrorKey === 'address.addressline1') {
+        erroringFieldRef = isLookingUp ? postcodeLookupDropdownRef : postcodeLookupInputRef
+      }
     } else if (manualEntry && showError) {
         switch(addressError) {
           case "address.addressline1":
@@ -437,9 +451,14 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
         } 
     }
 
+    console.log('------ erroringFieldRef -------')
+    console.log(erroringFieldRef)
+    console.log('------ erroringFieldRef -------')
+    console.log(`ispostcodeLookupDropdownRef: ${erroringFieldRef === postcodeLookupDropdownRef}`)
+
     if (erroringFieldRef && erroringFieldRef.current != null) {
       erroringFieldRef.current.scrollIntoView({ behavior: 'smooth' })
-      focusFormField(erroringFieldRef.current, erroringFieldRef === postcodeRef ? 'input' : null)
+      focusFormField(erroringFieldRef.current, erroringFieldRef === postcodeLookupInputRef ? 'input' : null)
     }
 
   }, [formErrors, firstErrorKey, touchedFields])
@@ -449,7 +468,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
       const response = await getAddress(postcodeEntered)
       setAddresses(response)
       setIsLookingUp(true)
-      postcodeRef && postcodeRef.current.focus()
+      postcodeLookupDropdownRef && postcodeLookupDropdownRef.current.focus()
     } else {
       setShowError(true)
     }
@@ -471,6 +490,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           <InlineStyledInput
             type="text"
             name="address"
+            ref={postcodeLookupInputRef}
             error={(postcodeEntered && postcodeRegex.test(postcodeEntered)) ? false : showError}
             onBlur={onBlur}
             className={`${showError ? 'input-validation-error' : ''}`}
@@ -503,7 +523,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           </p>
 
           <label htmlFor="postcode">Select address *</label>
-          <StyledDropdown ref={postcodeRef} name="postcode" id="postcode" onChange={e => onAddressSelection(e.target.value)} error={showError}>
+          <StyledDropdown ref={postcodeLookupDropdownRef} name="postcode" id="postcode" onChange={e => onAddressSelection(e.target.value)} error={showError}>
             <option value="">Please select an address</option>
             {addresses.map(address => <option value={address.id}>{address.label}</option>)}
           </StyledDropdown>
