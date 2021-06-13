@@ -442,3 +442,46 @@ export const computeConditionRule = ({ operator, match, value }) => {
       return false
   }
 }
+
+
+/**
+ * search through child elements of errRef,
+ * giving focus to the 1st 'focusable' element found (e.g. <input>, <select>....)
+ * @param div
+ * @param onlySearchForTagName - Only search for this element tag
+ */
+export const focusFormField = (element:HTMLElement, onlySearchForTagName?:string) => {
+
+  let focusableElement:HTMLElement | null = null;
+  let focusableElements:HTMLCollection | null = null;
+
+  // check if element is actually focusable
+  if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'BUTTON') {
+    focusableElement = element;
+  } else {
+    if (onlySearchForTagName) {
+      focusableElements = element.getElementsByTagName(onlySearchForTagName);
+    } else {
+      // check for all focusable elements types
+      focusableElements = element.getElementsByTagName('input');
+      if (focusableElements.length < 1) {
+        focusableElements = element.getElementsByTagName('select');
+      }
+      if (focusableElements.length < 1) {
+        focusableElements = element.getElementsByTagName('button');
+      }
+    }
+
+    if (focusableElements.length > 0) {
+      focusableElement = (focusableElements[0] as HTMLElement);
+    }
+  }
+
+  if (!focusableElement) {
+    console.log('-------- No Focusable element found for ---------')
+    console.log(element)
+  } else {
+    focusableElement.focus();
+  }
+  
+}

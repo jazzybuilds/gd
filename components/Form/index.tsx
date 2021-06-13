@@ -2,7 +2,16 @@
 import React from 'react'
 import axios from 'axios';
 import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
-import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
+import { 
+  createValidationSchema,
+  flattenFormValues,
+  extractFields,
+  validate,
+  computeConditionRule,
+  FormValuesProps,
+  ConditionProps,
+  focusFormField
+} from '../../utils/formUtils';
 import Postcode from "./Postcode"
 import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerDropdowns, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
@@ -28,6 +37,8 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(errRef.current)
+      //@see Postcode which has responsibility for handling it's own error messages
     }
   }, [isValidating, firstErrorKey])
 
@@ -383,6 +394,7 @@ const FormComponent = (props) => {
   React.useEffect(() => {
     if (sectionRef && sectionRef.current && hasMounted) {
       sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(sectionRef.current)
     }
   }, [currentStep, renderPaymentStep])
 
