@@ -676,19 +676,21 @@ const FormComponent = (props) => {
                         type="button"
                         disabled={formProps.isSubmitting}
                         onClick={async () => {
+                          setFirstErrorKey(null);
                           setIsValidating(true)
-                          if (["submit", "payment"].includes(buttonData.action)) {
-                            await formProps.submitForm()
-                          } else {
-                            const formErrors = await formProps.validateForm()
-                            if (Object.keys(formErrors).length > 0) {
-                              Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
+                          const formErrors = await formProps.validateForm()
+                          if (Object.keys(formErrors).length > 0) {
+                            Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
 
-                              setFirstErrorKey(Object.keys(formErrors)[0])
+                            setFirstErrorKey(Object.keys(formErrors)[0])
+                          } else {
+                            if (["submit", "payment"].includes(buttonData.action)) {
+                              await formProps.submitForm()
                             } else {
                               setCurrentStep(currentStep + 1)
                             }
                           }
+                          
                           setIsValidating(false)
                         }}
                       >
