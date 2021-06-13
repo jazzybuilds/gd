@@ -65,7 +65,6 @@ const ThankYou = (props) => {
 
   }, [])
 
-
   if (!fields || !fields["event page"]) {
     console.log("No event data supplied")
     return null
@@ -74,7 +73,12 @@ const ThankYou = (props) => {
   if (!user || !event) {
     return (<p>Loading</p>)
   }
-  
+
+  const startsAt = new Date(`${event.date} ${event.time}`)
+  const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
+  const endsAt = new Date(`${event.date} ${event.time}`)
+  const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
+
   return (
     <Root className="component">
       <p>{fields["confirmation text"]}</p>
@@ -103,8 +107,8 @@ const ThankYou = (props) => {
               name: event.title,
               details: "",
               location: event.location,
-              startsAt: String(parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())),
-              endsAt: String(parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())),
+              startsAt: startsAtStr,
+              endsAt: endsAtStr,
             }}
           />
         </Calendar>
