@@ -456,7 +456,7 @@ export const focusFormField = (element:HTMLElement, onlySearchForTagName?:string
   let focusableElements:HTMLCollection | null = null;
 
   // check if element is actually focusable
-  if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'BUTTON') {
+  if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'BUTTON' || element.tagName === 'TEXTAREA' ) {
     focusableElement = element;
   } else {
     if (onlySearchForTagName) {
@@ -470,6 +470,10 @@ export const focusFormField = (element:HTMLElement, onlySearchForTagName?:string
       if (focusableElements.length < 1) {
         focusableElements = element.getElementsByTagName('button');
       }
+      if (focusableElements.length < 1) {
+        focusableElements = element.getElementsByTagName('textarea');
+      }
+      
     }
 
     if (focusableElements.length > 0) {
