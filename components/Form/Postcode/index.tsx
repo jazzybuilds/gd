@@ -393,7 +393,7 @@ const ManualAddress = (props: ManualAddressProps) => {
   )
 }
 
-const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields}) => {
+const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields, firstErrorKey}) => {
   const postcodeRef = React.useRef(null)
   const address1Ref = React.useRef(null)
   const townRef = React.useRef(null)
@@ -417,21 +417,20 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
 
     let erroringFieldRef:any  = null;
     if (!manualEntry && showError) {
-      erroringFieldRef = postcodeRef
+      if (firstErrorKey === 'address.postcode') erroringFieldRef = postcodeRef
     } else if (manualEntry && showError) {
-        console.log(addressError)
         switch(addressError) {
           case "address.addressline1":
-            erroringFieldRef = address1Ref
+            if (firstErrorKey === 'address.addressline1') erroringFieldRef = address1Ref
             break;
           case "address.town":
-            erroringFieldRef = townRef
+            if (firstErrorKey === 'address.town') erroringFieldRef = townRef
             break;
           case "address.country":
-            erroringFieldRef = countryRef
+            if (firstErrorKey === 'address.country') erroringFieldRef = countryRef
             break;
           case "address.postcode":
-            erroringFieldRef = postcodeManualRef
+            if (firstErrorKey === 'address.postcode') erroringFieldRef = postcodeManualRef
             break; 
           default:
             // code block
@@ -439,12 +438,11 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
     }
 
     if (erroringFieldRef && erroringFieldRef.current != null) {
-      console.log(erroringFieldRef);
       erroringFieldRef.current.scrollIntoView({ behavior: 'smooth' })
       focusFormField(erroringFieldRef.current, erroringFieldRef === postcodeRef ? 'input' : null)
     }
 
-  }, [formErrors, touchedFields])
+  }, [formErrors, firstErrorKey, touchedFields])
 
   const onLookup = async () => {
     if (postcodeEntered && postcodeRegex.test(postcodeEntered)) {
