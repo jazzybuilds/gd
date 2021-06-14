@@ -500,8 +500,8 @@ const FormComponent = (props) => {
     const email = aliasFields.find(value => value.alias === "email")
     const challenge = aliasFields.find(value => value.alias === "challenge")
 
-    localStorage.removeItem(pageId);
-    localStorage.setItem(pageId, JSON.stringify({
+    sessionStorage.removeItem(pageId);
+    sessionStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
