@@ -37,7 +37,7 @@ const ThankYou = (props) => {
     }
 
     if (fields["event page"]) {
-      const storageData = JSON.parse(localStorage.getItem(fields["event page"]["id"]))
+      const storageData = JSON.parse(sessionStorage.getItem(fields["event page"]["id"]))
       if (!storageData) {
         redirectFunc()
       } else {
@@ -48,7 +48,10 @@ const ThankYou = (props) => {
           reference: storageData[FormStorageNames.PaymentReference]
         })
 
-        const parsedDate = fields["event page"]["event date"] ? parse(fields["event page"]["event date"], "MM/dd/yyyy h:mm:ss a", new Date()) : null
+        // TODO - pass dates around consistently as ISO timestamps
+        const eventDate = fields["event page"]["event date"]
+        const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
+        const parsedDate = eventDate ? parse(eventDate, formatStr, new Date()) : null
         setEvent({
           title: fields["calendar title"],
           description: "",
@@ -61,8 +64,6 @@ const ThankYou = (props) => {
     } else {
       redirectFunc()
     }
-
-
   }, [])
 
   if (!fields || !fields["event page"]) {
@@ -74,9 +75,17 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
-  const startsAt = new Date(`${event.date} ${event.time}`)
+  let startsAt = new Date()
+  let endsAt = new Date()
+
+  if (event.date) {
+    // TODO - pass dates around consistently as ISO timestamps
+    const formatStr = event.date && event.date.indexOf('/') > -1 ? "dd/MM/yyyy h:mm a" : "yyyy-MM-dd h:mm:ss a"
+    startsAt = parse(`${event.date} ${event.time}`, formatStr, new Date())
+    endsAt = parse(`${event.date} ${event.time}`, formatStr, new Date())
+  }
+
   const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
-  const endsAt = new Date(`${event.date} ${event.time}`)
   const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
 
   return (

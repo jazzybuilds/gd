@@ -500,19 +500,19 @@ const FormComponent = (props) => {
     const email = aliasFields.find(value => value.alias === "email")
     const challenge = aliasFields.find(value => value.alias === "challenge")
 
-    localStorage.removeItem(pageId);
-    localStorage.setItem(pageId, JSON.stringify({
+    sessionStorage.removeItem(pageId);
+    sessionStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
-
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
       window.location.href = button.redirectURL
     } else {
+      
       window.location.href = window.location.href + "thank-you"
     }
   }
