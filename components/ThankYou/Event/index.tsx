@@ -61,8 +61,6 @@ const ThankYou = (props) => {
     } else {
       redirectFunc()
     }
-
-
   }, [])
 
   if (!fields || !fields["event page"]) {
@@ -78,8 +76,8 @@ const ThankYou = (props) => {
   let endsAt = new Date()
 
   try {
-    startsAt = new Date(`${event.date} ${event.time}`)
-    endsAt = new Date(`${event.date} ${event.time}`)
+    startsAt = parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())
+    endsAt = parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())
   } catch (error) {
     console.log(error)
     console.log(`event.date" ${event.date}`)
