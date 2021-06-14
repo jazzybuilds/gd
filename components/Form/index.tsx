@@ -510,7 +510,7 @@ const FormComponent = (props) => {
     }));
 
     const reducer = (accumulator, currentValue) => accumulator + `${currentValue.id}=${currentValue.value}&`;
-    const queryPrams = values.reduce(reducer, '?')
+    const queryPrams = allFormValues.reduce(reducer, '?')
 
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
