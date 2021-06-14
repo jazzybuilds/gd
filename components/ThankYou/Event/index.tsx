@@ -78,25 +78,15 @@ const ThankYou = (props) => {
   let startsAt = new Date()
   let endsAt = new Date()
 
-  try {
+  if (event.date) {
     // TODO - pass dates around consistently as ISO timestamps
-    const eventDate = event.date
-    const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "dd/MM/yyyy h:mm a" : "yyyy-MM-dd h:mm:ss a"
-    startsAt = eventDate ? parse(`${event.date} ${event.time}`, formatStr, new Date()) : new Date()
-    endsAt = eventDate ? parse(`${event.date} ${event.time}`, formatStr, new Date()) : new Date()
-  } catch (error) {
-    console.log(error)
-    console.log(`event.date" ${event.date}`)
-    console.log(`event.time" ${event.time}`)
-  } 
+    const formatStr = event.date && event.date.indexOf('/') > -1 ? "dd/MM/yyyy h:mm a" : "yyyy-MM-dd h:mm:ss a"
+    startsAt = parse(`${event.date} ${event.time}`, formatStr, new Date())
+    endsAt = parse(`${event.date} ${event.time}`, formatStr, new Date())
+  }
 
-  //const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
-  //const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
-  console.log(`---- event.date: ${event.date} -----`)
-  console.log(`---- startsAt: ${startsAt} -----`)
-  console.log(format(startsAt, "yyyy-MM-dd'T'HH:mm"))
-  const startsAtStr = "2025-05-01T06:30"
-  const endsAtStr = "2025-05-01T06:30"
+  const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
+  const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
 
   return (
     <Root className="component">

@@ -508,14 +508,12 @@ const FormComponent = (props) => {
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
-
-    const queryPrams = `?${Object.keys(values).map(key => `${key}=${values[key]}`).join("&")}`;
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
-      window.location.href = button.redirectURL + queryPrams
+      window.location.href = button.redirectURL
     } else {
       
-      window.location.href = window.location.href + "thank-you" + queryPrams
+      window.location.href = window.location.href + "thank-you"
     }
   }
 
