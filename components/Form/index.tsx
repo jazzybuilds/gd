@@ -509,12 +509,14 @@ const FormComponent = (props) => {
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 
+    const reducer = (accumulator, currentValue) => accumulator + `${currentValue.id}=${currentValue.value}&`;
+    const queryPrams = values.reduce(reducer, '?')
+
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
-      window.location.href = button.redirectURL
+      window.location.href = button.redirectURL + queryPrams
     } else {
-      const reducer = (accumulator, currentValue) => accumulator + `${currentValue.id}=${currentValue.value}&`;
-      const queryPrams = values.reduce(reducer, '?')
+      
       window.location.href = window.location.href + "thank-you" + queryPrams
     }
   }
