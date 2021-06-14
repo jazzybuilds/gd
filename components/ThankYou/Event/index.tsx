@@ -92,7 +92,8 @@ const ThankYou = (props) => {
 
   //const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
   //const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
-  console.log(`---- startsAtStr: ${startsAt} -----`)
+  console.log(`---- event.date: ${event.date} -----`)
+  console.log(`---- startsAt: ${startsAt} -----`)
   console.log(format(startsAt, "yyyy-MM-dd'T'HH:mm"))
   const startsAtStr = "2025-05-01T06:30"
   const endsAtStr = "2025-05-01T06:30"
