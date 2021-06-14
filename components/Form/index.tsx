@@ -509,9 +509,7 @@ const FormComponent = (props) => {
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 
-    const reducer = (accumulator, currentValue) => accumulator + `${currentValue.id}=${currentValue.value}&`;
-    const queryPrams = allFormValues.reduce(reducer, '?')
-
+    const queryPrams = `?${Object.keys(values).map(key => `${key}=${values[key]}`).join("&")}`;
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
       window.location.href = button.redirectURL + queryPrams
