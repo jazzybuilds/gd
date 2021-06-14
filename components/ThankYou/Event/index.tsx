@@ -48,7 +48,9 @@ const ThankYou = (props) => {
           reference: storageData[FormStorageNames.PaymentReference]
         })
 
-        const parsedDate = fields["event page"]["event date"] ? parse(fields["event page"]["event date"], "MM/dd/yyyy h:mm:ss a", new Date()) : null
+        const eventDate = fields["event page"]["event date"]
+        const formatStr = eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
+        const parsedDate = fields["event page"]["event date"] ? parse(eventDate, formatStr, new Date()) : null
         setEvent({
           title: fields["calendar title"],
           description: "",
