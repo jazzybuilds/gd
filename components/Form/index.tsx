@@ -513,7 +513,9 @@ const FormComponent = (props) => {
     if (button) {
       window.location.href = button.redirectURL
     } else {
-      window.location.href = window.location.href + "thank-you"
+      const reducer = (accumulator, currentValue) => accumulator + `${currentValue.id}=${currentValue.value}&`;
+      const queryPrams = values.reduce(reducer, '?')
+      window.location.href = window.location.href + "thank-you" + queryPrams
     }
   }
 
