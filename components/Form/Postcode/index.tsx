@@ -418,15 +418,6 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
       setShowError(false)
     }
 
-    console.log('------ formErrors ------')
-    console.log(formErrors)
-    console.log('------ firstErrorKey -------')
-    console.log(firstErrorKey)
-    console.log('------ showError --------')
-    console.log(showError)
-    console.log('------ manualEntry -------')
-    console.log(manualEntry)
-
     let erroringFieldRef:any  = null;
     if (!manualEntry && showError) {
       if (firstErrorKey === 'address.addressline1') {
@@ -450,11 +441,6 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
             // code block
         } 
     }
-
-    console.log('------ erroringFieldRef -------')
-    console.log(erroringFieldRef)
-    console.log('------ erroringFieldRef -------')
-    console.log(`ispostcodeLookupDropdownRef: ${erroringFieldRef === postcodeLookupDropdownRef}`)
 
     if (erroringFieldRef && erroringFieldRef.current != null) {
       erroringFieldRef.current.scrollIntoView({ behavior: 'smooth' })
