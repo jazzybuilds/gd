@@ -126,7 +126,9 @@ export const StyledDropdownGroup =  styled.div`
   ${props => props.theme.breakpoints.sm} {
     flex-direction: row;
     max-width: ${maxInputWidth}px;
-    gap: 2rem;
+    span:nth-child(1), span:nth-child(2) { 
+      margin-right: 2rem
+    }
   }
 `
 
