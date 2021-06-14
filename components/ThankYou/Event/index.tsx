@@ -48,9 +48,10 @@ const ThankYou = (props) => {
           reference: storageData[FormStorageNames.PaymentReference]
         })
 
+        // TODO - pass dates around consistently as ISO timestamps
         const eventDate = fields["event page"]["event date"]
-        const formatStr = eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
-        const parsedDate = fields["event page"]["event date"] ? parse(eventDate, formatStr, new Date()) : null
+        const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
+        const parsedDate = eventDate ? parse(eventDate, formatStr, new Date()) : null
         setEvent({
           title: fields["calendar title"],
           description: "",
