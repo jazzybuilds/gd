@@ -74,9 +74,19 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
-  const startsAt = new Date(`${event.date} ${event.time}`)
+  let startsAt = new Date()
+  let endsAt = new Date()
+
+  try {
+    startsAt = new Date(`${event.date} ${event.time}`)
+    endsAt = new Date(`${event.date} ${event.time}`)
+  } catch (error) {
+    console.log(error)
+    console.log(`event.date" ${event.date}`)
+    console.log(`event.time" ${event.time}`)
+  } 
+
   const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
-  const endsAt = new Date(`${event.date} ${event.time}`)
   const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
 
   return (
