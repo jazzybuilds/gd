@@ -61,18 +61,31 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
     // Create variable to hold new number of days to inject
     let days;
     // 31 or 30 days?
-    if(monthIndex === -1 || months[monthIndex] === 'January' || months[monthIndex] === 'March' || months[monthIndex] === 'May' || months[monthIndex] === 'July' || months[monthIndex] === 'August' || months[monthIndex] === 'October' || months[monthIndex] === 'December') {
+    if(
+      monthIndex === "" ||
+      months[monthIndex-1] === 'January' ||
+      months[monthIndex-1] === 'March' ||
+      months[monthIndex-1] === 'May' ||
+      months[monthIndex-1] === 'July' ||
+      months[monthIndex-1] === 'August' ||
+      months[monthIndex-1] === 'October' ||
+      months[monthIndex-1] === 'December'
+    ) {
       days = 31;
-    } else if(months[monthIndex] === 'April' || months[monthIndex] === 'June' || months[monthIndex] === 'September' || months[monthIndex] === 'November') {
+    } else if(
+        months[monthIndex-1] === 'April' ||
+        months[monthIndex-1] === 'June' ||
+        months[monthIndex-1] === 'September' ||
+        months[monthIndex-1] === 'November'
+      ) {
       days = 30;
     } else {
     // If month is February, calculate whether it is a leap year or not
-    const isLeap = new Date(selectedYear, 1, 29).getMonth() === 1;
+    const isLeap = new Date(Number(selectedYear), 1, 29).getMonth() === 1;
     isLeap ? days = 29 : days = 28;
     }
     
     const daysOptions = range(1, days + 1).map( d => ({value:d, label:d}));
-    daysOptions.unshift({label:'Select', value:-1});
     return daysOptions;
   }
 
@@ -90,22 +103,20 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
     'November',
     'December'
   ];
-  const monthOptions = months.map((m, i) => ({value:i, label:m}));
-  monthOptions.unshift({label:'Select', value:-1});
+  const monthOptions = months.map((m, i) => ({value:i+1, label:m}));
 
     // Flip years range around for past date selection
   const yearRange = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
   const yearOptions =  (props.alias.toLowerCase() === 'past') ?
   yearRange.reverse() : yearRange
-  yearOptions.unshift({label:'Select', value:-1});
 
-  const day = initValue ? initValue.getDate() : -1;
-  const month = initValue ? initValue.getMonth() : -1;
-  const year = initValue ? initValue.getFullYear() : -1;
+  const day = initValue ? initValue.getDate() : "";
+  const month = initValue ? initValue.getMonth() + 1 : "";
+  const year = initValue ? initValue.getFullYear() : "";
 
-  const [selectedDay, setSelectedDay] = React.useState<number>(day)
-  const [selectedMonth, setSelectedMonth] = React.useState<number>(month)
-  const [selectedYear, setSelectedYear] = React.useState<number>(year)
+  const [selectedDay, setSelectedDay] = React.useState<number|string>(day)
+  const [selectedMonth, setSelectedMonth] = React.useState<number|string>(month)
+  const [selectedYear, setSelectedYear] = React.useState<number|string>(year)
   const [dayOptions, setDayOptions] = React.useState(populateDays(month))
 
   React.useEffect(() => {
@@ -113,18 +124,18 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
     setDayOptions(dayOptions)
     // check is selectedDay is outside max day range of selectedMonth
     // if so, adjust down to nearest valid date
-    const numOfDays = dayOptions.length - 1;
+    const numOfDays = dayOptions.length;
     if(selectedDay && selectedDay > numOfDays) {
       setSelectedDay(numOfDays)
     }
   }, [selectedMonth, selectedYear])
 
   React.useEffect(() => {
-    if (selectedDay === -1 || selectedMonth === -1 || selectedYear === -1) {
+    if (selectedDay === '' || selectedMonth === '' || selectedYear === '') {
       props.onChange('')
       return
     }
-    const monthIndex:number = selectedMonth+1
+    const monthIndex:number = Number(selectedMonth)
     const dateString = `${selectedYear}-${String(monthIndex).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`;
     props.onChange(dateString)
   }, [selectedDay, selectedMonth, selectedYear])
@@ -137,39 +148,42 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
             <span>
               <DropDown
                 options={dayOptions}
+                addDefault={true}
                 label='Day'
                 type='select-group'
                 error={props.error}
                 aria-label={`${label} Day`}
                 value={selectedDay}
                 required={required}
-                onChange={e => {setSelectedDay(parseInt( e.target.value, 10 ))}}
+                onChange={e => {setSelectedDay( e.target.value !== "" ? parseInt( e.target.value , 10 ) : "")}}
                 {...props.fieldProps}
               />
             </span>
             <span>
               <DropDown
                 options={monthOptions}
+                addDefault={true}
                 label='Month'
                 type='select-group'
                 error={props.error}
                 aria-label={`${label} Month`}
                 value={selectedMonth}
                 required={required}
-                onChange={e => {setSelectedMonth(parseInt( e.target.value, 10 ))}}
+                onChange={e => {setSelectedMonth( e.target.value !== "" ? parseInt( e.target.value, 10 ) : "")}}
                 {...props.fieldProps}
               />
             </span>
             <span>
               <DropDown
                 options={yearOptions}
+                addDefault={true}
                 label='Year'
                 type='select-group'
                 error={props.error}
                 aria-label={`${label} Year`}
                 value={selectedYear}
                 required={required}
-                onChange={e => {setSelectedYear(parseInt( e.target.value, 10 ))}}
+                onChange={e => {setSelectedYear( e.target.value !== "" ? parseInt( e.target.value, 10 ) : "")}}
                 {...props.fieldProps}
               />
             </span>

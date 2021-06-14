@@ -2,7 +2,16 @@
 import React from 'react'
 import axios from 'axios';
 import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
-import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
+import { 
+  createValidationSchema,
+  flattenFormValues,
+  extractFields,
+  validate,
+  computeConditionRule,
+  FormValuesProps,
+  ConditionProps,
+  focusFormField
+} from '../../utils/formUtils';
 import Postcode from "./Postcode"
 import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerDropdowns, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
@@ -28,12 +37,15 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(errRef.current)
+      //@see Postcode which has responsibility for handling it's own error messages
     }
   }, [isValidating, firstErrorKey])
 
   if (fieldValues.name === 'address') {
     return (
       <Postcode
+        firstErrorKey={firstErrorKey}
         formErrors={formProps.errors}
         values={formProps.values.address}
         touchedFields={formProps.touched}
@@ -383,6 +395,7 @@ const FormComponent = (props) => {
   React.useEffect(() => {
     if (sectionRef && sectionRef.current && hasMounted) {
       sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(sectionRef.current)
     }
   }, [currentStep, renderPaymentStep])
 
@@ -663,19 +676,21 @@ const FormComponent = (props) => {
                         type="button"
                         disabled={formProps.isSubmitting}
                         onClick={async () => {
+                          setFirstErrorKey(null);
                           setIsValidating(true)
-                          if (["submit", "payment"].includes(buttonData.action)) {
-                            await formProps.submitForm()
-                          } else {
-                            const formErrors = await formProps.validateForm()
-                            if (Object.keys(formErrors).length > 0) {
-                              Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
+                          const formErrors = await formProps.validateForm()
+                          if (Object.keys(formErrors).length > 0) {
+                            Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
 
-                              setFirstErrorKey(Object.keys(formErrors)[0])
+                            setFirstErrorKey(Object.keys(formErrors)[0])
+                          } else {
+                            if (["submit", "payment"].includes(buttonData.action)) {
+                              await formProps.submitForm()
                             } else {
                               setCurrentStep(currentStep + 1)
                             }
                           }
+                          
                           setIsValidating(false)
                         }}
                       >
