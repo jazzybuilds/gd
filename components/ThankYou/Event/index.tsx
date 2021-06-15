@@ -90,9 +90,9 @@ const ThankYou = (props) => {
 
   if (event.date) {
     // TODO - pass dates around consistently as ISO timestamps
-    const formatStr = event.date && event.date.indexOf('/') > -1 ? "dd/MM/yyyy h:mm a" : "yyyy-MM-dd h:mm:ss a"
-    startsAt = parse(`${event.date} ${event.time}`, formatStr, new Date())
-    endsAt = parse(`${event.date} ${event.time}`, formatStr, new Date())
+    const formatStr = event.date && event.date.indexOf('/') > -1 ? "dd/MM/yyyy h:mm a" : "yyyy-MM-dd"
+    startsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
+    endsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
   }
 
   const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
