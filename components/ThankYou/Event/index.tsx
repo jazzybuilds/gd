@@ -85,18 +85,18 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
-  let startsAt = new Date()
-  let endsAt = new Date()
+  let startsAtStr = ''
+  let endsAtStr = ''
 
+  // @see useEffect() setEvent state
   if (event.date) {
-    // TODO - pass dates around consistently as ISO timestamps
-    const formatStr = event.date && event.date.indexOf('/') > -1 ? "dd/MM/yyyy h:mm a" : "yyyy-MM-dd"
-    startsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
-    endsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
+    const formatStr = event.time ? "dd/MM/yyyy h:mm a" : "dd/MM/yyyy"
+    const startsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
+    const endsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
+    startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
+    endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
   }
 
-  const startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
-  const endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
 
   return (
     <Root className="component">
