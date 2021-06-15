@@ -84,8 +84,11 @@ const ThankYou = (props) => {
   }
 
   // @see useEffect() setEvent state
-  let startsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
-  let endsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
+  const startsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
+  const endsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
+
+  const startsAtDateStr = event.date ? format(event.date, "dd/MM/yyyy") : ''
+  const startsAtTimeStr = event.date ? format(event.date, "h:mm a") : ''
 
   return (
     <Root className="component">
@@ -100,14 +103,14 @@ const ThankYou = (props) => {
         {event.challenge && <ListText>Challenge: {event.challenge}</ListText>}
         {event.location && !event.challenge && <ListText>Where: {event.location}</ListText>}
         
-        {event.date && <ListText>Date: {event.date}</ListText>}
-        {event.time && <ListText gutter={true}>Time: {event.time}</ListText>}
+        {startsAtDateStr && <ListText>Date: {startsAtDateStr}</ListText>}
+        {startsAtTimeStr && <ListText gutter={true}>Time: {startsAtTimeStr}</ListText>}
 
         {user.reference &&
           <ListText>Payment reference: {user.reference}</ListText>
         }
       </div>
-      {event.date && event.date &&
+      {startsAtStr && endsAtStr &&
         <Calendar>
           <AddToCalendar
             children="Add to my calendar"
