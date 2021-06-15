@@ -467,6 +467,8 @@ const FormComponent = (props) => {
   }
 
   const validatePage = async (values) => {
+    const isUK = values['address'].country === 'United Kingdom'
+
     const currentFormValues = formattedFields.slice(0, currentStep).reduce((fields, field) => {
       return [
         ...fields,
@@ -475,7 +477,7 @@ const FormComponent = (props) => {
     }, [])
 
     const formattedFormValues = flattenFormValues(currentFormValues)
-    const schema = createValidationSchema({ fields: formattedFormValues, hardcodedAddress: true })
+    const schema = createValidationSchema({ fields: formattedFormValues, hardcodedAddress: true, isUK })
 
     const validateValues = await validate({ schema, values, fields: formattedFormValues })
 
