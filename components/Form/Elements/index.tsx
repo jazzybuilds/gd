@@ -45,7 +45,6 @@ export const Radio = ({ label, ...props }) => {
 
 export const DatePickerDropdowns = ({ label, required, ...props }) => {
 
-  const now = new Date()
   let initValue: Date = props.initValue ? new Date(props.initValue) : null;
 
   const defaultMinDate = new Date();
@@ -55,9 +54,31 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
   defaultMaxDate.setFullYear(defaultMaxDate.getFullYear() + 51)
 
   let minDate: Date = props.min ? new Date(props.min) : defaultMinDate;
-  let maxDate: Date = props.max ? new Date(props.max) : now;
+  let maxDate: Date = props.max ? new Date(props.max) : new Date();
 
-  const populateDays = (monthIndex) => {
+  const isFutureDatePicker = Boolean(props.alias.toLowerCase() === 'future')
+
+  const now = new Date()
+  const nowDay = now.getDate()
+  const nowMonth = now.getMonth()
+  const nowYear = now.getFullYear()
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+
+  const populateDays = (monthIndex:any, nowDay:number, nowMonth:number, nowYear:number, disablePastDates:boolean = false) => {
     // Create variable to hold new number of days to inject
     let days;
     // 31 or 30 days?
@@ -85,27 +106,20 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
     isLeap ? days = 29 : days = 28;
     }
     
-    const daysOptions = range(1, days + 1).map( d => ({value:d, label:d}));
+    const daysOptions = range(1, days + 1).map((d, i) => ({
+      value:d,
+      label:d,
+      disabled: (disablePastDates && nowYear === selectedYear && (nowMonth === monthIndex-1) && i < nowDay-1)
+    }));
     return daysOptions;
   }
 
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
-  const monthOptions = months.map((m, i) => ({value:i+1, label:m}));
+  const populateMonths = (nowMonth:number, nowYear:number, disablePastDates:boolean) => {
+    const monthOptions = months.map((m, i) => ({value:i+1, label:m, disabled: (disablePastDates && nowYear === selectedYear && i < nowMonth)}));
+    return monthOptions
+  }
 
-    // Flip years range around for past date selection
+  // Flip years range around for past date selection
   const yearRange = range(minDate.getFullYear(), maxDate.getFullYear()+1).map( y => ({value:y, label:y}))
   const yearOptions =  (props.alias.toLowerCase() === 'past') ?
   yearRange.reverse() : yearRange
@@ -117,16 +131,27 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
   const [selectedDay, setSelectedDay] = React.useState<number|string>(day)
   const [selectedMonth, setSelectedMonth] = React.useState<number|string>(month)
   const [selectedYear, setSelectedYear] = React.useState<number|string>(year)
-  const [dayOptions, setDayOptions] = React.useState(populateDays(month))
+  const [dayOptions, setDayOptions] = React.useState(populateDays(month, nowDay, nowMonth, nowYear, isFutureDatePicker))
+  const [monthOptions, setMonthOptions] = React.useState(populateMonths(nowMonth, nowYear, isFutureDatePicker))
 
   React.useEffect(() => {
-    const dayOptions = populateDays(selectedMonth)
+
+    setMonthOptions(populateMonths(nowMonth, nowYear, isFutureDatePicker))
+    const dayOptions = populateDays(selectedMonth, nowDay, nowMonth, nowYear, isFutureDatePicker)
     setDayOptions(dayOptions)
     // check is selectedDay is outside max day range of selectedMonth
     // if so, adjust down to nearest valid date
     const numOfDays = dayOptions.length;
     if(selectedDay && selectedDay > numOfDays) {
       setSelectedDay(numOfDays)
+    }
+
+    if (isFutureDatePicker && selectedYear === nowYear && selectedMonth === nowMonth+1 && selectedDay < nowDay) {
+      setSelectedDay('')
+    }
+
+    if (isFutureDatePicker && selectedYear === nowYear && selectedMonth < nowMonth+1) {
+      setSelectedMonth('')
     }
   }, [selectedMonth, selectedYear])
 
@@ -196,7 +221,7 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
 
 interface DropDownProps extends FieldProps{
   rows?: number
-  options: {value: string, label: string}[]
+  options: {value: string, label: string, disabled?: boolean}[]
   addDefault?: boolean
 }
 
@@ -215,7 +240,7 @@ export const DropDown = ({ label, options, addDefault, type, rows, required, err
     >
       {addDefault && <option value="" disabled={true}>Please select...</option>}
       {options.map(option => (
-        <option key={option.value} value={option.value} >{option.label}</option>
+        <option key={option.value} value={option.value} disabled={option.disabled} >{option.label}</option>
       ))}
     </StyledDropdown>
   </React.Fragment>
