@@ -12,6 +12,10 @@ export const ListText = styled.h4<{gutter: boolean}>`
 
 export const SummaryText = styled.div`
   margin-bottom: 26px;
+  
+  strong {
+    overflow-wrap: break-word;
+  }
 `
 
 export const Calendar = styled.div<{open: boolean}>`
