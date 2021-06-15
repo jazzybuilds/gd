@@ -108,7 +108,8 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     ...rest,
     helptext,
     className,
-    'aria-describedby': `${rest.name}-error`,
+    'aria-label' : rest.label,
+    'aria-describedby': hasError ? `${rest.name} ${rest.name}-error` : rest.name,
     'aria-required': validation.required,
     required: validation.required,
     value: formProps.values[rest.name],
@@ -499,6 +500,7 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
     const challenge = aliasFields.find(value => value.alias === "challenge")
+    const dateOfChallenge = aliasFields.find(value => value.itemName === "DateOfChallenge")
 
     sessionStorage.removeItem(pageId);
     sessionStorage.setItem(pageId, JSON.stringify({
@@ -506,8 +508,10 @@ const FormComponent = (props) => {
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
+      [FormStorageNames.DateOfChallenge]: dateOfChallenge ? values[dateOfChallenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
+
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
       window.location.href = button.redirectURL
