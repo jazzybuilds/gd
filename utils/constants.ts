@@ -3,6 +3,7 @@ export enum FormStorageNames {
   Lastname = 'lastname',
   Email = 'email',
   Challenge = 'challenge',
+  EventDate = 'date',
   PaymentReference = 'payment-reference'
 }
 

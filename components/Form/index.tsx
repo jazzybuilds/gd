@@ -499,6 +499,7 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
     const challenge = aliasFields.find(value => value.alias === "challenge")
+    const date = aliasFields.find(value => value.alias === "date")
 
     sessionStorage.removeItem(pageId);
     sessionStorage.setItem(pageId, JSON.stringify({
@@ -506,6 +507,7 @@ const FormComponent = (props) => {
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
+      [FormStorageNames.EventDate]: values[date.id],
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
     const button = allFormValues.find(formValue => formValue.redirectURL)
