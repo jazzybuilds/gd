@@ -51,21 +51,24 @@ const ThankYou = (props) => {
         let eventDate = fields["event page"]["event date"]
         // 'Own Events' challenge dates are not returned by backend
         // see if there's a date in sessionStorage as fallback
+        // these dates don't have a time element
         if (!eventDate) {
           eventDate = storageData[FormStorageNames.DateOfChallenge]
         }
         console.log('------- eventDate ---------')
         console.log(eventDate)
         // TODO - pass dates around consistently as ISO timestamps
-        const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
+        const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd"
         const parsedDate = eventDate ? parse(eventDate, formatStr, new Date()) : null
+        console.log('------- parsedDate ---------')
+        console.log(parsedDate)
         setEvent({
           title: fields["calendar title"],
           description: "",
           location: fields["event page"]["location"],
           challenge: storageData[FormStorageNames.Challenge],
           date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
-          time: parsedDate ? format(parsedDate, "h:mm a") : ""
+          time: eventDate && eventDate.indexOf('/') > -1 ? format(parsedDate, "h:mm a") : ""
         })
       }
     } else {
