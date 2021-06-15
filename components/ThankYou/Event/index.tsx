@@ -16,7 +16,8 @@ interface EventProps {
   description: string
   location: string
   challenge: string
-  date: Date
+  dateTime: Date | null
+  date: Date | null
 }
 
 const ThankYou = (props) => {
@@ -54,18 +55,24 @@ const ThankYou = (props) => {
         if (!eventDate) {
           eventDate = storageData[FormStorageNames.DateOfChallenge]
         }
-        console.log('------- eventDate ---------')
-        console.log(eventDate)
+
+        let parsedDate = null
+        let parsedDateTime = null
         // TODO - pass dates around consistently as ISO timestamps
-        const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd"
-        const parsedDate = eventDate ? parse(eventDate, formatStr, new Date()) : null
-        console.log('------- parsedDate ---------')
-        console.log(parsedDate)
+        if (eventDate) {
+          if (eventDate.indexOf('/') > -1) {
+            parsedDateTime = eventDate ? parse(eventDate, "MM/dd/yyyy h:mm:ss a", new Date()) : null
+            parsedDate = parsedDateTime
+          } else {
+            parsedDate = eventDate ? parse(eventDate, "yyyy-MM-dd", new Date()) : null
+          }
+        }
         setEvent({
           title: fields["calendar title"],
           description: "",
           location: fields["event page"]["location"],
           challenge: storageData[FormStorageNames.Challenge],
+          dateTime: parsedDateTime,
           date: parsedDate
         })
       }
@@ -83,12 +90,22 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
+  let startsAtStr = ''
+  let endsAtStr = ''
+  let startsAtDateStr = ''
+  let startsAtTimeStr = ''
   // @see useEffect() setEvent state
-  const startsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
-  const endsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
+  if (event.dateTime) {
+    startsAtStr = format(event.dateTime, "yyyy-MM-dd'T'HH:mm")
+    endsAtStr = format(event.dateTime, "yyyy-MM-dd'T'HH:mm")
+    startsAtDateStr = format(event.dateTime, "dd/MM/yyyy")
+    startsAtTimeStr = format(event.dateTime, "h:mm a")
+  } else if (event.date) {
+    startsAtStr = format(event.date, "yyyy-MM-dd")
+    endsAtStr = format(event.date, "yyyy-MM-dd")
+    startsAtDateStr = format(event.date, "dd/MM/yyyy")
+  }
 
-  const startsAtDateStr = event.date ? format(event.date, "dd/MM/yyyy") : ''
-  const startsAtTimeStr = event.date ? format(event.date, "h:mm a") : ''
 
   return (
     <Root className="component">
