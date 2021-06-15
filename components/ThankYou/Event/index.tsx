@@ -54,6 +54,8 @@ const ThankYou = (props) => {
         if (!eventDate) {
           eventDate = storageData[FormStorageNames.DateOfChallenge]
         }
+        console.log('------- eventDate ---------')
+        console.log(eventDate)
         // TODO - pass dates around consistently as ISO timestamps
         const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
         const parsedDate = eventDate ? parse(eventDate, formatStr, new Date()) : null
