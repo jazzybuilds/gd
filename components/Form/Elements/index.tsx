@@ -153,6 +153,7 @@ export const DatePickerDropdowns = ({ label, required, ...props }) => {
                 type='select-group'
                 error={props.error}
                 aria-label={`${label} Day`}
+                aria-describedby={props['aria-describedby']}
                 value={selectedDay}
                 required={required}
                 onChange={e => {setSelectedDay( e.target.value !== "" ? parseInt( e.target.value , 10 ) : "")}}
