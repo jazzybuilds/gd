@@ -516,6 +516,7 @@ const FormComponent = (props) => {
       [FormStorageNames.EventDate]: '',
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
+    /*
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
       window.location.href = button.redirectURL
@@ -523,6 +524,7 @@ const FormComponent = (props) => {
       
       window.location.href = window.location.href + "thank-you"
     }
+    */
   }
 
 
