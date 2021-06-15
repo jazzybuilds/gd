@@ -16,8 +16,7 @@ interface EventProps {
   description: string
   location: string
   challenge: string
-  date: string
-  time: string
+  date: Date
 }
 
 const ThankYou = (props) => {
@@ -67,8 +66,7 @@ const ThankYou = (props) => {
           description: "",
           location: fields["event page"]["location"],
           challenge: storageData[FormStorageNames.Challenge],
-          date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
-          time: eventDate && eventDate.indexOf('/') > -1 ? format(parsedDate, "h:mm a") : ""
+          date: parsedDate
         })
       }
     } else {
@@ -85,18 +83,9 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
-  let startsAtStr = ''
-  let endsAtStr = ''
-
   // @see useEffect() setEvent state
-  if (event.date) {
-    const formatStr = event.time ? "dd/MM/yyyy h:mm a" : "dd/MM/yyyy"
-    const startsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
-    const endsAt = parse(event.time ? `${event.date} ${event.time}` : event.date, formatStr, new Date())
-    startsAtStr = format(startsAt, "yyyy-MM-dd'T'HH:mm")
-    endsAtStr = format(endsAt, "yyyy-MM-dd'T'HH:mm")
-  }
-
+  let startsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
+  let endsAtStr = event.date ? format(event.date, "yyyy-MM-dd'T'HH:mm") : ''
 
   return (
     <Root className="component">
