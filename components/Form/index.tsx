@@ -500,12 +500,7 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
     const challenge = aliasFields.find(value => value.alias === "challenge")
-    console.log('-------- allFormValues --------')
-    console.log(allFormValues)
-    console.log('--------  aliasFields  --------')
-    console.log(aliasFields)
-    console.log('--------    values     --------')
-    console.log(values)
+    const dateOfChallenge = aliasFields.find(value => value.itemName === "DateOfChallenge")
 
     sessionStorage.removeItem(pageId);
     sessionStorage.setItem(pageId, JSON.stringify({
@@ -513,10 +508,10 @@ const FormComponent = (props) => {
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
-      [FormStorageNames.EventDate]: '',
+      [FormStorageNames.DateOfChallenge]: dateOfChallenge ? values[dateOfChallenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
-    /*
+
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
       window.location.href = button.redirectURL
@@ -524,7 +519,6 @@ const FormComponent = (props) => {
       
       window.location.href = window.location.href + "thank-you"
     }
-    */
   }
 
 

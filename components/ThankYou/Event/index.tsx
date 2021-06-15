@@ -48,8 +48,13 @@ const ThankYou = (props) => {
           reference: storageData[FormStorageNames.PaymentReference]
         })
 
+        let eventDate = fields["event page"]["event date"]
+        // 'Own Events' challenge dates are not returned by backend
+        // see if there's a date in sessionStorage as fallback
+        if (!eventDate) {
+          eventDate = storageData[FormStorageNames.DateOfChallenge]
+        }
         // TODO - pass dates around consistently as ISO timestamps
-        const eventDate = fields["event page"]["event date"]
         const formatStr = eventDate && eventDate.indexOf('/') > -1 ? "MM/dd/yyyy h:mm:ss a" : "yyyy-MM-dd h:mm:ss a"
         const parsedDate = eventDate ? parse(eventDate, formatStr, new Date()) : null
         setEvent({
