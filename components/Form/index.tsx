@@ -108,8 +108,6 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     ...rest,
     helptext,
     className,
-    'aria-label' : rest.label,
-    'aria-describedby': hasError ? `${rest.name} ${rest.name}-error` : rest.name,
     'aria-required': validation.required,
     required: validation.required,
     value: formProps.values[rest.name],
@@ -120,9 +118,12 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     },
   }
 
-  if (hasError) {
-    fieldProps["aria-invalid"] = "true"
-  }
+  if (hasError) fieldProps["aria-invalid"] = "true"
+
+  // if there is no error, set the aria-label to label value
+  if (!hasError) fieldProps['aria-label'] = rest.label
+  // if there is an error, include the error id along with  the field label in the aria-describedby
+  fieldProps['aria-describedby'] = hasError ? `${rest.name} ${rest.name}-error` : rest.name
 
   if (fieldProps.type === 'date') {
     fieldProps.max = validation.max
