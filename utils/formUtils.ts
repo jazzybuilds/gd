@@ -123,7 +123,7 @@ function formatFieldProps(item: any): FormValuesProps {
   }
 
   if (["text", "rawhtml", "sectionheader"].includes(componentType)) {
-    const ariaLabelAttr = ["sectionheader"].includes(componentType) ? `aria-label:${item.Text}` : '';
+    const ariaLabelAttr = ["sectionheader"].includes(componentType) ? `aria-label:"${item.Text}"` : '';
     const htmlElement = componentType === "rawhtml" ? `${item.Html}` : `<${item.HtmlTag} ${ariaLabelAttr}>${item.Text}</${item.HtmlTag}>`
     return {
       name: "html",
