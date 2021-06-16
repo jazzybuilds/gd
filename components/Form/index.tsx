@@ -119,11 +119,10 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   }
 
   if (hasError) fieldProps["aria-invalid"] = "true"
+
   // if there is no error, set the aria-label to label value
-  // TODO some platforms may need the aria-label set irrespective of error
-  // This is a test to try and avoid the field label being read out twice on iOS
   if (!hasError) fieldProps['aria-label'] = rest.label
-  // if there is an error, include the error id in the aria-describedby
+  // if there is an error, include the error id along with  the field label in the aria-describedby
   fieldProps['aria-describedby'] = hasError ? `${rest.name} ${rest.name}-error` : rest.name
 
   if (fieldProps.type === 'date') {
