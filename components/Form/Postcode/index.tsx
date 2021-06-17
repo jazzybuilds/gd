@@ -450,11 +450,6 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
         } 
     }
 
-    console.log('------ erroringFieldRef -------')
-    console.log(erroringFieldRef)
-    console.log('------ erroringFieldRef -------')
-    console.log(`ispostcodeLookupDropdownRef: ${erroringFieldRef === postcodeLookupDropdownRef}`)
-
     if (erroringFieldRef && erroringFieldRef.current != null) {
       erroringFieldRef.current.scrollIntoView({ behavior: 'smooth' })
       focusFormField(erroringFieldRef.current, erroringFieldRef === postcodeLookupInputRef ? 'input' : null)

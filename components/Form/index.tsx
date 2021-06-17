@@ -108,7 +108,6 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     ...rest,
     helptext,
     className,
-    'aria-describedby': `${rest.name}-error`,
     'aria-required': validation.required,
     required: validation.required,
     value: formProps.values[rest.name],
@@ -119,9 +118,12 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     },
   }
 
-  if (hasError) {
-    fieldProps["aria-invalid"] = "true"
-  }
+  if (hasError) fieldProps["aria-invalid"] = "true"
+
+  // if there is no error, set the aria-label to label value
+  if (!hasError) fieldProps['aria-label'] = rest.label
+  // if there is an error, include the error id along with  the field label in the aria-describedby
+  fieldProps['aria-describedby'] = hasError ? `${rest.name} ${rest.name}-error` : rest.name
 
   if (fieldProps.type === 'date') {
     fieldProps.max = validation.max
@@ -501,13 +503,15 @@ const FormComponent = (props) => {
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
     const challenge = aliasFields.find(value => value.alias === "challenge")
+    const dateOfChallenge = aliasFields.find(value => value.itemName === "DateOfChallenge")
 
-    localStorage.removeItem(pageId);
-    localStorage.setItem(pageId, JSON.stringify({
+    sessionStorage.removeItem(pageId);
+    sessionStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
+      [FormStorageNames.DateOfChallenge]: dateOfChallenge ? values[dateOfChallenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 
@@ -515,6 +519,7 @@ const FormComponent = (props) => {
     if (button) {
       window.location.href = button.redirectURL
     } else {
+      
       window.location.href = window.location.href + "thank-you"
     }
   }
