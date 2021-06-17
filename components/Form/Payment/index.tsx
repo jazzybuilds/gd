@@ -55,11 +55,27 @@ interface makeStripePaymentProps extends Omit<UpdateReferenceProps, "PaymentMeth
 
 const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${formatPrice(amount)}`)}`
 
+const formatAmount = (amount) => {
+  console.log('amount', amount)
+  
+  const penceToPounds = amount / 100
+  const amountToArray = penceToPounds.toString().split('.')
+  
+  const pounds =  amountToArray[0]
+  const pence =  amountToArray[1]
+  
+  const formatedPence = pence && pence.length < 2 ? pence + 0 : pence
+  const formatedAmount = pence ? `${pounds}.${formatedPence}` : pounds
+  
+  return formatedAmount;
+}
+
 const updateFormSubmission = async (props: UpdateReferenceProps) => {
+  const formatedAmount = formatAmount(props.amount)
   try {
     const { data } = await axios.post("/api-fe/formUpdate", {
       ...props,
-      amount: props.amount / 100
+      amount: formatedAmount
     })
     return data
   } catch (error) {

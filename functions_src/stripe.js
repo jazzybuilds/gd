@@ -1,6 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 exports.handler = async function (event, context) {
+  console.log('stripe |||||||||||||||||', event)
   const payload = JSON.parse(event.body)
 
   if (!payload.amount || !payload.referenceNumber) {
