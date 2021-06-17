@@ -301,7 +301,7 @@ const ManualAddress = (props: ManualAddressProps) => {
   const errorAddress1 = props.touched?.address?.addressline1 ? props.errors['address.addressline1'] : false
   const errorTown = props.touched?.address?.town ? props.errors['address.town'] : false
   const errorCountry = props.touched?.address?.country ? props.errors['address.country'] : false
-  const errorPostcode = props.touched?.address?.postcode && !isUK ? props.errors['address.postcode'] : false
+  const errorPostcode = props.touched?.address?.postcode && isUK ? props.errors['address.postcode'] : false
 
   const changeCountry  = (e) => {
     setSelectedCountry(e.target.value)
