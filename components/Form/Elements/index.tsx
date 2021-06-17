@@ -225,7 +225,9 @@ interface DropDownProps extends FieldProps{
   addDefault?: boolean
 }
 
-export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => !props.disabled && (
+export const DropDown = ({ label, options, addDefault, type, rows, required, error, ...props }: DropDownProps) => {
+  
+  return !props.disabled && (
   <React.Fragment>
     <Label name={props.name} label={label} required={required} />
     <StyledDropdown 
@@ -238,13 +240,20 @@ export const DropDown = ({ label, options, addDefault, type, rows, required, err
       {...props}
       size={rows}
     >
-      {addDefault && <option value="" disabled={true}>Please select...</option>}
+      {addDefault && <option value="" disabled={true} onChange={props.onChange}>Please select...</option>}
       {options.map(option => (
-        <option key={option.value} value={option.value} disabled={option.disabled} >{option.label}</option>
+        <option
+          key={option.value}
+          value={option.value}
+          onChange={props.onChange}
+          disabled={option.disabled}
+        >
+          {option.label}
+        </option>
       ))}
     </StyledDropdown>
   </React.Fragment>
-)
+)}
 
 export const Input = ({ required, helptext, type, error, label, ...props }: FieldProps) => {
   return !props.disabled && (

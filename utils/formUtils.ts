@@ -255,7 +255,7 @@ const createYupSchema = (schema, config) => {
   return schema;
 }
 
-export const createValidationSchema = ({ fields, hardcodedAddress }) => {
+export const createValidationSchema = ({ fields, hardcodedAddress, isUK }) => {
   const schema = fields.filter(field => !field.isHTML && !["address", "hidden"].includes(field.type)).map(field => {
     const item = {
       id: field.name,
@@ -367,13 +367,22 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
   const defaultValidation: any = {}
 
   const addressField = fields.find(field => field.name === "address")
-  if (hardcodedAddress && addressField && !addressField.disabled) {
+  if (hardcodedAddress && addressField && !addressField.disabled && isUK) {
     defaultValidation.address = Yup.object({
       addressline1: Yup.string().required().label("address line 1"),
       town: Yup.string().required().label("Town/City"),
       country: Yup.string().required().label("country"),
       postcode: Yup.string().required().label("postcode"),
     })
+    console.log('defaultValidation', defaultValidation)
+  } else if(hardcodedAddress && addressField && !addressField.disabled){
+    defaultValidation.address = Yup.object({
+      addressline1: Yup.string().required().label("address line 1"),
+      town: Yup.string().required().label("Town/City"),
+      country: Yup.string().required().label("country"),
+      postcode: Yup.string().label("postcode"),
+    })
+    console.log('defaultValidation', defaultValidation)
   }
 
   return Yup.object().shape(schema.reduce(createYupSchema, defaultValidation))

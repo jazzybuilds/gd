@@ -8,6 +8,8 @@ const {
 } = require('./formUtils');
 
 exports.handler = async function (event, context) {
+  const isUK = values['address'].country === 'United Kingdom'
+
   const payload = JSON.parse(event.body)
   if (!payload.formId) {
     return {
@@ -52,7 +54,7 @@ exports.handler = async function (event, context) {
     })
   })
 
-  const schema = createValidationSchema({fields: formFields, hardcodedAddress: false })
+  const schema = createValidationSchema({fields: formFields, hardcodedAddress: false, isUK})
   const validation = await validate({ schema, values: payload, fields: formFields })
 
   if (!validation || Object.keys(validation).length > 0) {
