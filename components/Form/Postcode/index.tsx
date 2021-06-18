@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { DropDown } from '../Elements/index';
 import { focusFormField } from '../../../utils/formUtils';
 import { StyledDropdown, StyledInput, InlineStyledInput, InlineWrapper } from '../Form.styles';
 import { InlineStyledButton } from '../Form.styles';
@@ -293,11 +294,19 @@ interface ManualAddressProps {
 }
 
 const ManualAddress = (props: ManualAddressProps) => {
-  
+  const [selectedCountry, setSelectedCountry] = React.useState<string>('United Kingdom');
+  const isUK = selectedCountry === 'United Kingdom';
+  const postCodeLabel = !isUK ? 'Postcode' : 'Postcode *'
+    
   const errorAddress1 = props.touched?.address?.addressline1 ? props.errors['address.addressline1'] : false
   const errorTown = props.touched?.address?.town ? props.errors['address.town'] : false
   const errorCountry = props.touched?.address?.country ? props.errors['address.country'] : false
-  const errorPostcode = props.touched?.address?.postcode ? props.errors['address.postcode'] : false
+  const errorPostcode = props.touched?.address?.postcode && isUK ? props.errors['address.postcode'] : false
+
+  const changeCountry  = (e) => {
+    setSelectedCountry(e.target.value)
+    props.onChange(e)
+  }
 
   return (
     <div className="postcode-lookup-step-3">
@@ -359,35 +368,34 @@ const ManualAddress = (props: ManualAddressProps) => {
         onChange={props.onChange}
       />
 
-      <label htmlFor="address.country" aria-required={true}>Country *</label>
-      <StyledDropdown
+      <DropDown
+        label='Country'
         name="address.country"
-        id="address.country"
+        value={selectedCountry}
+        options={countries}
+        rows={0}
+        required={isUK}
         error={errorCountry}
-        ref={props.countryRef}
-        value={props.values.country}
-        autoComplete="country-name"
-      >
-        <option label="Please select..." value="">Please select...</option>
-        {countries.map(country => (
-          <option value={country.value}>{country.label}</option>
-        ))}
-      </StyledDropdown>
+        onChange={(e) => changeCountry(e)}
+        onBlur={props.onBlur}
+        type=''
+      />
+      
       {props.touched?.address?.country &&<span className="field-validation-error">{props.errors['address.country']}</span>}
 
-      <label htmlFor="address.postcode" aria-required={true}>Postcode *</label>
+      <label htmlFor="address.postcode" aria-required={isUK}>{postCodeLabel}</label>
       <StyledInput
         name="address.postcode"
         id="address.postcode"
         type="text"
-        error={errorPostcode}
+        error={isUK && errorPostcode}
         ref={props.postcodeManualRef}
         value={props.values.postcode}
         autoComplete="postal-code"
         onBlur={props.onBlur}
         onChange={props.onChange}
       />
-      {props.touched?.address?.postcode &&<span className="field-validation-error">{props.errors['address.postcode']}</span>}
+      {isUK && props.touched?.address?.postcode &&<span className="field-validation-error">{props.errors['address.postcode']}</span>}
 
     </div>
   )
@@ -435,7 +443,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
             if (firstErrorKey === 'address.country') erroringFieldRef = countryRef
             break;
           case "address.postcode":
-            if (firstErrorKey === 'address.postcode') erroringFieldRef = postcodeManualRef
+            if (firstErrorKey === 'address.postcode' && values['country'] === 'United Kingdom') erroringFieldRef = postcodeManualRef
             break; 
           default:
             // code block
@@ -477,7 +485,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
             type="text"
             name="address"
             ref={postcodeLookupInputRef}
-            error={(postcodeEntered && postcodeRegex.test(postcodeEntered)) ? false : showError}
+            error={(postcodeEntered && postcodeRegex.test(postcodeEntered)) ? false : !manualEntry && showError}
             onBlur={onBlur}
             className={`${showError ? 'input-validation-error' : ''}`}
             aria-label="Postcode"
@@ -486,7 +494,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
             onChange={e => setPostcodeEntered(e.target.value)}
           />
 
-          {showError &&
+          {showError && !manualEntry &&
             <span id="PostcodeError" className="field-validation-error">
               Please enter a postcode and find your address.
             </span>
@@ -516,7 +524,7 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
         </div>
       }
 
-      {!manualEntry && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>Enter address manually</a></p>}
+      {!manualEntry && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>click here if you are a non-UK resident</a></p>}
       {manualEntry && 
         <ManualAddress
           touched={touchedFields}
