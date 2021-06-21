@@ -45,5 +45,6 @@ public/_redirects
 
 .temp
 .debug.log
+.toml
 
 storybook-static
