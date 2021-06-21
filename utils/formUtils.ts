@@ -122,8 +122,10 @@ function formatFieldProps(item: any): FormValuesProps {
     }
   }
 
-  if (["text", "rawhtml"].includes(componentType)) {
-    const htmlElement = componentType === "rawhtml" ? `${item.Html}` : `<${item.HtmlTag}>${item.Text}</${item.HtmlTag}>`
+  if (["text", "rawhtml", "sectionheader"].includes(componentType)) {
+    const ariaLabelAttr = ["sectionheader"].includes(componentType) ? 
+    item.arialabel ? `aria-label:"${item.arialabel}"` : `aria-label:"${item.Text}"` : '';
+    const htmlElement = componentType === "rawhtml" ? `${item.Html}` : `<${item.HtmlTag} ${ariaLabelAttr}>${item.Text}</${item.HtmlTag}>`
     return {
       name: "html",
       type: "html",
@@ -253,7 +255,7 @@ const createYupSchema = (schema, config) => {
   return schema;
 }
 
-export const createValidationSchema = ({ fields, hardcodedAddress }) => {
+export const createValidationSchema = ({ fields, hardcodedAddress, isUK }) => {
   const schema = fields.filter(field => !field.isHTML && !["address", "hidden"].includes(field.type)).map(field => {
     const item = {
       id: field.name,
@@ -320,14 +322,14 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
         })
       }
 
-      if (field.validation?.min) {
+      if (field.type !== "date" && field.validation?.min) {
         item.validations.push({
           type: "min",
           params: [field.validation.min, `${label} is too short`]
         })
       }
 
-      if (field.validation?.max) {
+      if (field.type !== "date" && field.validation?.max) {
         item.validations.push({
           type: "max",
           params: [field.validation.max, `${label} is too long`]
@@ -365,13 +367,22 @@ export const createValidationSchema = ({ fields, hardcodedAddress }) => {
   const defaultValidation: any = {}
 
   const addressField = fields.find(field => field.name === "address")
-  if (hardcodedAddress && addressField && !addressField.disabled) {
+  if (hardcodedAddress && addressField && !addressField.disabled && isUK) {
     defaultValidation.address = Yup.object({
       addressline1: Yup.string().required().label("address line 1"),
       town: Yup.string().required().label("Town/City"),
       country: Yup.string().required().label("country"),
       postcode: Yup.string().required().label("postcode"),
     })
+    console.log('defaultValidation', defaultValidation)
+  } else if(hardcodedAddress && addressField && !addressField.disabled){
+    defaultValidation.address = Yup.object({
+      addressline1: Yup.string().required().label("address line 1"),
+      town: Yup.string().required().label("Town/City"),
+      country: Yup.string().required().label("country"),
+      postcode: Yup.string().label("postcode"),
+    })
+    console.log('defaultValidation', defaultValidation)
   }
 
   return Yup.object().shape(schema.reduce(createYupSchema, defaultValidation))
@@ -441,4 +452,51 @@ export const computeConditionRule = ({ operator, match, value }) => {
     default:
       return false
   }
+}
+
+
+/**
+ * search through child elements of errRef,
+ * giving focus to the 1st 'focusable' element found (e.g. <input>, <select>....)
+ * @param div
+ * @param onlySearchForTagName - Only search for this element tag
+ */
+export const focusFormField = (element:HTMLElement, onlySearchForTagName?:string) => {
+
+  let focusableElement:HTMLElement | null = null;
+  let focusableElements:HTMLCollection | null = null;
+
+  // check if element is actually focusable
+  if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'BUTTON' || element.tagName === 'TEXTAREA' ) {
+    focusableElement = element;
+  } else {
+    if (onlySearchForTagName) {
+      focusableElements = element.getElementsByTagName(onlySearchForTagName);
+    } else {
+      // check for all focusable elements types
+      focusableElements = element.getElementsByTagName('input');
+      if (focusableElements.length < 1) {
+        focusableElements = element.getElementsByTagName('select');
+      }
+      if (focusableElements.length < 1) {
+        focusableElements = element.getElementsByTagName('button');
+      }
+      if (focusableElements.length < 1) {
+        focusableElements = element.getElementsByTagName('textarea');
+      }
+      
+    }
+
+    if (focusableElements.length > 0) {
+      focusableElement = (focusableElements[0] as HTMLElement);
+    }
+  }
+
+  if (!focusableElement) {
+    console.log('-------- No Focusable element found for ---------')
+    console.log(element)
+  } else {
+    focusableElement.focus();
+  }
+  
 }

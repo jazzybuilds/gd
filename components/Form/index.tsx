@@ -2,9 +2,18 @@
 import React from 'react'
 import axios from 'axios';
 import { Formik, Form, getIn, ErrorMessage, FormikProps, FormikValues } from 'formik';
-import { createValidationSchema, flattenFormValues, extractFields, validate, computeConditionRule, FormValuesProps, ConditionProps } from '../../utils/formUtils';
+import { 
+  createValidationSchema,
+  flattenFormValues,
+  extractFields,
+  validate,
+  computeConditionRule,
+  FormValuesProps,
+  ConditionProps,
+  focusFormField
+} from '../../utils/formUtils';
 import Postcode from "./Postcode"
-import { Radio, CheckBox, DropDown, Text, Label, Input, DatePicker, InputError } from './Elements';
+import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerDropdowns, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
@@ -28,12 +37,15 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
   React.useEffect(() => {
     if (hasError && errRef && errRef.current && firstErrorKey && firstErrorKey === fieldValues.name) {
       errRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(errRef.current)
+      //@see Postcode which has responsibility for handling it's own error messages
     }
   }, [isValidating, firstErrorKey])
 
   if (fieldValues.name === 'address') {
     return (
       <Postcode
+        firstErrorKey={firstErrorKey}
         formErrors={formProps.errors}
         values={formProps.values.address}
         touchedFields={formProps.touched}
@@ -96,7 +108,6 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     ...rest,
     helptext,
     className,
-    'aria-describedby': `${rest.name}-error`,
     'aria-required': validation.required,
     required: validation.required,
     value: formProps.values[rest.name],
@@ -107,9 +118,12 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     },
   }
 
-  if (hasError) {
-    fieldProps["aria-invalid"] = "true"
-  }
+  if (hasError) fieldProps["aria-invalid"] = "true"
+
+  // if there is no error, set the aria-label to label value
+  if (!hasError) fieldProps['aria-label'] = rest.label
+  // if there is an error, include the error id along with  the field label in the aria-describedby
+  fieldProps['aria-describedby'] = hasError ? `${rest.name} ${rest.name}-error` : rest.name
 
   if (fieldProps.type === 'date') {
     fieldProps.max = validation.max
@@ -154,7 +168,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     if (fieldType === 'radio list') {
-      return (
+      return !fieldProps.disabled && (
         <React.Fragment>
           <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} />
           <fieldset>
@@ -183,13 +197,57 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     if (fieldType === "date") {
+
+      const defaultMinDate = new Date();
+      defaultMinDate.setFullYear(defaultMinDate.getFullYear() - 120)
+      const defaultMaxDate = new Date();
+      defaultMaxDate.setFullYear(defaultMaxDate.getFullYear() + 51)
+
+      let minDate: Date = fieldProps.min ? new Date(fieldProps.min) : defaultMinDate;
+      let initDate: Date | null = fieldProps.value ? new Date(fieldProps.value) : null;
+      let maxDate: Date = fieldProps.max ? new Date(fieldProps.max) :defaultMaxDate;
+
+      if (fieldProps.alias.toLowerCase() === 'past') {
+        minDate = defaultMinDate;
+        maxDate = new Date();
+      } else if (fieldProps.alias.toLowerCase() === 'future') {
+        minDate = new Date();
+        maxDate = defaultMaxDate;
+      } 
+
+      let min = `${minDate.getFullYear()}-${String(minDate.getMonth()+1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`;
+      let initValue = initDate ? `${initDate.getFullYear()}-${String(initDate.getMonth()+1).padStart(2, '0')}-${String(initDate.getDate()).padStart(2, '0')}` : null;
+      let max = `${maxDate.getFullYear()}-${String(maxDate.getMonth()+1).padStart(2, '0')}-${String(maxDate.getDate()).padStart(2, '0')}`;
+      
+      /**
+      * @see https://guidedogs.atlassian.net/browse/GDID-4569
+      * Leaving code in should we ever revisit using the built-in Date Input
+      * 
+      // test whether a new date input falls back to a text input or not
+      const test = document.createElement('input');
+
+      try {
+        test.type = 'date';
+      } catch (e) {
+        console.log(e.description);
+      }
+      // if it does, run the code inside the if() {} block
+      if(test.type === 'date') {
+        return (
+          <Input {...fieldProps} type='date' min={min} max={max} error={hasError} />
+        )
+      }
+      */
       return (
-        <DatePicker
+        <DatePickerDropdowns 
           {...fieldProps}
-          value={fieldProps.value}
+          min={min}
+          max={max}
+          initValue={initValue}
           error={hasError}
-          onBlur={() => formProps.setFieldTouched(fieldValues.name)}
-          onChange={value => formProps.setFieldValue(fieldProps.name, value)} />
+          onChange={value => formProps.setFieldValue(fieldProps.name, value)}
+        />
+          
       )
     }
 
@@ -339,6 +397,7 @@ const FormComponent = (props) => {
   React.useEffect(() => {
     if (sectionRef && sectionRef.current && hasMounted) {
       sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(sectionRef.current)
     }
   }, [currentStep, renderPaymentStep])
 
@@ -373,11 +432,10 @@ const FormComponent = (props) => {
         })
       })
 
-
       if (ownPlaceField && capacityFull) {
         updatedFields = updateFormattedField(updatedFields, ownPlaceField.id, 'type', 'hidden')
       }
-
+      
       setFormattedFields(updatedFields)
       setHasMounted(true)
     }
@@ -411,6 +469,8 @@ const FormComponent = (props) => {
   }
 
   const validatePage = async (values) => {
+    const isUK = values['address'].country === 'United Kingdom'
+
     const currentFormValues = formattedFields.slice(0, currentStep).reduce((fields, field) => {
       return [
         ...fields,
@@ -419,7 +479,7 @@ const FormComponent = (props) => {
     }, [])
 
     const formattedFormValues = flattenFormValues(currentFormValues)
-    const schema = createValidationSchema({ fields: formattedFormValues, hardcodedAddress: true })
+    const schema = createValidationSchema({ fields: formattedFormValues, hardcodedAddress: true, isUK })
 
     const validateValues = await validate({ schema, values, fields: formattedFormValues })
 
@@ -442,12 +502,16 @@ const FormComponent = (props) => {
     const firstname = aliasFields.find(value => value.alias === "firstname")
     const lastname = aliasFields.find(value => value.alias === "lastname")
     const email = aliasFields.find(value => value.alias === "email")
+    const challenge = aliasFields.find(value => value.alias === "challenge")
+    const dateOfChallenge = aliasFields.find(value => value.itemName === "DateOfChallenge")
 
-    localStorage.removeItem(pageId);
-    localStorage.setItem(pageId, JSON.stringify({
+    sessionStorage.removeItem(pageId);
+    sessionStorage.setItem(pageId, JSON.stringify({
       [FormStorageNames.Firstname]: values[firstname.id],
       [FormStorageNames.Lastname]: values[lastname.id],
       [FormStorageNames.Email]: values[email.id],
+      [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
+      [FormStorageNames.DateOfChallenge]: dateOfChallenge ? values[dateOfChallenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
     }));
 
@@ -455,6 +519,7 @@ const FormComponent = (props) => {
     if (button) {
       window.location.href = button.redirectURL
     } else {
+      
       window.location.href = window.location.href + "thank-you"
     }
   }
@@ -618,19 +683,21 @@ const FormComponent = (props) => {
                         type="button"
                         disabled={formProps.isSubmitting}
                         onClick={async () => {
+                          setFirstErrorKey(null);
                           setIsValidating(true)
-                          if (["submit", "payment"].includes(buttonData.action)) {
-                            await formProps.submitForm()
-                          } else {
-                            const formErrors = await formProps.validateForm()
-                            if (Object.keys(formErrors).length > 0) {
-                              Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
+                          const formErrors = await formProps.validateForm()
+                          if (Object.keys(formErrors).length > 0) {
+                            Object.keys(formErrors).map(formErr => formProps.setFieldTouched(formErr))
 
-                              setFirstErrorKey(Object.keys(formErrors)[0])
+                            setFirstErrorKey(Object.keys(formErrors)[0])
+                          } else {
+                            if (["submit", "payment"].includes(buttonData.action)) {
+                              await formProps.submitForm()
                             } else {
                               setCurrentStep(currentStep + 1)
                             }
                           }
+                          
                           setIsValidating(false)
                         }}
                       >

@@ -15,8 +15,9 @@ interface EventProps {
   title: string
   description: string
   location: string
-  date: string
-  time: string
+  challenge: string
+  dateTime: Date | null
+  date: Date | null
 }
 
 const ThankYou = (props) => {
@@ -36,7 +37,7 @@ const ThankYou = (props) => {
     }
 
     if (fields["event page"]) {
-      const storageData = JSON.parse(localStorage.getItem(fields["event page"]["id"]))
+      const storageData = JSON.parse(sessionStorage.getItem(fields["event page"]["id"]))
       if (!storageData) {
         redirectFunc()
       } else {
@@ -47,22 +48,38 @@ const ThankYou = (props) => {
           reference: storageData[FormStorageNames.PaymentReference]
         })
 
-        const parsedDate = fields["event page"]["event date"] ? parse(fields["event page"]["event date"], "MM/dd/yyyy h:mm:ss a", new Date()) : null
+        let eventDate = fields["event page"]["event date"]
+        // 'Own Events' challenge dates are not returned by backend
+        // see if there's a date in sessionStorage as fallback
+        // these dates don't have a time element
+        if (!eventDate) {
+          eventDate = storageData[FormStorageNames.DateOfChallenge]
+        }
+
+        let parsedDate = null
+        let parsedDateTime = null
+        // TODO - pass dates around consistently as ISO timestamps
+        if (eventDate) {
+          if (eventDate.indexOf('/') > -1) {
+            parsedDateTime = eventDate ? parse(eventDate, "MM/dd/yyyy h:mm:ss a", new Date()) : null
+            parsedDate = parsedDateTime
+          } else {
+            parsedDate = eventDate ? parse(eventDate, "yyyy-MM-dd", new Date()) : null
+          }
+        }
         setEvent({
           title: fields["calendar title"],
           description: "",
           location: fields["event page"]["location"],
-          date: parsedDate ? format(parsedDate, "dd/MM/yyyy") : "",
-          time: parsedDate ? format(parsedDate, "h:mm a") : ""
+          challenge: storageData[FormStorageNames.Challenge],
+          dateTime: parsedDateTime,
+          date: parsedDate
         })
       }
     } else {
       redirectFunc()
     }
-
-
   }, [])
-
 
   if (!fields || !fields["event page"]) {
     console.log("No event data supplied")
@@ -73,6 +90,23 @@ const ThankYou = (props) => {
     return (<p>Loading</p>)
   }
 
+  let startsAtStr = ''
+  let endsAtStr = ''
+  let startsAtDateStr = ''
+  let startsAtTimeStr = ''
+  // @see useEffect() setEvent state
+  if (event.dateTime) {
+    startsAtStr = format(event.dateTime, "yyyy-MM-dd'T'HH:mm")
+    endsAtStr = format(event.dateTime, "yyyy-MM-dd'T'HH:mm")
+    startsAtDateStr = format(event.dateTime, "dd/MM/yyyy")
+    startsAtTimeStr = format(event.dateTime, "h:mm a")
+  } else if (event.date) {
+    startsAtStr = format(event.date, "yyyy-MM-dd")
+    endsAtStr = format(event.date, "yyyy-MM-dd")
+    startsAtDateStr = format(event.date, "dd/MM/yyyy")
+  }
+
+
   return (
     <Root className="component">
       <p>{fields["confirmation text"]}</p>
@@ -82,15 +116,18 @@ const ThankYou = (props) => {
 
       <div>
         <ListText>Name: {user.firstname} {user.lastname}</ListText>
-        {event.location && <ListText>Where: {event.location}</ListText>}
-        {event.date && <ListText>Date: {event.date}</ListText>}
-        {event.time && <ListText gutter={true}>Time: {event.time}</ListText>}
+        
+        {event.challenge && <ListText>Challenge: {event.challenge}</ListText>}
+        {event.location && !event.challenge && <ListText>Where: {event.location}</ListText>}
+        
+        {startsAtDateStr && <ListText>Date: {startsAtDateStr}</ListText>}
+        {startsAtTimeStr && <ListText gutter={true}>Time: {startsAtTimeStr}</ListText>}
 
         {user.reference &&
           <ListText>Payment reference: {user.reference}</ListText>
         }
       </div>
-      {event.date && event.date &&
+      {startsAtStr && endsAtStr &&
         <Calendar>
           <AddToCalendar
             children="Add to my calendar"
@@ -98,8 +135,8 @@ const ThankYou = (props) => {
               name: event.title,
               details: "",
               location: event.location,
-              startsAt: String(parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())),
-              endsAt: String(parse(`${event.date} ${event.time}`, "dd/MM/yyyy h:mm a", new Date())),
+              startsAt: startsAtStr,
+              endsAt: endsAtStr,
             }}
           />
         </Calendar>

@@ -52,7 +52,7 @@ exports.handler = async function (event, context) {
     })
   })
 
-  const schema = createValidationSchema({fields: formFields, hardcodedAddress: false })
+  const schema = createValidationSchema({fields: formFields, hardcodedAddress: false})
   const validation = await validate({ schema, values: payload, fields: formFields })
 
   if (!validation || Object.keys(validation).length > 0) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import { actions } from '@storybook/addon-actions';
 
-import { Input, Radio, CheckBox, DatePicker, DropDown, InputError } from '.';
+import { Input, Radio, CheckBox, DatePickerDropdowns, DropDown, InputError } from '.';
 
 export default {
   title: 'Form Elements',
@@ -25,15 +25,19 @@ export const DropDownElement = () => {
   )
 };
 
-
-
-export const DatePickerElement = () => {
+export const DateInputElement = () => {
   const [value, setValue] = React.useState()
   return (
-    <DatePicker required={false} onChange={e => setValue(e)} value={value} {...defaultProps} />
+    <Input required={false} type='date' onChange={e => setValue(e.target.value)}  value={value} {...defaultProps} />
   )
 };
 
+export const DatePickerDropdownsElement = () => {
+  const [value, setValue] = React.useState()
+  return (
+    <DatePickerDropdowns required={false} onChange={e => setValue(e)} value={value} {...defaultProps} />
+  )
+};
 
 export const InputElement = () => {
   const [value, setValue] = React.useState()

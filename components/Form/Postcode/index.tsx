@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { DropDown } from '../Elements/index';
+import { focusFormField } from '../../../utils/formUtils';
 import { StyledDropdown, StyledInput, InlineStyledInput, InlineWrapper } from '../Form.styles';
 import { InlineStyledButton } from '../Form.styles';
 
@@ -284,53 +286,136 @@ interface ManualAddressProps {
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void,
   errors: any;
   touched: any;
-  values: AddressProps | null 
+  values: AddressProps | null
+  address1Ref: React.RefObject<HTMLElement>
+  townRef: React.RefObject<HTMLElement>
+  countryRef: React.RefObject<HTMLElement>
+  postcodeManualRef: React.RefObject<HTMLElement>
 }
 
 const ManualAddress = (props: ManualAddressProps) => {
+  const [selectedCountry, setSelectedCountry] = React.useState<string>('United Kingdom');
+  const isUK = selectedCountry === 'United Kingdom';
+  const postCodeLabel = !isUK ? 'Postcode' : 'Postcode *'
+    
+  const errorAddress1 = props.touched?.address?.addressline1 ? props.errors['address.addressline1'] : false
+  const errorTown = props.touched?.address?.town ? props.errors['address.town'] : false
+  const errorCountry = props.touched?.address?.country ? props.errors['address.country'] : false
+  const errorPostcode = props.touched?.address?.postcode && isUK ? props.errors['address.postcode'] : false
+
+  const changeCountry  = (e) => {
+    setSelectedCountry(e.target.value)
+    props.onChange(e)
+  }
+
   return (
     <div className="postcode-lookup-step-3">
-      <label htmlFor="address.addressline1">Address line 1 *</label>
-      <StyledInput name="address.addressline1" id="address.addressline1" type="text" value={props.values.addressline1} onBlur={props.onBlur} onChange={props.onChange}/>
+      <label htmlFor="address.addressline1" aria-required={true}>Address line 1 *</label>
+      <StyledInput 
+        name="address.addressline1"
+        id="address.addressline1"
+        type="text"
+        error={errorAddress1}
+        ref={props.address1Ref}
+        value={props.values.addressline1}
+        autoComplete="address-line1"
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
       {props.touched?.address?.addressline1 && <span className="field-validation-error">{props.errors['address.addressline1']}</span>}
 
       <label htmlFor="address.addressline2">Address line 2</label>
-      <StyledInput name="address.addressline2" id="address.addressline2" type="text" value={props.values.addressline2} onBlur={props.onBlur} onChange={props.onChange}/>
+      <StyledInput 
+        name="address.addressline2"
+        id="address.addressline2"
+        type="text"
+        value={props.values.addressline2}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
 
       <label htmlFor="address.addressline3">Address line 3</label>
-      <StyledInput name="address.addressline3" id="address.addressline3" type="text" value={props.values.addressline3} onBlur={props.onBlur} onChange={props.onChange}/>
+      <StyledInput 
+        name="address.addressline3"
+        id="address.addressline3"
+        type="text"
+        value={props.values.addressline3}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
 
-      <label htmlFor="address.city">Town/City *</label>
-      <StyledInput name="address.town" id="address.town" type="text" value={props.values.town} onBlur={props.onBlur} onChange={props.onChange}/>
+      <label htmlFor="address.city" aria-required={true}>Town/City *</label>
+      <StyledInput
+        name="address.town"
+        id="address.town"
+        type="text"
+        error={errorTown}
+        ref={props.townRef}
+        value={props.values.town}
+        autoComplete="address-level1"
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
       {props.touched?.address?.town &&<span className="field-validation-error">{props.errors['address.town']}</span>}
 
       <label htmlFor="address.county">County</label>
-      <StyledInput name="address.county" id="address.county" type="text" value={props.values.county} onBlur={props.onBlur} onChange={props.onChange}/>
+      <StyledInput
+        name="address.county"
+        id="address.county"
+        type="text"
+        value={props.values.county}
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
 
-      <label htmlFor="address.country">Country *</label>
-      <StyledDropdown name="address.country" id="address.country" value={props.values.country}>
-        <option label="Please select..." value="">Please select...</option>
-        {countries.map(country => (
-          <option value={country.value}>{country.label}</option>
-        ))}
-      </StyledDropdown>
+      <DropDown
+        label='Country'
+        name="address.country"
+        value={selectedCountry}
+        options={countries}
+        rows={0}
+        required={isUK}
+        error={errorCountry}
+        onChange={(e) => changeCountry(e)}
+        onBlur={props.onBlur}
+        type=''
+      />
+      
       {props.touched?.address?.country &&<span className="field-validation-error">{props.errors['address.country']}</span>}
 
-      <label htmlFor="address.postcode">Postcode *</label>
-      <StyledInput name="address.postcode" id="address.postcode" type="text" value={props.values.postcode} onBlur={props.onBlur} onChange={props.onChange}/>
-      {props.touched?.address?.postcode &&<span className="field-validation-error">{props.errors['address.postcode']}</span>}
+      <label htmlFor="address.postcode" aria-required={isUK}>{postCodeLabel}</label>
+      <StyledInput
+        name="address.postcode"
+        id="address.postcode"
+        type="text"
+        error={isUK && errorPostcode}
+        ref={props.postcodeManualRef}
+        value={props.values.postcode}
+        autoComplete="postal-code"
+        onBlur={props.onBlur}
+        onChange={props.onChange}
+      />
+      {isUK && props.touched?.address?.postcode &&<span className="field-validation-error">{props.errors['address.postcode']}</span>}
 
     </div>
   )
 }
 
-const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields}) => {
-  const postcodeRef = React.useRef(null)
+const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedFields, firstErrorKey}) => {
+  
+  const postcodeLookupInputRef = React.useRef(null)
+  const postcodeLookupDropdownRef = React.useRef(null)
+
+  const address1Ref = React.useRef(null)
+  const townRef = React.useRef(null)
+  const countryRef = React.useRef(null)
+  const postcodeManualRef = React.useRef(null)
+
   const [postcodeEntered, setPostcodeEntered] = React.useState("")
   const [showError, setShowError] = React.useState(false)
   const [isLookingUp, setIsLookingUp] = React.useState(false)
   const [addresses, setAddresses] = React.useState<AddressProps[]>([])
-  const [manualEntery, setManualEntry] = React.useState(false)
+  const [manualEntry, setManualEntry] = React.useState(false)
   const postcodeRegex = /^([A-Za-z][A-Ha-hJ-Yj-y]?[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|[Gg][Ii][Rr] ?0[Aa]{2})$/i; // UK Postcode regex
 
   React.useEffect(() => {
@@ -340,14 +425,44 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
     } else {
       setShowError(false)
     }
-  }, [formErrors, touchedFields])
+
+    let erroringFieldRef:any  = null;
+    if (!manualEntry && showError) {
+      if (firstErrorKey === 'address.addressline1') {
+        erroringFieldRef = isLookingUp ? postcodeLookupDropdownRef : postcodeLookupInputRef
+      }
+    } else if (manualEntry && showError) {
+        switch(addressError) {
+          case "address.addressline1":
+            if (firstErrorKey === 'address.addressline1') erroringFieldRef = address1Ref
+            break;
+          case "address.town":
+            if (firstErrorKey === 'address.town') erroringFieldRef = townRef
+            break;
+          case "address.country":
+            if (firstErrorKey === 'address.country') erroringFieldRef = countryRef
+            break;
+          case "address.postcode":
+            if (firstErrorKey === 'address.postcode' && values['country'] === 'United Kingdom') erroringFieldRef = postcodeManualRef
+            break; 
+          default:
+            // code block
+        } 
+    }
+
+    if (erroringFieldRef && erroringFieldRef.current != null) {
+      erroringFieldRef.current.scrollIntoView({ behavior: 'smooth' })
+      focusFormField(erroringFieldRef.current, erroringFieldRef === postcodeLookupInputRef ? 'input' : null)
+    }
+
+  }, [formErrors, firstErrorKey, touchedFields])
 
   const onLookup = async () => {
     if (postcodeEntered && postcodeRegex.test(postcodeEntered)) {
       const response = await getAddress(postcodeEntered)
       setAddresses(response)
       setIsLookingUp(true)
-      postcodeRef && postcodeRef.current.focus()
+      postcodeLookupDropdownRef && postcodeLookupDropdownRef.current.focus()
     } else {
       setShowError(true)
     }
@@ -369,15 +484,17 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           <InlineStyledInput
             type="text"
             name="address"
-            error={showError}
+            ref={postcodeLookupInputRef}
+            error={(postcodeEntered && postcodeRegex.test(postcodeEntered)) ? false : !manualEntry && showError}
             onBlur={onBlur}
             className={`${showError ? 'input-validation-error' : ''}`}
             aria-label="Postcode"
             value={postcodeEntered}
+            autoComplete="nope"
             onChange={e => setPostcodeEntered(e.target.value)}
           />
 
-          {showError &&
+          {showError && !manualEntry &&
             <span id="PostcodeError" className="field-validation-error">
               Please enter a postcode and find your address.
             </span>
@@ -400,21 +517,25 @@ const Postcode = ({ onSubmit, values, onChange, onBlur, formErrors, touchedField
           </p>
 
           <label htmlFor="postcode">Select address *</label>
-          <StyledDropdown ref={postcodeRef} name="postcode" id="postcode" onChange={e => onAddressSelection(e.target.value)} error={showError}>
+          <StyledDropdown ref={postcodeLookupDropdownRef} name="postcode" id="postcode" onChange={e => onAddressSelection(e.target.value)} error={showError}>
             <option value="">Please select an address</option>
             {addresses.map(address => <option value={address.id}>{address.label}</option>)}
           </StyledDropdown>
         </div>
       }
 
-      {!manualEntery && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>Enter address manually</a></p>}
-      {manualEntery && 
+      {!manualEntry && <p>or <a id="EnterManually" href="#" onClick={(e) => { e.preventDefault(); setManualEntry(true)}}>click here if you are a non-UK resident</a></p>}
+      {manualEntry && 
         <ManualAddress
           touched={touchedFields}
           errors={formErrors}
           values={values}
           onBlur={onBlur}
           onChange={onChange}
+          address1Ref = {address1Ref}
+          townRef = {townRef}
+          countryRef = {countryRef}
+          postcodeManualRef = {postcodeManualRef}
         />
       }
     </div>

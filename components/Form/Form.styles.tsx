@@ -102,44 +102,7 @@ const StyledInputMixin = css<{removeGutter?: boolean}>`
     background-color: ${props => props.theme.colors.white}!important;
   }
   ${props => props.disabled && StyledInputDisabledMixin}
-  ${props => props.removeGutter ? "margin-bottom: 0!important;": ""}
-  
-`
-
-export const DatePickerRoot = styled.div`
-  position: relative;
-  max-width: ${maxInputWidth}px;
-`
-export const StyledDatePicker = styled.input`
-  ${StyledInputMixin}
-  border-radius: .5rem;
-  padding: 0.875rem 1.125rem;
-  width: 100%;
-  font-size: 1rem;
-  ::-webkit-input-placeholder {
-    color: ${props => props.theme.colors.primary}!important;
-  }
-
-  ::-moz-placeholder {
-      color: ${props => props.theme.colors.primary}!important;
-  }
-
-  ::-ms-placeholder {
-      color: ${props => props.theme.colors.primary}!important;
-  }
-
-  ::placeholder {
-      color: ${props => props.theme.colors.primary}!important;
-  }
-`
-
-export const DatePickerImage = styled.img`
-  width: 20px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  z-index: 1000;
+  ${props => props.removeGutter ? "margin-bottom: 0!important;": ""}  
 `
 
 export const StyledInput = styled.input`
@@ -152,6 +115,21 @@ export const StyledTextArea = styled.textarea`
 
 export const StyledDropdown = styled.select`
   ${StyledInputMixin}
+`
+
+export const StyledDropdownGroup =  styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  gap: 0;
+
+  ${props => props.theme.breakpoints.sm} {
+    flex-direction: row;
+    max-width: ${maxInputWidth}px;
+    span:nth-child(1), span:nth-child(2) { 
+      margin-right: 2rem
+    }
+  }
 `
 
 export const InlineStyledInput = styled.input`
@@ -246,4 +224,8 @@ export const StyledCheckbox = styled.label<{disabled?: boolean}>`
       border-radius: 6px;
      }
   }
+`
+
+export const StyledError = styled.span`
+  font-size: 16px;
 `
