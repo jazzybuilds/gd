@@ -2,6 +2,7 @@
 
 _redirects
 /functions_src/*.json
+/functions_src/formUtils.js
 /functions/
 
 # dependencies
@@ -48,3 +49,5 @@ public/_redirects
 .toml
 
 storybook-static
+generate-form-data.js
+utils/*.js

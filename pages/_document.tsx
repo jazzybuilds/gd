@@ -38,6 +38,8 @@ export default class CustomDocument extends Document {
             property="og:image"
           />
 
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=Object.keys"></script>
+
           {/* @ts-ignore */}
           {this.props.styleTags}
         </Head>

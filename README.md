@@ -18,7 +18,7 @@ Run `yarn`.
 
 ## Uniform endpoints
 
-The following ngrok tunnel is configured for the PoC: `http://tempsitecoreguidedogs.trafficmanager.net`.
+The following ngrok tunnel is configured for the PoC: `http://tempsitecoreguidedogs.trafficmanager.net`. This can be changed in the .env file to point to a custom container. The sitename in the .ENV needs to be suffixed with "preview". E.g. "guidedogsdotorgpreview".
 
 ### Map Service
 The role of Uniform Map Service is to return the hierarchy of all the pages in scope for a given site.
@@ -152,7 +152,6 @@ If is enabled (it is disabled for the time being), accessing any of the APIs abo
 In order to force re-population of cache, add the following query string at the end of either map, page or html service:
 `?blob=regenerate&uniform_token=12345`, for example: `http://tempsitecoreguidedogs.trafficmanager.net/uniform/api/content/guidedogsdotorgpreview/html.json?blob=regenerate&uniform_token=12345`
 
-
-
-
+### Troubleshooting
+If an error occurs with the message: `Error: resolve-url-loader: CSS error`, open `node_modules/resolve-url-loader/index.js`. Under `var options` change `removeCR` from `"false"` to `"true"`.
 

@@ -309,4 +309,9 @@
   status = 200
   force = true
   [redirects.headers]
-      Authorization = "Basic Z3VpZGVkb2dzOmM4N2J0R0hRWUhVWENqc1FNQTV5dHRKWg=="		
+      Authorization = "Basic Z3VpZGVkb2dzOmM4N2J0R0hRWUhVWENqc1FNQTV5dHRKWg=="
+
+[[redirects]]
+  from = "/api-fe/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
