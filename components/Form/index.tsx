@@ -636,9 +636,10 @@ const FormComponent = (props) => {
                             WebsiteReferenceID: ref
                           }),
                           onSubmit: (paymentId, params) => {
+                            console.log(" params['successful_payment_form_not_updated']", params)
                             formProps.setFieldValue("paymentId", paymentId)
                             formProps.setSubmitting(true)
-                            formProps.values.successful_payment_form_not_updated = params?.successful_payment_form_not_updated && params['successful_payment_form_not_updated']
+                            formProps.values.successful_payment_form_not_updated = params['successful_payment_form_not_updated'] && params['successful_payment_form_not_updated']
                             formProps.values.paymentId = paymentId
                             onSubmit(formProps.values)
                           }
