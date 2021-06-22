@@ -374,7 +374,6 @@ export const createValidationSchema = ({ fields, hardcodedAddress, isUK }) => {
       country: Yup.string().required().label("country"),
       postcode: Yup.string().required().label("postcode"),
     })
-    console.log('defaultValidation', defaultValidation)
   } else if(hardcodedAddress && addressField && !addressField.disabled){
     defaultValidation.address = Yup.object({
       addressline1: Yup.string().required().label("address line 1"),
@@ -382,7 +381,6 @@ export const createValidationSchema = ({ fields, hardcodedAddress, isUK }) => {
       country: Yup.string().required().label("country"),
       postcode: Yup.string().label("postcode"),
     })
-    console.log('defaultValidation', defaultValidation)
   }
 
   return Yup.object().shape(schema.reduce(createYupSchema, defaultValidation))
