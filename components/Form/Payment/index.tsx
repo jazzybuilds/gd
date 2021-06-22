@@ -19,6 +19,8 @@ import { Modal } from "../../Modal";
 import { formatPrice } from "./PaymentWrapper";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
+const googlePayMerchantId = process.env.NEXT_PUBLIC_GOOGLEPAY_MERCHANTID
+const googlePayEnvironment = process.env.NEXT_PUBLIC_GOOGLEPAY_ENVIRONMENT === "PRODUCTION" ? "PRODUCTION" : "TEST"
 const stripePromise = loadStripe(stripeKey);
 
 interface UpdateReferenceProps {
@@ -36,7 +38,7 @@ interface PaymentOptionProps extends Omit<UpdateReferenceProps, "PaymentMethod" 
   statement: string
   productType: string
   summary: string
-  onSubmit: (id: string) => void
+  onSubmit: (id: string, param?: object) => void
   onReferenceUpdate: (ref: string) => void
 }
 
@@ -44,6 +46,7 @@ interface makeStripePaymentResponse {
   reference: string
   message?: string
   intent?: any
+  successful_payment_form_not_updated?: boolean
 }
 
 interface makeStripePaymentProps extends Omit<UpdateReferenceProps, "PaymentMethod" | "status"> {
@@ -55,9 +58,7 @@ interface makeStripePaymentProps extends Omit<UpdateReferenceProps, "PaymentMeth
 
 const formatSummaryText = (amount, text) => `${text.replace("{amount}", `£${formatPrice(amount)}`)}`
 
-const formatAmount = (amount) => {
-  console.log('amount', amount)
-  
+const formatAmount = (amount) => {  
   const penceToPounds = amount / 100
   const amountToArray = penceToPounds.toString().split('.')
   
@@ -107,6 +108,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     })
     return Promise.reject({
       message: "Something went wrong, please try again",
+      successful_payment_form_not_updated: false,
       reference: newReference.WebsiteReferenceID
     })
   }
@@ -116,7 +118,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     return_url: window.location.href
   }, { handleActions: false });
 
-  if (payload.error) {
+  if (payload.error) { 
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
@@ -128,9 +130,37 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     })
     return Promise.reject({
       message: payload.error.message ?? "Unable to take payment",
+      successful_payment_form_not_updated: false,
       reference: newReference.WebsiteReferenceID ?? rest.referenceNumber,
     })
-  } else {    
+  } else if (payload.paymentIntent.status === 'succeeded') {  
+    try {
+      const newReference = await updateFormSubmission({
+        formId: rest.formId,
+        sessionId: rest.sessionId,
+        referenceNumber: rest.referenceNumber,
+        amount: rest.amount,
+        discountCode: rest.discountCode,
+        PaymentMethod: "CC",
+        status: '200'
+      })
+
+      return Promise.resolve({
+        reference: newReference.WebsiteReferenceID,
+        successful_payment_form_not_updated: false,
+        intent: payload.paymentIntent,
+      })
+  
+    } catch (error) {
+      new Error(error)
+    }
+
+    return Promise.resolve({
+      reference: rest.referenceNumber,
+      successful_payment_form_not_updated: true,
+      intent: payload.paymentIntent,
+    })
+  } else {
     const newReference = await updateFormSubmission({
       formId: rest.formId,
       sessionId: rest.sessionId,
@@ -138,10 +168,11 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
       amount: rest.amount,
       discountCode: rest.discountCode,
       PaymentMethod: "CC",
-      status: payload.paymentIntent.status === 'succeeded' ? '200' : payload.paymentIntent.status
+      status: payload.paymentIntent.status
     })
     return Promise.resolve({
       reference: newReference.WebsiteReferenceID,
+      successful_payment_form_not_updated: false,
       intent: payload.paymentIntent,
     })
   }
@@ -169,7 +200,7 @@ function getGooglePayRequest(amount: number): google.payments.api.PaymentDataReq
       },
     ],
     merchantInfo: {
-      merchantId: process.env.NEXT_PUBLIC_STRIPE_MERCHANT_ID,
+      merchantId: googlePayMerchantId,
       merchantName: 'Guide Dogs',
     },
     transactionInfo: {
@@ -330,7 +361,7 @@ const PayPal = (props: PaymentOptionProps) => {
       PaymentMethod: "PP",
       status: "200"
     })
-    return props.onSubmit(props.referenceNumber);
+    return props.onSubmit(props.referenceNumber, {});
   }
 
   const createOrder = React.useCallback((data, actions) => {
@@ -444,7 +475,7 @@ const StripePayments = (props: StripePaymentsProps) => {
           const result = await stripe.retrievePaymentIntent(stripeClientId)
 
           if (result.paymentIntent.status === "succeeded") {
-            props.onSubmit(props.referenceNumber)
+            props.onSubmit(props.referenceNumber, {})
 
             const newReference = await updateFormSubmission({
               formId: props.formId,
@@ -494,7 +525,7 @@ const StripePayments = (props: StripePaymentsProps) => {
   React.useEffect(() => {
     const handlePaymentMethodReceived = async (event) => {
       setSubmitting(true)
-
+      
       try {
         const response = await makeStripePayment({
           stripe,
@@ -509,7 +540,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         })
         event.complete("success")
         setError(null)
-        props.onSubmit(response.reference)
+        props.onSubmit(response.reference, {})
       } catch (error) {
         event.complete("fail")
         props.onReferenceUpdate(error.reference)
@@ -542,10 +573,21 @@ const StripePayments = (props: StripePaymentsProps) => {
       if (response.intent.status === 'requires_action') {
         setRetryPaymentReference(response.reference)
       }
+
+      if (response?.successful_payment_form_not_updated) {
+        props.onSubmit(
+          response.reference,
+          {
+            successful_payment_form_not_updated: response.successful_payment_form_not_updated 
+          }
+        )
+        return
+      }
+
       if (response.intent.next_action) {
         setIframe(response.intent.next_action.redirect_to_url.url)
       } else {
-        props.onSubmit(response.reference)
+        props.onSubmit(response.reference, {})
       }
     } catch (error) {
       setError(error.message)
@@ -630,7 +672,7 @@ const PaymentOptions = (props: PaymentProps) => {
   React.useEffect(() => {
     if (window.PaymentRequest) {
       const googleClient = new google.payments.api.PaymentsClient({
-        environment: stripeKey.includes("live") ? "PRODUCTION" : "TEST"
+        environment: googlePayEnvironment
       })
 
       googleClient
