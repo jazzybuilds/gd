@@ -108,6 +108,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     })
     return Promise.reject({
       message: "Something went wrong, please try again",
+      successful_payment_form_not_updated: false,
       reference: newReference.WebsiteReferenceID
     })
   }
@@ -129,6 +130,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     })
     return Promise.reject({
       message: payload.error.message ?? "Unable to take payment",
+      successful_payment_form_not_updated: false,
       reference: newReference.WebsiteReferenceID ?? rest.referenceNumber,
     })
   } else if (payload.paymentIntent.status === 'succeeded') {  
@@ -170,6 +172,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
     })
     return Promise.resolve({
       reference: newReference.WebsiteReferenceID,
+      successful_payment_form_not_updated: false,
       intent: payload.paymentIntent,
     })
   }
@@ -358,7 +361,7 @@ const PayPal = (props: PaymentOptionProps) => {
       PaymentMethod: "PP",
       status: "200"
     })
-    return props.onSubmit(props.referenceNumber);
+    return props.onSubmit(props.referenceNumber, {});
   }
 
   const createOrder = React.useCallback((data, actions) => {
@@ -472,7 +475,7 @@ const StripePayments = (props: StripePaymentsProps) => {
           const result = await stripe.retrievePaymentIntent(stripeClientId)
 
           if (result.paymentIntent.status === "succeeded") {
-            props.onSubmit(props.referenceNumber)
+            props.onSubmit(props.referenceNumber, {})
 
             const newReference = await updateFormSubmission({
               formId: props.formId,
@@ -537,7 +540,7 @@ const StripePayments = (props: StripePaymentsProps) => {
         })
         event.complete("success")
         setError(null)
-        props.onSubmit(response.reference)
+        props.onSubmit(response.reference, {})
       } catch (error) {
         event.complete("fail")
         props.onReferenceUpdate(error.reference)
@@ -584,7 +587,7 @@ const StripePayments = (props: StripePaymentsProps) => {
       if (response.intent.next_action) {
         setIframe(response.intent.next_action.redirect_to_url.url)
       } else {
-        props.onSubmit(response.reference)
+        props.onSubmit(response.reference, {})
       }
     } catch (error) {
       setError(error.message)
