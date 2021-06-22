@@ -22,14 +22,10 @@ interface EventProps {
   date: Date | null
 }
 
-interface ModalToggle {
-  toggle: boolean
-}
-
 const ThankYou = (props) => {
   const [user, setUser] = React.useState<UserProps | null>(null)
   const [event, setEvent] = React.useState<EventProps | null>(null)
-  const [toggle, setToggle] = React.useState<ModalToggle | false>(false)
+  const [toggle, setToggle] = React.useState<boolean>(false)
   const { item: { fields } } = props.renderingContext
 
   React.useEffect(() => {
