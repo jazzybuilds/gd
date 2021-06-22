@@ -19,6 +19,8 @@ import { Modal } from "../../Modal";
 import { formatPrice } from "./PaymentWrapper";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
+const googlePayMerchantId = process.env.NEXT_PUBLIC_GOOGLEPAY_MERCHANTID
+const googlePayEnvironment = process.env. NEXT_PUBLIC_GOOGLEPAY_ENVIRONMENT === "PRODUCTION" ? "PRODUCTION" : "TEST"
 const stripePromise = loadStripe(stripeKey);
 
 interface UpdateReferenceProps {
@@ -169,7 +171,7 @@ function getGooglePayRequest(amount: number): google.payments.api.PaymentDataReq
       },
     ],
     merchantInfo: {
-      merchantId: process.env.NEXT_PUBLIC_STRIPE_MERCHANT_ID,
+      merchantId: googlePayMerchantId,
       merchantName: 'Guide Dogs',
     },
     transactionInfo: {
@@ -630,7 +632,7 @@ const PaymentOptions = (props: PaymentProps) => {
   React.useEffect(() => {
     if (window.PaymentRequest) {
       const googleClient = new google.payments.api.PaymentsClient({
-        environment: stripeKey.includes("live") ? "PRODUCTION" : "TEST"
+        environment: googlePayEnvironment
       })
 
       googleClient
