@@ -597,7 +597,7 @@ const StripePayments = (props: StripePaymentsProps) => {
   }
 
   if (iframe) {
-    return <Modal open={true}><iframe src={iframe} width="600" height="600" /></Modal>
+    return <Modal thankYouPage={false} open={true}><iframe src={iframe} width="600" height="600" /></Modal>
   }
 
   const componentProps = {

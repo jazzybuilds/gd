@@ -4,6 +4,7 @@ import { Root, Wrapper } from './Modal.styles'
 interface ModalProps {
   children: React.ReactNode
   open: boolean
+  thankYouPage: boolean
 }
 
 export const Modal = (props: ModalProps) => {
@@ -21,8 +22,8 @@ export const Modal = (props: ModalProps) => {
 
   return (
     <React.Fragment>
-      <Root>
-        <Wrapper>
+      <Root >
+        <Wrapper thankYouPage={props.thankYouPage}>
           {props.children}
         </Wrapper>
       </Root>

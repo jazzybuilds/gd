@@ -14,6 +14,8 @@ export const SummaryText = styled.div`
   margin-bottom: 26px;
   ${(props) => props.modal && css`
     color: black;
+    text-align: center;
+    line-height: 1.5rem;
   `}
   
   strong {
@@ -74,11 +76,13 @@ export const Calendar = styled.div<{open: boolean}>`
   }
 `
 
-export const ModalButton = styled.button`
+export const ModalButton = styled.input`
+  background: #7cd2ff;
+  padding: 5px 20px 5px 20px;
+  line-height: 2rem;
+  border: none;
+  border-radius: 2rem !important;
   color: #002c5c;
-  background-color: #7CD2FF;
-  padding: 1rem;
-  border-radius: 30%;
 `
 
 export const InnerModal = styled.div`
@@ -87,5 +91,5 @@ export const InnerModal = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 1.5rem 2rem 1rem;
 `
