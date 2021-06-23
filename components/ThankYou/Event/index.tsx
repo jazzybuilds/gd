@@ -125,12 +125,13 @@ const ThankYou = (props) => {
 
 
       {toggle && (
-        <Modal open={user?.successfulPaymentFormNotUpdated}>
+        <Modal open={user?.successfulPaymentFormNotUpdated} thankYouPage>
           <InnerModal>
-            <SummaryText modal>Sorry, something went wrong.</SummaryText>
-            <SummaryText modal>The payment was successful but we have been ynable to save your data. Please do not attempt another payment de call our Customer Service team who will help you further.</SummaryText>
+            <SummaryText modal>Well, this is paw-kward..</SummaryText>
+            <SummaryText modal>
+              Your payment was successful but we don't seem to have all of the information we need. There is no need to make another payment but please contact our Supporter Care Team on 0800 953 113 or via email <a href="mailto:guidedogs@guidedogs.org.uk">guidedogs@guidedogs.org.uk</a> so we can resolve this for you. Please quote the payment reference displayed below. </SummaryText>
             <SummaryText modal>Payment reference: {user.reference}</SummaryText>
-            <ModalButton onClick={() => handleModalButtonClick()}>OK</ModalButton>
+            <ModalButton onClick={() => handleModalButtonClick()} type='button' value="OK"/>
           </InnerModal>
         </Modal>
       )}
