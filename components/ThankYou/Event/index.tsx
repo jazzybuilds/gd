@@ -2,13 +2,15 @@ import { format, parse } from 'date-fns';
 import React from 'react'
 import AddToCalendar from '@culturehq/add-to-calendar';
 import { FormStorageNames } from '../../../utils/constants';
-import { ListText, Calendar, SummaryText, Root } from './ThankYou.styles';
+import { ListText, Calendar, SummaryText, Root, ModalButton, InnerModal } from './ThankYou.styles';
+import { Modal } from '../../Modal'
 
 interface UserProps {
   firstname: string
   lastname: string
   email: string
   reference: string
+  successfulPaymentFormNotUpdated: boolean
 }
 
 interface EventProps {
@@ -23,7 +25,12 @@ interface EventProps {
 const ThankYou = (props) => {
   const [user, setUser] = React.useState<UserProps | null>(null)
   const [event, setEvent] = React.useState<EventProps | null>(null)
+  const [toggle, setToggle] = React.useState<boolean>(false)
   const { item: { fields } } = props.renderingContext
+
+  React.useEffect(() => {
+    setToggle(user?.successfulPaymentFormNotUpdated)
+  }, [user?.successfulPaymentFormNotUpdated])
 
   React.useEffect(() => {
     const redirectFunc = () => {
@@ -45,7 +52,8 @@ const ThankYou = (props) => {
           firstname: storageData[FormStorageNames.Firstname],
           lastname: storageData[FormStorageNames.Lastname],
           email: storageData[FormStorageNames.Email],
-          reference: storageData[FormStorageNames.PaymentReference]
+          reference: storageData[FormStorageNames.PaymentReference],
+          successfulPaymentFormNotUpdated: storageData[FormStorageNames.SuccessfulPaymentFormNotUpdated]
         })
 
         let eventDate = fields["event page"]["event date"]
@@ -106,11 +114,29 @@ const ThankYou = (props) => {
     startsAtDateStr = format(event.date, "dd/MM/yyyy")
   }
 
+  const handleModalButtonClick = () => {
+    setToggle(!toggle)
+    document.body.classList.remove("no-scroll")
+    return toggle
+  }
 
   return (
     <Root className="component">
       <p>{fields["confirmation text"]}</p>
       <h2>{fields["title"]}</h2>
+
+
+      {toggle && (
+        <Modal open={user?.successfulPaymentFormNotUpdated} thankYouPage>
+          <InnerModal role="alert">
+            <SummaryText modal>Well, this is paw-kward..</SummaryText>
+            <SummaryText modal>
+              Your payment was successful but we don't seem to have all of the information we need. There is no need to make another payment but please contact our Supporter Care Team on 0800 953 113 or via email <a href="mailto:guidedogs@guidedogs.org.uk">guidedogs@guidedogs.org.uk</a> so we can resolve this for you. Please quote the payment reference displayed below. </SummaryText>
+            <SummaryText modal>Payment reference: {user.reference}</SummaryText>
+            <ModalButton onClick={handleModalButtonClick} type='button' value="OK"/>
+          </InnerModal>
+        </Modal>
+      )}
 
       <SummaryText dangerouslySetInnerHTML={{ __html: fields["summary"].replace("#EMAIL#", user.email) }} />
 
