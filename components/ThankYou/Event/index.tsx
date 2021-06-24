@@ -116,6 +116,8 @@ const ThankYou = (props) => {
 
   const handleModalButtonClick = () => {
     setToggle(!toggle)
+    document.body.classList.remove("no-scroll")
+    return toggle
   }
 
   return (
@@ -126,12 +128,12 @@ const ThankYou = (props) => {
 
       {toggle && (
         <Modal open={user?.successfulPaymentFormNotUpdated} thankYouPage>
-          <InnerModal>
+          <InnerModal role="alert">
             <SummaryText modal>Well, this is paw-kward..</SummaryText>
             <SummaryText modal>
               Your payment was successful but we don't seem to have all of the information we need. There is no need to make another payment but please contact our Supporter Care Team on 0800 953 113 or via email <a href="mailto:guidedogs@guidedogs.org.uk">guidedogs@guidedogs.org.uk</a> so we can resolve this for you. Please quote the payment reference displayed below. </SummaryText>
             <SummaryText modal>Payment reference: {user.reference}</SummaryText>
-            <ModalButton onClick={() => handleModalButtonClick()} type='button' value="OK"/>
+            <ModalButton onClick={handleModalButtonClick} type='button' value="OK"/>
           </InnerModal>
         </Modal>
       )}
