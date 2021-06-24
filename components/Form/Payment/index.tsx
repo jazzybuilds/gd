@@ -169,7 +169,7 @@ function getGooglePayRequest(amount: number): google.payments.api.PaymentDataReq
       },
     ],
     merchantInfo: {
-      merchantId: process.env.NEXT_PUBLIC_STRIPE_MERCHANT_ID,
+      merchantId: process.env.STRIPE_SECRET,
       merchantName: 'Guide Dogs',
     },
     transactionInfo: {
