@@ -513,13 +513,14 @@ const FormComponent = (props) => {
       [FormStorageNames.Challenge]: challenge ? values[challenge.id] : "",
       [FormStorageNames.DateOfChallenge]: dateOfChallenge ? values[dateOfChallenge.id] : "",
       [FormStorageNames.PaymentReference]: paymentReference.WebsiteReferenceID ? paymentReference.WebsiteReferenceID : undefined,
+      [FormStorageNames.SuccessfulPaymentFormNotUpdated]: values['successful_payment_form_not_updated'],
     }));
 
     const button = allFormValues.find(formValue => formValue.redirectURL)
     if (button) {
       window.location.href = button.redirectURL
     } else {
-      
+
       window.location.href = window.location.href + "thank-you"
     }
   }
@@ -634,9 +635,12 @@ const FormComponent = (props) => {
                             ...paymentReference,
                             WebsiteReferenceID: ref
                           }),
-                          onSubmit: (paymentId) => {
+                          onSubmit: (paymentId, params) => {
+                            console.log(" params['successful_payment_form_not_updated']", params)
                             formProps.setFieldValue("paymentId", paymentId)
                             formProps.setSubmitting(true)
+                            formProps.values.successful_payment_form_not_updated = params['successful_payment_form_not_updated'] && params['successful_payment_form_not_updated']
+                            formProps.values.paymentId = paymentId
                             onSubmit(formProps.values)
                           }
                         }}
