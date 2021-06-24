@@ -139,6 +139,10 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     if (fieldType === 'checkbox list') {
+      if (!hasError) {
+        delete fieldProps['aria-describedby']
+      }
+      delete fieldProps['aria-label']
       return (
         <React.Fragment>
           <Label gutter={true} name={fieldProps.name} label={fieldProps.label} required={validation.required} />
@@ -168,6 +172,10 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
     }
 
     if (fieldType === 'radio list') {
+      if (!hasError) {
+        delete fieldProps['aria-describedby']
+      }
+      delete fieldProps['aria-label']
       return !fieldProps.disabled && (
         <React.Fragment>
           <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} />
