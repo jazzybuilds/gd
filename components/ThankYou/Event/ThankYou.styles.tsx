@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { typography } from '../../../theme'
 
 export const Root = styled.div`
@@ -12,6 +12,11 @@ export const ListText = styled.h4<{gutter: boolean}>`
 
 export const SummaryText = styled.div`
   margin-bottom: 26px;
+  ${(props) => props.modal && css`
+    color: black;
+    text-align: center;
+    line-height: 1.5rem;
+  `}
   
   strong {
     overflow-wrap: break-word;
@@ -69,4 +74,22 @@ export const Calendar = styled.div<{open: boolean}>`
       }
     }
   }
+`
+
+export const ModalButton = styled.input`
+  background: #7cd2ff;
+  padding: 5px 20px 5px 20px;
+  line-height: 2rem;
+  border: none;
+  border-radius: 2rem !important;
+  color: #002c5c;
+`
+
+export const InnerModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 2rem 1rem;
 `

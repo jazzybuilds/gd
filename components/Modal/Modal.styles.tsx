@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Root = styled.div`
   position: fixed;
@@ -16,5 +16,17 @@ export const Wrapper = styled.div`
   margin: 20px auto;
   background: ${props => props.theme.colors.white};
   width: 600px;
-  height: 600px
+  height: 600px;
+
+  ${(props) => props.thankYouPage && css`
+    width: 80%;
+    height: auto;
+    border-radius: 2rem;
+    margin-top: 10%;
+
+
+   @media (min-width: 768px){
+        width: 50%;
+    }
+  `}
 `
