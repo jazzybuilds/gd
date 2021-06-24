@@ -179,6 +179,7 @@ const makeStripePayment = async ({ stripe, paymentMethod, ...rest }: makeStripeP
 }
 
 function getGooglePayRequest(amount: number): google.payments.api.PaymentDataRequest {
+
   return {
     apiVersion: 2,
     apiVersionMinor: 0,
@@ -319,6 +320,7 @@ const GooglePay = (props: StripeComponentProps & { googleClient: google.payments
         })
       })
       .catch(function (err) {
+        console.error({ err })
         setError("Unable to take payment, please try again")
       });
   }
