@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledCheckbox, StyledDropdown, StyledDropdownGroup, StyledError, StyledInput, StyledLabel, StyledRadio, StyledTextArea } from '../Form.styles'
+import { StyledCheckbox, StyledDropdown, StyledDropdownGroup, StyledError, StyledInput, StyledLabel, StyledLegend, StyledRadio, StyledTextArea } from '../Form.styles'
 
 import range from 'ramda/src/range'
 
@@ -21,6 +21,10 @@ interface FieldProps {
 
 export const Label = (props: {gutter?: boolean, required?: boolean, name: string, label: string, disabled?:boolean }) => (
   <StyledLabel gutter={props.gutter} disabled={props.disabled} htmlFor={props.name}>{props.label}{props.required ? "*" : ""}</StyledLabel>
+)
+
+export const Legend = (props: {gutter?: boolean, required?: boolean, label: string, disabled?:boolean }) => (
+  <StyledLegend gutter={props.gutter} disabled={props.disabled} >{props.label}{props.required ? "*" : ""}</StyledLegend>
 )
 
 export const Text = (props: {htmlElement: string}) => <div dangerouslySetInnerHTML={{ __html: props.htmlElement }} />

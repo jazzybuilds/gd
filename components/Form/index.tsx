@@ -13,7 +13,7 @@ import {
   focusFormField
 } from '../../utils/formUtils';
 import Postcode from "./Postcode"
-import { Radio, CheckBox, DropDown, Text, Label, Input, DatePickerDropdowns, InputError } from './Elements';
+import { Radio, CheckBox, DropDown, Text, Legend, Input, DatePickerDropdowns, InputError } from './Elements';
 import { BackButton, FormSectionWrapper, Section, StyledButton } from './Form.styles';
 import { PaymentWrapper } from './Payment/PaymentWrapper';
 import DashedDivider from '../Divider/Dashed';
@@ -145,28 +145,30 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       delete fieldProps['aria-label']
       return (
         <React.Fragment>
-          <Label gutter={true} name={fieldProps.name} label={fieldProps.label} required={validation.required} />
-          {options.map(option =>
-            <CheckBox
-              key={`${fieldProps.id}-${option.value}`}
-              {...fieldProps}
-              required={false}
-              id={`${fieldProps.id}-${option.value}`}
-              name={`${fieldProps.id}-${option.value}`}
-              value={option.value}
-              label={option.label}
-              onChange={(e) => {
-                let checkValues = fieldProps.value
-                if (!e.target.checked) {
-                  checkValues = checkValues.filter(val => val !== e.target.value)
-                } else {
-                  checkValues.push(e.target.value)
-                }
-                formProps.setFieldValue(fieldProps.id, checkValues)
-                handleRules(e)
-              }}
-            />
-          )}
+          <fieldset>
+            <Legend gutter={true} label={fieldProps.label} required={validation.required} />
+            {options.map(option =>
+              <CheckBox
+                key={`${fieldProps.id}-${option.value}`}
+                {...fieldProps}
+                required={false}
+                id={`${fieldProps.id}-${option.value}`}
+                name={`${fieldProps.id}-${option.value}`}
+                value={option.value}
+                label={option.label}
+                onChange={(e) => {
+                  let checkValues = fieldProps.value
+                  if (!e.target.checked) {
+                    checkValues = checkValues.filter(val => val !== e.target.value)
+                  } else {
+                    checkValues.push(e.target.value)
+                  }
+                  formProps.setFieldValue(fieldProps.id, checkValues)
+                  handleRules(e)
+                }}
+              />
+            )}
+          </fieldset>
         </React.Fragment>
       )
     }
@@ -178,23 +180,23 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       delete fieldProps['aria-label']
       return !fieldProps.disabled && (
         <React.Fragment>
-          <Label name={fieldProps.name} label={fieldProps.label} required={validation.required} />
           <fieldset>
-            {options.map(option => (
-              <Radio
-                key={`${fieldProps.id}-${option.value}`}
-                {...fieldProps}
-                required={false}
-                name={fieldProps.name}
-                id={`${fieldProps.id}-${option.value}`}
-                value={option.value} label={option.label}
-                selected={fieldProps.value === option.value}
-                onChange={(e) => {
-                  formProps.setFieldValue(fieldProps.id, e.target.value)
-                  handleRules(e)
-                }}
-              />
-            ))}
+            <Legend label={fieldProps.label} required={validation.required} />
+              {options.map(option => (
+                <Radio
+                  key={`${fieldProps.id}-${option.value}`}
+                  {...fieldProps}
+                  required={false}
+                  name={fieldProps.name}
+                  id={`${fieldProps.id}-${option.value}`}
+                  value={option.value} label={option.label}
+                  selected={fieldProps.value === option.value}
+                  onChange={(e) => {
+                    formProps.setFieldValue(fieldProps.id, e.target.value)
+                    handleRules(e)
+                  }}
+                />
+              ))}
           </fieldset>
         </React.Fragment>
       )

@@ -152,6 +152,13 @@ export const StyledLabel = styled.label<{gutter?: boolean}>`
   margin-bottom: ${props => props.gutter ? "32px" :""};
 `
 
+export const StyledLegend = styled.legend<{gutter?: boolean}>`
+  ${props => props.disabled && StyledInputDisabledMixin}
+  background: none!important;
+  line-height: ${props => props.gutter ? "26px" :""};
+  margin-bottom: ${props => props.gutter ? "32px" :""};
+`
+
 const CheckRadioDisabledMixin = css`
   cursor: not-allowed;
   opacity: .5;
