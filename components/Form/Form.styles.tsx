@@ -152,11 +152,15 @@ export const StyledLabel = styled.label<{gutter?: boolean}>`
   margin-bottom: ${props => props.gutter ? "32px" :""};
 `
 
-export const StyledLegend = styled.legend<{gutter?: boolean}>`
+export const StyledLegend = styled.legend<{}>`
   ${props => props.disabled && StyledInputDisabledMixin}
   background: none!important;
-  line-height: ${props => props.gutter ? "26px" :""};
-  margin-bottom: ${props => props.gutter ? "32px" :""};
+  line-height: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: castledown-bold,Segoe UI,Candara,Bitstream Vera Sans,DejaVu Sans,Trebuchet MS,Verdana,Verdana Ref,sans-serif;
+  margin-bottom: 10px;
 `
 
 const CheckRadioDisabledMixin = css`

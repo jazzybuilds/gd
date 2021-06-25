@@ -146,7 +146,7 @@ const RenderField = ({ isValidating, formProps, fieldValues, rules, setDisabledS
       return (
         <React.Fragment>
           <fieldset>
-            <Legend gutter={true} label={fieldProps.label} required={validation.required} />
+            <Legend label={fieldProps.label} required={validation.required} />
             {options.map(option =>
               <CheckBox
                 key={`${fieldProps.id}-${option.value}`}
