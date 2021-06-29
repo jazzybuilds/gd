@@ -30,54 +30,54 @@ import CampaignSearchComponent from '../components/CampaignSearch'
 import BlockQuoteComponent from '../components/BlockQuote'
 
 const LoaderComponent = () => <div />
-const BrowserTitle =  loadable(() => import('../components/Meta/BrowserTitle'))
+const BrowserTitle = loadable(() => import('../components/Meta/BrowserTitle'))
 
-const HeroComponent =  loadable(() => import('../components/Hero'), {
-  fallback: <div className="c-hero c-hero--primary" style={{height: 560}} />,
+const HeroComponent = loadable(() => import('../components/Hero'), {
+  fallback: <div className="c-hero c-hero--primary" style={{ height: 560 }} />,
 })
-const HeroSecondaryComponent =  loadable(() => import('../components/HeroSecondary'), {
-  fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
+const HeroSecondaryComponent = loadable(() => import('../components/HeroSecondary'), {
+  fallback: <div className="c-hero c-hero--secondary" style={{ height: 500 }} />,
 })
-const DynamicHeroComponent =  loadable(() => import('../components/HeroDynamic'), {
-  fallback: <div className="c-hero c-hero--secondary" style={{height: 500}} />,
-})
-
-
-const ButtonComponent =  loadable(() => import('../components/Button'), {
-  fallback: <div style={{height: 56}} />,
-})
-const ImageComponent =  loadable(() => import('../components/Image'), {
-  fallback: <div style={{height: 441}} />,
-})
-const VideoComponent =  loadable(() => import('../components/Video'), {
-  fallback: LoaderComponent
-})
-const CookiePreferencesComponent =  loadable(() => import('../components/CookiePreferences'), {
-  fallback: LoaderComponent
-})
-const DividerComponent =  loadable(() => import('../components/Divider'), {
-  fallback: LoaderComponent
-})
-const MetadataLayout =  loadable(() => import('../components/MetadataLayout'), {
-  fallback: LoaderComponent
-})
-const FormComponent =  loadable(() => import('../components/Form'), {
-  fallback: LoaderComponent
+const DynamicHeroComponent = loadable(() => import('../components/HeroDynamic'), {
+  fallback: <div className="c-hero c-hero--secondary" style={{ height: 500 }} />,
 })
 
-const ThankYouComponent =  loadable(() => import('../components/ThankYou/Event'), {
+
+const ButtonComponent = loadable(() => import('../components/Button'), {
+  fallback: <div style={{ height: 56 }} />,
+})
+const ImageComponent = loadable(() => import('../components/Image'), {
+  fallback: <div style={{ height: 441 }} />,
+})
+const VideoComponent = loadable(() => import('../components/Video'), {
+  fallback: LoaderComponent
+})
+const CookiePreferencesComponent = loadable(() => import('../components/CookiePreferences'), {
+  fallback: LoaderComponent
+})
+const DividerComponent = loadable(() => import('../components/Divider'), {
+  fallback: LoaderComponent
+})
+const MetadataLayout = loadable(() => import('../components/MetadataLayout'), {
+  fallback: LoaderComponent
+})
+const FormComponent = loadable(() => import('../components/Form'), {
   fallback: LoaderComponent
 })
 
-const EventDetailsComponent =  loadable(() => import('../components/Events/Details'), {
+const ThankYouComponent = loadable(() => import('../components/ThankYou/Event'), {
   fallback: LoaderComponent
 })
 
-const CapacityBannerComponent =  loadable(() => import('../components/CapacityBanner'), {
+const EventDetailsComponent = loadable(() => import('../components/Events/Details'), {
   fallback: LoaderComponent
 })
 
-const JustGivingComponent =  loadable(() => import('../components/JustGiving'), {
+const CapacityBannerComponent = loadable(() => import('../components/CapacityBanner'), {
+  fallback: LoaderComponent
+})
+
+const JustGivingComponent = loadable(() => import('../components/JustGiving'), {
   fallback: LoaderComponent
 })
 
@@ -118,6 +118,13 @@ componentsIndex["JustGiving"] = JustGivingComponent
 class Placeholder extends BasePlaceholder {
   constructor(props) {
     super(props, componentsIndex, createConsoleLogger(), context.options);
+    if (props.renderingContext && props.renderingContext.item && props.renderingContext.item.fields) {
+      Object.values(props.renderingContext.item.fields).map(value => {
+        if (value && typeof value === "string" && value.indexOf("{\"commands\":") > -1) {
+          throw new Error('Uniform - corrupt content from EE bug.');
+        }
+      })
+    }
   }
 }
 
