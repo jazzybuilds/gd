@@ -118,12 +118,10 @@ componentsIndex["JustGiving"] = JustGivingComponent
 class Placeholder extends BasePlaceholder {
   constructor(props) {
     super(props, componentsIndex, createConsoleLogger(), context.options);
-    if (props.renderingContext && props.renderingContext.item && props.renderingContext.item.fields) {
-      Object.values(props.renderingContext.item.fields).map(value => {
-        if (value && typeof value === "string" && value.indexOf("{\"commands\":") > -1) {
-          throw new Error('Uniform - corrupt content from EE bug.');
-        }
-      })
+    if (props.renderingContext && props.renderingContext.item && 
+      props.renderingContext.item.fields &&
+      Object.values(props.renderingContext.item.fields).some(value => value && typeof value === "string" && value.indexOf("{\"commands\":") > -1)) {
+      throw new Error('Uniform - corrupt content from EE bug.');
     }
   }
 }
